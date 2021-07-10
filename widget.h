@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QDataStream>
 
-#include  <mainwindow.h>
+//#include  <mainwindow.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -27,6 +27,6 @@ private slots:
 private:
     Ui::Widget *ui;
      DialogFormakeAccount* D;
-     MainWindow * m;
+     //MainWindow * m;
 };
 #endif // WIDGET_H
