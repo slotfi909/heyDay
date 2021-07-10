@@ -62,6 +62,10 @@ MainWindow::MainWindow(QWidget *parent, int _id)
     ui->pushButton_3->setIcon(QIcon("F:/qt projects/projectAP/Logo/shop.jpg"));
     ui->pushButton_3->setIconSize(QSize(61, 62));
 
+
+    Ex.setLabel1(ui->label_5);
+
+
     struct tmp p;
         QFile infile("person.txt");
         infile.open(QIODevice::ReadOnly);
@@ -80,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent, int _id)
 
 MainWindow::~MainWindow()
 {
+    Ex.terminate();
     delete ui;
 }
 
@@ -156,11 +161,13 @@ void MainWindow::showPassedDay()
 void MainWindow::on_pushButton_3_clicked()
 {
 
+
 }
 
 //next day button(AmirAli)
 void MainWindow::on_pushButton_2_clicked()
 {
+
 
 }
 

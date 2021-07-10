@@ -57,7 +57,7 @@ struct temp p;
 				   //poya code
                   m=new MainWindow(this,p.shenaseP);
                   this->close();
-
+                   m->Ex.start();
                   m->show();
 
 

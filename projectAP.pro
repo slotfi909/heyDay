@@ -13,19 +13,22 @@ SOURCES += \
     main.cpp \
     widget.cpp\
     scoreboard.cpp\
-    mainwindow.cpp
+    mainwindow.cpp\
+    exthread.cpp
 
 HEADERS += \
     dialogformakeaccount.h \
     widget.h\
     scoreboard.h\
-    mainwindow.h
+    mainwindow.h\
+    exthread.h
 
 FORMS += \
     dialogformakeaccount.ui \
     widget.ui\
     mainwindow.ui\
     scoreboard.ui
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

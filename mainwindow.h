@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QPixmap>
 #include "scoreboard.h"
+#include"exthread.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -61,5 +62,7 @@ private:
     int passedDays;
     int userId;
     scoreboard sc;
+public:
+ Exthread Ex;
 };
 #endif // MAINWINDOW_H
