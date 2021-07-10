@@ -33,33 +33,33 @@ MainWindow::MainWindow(QWidget *parent, int _id)
     ui->setupUi(this);
     this->setWindowTitle("HeyDay");
 
-    QPixmap bkgnd("C:/Users/Radikal/Desktop/Logo/back.jpg");
+    QPixmap bkgnd("F:/qt projects/projectAP/Logo/back.jpg");
        bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
        QPalette palette;
        palette.setBrush(QPalette::Window/*Background*/, bkgnd);
        this->setPalette(palette);
 
     //main window title icon
-    setWindowIcon(QIcon("C:/Users/Radikal/Desktop/Logo/heyday1.jpg"));
+    setWindowIcon(QIcon("F:/qt projects/projectAP/Logo/heyday1.jpg"));
 
     //level icon
-    QPixmap starIcon("C:/Users/Radikal/Desktop/Logo/images.png");
+    QPixmap starIcon("F:/qt projects/projectAPLogo/images.png");
     ui->label->setPixmap(starIcon.scaled(30,30));
 
     //coin icon
-    QPixmap coinIcon("C:/Users/Radikal/Desktop/Logo/coin.png");
+    QPixmap coinIcon("F:/qt projects/projectAP/Logo/coin.png");
     ui->label_2->setPixmap(coinIcon.scaled(35,35));
 
     //next day button icon
-    ui->pushButton_2->setIcon(QIcon("C:/Users/Radikal/Desktop/Logo/images.jpg"));
+    ui->pushButton_2->setIcon(QIcon("F:/qt projects/projectAP/Logo/images.jpg"));
     ui->pushButton_2->setIconSize(QSize(54, 52));
 
     //scorebored button icon
-    ui->pushButton->setIcon(QIcon("C:/Users/Radikal/Desktop/Logo/score.jpg"));
+    ui->pushButton->setIcon(QIcon("F:/qt projects/projectAP/Logo/score.jpg"));
     ui->pushButton->setIconSize(QSize(40, 40));
 
     //shop button icon
-    ui->pushButton_3->setIcon(QIcon("C:/Users/Radikal/Desktop/Logo/shop.jpg"));
+    ui->pushButton_3->setIcon(QIcon("F:/qt projects/projectAP/Logo/shop.jpg"));
     ui->pushButton_3->setIconSize(QSize(61, 62));
 
     struct tmp p;
@@ -86,10 +86,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    scoreboard sc;
-    sc.setWindowIcon(QIcon("C:/Users/Radikal/Desktop/Logo/score.jpg"));
+
+    sc.setWindowIcon(QIcon("F:/qt projects/projectAP/Logo/score.jpg"));
     sc.setModal(true);
-    sc.exec();
+    sc.show();
 }
 
 void MainWindow::setLevel(int _level)

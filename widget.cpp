@@ -46,21 +46,19 @@ struct temp p;
     QFile infile("person.txt");
     infile.open(QIODevice::ReadOnly);
     if(infile.isOpen()){
-        /*infile.seek(ios_base::end);
-        int size = infile.size();
-        infile.seek(ios_base::beg);*/
+
         while(!infile.atEnd()){
-               /*infile.read((char*)&p,sizeof(p));*/
+
             QDataStream in(&infile);
             in>>p;
                if(ui->userLine->text()==p.username&&ui->passlineEdit->text()==p.pass){
 
                    peyda=0;
 				   //poya code
-                 /* m=new MainWindow(this,p.shenaseP);
+                  m=new MainWindow(this,p.shenaseP);
                   this->close();
 
-                  m->show();*/
+                  m->show();
 
 
                }

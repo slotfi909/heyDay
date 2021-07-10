@@ -60,5 +60,6 @@ private:
     int coin;
     int passedDays;
     int userId;
+    scoreboard sc;
 };
 #endif // MAINWINDOW_H
