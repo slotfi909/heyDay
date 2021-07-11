@@ -9,6 +9,8 @@
 #include "person.h"
 #include "exthread.h"
 #include "Aviculture.h"
+#include "Sheepcote.h"
+#include "Dairyfarm.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -58,6 +60,8 @@ private:
     Ui::MainWindow *ui;
     person0 owner;
     Aviculture *Avi;
+    Sheepcote *Sh;
+    Dairyfarm *Da;
 
 };
 #endif // MAINWINDOW_H

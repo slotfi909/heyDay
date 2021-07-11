@@ -154,12 +154,15 @@ void MainWindow::on_Aviculture_clicked()
 //Dairyfarm (Ahmad)
 void MainWindow::on_Dairyfarm_clicked()
 {
-
+    Da=new Dairyfarm(this);
+    Da->show();
 }
 
 //Sheepcote (Ahmad)
 void MainWindow::on_Sheepcote_clicked()
 {
+    Sh=new Sheepcote(this);
+    Sh->show();
 
 }
 
