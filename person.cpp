@@ -1,47 +1,5 @@
-#ifndef PERSON_H
-#define PERSON_H
-#include <QString>
-#include <iostream>
-#include <QFile>
+#include "person.h"
 
-
-class person{
-    private:
-    QString name;
-    QString pass;
-    QString username;
-    QString email;
-    int coin;
-    int exp;
-    int level;
-    int shenaseP;
-    int maxExp;
-    public://functions
-    void setName(QString);
-    void setPass(QString);
-    void setUsername(QString);
-    void setEmail(QString);
-    void setCoin(int);
-    void setExp(int);
-    void setLevel(int);
-    void setShenaseP(int);
-    void setMaxExp(int);
-    person(int);//constructor
-    QString getName();
-    QString getUsername();
-    QString getEmail();
-    int getShenaseP();
-    int changeCoin(int);//return coin
-    int changeExp(int);
-    int changeLevel();
-    int getMaxExp();
-    int getExp();
-    int getCoin();
-    int getLevel();
-    void Update_file();
-};
-
-/*
 void person::Update_file(){
 
     struct temp{
@@ -164,6 +122,10 @@ void person::Update_file(){
         return level;
     }
 
-    int person::getMaxExp(){return maxExp;}*/
+    int person::getMaxExp(){return maxExp;}
 
-#endif // PERSON_H
+    int person::getExp(){return exp;}
+
+    int person::getCoin(){return coin;}
+
+    int person::getLevel(){return level;}

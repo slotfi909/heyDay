@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QPixmap>
 #include "scoreboard.h"
-#include"exthread.h"
+#include "wheatland.h"
 #include "person.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,21 +16,26 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, int _id = 1);
+    person *me;
+    MainWindow(QWidget *parent = nullptr, int shenaseP = 1);
     ~MainWindow();
 public slots:
 
     void setLevel(int);
     void showLevel();
+    int getLevel(){return level;};
 
     void setXp(int);
     void showXp();
+    int getXp(){return xp;};
 
     void setPassedDay(int);
     void showPassedDay();
+    int getPassedDay(){return passedDays;};
 
     void setCoin(int);
     void showCoin();
+    int getCoin(){return coin;};
 
     void upDateXp(int);
 
@@ -57,9 +62,11 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-     person owner;
-    scoreboard sc;
-public:
- Exthread Ex;
+    //person me;
+    int level;
+    int xp;
+    int coin;
+    int passedDays;
+    int userId;
 };
 #endif // MAINWINDOW_H
