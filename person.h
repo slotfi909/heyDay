@@ -35,6 +35,7 @@ class person{
     int changeExp(int);
     int changeLevel();
     int getMaxExp();
+    int getLevel();
     void Update_file();
 };
 

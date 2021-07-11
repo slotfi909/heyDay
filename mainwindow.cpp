@@ -59,7 +59,7 @@ MainWindow::~MainWindow()
 {
     Ex.terminate();
 
-    Ex.ExupdateFile(/*shenase*/);
+    Ex.ExupdateFile(owner.getShenaseP());
     delete ui;
 }
 
@@ -74,7 +74,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::setLevel(int _level)
 {
-    level = _level;
+    owner.ge = _level;
     showLevel();
 }
 
