@@ -26,6 +26,7 @@ Widget::Widget(QWidget *parent)
 
 Widget::~Widget()
 {
+
     delete ui;
 }
 
@@ -57,6 +58,7 @@ struct temp p;
 				   //poya code
                   m=new MainWindow(this,p.shenaseP);
                   this->close();
+                  m->Ex.set_Day(p.shenaseP);
                    m->Ex.start();
                   m->show();
 

@@ -14,14 +14,18 @@ SOURCES += \
     widget.cpp\
     scoreboard.cpp\
     mainwindow.cpp\
-    exthread.cpp
+    exthread.cpp\
+    person.cpp\
+    Aviculture.cpp
 
 HEADERS += \
     dialogformakeaccount.h \
+    person.h \
     widget.h\
     scoreboard.h\
     mainwindow.h\
-    exthread.h
+    exthread.h\
+    Aviculture.h
 
 FORMS += \
     dialogformakeaccount.ui \

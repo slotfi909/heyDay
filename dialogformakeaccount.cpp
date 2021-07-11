@@ -1,5 +1,6 @@
 #include "dialogformakeaccount.h"
 #include "ui_dialogformakeaccount.h"
+
 QDataStream &operator>>(QDataStream &in, struct person &p){ //for read from the file
     in >> p.name >> p.pass >>p.username>>p.email>>p.coin>>p.exp>>p.level>>p.shenaseP>>p.maxExp;
     return in;
@@ -76,9 +77,7 @@ void DialogFormakeAccount::on_makeaccPush_clicked()
         QFile infile("person.txt");
         infile.open(QIODevice::ReadOnly);
         if(infile.isOpen()){
-            /*infile.seek(ios_base::end);
-            int size = infile.size();
-            infile.seek(ios_base::beg);*/
+
             while(!infile.atEnd()){
                 QDataStream in(&infile);
                 in>>temp2;

@@ -13,14 +13,14 @@ scoreboard::scoreboard(QWidget *parent) :
 
     this->setWindowTitle("Ranking Table");
 
-    QPixmap starIcon("F:/qt projects/projectAP/Logo/rank.jpg");
+    QPixmap starIcon("C:/HeydayLogo/Logo/rank.jpg");
     ui->label->setPixmap(starIcon.scaled(30,30));
 
     //set background color
     this->setStyleSheet("background-color: lightgreen");
     ui->listWidget->setStyleSheet("background-color: white");
 
-    ui->pushButton->setIcon(QIcon("F:/qt projects/projectAP/Logo/ok.png"));
+    ui->pushButton->setIcon(QIcon("C:/HeydayLogo/Logo/ok.png"));
     ui->pushButton->setIconSize(QSize(45, 45));
 
 
