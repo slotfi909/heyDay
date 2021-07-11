@@ -14,7 +14,8 @@ SOURCES += \
     widget.cpp\
     scoreboard.cpp\
     mainwindow.cpp\
-    exthread.cpp
+    exthread.cpp\
+    person.cpp
 
 HEADERS += \
     dialogformakeaccount.h \
