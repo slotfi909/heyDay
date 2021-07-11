@@ -7,28 +7,15 @@
 #include <QDataStream>
 //using namespace std;
 
-struct tmp{
-QString name;
-QString pass;
-QString username;
-QString email;
-int coin;
-int exp;
-int level;
-int shenaseP;
-int maxExp;
-};
 
-QDataStream &operator>>(QDataStream &in, struct tmp &p){ //for read from the file
-    in >> p.name >> p.pass >>p.username>>p.email>>p.coin>>p.exp>>p.level>>p.shenaseP>>p.maxExp;
-    return in;
-}
+
+
 
 MainWindow::MainWindow(QWidget *parent, int _id)
-    : QMainWindow(parent)
+    : QMainWindow(parent),owner(_id)
     , ui(new Ui::MainWindow)
 {
-    userId = _id;
+
 
     ui->setupUi(this);
     this->setWindowTitle("HeyDay");
@@ -66,25 +53,13 @@ MainWindow::MainWindow(QWidget *parent, int _id)
     Ex.setLabel1(ui->label_5);
 
 
-    struct tmp p;
-        QFile infile("person.txt");
-        infile.open(QIODevice::ReadOnly);
-        if(infile.isOpen()){
-            while(!infile.atEnd()){
-                QDataStream in(&infile);
-                in >> p;
-                   if(p.shenaseP == userId){
-
-
-
-                   }
-            }
-        }
 }
 
 MainWindow::~MainWindow()
 {
     Ex.terminate();
+
+    Ex.ExupdateFile(/*shenase*/);
     delete ui;
 }
 

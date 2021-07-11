@@ -18,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     dialogformakeaccount.h \
+    person.h \
     widget.h\
     scoreboard.h\
     mainwindow.h\

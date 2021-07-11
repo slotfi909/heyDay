@@ -6,6 +6,7 @@
 #include <QPixmap>
 #include "scoreboard.h"
 #include"exthread.h"
+#include "person.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -56,11 +57,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    int level;
-    int xp;
-    int coin;
-    int passedDays;
-    int userId;
+     person owner;
     scoreboard sc;
 public:
  Exthread Ex;
