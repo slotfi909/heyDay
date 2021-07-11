@@ -1,9 +1,9 @@
 #include "Dairyfarm.h"
-#define DAIRYFARM "E:/lessons/term 2/AP/project/Dairyfarm_logo/cow.png"
-#define STATUS "E:/lessons/term 2/AP/project/Aviculture_logo/2230690.png"
-#define FEEDING "E:/lessons/term 2/AP/project/Dairyfarm_logo/2644051.png"
-#define REMOVAL "E:/lessons/term 2/AP/project/Dairyfarm_logo/6571245.png"
-#define UPGRADING "E:/lessons/term 2/AP/project/Aviculture_logo/6154580.png"
+#define DAIRYFARM "C:/HeydayLogo/Dairyfarm_logo/cow.png"
+#define STATUS "C:/HeydayLogo/Aviculture_logo/2230690.png"
+#define FEEDING "C:/HeydayLogo/Dairyfarm_logo/2644051.png"
+#define REMOVAL "C:/HeydayLogo/Dairyfarm_logo/6571245.png"
+#define UPGRADING "C:/HeydayLogo/Aviculture_logo/6154580.png"
 
 Dairyfarm::Dairyfarm(QWidget *parent)
     : QWidget(parent)
@@ -18,7 +18,7 @@ Dairyfarm::Dairyfarm(QWidget *parent)
 
     connect(button, SIGNAL(clicked()), this, SLOT(open_second_window()));
 
-    ui.setupUi(this);
+    //ui.setupUi(this);
 }
 
 void Dairyfarm::open_second_window() {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QWidget>
-#include "ui_Dairyfarm.h"
+//#include "ui_Dairyfarm.h"
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QDialog>
@@ -20,5 +20,5 @@ private:
     QVBoxLayout* mainLayout;
     QPushButton* button;
 
-    Ui::DairyfarmClass ui;
+    //Ui::DairyfarmClass ui;
 };

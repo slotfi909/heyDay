@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QWidget>
-#include "ui_Sheepcote.h"
+//#include "ui_Sheepcote.h"
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QDialog>
@@ -20,5 +20,5 @@ private:
     QVBoxLayout* mainLayout;
     QPushButton* button;
 
-    Ui::SheepcoteClass ui;
+    //Ui::SheepcoteClass ui;
 };

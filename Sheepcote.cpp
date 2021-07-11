@@ -1,9 +1,9 @@
 #include "Sheepcote.h"
-#define SHEEPCOTE "E:/lessons/term 2/AP/project/Sheepcote_logo/1665662.png"
-#define STATUS "E:/lessons/term 2/AP/project/Aviculture_logo/2230690.png"
-#define FEEDING "E:/lessons/term 2/AP/project/Sheepcote_logo/3382344.png"
-#define REMOVAL "E:/lessons/term 2/AP/project/Sheepcote_logo/5332241.png"
-#define UPGRADING "E:/lessons/term 2/AP/project/Aviculture_logo/6154580.png"
+#define SHEEPCOTE "C:/HeydayLogo/Sheepcote_logo/1665662.png"
+#define STATUS "C:/HeydayLogo/Aviculture_logo/2230690.png"
+#define FEEDING "C:/HeydayLogo/Sheepcote_logo/3382344.png"
+#define REMOVAL "C:/HeydayLogo/Sheepcote_logo/5332241.png"
+#define UPGRADING "C:/HeydayLogot/Aviculture_logo/6154580.png"
 
 
 Sheepcote::Sheepcote(QWidget *parent)
@@ -19,7 +19,7 @@ Sheepcote::Sheepcote(QWidget *parent)
 
     connect(button, SIGNAL(clicked()), this, SLOT(open_second_window()));
 
-    ui.setupUi(this);
+    //ui.setupUi(this);
 }
 
 void Sheepcote::open_second_window() {

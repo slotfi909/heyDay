@@ -16,7 +16,9 @@ SOURCES += \
     mainwindow.cpp\
     exthread.cpp\
     person.cpp\
-    Aviculture.cpp
+    Aviculture.cpp\
+    Dairyfarm.cpp\
+    Sheepcote.cpp
 
 HEADERS += \
     dialogformakeaccount.h \
@@ -25,7 +27,9 @@ HEADERS += \
     scoreboard.h\
     mainwindow.h\
     exthread.h\
-    Aviculture.h
+    Aviculture.h\
+    Dairyfarm.h\
+    Sheepcote.h
 
 FORMS += \
     dialogformakeaccount.ui \
