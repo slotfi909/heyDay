@@ -146,6 +146,8 @@ void MainWindow::on_WheatLand_clicked()
 //Aviculture button (Ahmad)
 void MainWindow::on_Aviculture_clicked()
 {
+    Avi=new Aviculture(this);
+    Avi->show();
 
 }
 

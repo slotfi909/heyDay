@@ -15,7 +15,8 @@ SOURCES += \
     scoreboard.cpp\
     mainwindow.cpp\
     exthread.cpp\
-    person.cpp
+    person.cpp\
+    Aviculture.cpp
 
 HEADERS += \
     dialogformakeaccount.h \
@@ -23,7 +24,8 @@ HEADERS += \
     widget.h\
     scoreboard.h\
     mainwindow.h\
-    exthread.h
+    exthread.h\
+    Aviculture.h
 
 FORMS += \
     dialogformakeaccount.ui \

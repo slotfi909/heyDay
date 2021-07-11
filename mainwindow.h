@@ -8,6 +8,7 @@
 //#include "wheatland.h"
 #include "person.h"
 #include "exthread.h"
+#include "Aviculture.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -22,18 +23,9 @@ public:
     ~MainWindow();
     Exthread Ex;
 public slots:
-
-
     void showLevel();
 
-
-
     void showXp();
-
-
-
-
-
 
 
     void showCoin();
@@ -65,7 +57,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     person0 owner;
-
+    Aviculture *Avi;
 
 };
 #endif // MAINWINDOW_H
