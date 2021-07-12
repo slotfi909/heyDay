@@ -19,6 +19,9 @@ wheatland::wheatland(QWidget *parent, int _id) :
     ui->setupUi(this);
     this->setWindowTitle("Wheat Land");
 
+    //set background
+    this->setStyleSheet("background-color: lightyellow");
+
     //upgrade icon
     ui->upGrade->setIcon(QIcon("C:/HeydayLogo/Logo/upgrade2.png"));
     ui->upGrade->setIconSize(QSize(100, 100));
