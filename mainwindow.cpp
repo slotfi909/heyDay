@@ -8,7 +8,7 @@
 
 
 MainWindow::MainWindow(QWidget *parent, int shenaseP)
-    : QMainWindow(parent),owner(shenaseP)
+    : QMainWindow(parent),myfarm(shenaseP),Ex(&myfarm)
     , ui(new Ui::MainWindow)
 {
 
@@ -62,8 +62,8 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
 MainWindow::~MainWindow()
 {
     Ex.terminate();
-    Ex.ExupdateFile(owner.getShenaseP());
-    owner.Update_file();
+    Ex.ExupdateFile(myfarm.owner.getShenaseP());
+    myfarm.owner.Update_file();
     delete ui;
 }
 
@@ -80,7 +80,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::showLevel()
 {
-    QString stringNumber = QString::number(owner.getLevel());
+    QString stringNumber = QString::number(myfarm.owner.getLevel());
     ui->label_4->setText(stringNumber);
 }
 
@@ -89,7 +89,7 @@ void MainWindow::showLevel()
 //Display persentage of XP
 void MainWindow::showXp()
 {
-   ui->XP->setValue( owner.getExp()/owner.getMaxExp() * 100 );
+   ui->XP->setValue( myfarm.owner.getExp()/myfarm.owner.getMaxExp() * 100 );
 }
 
 
@@ -98,7 +98,7 @@ void MainWindow::showXp()
 
 void MainWindow::showCoin()
 {
-    QString stringNumber = QString::number(owner.getCoin());
+    QString stringNumber = QString::number(myfarm.owner.getCoin());
     ui->label_3->setText(stringNumber);
 
 }

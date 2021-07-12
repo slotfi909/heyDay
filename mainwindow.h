@@ -6,7 +6,7 @@
 #include <QPixmap>
 #include "scoreboard.h"
 //#include "wheatland.h"
-#include "person.h"
+#include "farm.h"
 #include "exthread.h"
 #include "Aviculture.h"
 #include "Sheepcote.h"
@@ -25,7 +25,7 @@ public:
     ~MainWindow();
 
 
-public slots:
+public :
     void showLevel();
 
     void showXp();
@@ -59,7 +59,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    person0 owner;
+     Farm myfarm;
     Aviculture *Avi;
     Sheepcote *Sh;
     Dairyfarm *Da;
