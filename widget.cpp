@@ -55,11 +55,11 @@ struct temp p;
                if(ui->userLine->text()==p.username&&ui->passlineEdit->text()==p.pass){
 
                    peyda=0;
-				   //poya code
+
                   m=new MainWindow(this,p.shenaseP);
                   this->close();
-                  m->Ex.set_Day(p.shenaseP);
-                   m->Ex.start();
+                  //m->Ex.set_Day(p.shenaseP);
+                  // m->Ex.start();
                   m->show();
 
 

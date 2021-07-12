@@ -15,6 +15,7 @@ void Exthread::run()
             now=later;
             day++;
             L1->setText("day : "+QString::number(day));
+
         }
     }
 

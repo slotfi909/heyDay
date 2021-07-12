@@ -23,7 +23,8 @@ public:
 
     MainWindow(QWidget *parent = nullptr,int shenaseP=1);
     ~MainWindow();
-    Exthread Ex;
+
+
 public slots:
     void showLevel();
 
@@ -62,6 +63,8 @@ private:
     Aviculture *Avi;
     Sheepcote *Sh;
     Dairyfarm *Da;
+    Exthread Ex;
+    scoreboard *sc;
 
 };
 #endif // MAINWINDOW_H

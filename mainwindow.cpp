@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
 
     ui->setupUi(this);
     Ex.setLabel1(ui->label_5);
+    Ex.set_Day(shenaseP);
+    Ex.start();
     //menu title
     this->setWindowTitle("HeyDay");
 
@@ -61,16 +63,17 @@ MainWindow::~MainWindow()
 {
     Ex.terminate();
     Ex.ExupdateFile(owner.getShenaseP());
+    owner.Update_file();
     delete ui;
 }
 
 
 void MainWindow::on_pushButton_clicked()
 {
-    scoreboard sc;
-    sc.setWindowIcon(QIcon("C:/HeydayLogo/Logo/score.jpg"));
-    sc.setModal(true);
-    sc.exec();
+    sc=new scoreboard(this);
+    sc->setWindowIcon(QIcon("C:/HeydayLogo/Logo/score.jpg"));
+    sc->setModal(true);
+    sc->show();
 }
 
 
