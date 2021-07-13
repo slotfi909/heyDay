@@ -2,8 +2,6 @@
 #include "ui_wheatland.h"
 #include <QMessageBox>
 #include <fstream>
-#include <istream>
-#include <ostream>
 using namespace std;
 
 bool endOfFarming = false;
@@ -13,10 +11,11 @@ int difDate(int dd1, int mm1, int yyyy1);
 void UpDate(int _keshtAmount);
 
 wheatland::wheatland(QWidget *parent, int _id) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::wheatland)
 {
     ui->setupUi(this);
+
     this->setWindowTitle("Wheat Land");
 
     //set background
@@ -89,8 +88,8 @@ wheatland::wheatland(QWidget *parent, int _id) :
       }
       //ui area display
         ui->AreaLabel->setText(QString::number(tmpArea));
-}
 
+}
 
 wheatland::~wheatland()
 {
@@ -199,6 +198,3 @@ void UpDate(int _keshtAmount) {
     remove("wheat.txt");
     rename("temp.txt", "wheat.txt");
 }
-
-
-

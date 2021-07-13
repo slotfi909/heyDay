@@ -1,18 +1,18 @@
 #ifndef WHEATLAND_H
 #define WHEATLAND_H
 
-#include <QDialog>
-#include <mainwindow.h>
+#include <QWidget>
+
 namespace Ui {
 class wheatland;
 }
 
-class wheatland : public QDialog
+class wheatland : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit wheatland(QWidget *parent = nullptr, int _id = 1);
+    explicit wheatland(QWidget *parent = nullptr, int id = 1);
     ~wheatland();
 
 private slots:
