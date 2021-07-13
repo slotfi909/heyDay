@@ -50,10 +50,12 @@ void person0::Update_file(){
            QDataStream out(&outfile);
            out<<p;
     }
+    infile.remove("person.txt");
+    outfile.rename("person-temp.txt","person.txt");
     outfile.close();
     infile.close();
-    remove("person.txt");
-    rename("person-temp.txt","person.txt");
+
+
     }
 
 }
