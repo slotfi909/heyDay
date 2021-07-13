@@ -59,10 +59,7 @@ scoreboard::scoreboard(QWidget *parent) :
             while(!infile.atEnd()){
                 QDataStream in(&infile);
                 in>>p[i];
-                //QString tmp = p[i].name + "   " + QString::number(p[i].level);
-                //ui->listWidget->addItem(tmp);
                 i++;
-
             }
         }
         ui->listWidget->addItem("RANK      USERNAME      LEVEL      EXP");
