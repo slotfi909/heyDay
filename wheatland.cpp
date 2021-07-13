@@ -10,7 +10,7 @@ int tmpId = 1, tmpArea = 5, tmpIsKeshting = 0, tmpAmountKeshting = 0, day = 0 , 
 int difDate(int dd1, int mm1, int yyyy1);
 void UpDate(int _keshtAmount);
 
-wheatland::wheatland(QWidget *parent, int _id) :
+wheatland::wheatland(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::wheatland)
 {
@@ -34,7 +34,7 @@ wheatland::wheatland(QWidget *parent, int _id) :
     ui->kesht->setIconSize(QSize(100, 100));
 
     //seting id of wheatland
-      id = _id;
+      //id = _id;
 
     //setting data with opening the wheatland file
       ifstream wheat("wheat.txt");
