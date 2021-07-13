@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
     Ex.setLabel1(ui->label_5);
     Ex.set_Day(shenaseP);
     Ex.start();
+
     //menu title
     this->setWindowTitle("HeyDay");
 
@@ -55,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
     ui->pushButton_3->setIcon(QIcon("C:/HeydayLogo/Logo/shop.jpg"));
     ui->pushButton_3->setIconSize(QSize(61, 62));
 
-    //garner button icon
+    //wheat button icon
 
 }
 
@@ -140,32 +141,44 @@ void MainWindow::on_alfalfaLand_clicked()
 //Wheatland (Pouya)
 void MainWindow::on_WheatLand_clicked()
 {
-  /* wheatland wh;
-   wh.setModal(true);
-   wh.exec();*/
+    wh = new wheatland;
+    wh->show();
 }
 
 
 //Aviculture button (Ahmad)
 void MainWindow::on_Aviculture_clicked()
 {
-    Avi=new Aviculture(this);
-    Avi->show();
-
+    if(myfarm.owner.getLevel() > 1){
+        Avi=new Aviculture(this);
+        Avi->show();
+    }
+    else{
+        QMessageBox::critical(this,"Error","At least level 2 is required!");
+    }
 }
 
 //Dairyfarm (Ahmad)
 void MainWindow::on_Dairyfarm_clicked()
 {
-    Da=new Dairyfarm(this);
-    Da->show();
+    if(myfarm.owner.getLevel() > 3){
+        Da = new Dairyfarm(this);
+        Da->show();
+    }
+    else{
+        QMessageBox::critical(this,"Error","At least level 4 is required!");
+    }
 }
 
 //Sheepcote (Ahmad)
 void MainWindow::on_Sheepcote_clicked()
 {
-    Sh=new Sheepcote(this);
-    Sh->show();
-
+    if(myfarm.owner.getLevel() > 5){
+        Sh = new Sheepcote(this);
+        Sh->show();
+    }
+    else{
+        QMessageBox::critical(this,"Error","At least level 6 is required!");
+    }
 }
 

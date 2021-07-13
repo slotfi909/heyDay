@@ -5,12 +5,12 @@
 #include <QMessageBox>
 #include <QPixmap>
 #include "scoreboard.h"
-//#include "wheatland.h"
 #include "farm.h"
 #include "exthread.h"
 #include "Aviculture.h"
 #include "Sheepcote.h"
 #include "Dairyfarm.h"
+#include "wheatland.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -59,12 +59,14 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-     Farm myfarm;
+    Farm myfarm;
     Aviculture *Avi;
     Sheepcote *Sh;
     Dairyfarm *Da;
     Exthread Ex;
     scoreboard *sc;
+    wheatland *wh;
+
 
 };
 #endif // MAINWINDOW_H
