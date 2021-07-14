@@ -8,13 +8,16 @@ class Aviculture_back
 	int capacity;
 	int level;
 	int start_day_of_upgrading;
-	int start_day_of_laying;
+	int start_day_of_produce;
 	int shenaseP;
 	bool isfed;
-	bool haveegg;
+	bool havecrop;
+	bool dastresi;
+
 public:
 
 	Aviculture_back(int);
+	~Aviculture_back();
 
 	void setcurrent(int _current);
 	void setcapacity(int _capacity);
@@ -22,13 +25,13 @@ public:
 	int getcurrent();
 	int getcapacity();
 	int getlevel();
-	int getstart_day_of_upgrading();
 
 	int addchicken(int num);
+	int removechicken(int num);
 	int starting_upgrade();
-	void upgrading();
-	void feeding();
-	void eggready();
-	void removal();
+	void upgrading();//zamani
+	int feeding();
+	void cropready();//zamani
+	int removal();
 	void Update_file();
 };

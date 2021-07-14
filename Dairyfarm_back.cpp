@@ -1,12 +1,75 @@
 #include "Dairyfarm_back.h"
+
+struct temp {
+	int current;
+	int capacity;
+	int level;
+	int start_day_of_upgrading;
+	int start_day_of_produce;
+	int shenaseP;
+	bool isfed;
+	bool havecrop;
+	bool dastresi;
+};
+
 Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
-	current = 0;
-	capacity = 2;
-	level = 1;
-	start_day_of_upgrading = -1;
-	isfed = false;
-	havemilk = false;
-	shenaseP = _shenaseP;
+	temp A;
+	
+	ifstream fin;
+	ofstream fout;
+	fin.open("Dairyfarm.txt");
+	if (!fin) {
+		fin.close();
+		fout.open("Dairyfarm.txt");
+		fout.close();
+		fin.open("Dairyfarm.txt", ios::app);
+	}
+	bool find = 1;
+	while (fin) {
+		fin.read((char*)&A, sizeof(temp));
+		if (A.shenaseP == _shenaseP) {
+			current = A.current;
+			capacity = A.capacity;
+			level = A.level;
+			start_day_of_upgrading = A.start_day_of_upgrading;
+			start_day_of_produce = A.start_day_of_produce;
+			shenaseP = A.shenaseP;
+			isfed = A.isfed;
+			havecrop = A.havecrop;
+			dastresi = A.dastresi;
+			find = 0;
+			break;
+		}
+	}
+	fin.close();
+	if (find) {    //first login
+		current = 0;
+		capacity = 2;
+		level = 1;
+		start_day_of_upgrading = -1;
+		start_day_of_produce = -1;
+		shenaseP = _shenaseP;
+		isfed = false;
+		havecrop = false;
+		dastresi = false;
+		//..................
+		A.current = 0;
+		A.capacity = 2;
+		A.level = 1;
+		A.start_day_of_upgrading = -1;
+		A.start_day_of_produce = -1;
+		A.shenaseP = _shenaseP;
+		A.isfed = false;
+		A.havecrop = false;
+		A.dastresi = false;
+
+		fout.open("Dairyfarm.txt", ios::app);
+		fout.write((char*)&A, sizeof(temp));
+		fout.close();
+	}
+}
+Dairyfarm_back::~Dairyfarm_back() {
+	Update_file();
 }
 
 void Dairyfarm_back::setcurrent(int _current) { current = _current; }
@@ -15,25 +78,45 @@ void Dairyfarm_back::setlevel(int _level) { level = _level; }
 int Dairyfarm_back::getcurrent() { return current; }
 int Dairyfarm_back::getcapacity() { return capacity; }
 int Dairyfarm_back::getlevel() { return level; }
-int Dairyfarm_back::getstart_day_of_upgrading() { return start_day_of_upgrading; }
+
 
 int Dairyfarm_back::addcow(int num) {
-	if ((capacity - current >= num) && !isfed && !havemilk) {
-		current += num;
-		return 1;
-	}
-	return -1;
+	if (capacity - current < num)
+		return 2;//nabod zarfiat;
+	else if (isfed)
+		return 3;//darhal ghaza khordan
+	else if (havecrop)
+		return 4;//mahsolat jam avari nashodeand
+
+	current += num;
+	return 1;
+}
+
+int Dairyfarm_back::removecow(int num) {
+	if (current < num)
+		return 2;//in teadad morgh mojod nist;
+	else if (isfed)
+		return 3;//darhal ghaza khordan
+	else if (havecrop)
+		return 4;//mahsolat jam avari nashodeand
+	current -= num;
+	return 1;
 }
 
 int Dairyfarm_back::starting_upgrade() {
-	if (/*getcoin()>=15 && getnail()>=2 && getlevel()>=5*/)
-	{
-		start_day_of_upgrading = /*getday()*/;
-		return 1;
-		//va tabe haii brai kam kardane in teadad az anbar
+	if (owner.getlevel() < 5)
+		return 2
+	else if (getnail() < 2)
+		return 3;
+	else if (owner.getcoin() < 15)
+		return 4;
 
-	}
-	return -1;
+	start_day_of_upgrading = /*getday()*/;
+
+	//owner.setCoin(owner.getCoin() - 15);
+	//owner.setExp(owner.getExp() + 6);
+	//va anbar ke codesh felan nist;
+	return 1;
 }
 
 void Dairyfarm_back::upgrading() {
@@ -44,49 +127,52 @@ void Dairyfarm_back::upgrading() {
 	}
 }
 
-void Dairyfarm_back::feeding() {
-	if (!havemilk)
-		if ()//ye tabe dakhel anbar lazeme ke  tedad yonje mord nazara begire va age dasht kam kone az zarfite khodesh nadash -1 return kone(2*current)
-		{
-			start_day_of_get_food = /*getday()*/;
-			isfed = true;
-		}
+int Dairyfarm_back::feeding() {
+	if (current == 0)
+		return 2;//morghi braye ghaza dadan nist;
+	else if (havecrop)
+		return 3;//mahsolat jam avari nashodeand
+	else if (/*tabe ke check kone anbar be andaze 2*curren yonje dare ya na*/)
+		return 4;//yonje kafi nist;
+
+	start_day_of_produce = /*getday()*/;
+	isfed = true;
+	//yonje ra kam mikonim;
+	//owner.setExp(owner.getExp() + 3);
 }
 
-void Dairyfarm_back::milkready() {
-	if (isfed && (/*getday()*/-start_day_of_get_food >= 3)) {
-		havemilk = true;
+void Dairyfarm_back::cropready() {
+	if (isfed && (/*getday()*/-start_day_of_produce >= 3)) {
+		havecrop = true;
 		isfed = false;
-		start_day_of_get_food = -1;
+		start_day_of_produce = -1;
 	}
 }
 
-void Dairyfarm_back::removal() {
-	if (havemilk&&/*getmilk()>=current*/) {
-		//setmilk(current khodesh+current);
-		havemilk = false;
-	}
+int Dairyfarm_back::removal() {
+	if (isfed && !havecrop)
+		return 2; //farayande dorost kardan shir tamam nashode ast;
+	else if (!havecrop)
+		return 3; //mahsoli baray bardasht nist;
+	else if (/*check inke aya anbar zarfiat shir be teadad current dare aya?*/)
+		return 4; //anbar ja nadard;
+
+		//set shir dakhel anbar
+	//owner.setExp(owner.getExp() + 5);
+	havecrop = false;
+	return 1;
 }
 
 void Dairyfarm_back::Update_file() {
 
-	struct temp {
-		int current;
-		int capacity;
-		int level;
-		int start_day_of_upgrading;
-		int start_day_of_get_food;
-		int shenaseP;
-		bool isfed;
-		bool havemilk;
-	}p;
+	temp p;
 
 	ofstream outfile;//for writing in new file.
 	ifstream infile;//for reading.
 
-	infile.open("Aviculture_back.txt", ios::in);
+	infile.open("Dairyfarm.txt", ios::in);
 	if (infile.is_open()) {
-		outfile.open("Aviculture_back-temp.txt", ios::out);//make file.
+		outfile.open("Dairyfarm-temp.txt", ios::out);//make file.
 		infile.seekg(0, ios::end);
 		int size = infile.tellg();
 		infile.seekg(0, ios_base::beg);
@@ -97,16 +183,17 @@ void Dairyfarm_back::Update_file() {
 				p.capacity = capacity;
 				p.level = level;
 				p.start_day_of_upgrading = start_day_of_upgrading;
-				p.start_day_of_get_food = start_day_of_get_food;
+				p.start_day_of_produce = start_day_of_produce;
 				p.isfed = isfed;
-				p.havemilk = havemilk;
+				p.havecrop = havecrop;
 				p.shenaseP = shenaseP;
+				p.dastresi = dastresi;
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}
 		outfile.close();
 		infile.close();
-		remove("Aviculture_back.txt");
-		rename("Aviculture_back-temp.txt", "Aviculture_back.txt");
+		remove("Dairyfarm.txt");
+		rename("Dairyfarm-temp.txt", "Dairyfarm.txt");
 	}
 }

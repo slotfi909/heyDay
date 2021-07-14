@@ -1,12 +1,77 @@
 #include "Sheepcote_back.h"
+
+struct temp {
+	int current;
+	int capacity;
+	int level;
+	int start_day_of_upgrading;
+	int start_day_of_produce;
+	int shenaseP;
+	bool isfed;
+	bool havecrop;
+	bool dastresi;
+};
+
 Sheepcote_back::Sheepcote_back(int _shenaseP) {
-	current = 0;
-	capacity = 2;
-	level = 1;
-	start_day_of_upgrading = -1;
-	isfed = false;
-	havewool = false;
-	shenaseP = _shenaseP;
+
+	temp A;
+
+	ifstream fin;
+	ofstream fout;
+	fin.open("Sheepcote.txt");
+	if (!fin) {
+		fin.close();
+		fout.open("Sheepcote.txt");
+		fout.close();
+		fin.open("Sheepcote.txt", ios::app);
+	}
+	bool find = 1;
+	while (fin) {
+		fin.read((char*)&A, sizeof(temp));
+		if (A.shenaseP == _shenaseP) {
+			current = A.current;
+			capacity = A.capacity;
+			level = A.level;
+			start_day_of_upgrading = A.start_day_of_upgrading;
+			start_day_of_produce = A.start_day_of_produce;
+			shenaseP = A.shenaseP;
+			isfed = A.isfed;
+			havecrop = A.havecrop;
+			dastresi = A.dastresi;
+			find = 0;
+			break;
+		}
+	}
+	fin.close();
+	if (find) {    //first login
+		current = 0;
+		capacity = 2;
+		level = 1;
+		start_day_of_upgrading = -1;
+		start_day_of_produce = -1;
+		shenaseP = _shenaseP;
+		isfed = false;
+		havecrop = false;
+		dastresi = false;
+		//..................
+		A.current = 0;
+		A.capacity = 2;
+		A.level = 1;
+		A.start_day_of_upgrading = -1;
+		A.start_day_of_produce = -1;
+		A.shenaseP = _shenaseP;
+		A.isfed = false;
+		A.havecrop = false;
+		A.dastresi = false;
+
+		fout.open("Sheepcote.txt", ios::app);
+		fout.write((char*)&A, sizeof(temp));
+		fout.close();
+	}
+}
+
+Sheepcote_back::~Sheepcote_back() {
+	Update_file();
 }
 
 void Sheepcote_back::setcurrent(int _current) { current = _current; }
@@ -15,24 +80,46 @@ void Sheepcote_back::setlevel(int _level) { level = _level; }
 int Sheepcote_back::getcurrent() { return current; }
 int Sheepcote_back::getcapacity() { return capacity; }
 int Sheepcote_back::getlevel() { return level; }
-int Sheepcote_back::getstart_day_of_upgrading() { return start_day_of_upgrading; }
 
 int Sheepcote_back::addsheep(int num) {
-	if ((capacity - current >= num) && !isfed && !havewool) {
-		current += num;
-		return 1;
-	}
-	return -1;
+	if (capacity - current < num)
+		return 2;//nabod zarfiat;
+	else if (isfed)
+		return 3;//darhal ghaza khordan
+	else if (havecrop)
+		return 4;//mahsolat jam avari nashodeand
+
+	current += num;
+	return 1;
+}
+
+int Sheepcote_back::removesheep(int num) {
+	if (current < num)
+		return 2;//in teadad morgh mojod nist;
+	else if (isfed)
+		return 3;//darhal ghaza khordan
+	else if (havecrop)
+		return 4;//mahsolat jam avari nashodeand
+	current -= num;
+	return 1;
 }
 
 int Sheepcote_back::starting_upgrade() {
-	if (/*getcoin()>=50 && getnail()>=3 && getlevel()>=7  && getshovel()>=1*/)
-	{
-		start_day_of_upgrading = /*getday()*/;
-		return 1;
-		//va tabe haii brai kam kardane in teadad az anbar
-	}
-	return -1;
+	if (owner.getlevel() < 7)
+		return 2
+	else if (getnail() < 3)
+		return 3;
+	else if (owner.getcoin() < 50)
+		return 4;
+	else if (get.shavel() < 1)
+		return 5;
+
+	start_day_of_upgrading = /*getday()*/;
+
+	//owner.setCoin(owner.getCoin() - 50);
+	//owner.setExp(owner.getExp() + 15);
+	//va anbar ke codesh felan nist;
+	return 1;
 }
 
 void Sheepcote_back::upgrading() {
@@ -43,52 +130,56 @@ void Sheepcote_back::upgrading() {
 	}
 }
 
-void Sheepcote_back::feeding() {
-	if (!havewool)
-		if ()//ye tabe dakhel anbar lazeme ke  tedad yonje mord nazara begire va age dasht kam kone az zarfite khodesh nadash -1 return kone(1*current)
-		{
-			start_day_of_get_food = /*getday()*/;
-			isfed = true;
-		}
+int Sheepcote_back::feeding() {
+	if (current == 0)
+		return 2;//morghi braye ghaza dadan nist;
+	else if (havecrop)
+		return 3;//mahsolat jam avari nashodeand
+	else if (/*tabe ke check kone anbar be andaze curren yonje dare ya na*/)
+		return 4;//yonje kafi nist;
+
+	start_day_of_produce = /*getday()*/;
+	isfed = true;
+	//yonje ra kam mikonim;
+	//owner.setExp(owner.getExp() + 7);
 }
 
-void Sheepcote_back::woolready() {
-	if (isfed && (/*getday()*/-start_day_of_get_food >= 10) && /*getcoin()*/ >= current) {
-		havewool = true;
-		isfed = false;
-		start_day_of_get_food = -1;
-		//tabe baraii kam kardane coin;
+void Sheepcote_back::cropready() {
+	if (isfed && (/*getday()*/-start_day_of_get_food >= 10) {
+		havecrop = true;
+	    isfed = false;
+    	start_day_of_produce = -1;
 	}
-
-
 }
 
-void Sheepcote_back::removal() {
-	if (havewool&&/*getmilk()>=current*/) {
-		//setwool(current khodesh+current);
-		havewool = false;
-	}
+int Sheepcote_back::removal() {
+	if (isfed && !havecrop)
+		return 2; //farayande dorost kardan shir tamam nashode ast;
+	else if (!havecrop)
+		return 3; //mahsoli baray bardasht nist;
+	else if (/*check inke aya anbar zarfiat pashm be teadad current dare aya?*/)
+		return 4; //anbar ja nadard;
+	else if (owner.getcoin() < current)
+		return 5;//coin kafi nist;
+
+		//set pashm dakhel anbar
+	//owner.setExp(owner.getExp() + 9);
+
+	//owner.setCoin(owner.getCoin() - current);
+	havecrop = false;
+	return 1;
 }
 
 void Sheepcote_back::Update_file() {
 
-	struct temp {
-		int current;
-		int capacity;
-		int level;
-		int start_day_of_upgrading;
-		int start_day_of_get_food;
-		int shenaseP;
-		bool isfed;
-		bool havewool;
-	}p;
+	temp p;
 
 	ofstream outfile;//for writing in new file.
 	ifstream infile;//for reading.
 
-	infile.open("Aviculture_back.txt", ios::in);
+	infile.open("Sheepcote.txt", ios::in);
 	if (infile.is_open()) {
-		outfile.open("Aviculture_back-temp.txt", ios::out);//make file.
+		outfile.open("Sheepcote-temp.txt", ios::out);//make file.
 		infile.seekg(0, ios::end);
 		int size = infile.tellg();
 		infile.seekg(0, ios_base::beg);
@@ -99,16 +190,17 @@ void Sheepcote_back::Update_file() {
 				p.capacity = capacity;
 				p.level = level;
 				p.start_day_of_upgrading = start_day_of_upgrading;
-				p.start_day_of_get_food = start_day_of_get_food;
+				p.start_day_of_produce = start_day_of_produce;
 				p.isfed = isfed;
-				p.havewool = havewool;
+				p.havecrop = havecrop;
 				p.shenaseP = shenaseP;
+				p.dastresi = dastresi;
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}
 		outfile.close();
 		infile.close();
-		remove("Aviculture_back.txt");
-		rename("Aviculture_back-temp.txt", "Aviculture_back.txt");
+		remove("Sheepcote.txt");
+		rename("Sheepcote-temp.txt", "Sheepcote.txt");
 	}
 }

@@ -8,12 +8,15 @@ class Sheepcote_back
 	int capacity;
 	int level;
 	bool isfed;
-	bool havewool;
+	bool havecrop;
 	int start_day_of_upgrading;
-	int start_day_of_get_food;
+	int start_day_of_produce;
 	int shenaseP;
+	bool dastresi;
+
 public:
 	Sheepcote_back(int);
+	~Sheepcote_back();
 
 	void setcurrent(int _current);
 	void setcapacity(int _capacity);
@@ -21,13 +24,13 @@ public:
 	int getcurrent();
 	int getcapacity();
 	int getlevel();
-	int getstart_day_of_upgrading();
 
 	int addsheep(int);
+	int removesheep(int);
 	int starting_upgrade();
 	void upgrading();
-	void feeding();
-	void woolready();
-	void removal();
+	int feeding();
+	void cropready();
+	int removal();
 	void Update_file();
 };
