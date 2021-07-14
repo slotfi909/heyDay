@@ -1,7 +1,8 @@
 #include "exthread.h"
-
-Exthread::Exthread()
+#include "mainwindow.h"
+Exthread::Exthread(Farm* temp)
 {
+    farmInEx =temp;
     now=time(0);
 
 }
@@ -12,10 +13,15 @@ void Exthread::run()
     while(1){
         time_t later=time(0);
         if(later-now>=4){
+            farmInEx->mymutex.lock();
+            //
             now=later;
             day++;
             L1->setText("day : "+QString::number(day));
-
+            farmInEx->owner.changeExp(1);
+            farmInEx->owner.changeLevel();
+            //
+            farmInEx->mymutex.unlock();
         }
     }
 

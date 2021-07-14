@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     dialogformakeaccount.cpp \
+    farm.cpp \
     main.cpp \
     widget.cpp\
     scoreboard.cpp\
@@ -22,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     dialogformakeaccount.h \
+    farm.h \
     person.h \
     widget.h\
     scoreboard.h\
