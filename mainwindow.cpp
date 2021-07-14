@@ -5,20 +5,39 @@
 #include <fstream>
 #include <string>
 #include <QDataStream>
+void runthread(QLabel*L1,Farm *myfarm,MainWindow*t){
+    L1->setText("day : "+QString::number(myfarm->owner.getDay()));
+    while(1){
 
+
+            myfarm->mymutex.lock();
+            //
+
+            myfarm->owner.setDay(myfarm->owner.getDay()+1);
+            L1->setText("day : "+QString::number(myfarm->owner.getDay()));
+            myfarm->owner.changeExp(1);
+            myfarm->owner.changeLevel();
+            t->showCoin();
+           t->showLevel();
+            t->showXp();
+             //
+            myfarm->mymutex.unlock();
+            _sleep(1000);
+
+    }
+}
 
 MainWindow::MainWindow(QWidget *parent, int shenaseP)
-    : QMainWindow(parent),myfarm(shenaseP),Ex(&myfarm)
+    : QMainWindow(parent),myfarm(shenaseP)
     , ui(new Ui::MainWindow)
 {
 
 
 
     ui->setupUi(this);
-    Ex.setLabel1(ui->label_5);
+   /* Ex.setLabel1(ui->label_5);
     Ex.set_Day(shenaseP);
-    Ex.start();
-
+    Ex.start();*/
     //menu title
     this->setWindowTitle("HeyDay");
 
@@ -56,14 +75,20 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
     ui->pushButton_3->setIcon(QIcon("C:/HeydayLogo/Logo/shop.jpg"));
     ui->pushButton_3->setIconSize(QSize(61, 62));
 
-    //wheat button icon
+
+
+
+    //multi thread
+
+    Qt=QThread::create(runthread,ui->label_5,&myfarm,this);
+    Qt->start();
 
 }
 
 MainWindow::~MainWindow()
 {
-    Ex.terminate();
-    Ex.ExupdateFile(myfarm.owner.getShenaseP());
+
+    Qt->terminate();
     myfarm.owner.Update_file();
     delete ui;
 }
@@ -141,8 +166,8 @@ void MainWindow::on_alfalfaLand_clicked()
 //Wheatland (Pouya)
 void MainWindow::on_WheatLand_clicked()
 {
-    wh = new wheatland;
-    wh->show();
+   // wh = new wheatland;
+    //wh->show();
 }
 
 

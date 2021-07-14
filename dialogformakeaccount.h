@@ -17,6 +17,7 @@ int exp;
 int level;
 int shenaseP;
 int maxExp;
+int day;
 };
 namespace Ui {
 class DialogFormakeAccount;

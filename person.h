@@ -16,6 +16,7 @@ class person0{
     int level;
     int shenaseP;
     int maxExp;
+    int day;
     public://functions
     void setName(QString);
     void setPass(QString);
@@ -26,6 +27,7 @@ class person0{
     void setLevel(int);
     void setShenaseP(int);
     void setMaxExp(int);
+    void setDay(int d){day=d;}
     person0(int);//constructor
     QString getName();
     QString getUsername();
@@ -38,6 +40,7 @@ class person0{
     int getExp();
     int getCoin();
     int getLevel();
+    int getDay(){return day;}
     void Update_file();
 };
 

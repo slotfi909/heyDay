@@ -2,12 +2,12 @@
 #include "ui_dialogformakeaccount.h"
 
 QDataStream &operator>>(QDataStream &in, struct person &p){ //for read from the file
-    in >> p.name >> p.pass >>p.username>>p.email>>p.coin>>p.exp>>p.level>>p.shenaseP>>p.maxExp;
+    in >> p.name >> p.pass >>p.username>>p.email>>p.coin>>p.exp>>p.level>>p.shenaseP>>p.maxExp>>p.day;
     return in;
 }
 
 QDataStream &operator<<(QDataStream &out, struct person &p){ //for writing from the file
-    out << p.name <<p.pass <<p.username<<p.email<<p.coin<<p.exp<<p.level<<p.shenaseP<<p.maxExp;
+    out << p.name <<p.pass <<p.username<<p.email<<p.coin<<p.exp<<p.level<<p.shenaseP<<p.maxExp<<p.day;
     return out;
 }
 DialogFormakeAccount::DialogFormakeAccount(QWidget *parent) :
@@ -37,7 +37,7 @@ void DialogFormakeAccount::on_makeaccPush_clicked()
         p.exp=0;
         p.level=1;
         p.maxExp=10;
-
+        p.day=0;
         int tedad = 0;
         QFile fp("tedadC.txt");
         fp.open(QIODevice::ReadOnly);

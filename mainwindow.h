@@ -10,7 +10,8 @@
 #include "Aviculture.h"
 #include "Sheepcote.h"
 #include "Dairyfarm.h"
-#include "wheatland.h"
+#include "QProgressBar"
+//#include "wheatland.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -25,7 +26,8 @@ public:
     ~MainWindow();
 
 
-public :
+
+public slots :
     void showLevel();
 
     void showXp();
@@ -56,16 +58,18 @@ private slots:
     void on_Dairyfarm_clicked();
 
     void on_Sheepcote_clicked();
-
+friend void runthread();
 private:
     Ui::MainWindow *ui;
     Farm myfarm;
     Aviculture *Avi;
     Sheepcote *Sh;
     Dairyfarm *Da;
-    Exthread Ex;
+    //Exthread Ex;
+    QThread *Qt;
     scoreboard *sc;
-    wheatland *wh;
+    //wheatland *wh;
+
 
 
 };

@@ -9,14 +9,15 @@ int exp;
 int level;
 int shenaseP;
 int maxExp;
+int day;
 };
 QDataStream &operator>>(QDataStream &in, struct personinper &p){ //for read from the file
-    in >> p.name >> p.pass >>p.username>>p.email>>p.coin>>p.exp>>p.level>>p.shenaseP>>p.maxExp;
+    in >> p.name >> p.pass >>p.username>>p.email>>p.coin>>p.exp>>p.level>>p.shenaseP>>p.maxExp>>p.day;
     return in;
 }
 
 QDataStream &operator<<(QDataStream &out, struct personinper &p){ //for writing from the file
-    out << p.name <<p.pass <<p.username<<p.email<<p.coin<<p.exp<<p.level<<p.shenaseP<<p.maxExp;
+    out << p.name <<p.pass <<p.username<<p.email<<p.coin<<p.exp<<p.level<<p.shenaseP<<p.maxExp<<p.day;
     return out;
 }
 
@@ -45,13 +46,14 @@ void person0::Update_file(){
                    p.level=level;
                    p.shenaseP=shenaseP;
                    p.maxExp=maxExp;
+                   p.day=day;
            }
-           outfile.write((char*)&p,sizeof(p));
+           //outfile.write((char*)&p,sizeof(p));
            QDataStream out(&outfile);
            out<<p;
     }
-    infile.remove("person.txt");
-    outfile.rename("person-temp.txt","person.txt");
+    infile.remove();
+    outfile.rename("person.txt");
     outfile.close();
     infile.close();
 
@@ -95,6 +97,7 @@ void person0::Update_file(){
               level=p.level;
               shenaseP=p.shenaseP;
               maxExp=p.maxExp;
+              day=p.day;
               break;
            }
           }

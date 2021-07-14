@@ -15,11 +15,12 @@ SOURCES += \
     widget.cpp\
     scoreboard.cpp\
     mainwindow.cpp\
-    exthread.cpp\
     person.cpp\
     Aviculture.cpp\
     Dairyfarm.cpp\
-    Sheepcote.cpp
+    Sheepcote.cpp\
+
+
 
 HEADERS += \
     dialogformakeaccount.h \
@@ -28,16 +29,18 @@ HEADERS += \
     widget.h\
     scoreboard.h\
     mainwindow.h\
-    exthread.h\
     Aviculture.h\
     Dairyfarm.h\
-    Sheepcote.h
+    Sheepcote.h\
+
+
 
 FORMS += \
     dialogformakeaccount.ui \
     widget.ui\
     mainwindow.ui\
-    scoreboard.ui
+    scoreboard.ui\
+    wheatland.ui
 
 
 # Default rules for deployment.

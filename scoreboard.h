@@ -2,7 +2,6 @@
 #define SCOREBOARD_H
 
 #include <QDialog>
-#include <QMultiMap>
 
 namespace Ui {
 class scoreboard;
@@ -18,7 +17,6 @@ public:
 
 private:
     Ui::scoreboard *ui;
-    QMultiMap<int,QString> players;
 };
 
 #endif // SCOREBOARD_H

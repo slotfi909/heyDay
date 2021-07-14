@@ -12,9 +12,10 @@ int exp;
 int level;
 int shenaseP;
 int maxExp;
+int day;
 };
 QDataStream &operator>>(QDataStream &in, struct temp &p){ //for read from the file
-    in >> p.name >> p.pass >>p.username>>p.email>>p.coin>>p.exp>>p.level>>p.shenaseP>>p.maxExp;
+    in >> p.name >> p.pass >>p.username>>p.email>>p.coin>>p.exp>>p.level>>p.shenaseP>>p.maxExp>>p.day;
     return in;
 }
 Widget::Widget(QWidget *parent)
@@ -58,8 +59,7 @@ struct temp p;
 
                   m=new MainWindow(this,p.shenaseP);
                   this->close();
-                  //m->Ex.set_Day(p.shenaseP);
-                  // m->Ex.start();
+
                   m->show();
 
 

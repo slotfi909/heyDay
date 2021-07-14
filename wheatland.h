@@ -12,7 +12,7 @@ class wheatland : public QWidget
     Q_OBJECT
 
 public:
-    explicit wheatland(QWidget *parent = nullptr);
+     wheatland(QWidget *parent = nullptr);
     ~wheatland();
 
 private slots:
