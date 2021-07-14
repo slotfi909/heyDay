@@ -25,7 +25,7 @@ public:
 storage();
 
 // functions
-void upgrade(person& player);
+void upgrade(person0& player);
 int getLevel();
 int getCapacity();
 int allMerchandises();
