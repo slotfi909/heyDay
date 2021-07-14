@@ -15,6 +15,12 @@ DialogFormakeAccount::DialogFormakeAccount(QWidget *parent) :
     ui(new Ui::DialogFormakeAccount)
 {
     ui->setupUi(this);
+
+    QPixmap bkgnd("C:/HeydayLogo/Logo/makeacc2.jpg");
+           bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+           QPalette palette;
+           palette.setBrush(QPalette::Window, bkgnd);
+           this->setPalette(palette);
 }
 
 DialogFormakeAccount::~DialogFormakeAccount()

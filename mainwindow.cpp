@@ -32,28 +32,24 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
     , ui(new Ui::MainWindow)
 {
 
-
-
     ui->setupUi(this);
-   /* Ex.setLabel1(ui->label_5);
-    Ex.set_Day(shenaseP);
-    Ex.start();*/
+
     //menu title
     this->setWindowTitle("HeyDay");
 
     //background image
-    QPixmap bkgnd("C:/HeydayLogo/Logo/back.jpg");
-       bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
-       QPalette palette;
-       palette.setBrush(QPalette::Window/*Background*/, bkgnd);
-       this->setPalette(palette);
+    QPixmap bkgnd("C:/HeydayLogo/Logo/menuback.jpg");
+           bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+           QPalette palette;
+           palette.setBrush(QPalette::Window/*Background*/, bkgnd);
+           this->setPalette(palette);
 
     //main window title icon
     setWindowIcon(QIcon("C:/HeydayLogo/Logo/heyday1.jpg"));
 
     //level icon
-    QPixmap starIcon("C:/HeydayLogo/Logo/images.png");
-    ui->label->setPixmap(starIcon.scaled(30,30));
+    QPixmap starIcon("C:/HeydayLogo/Logo/star.png");
+        ui->label->setPixmap(starIcon.scaled(50,50));
 
     //coin icon
     QPixmap coinIcon("C:/HeydayLogo/Logo/coin.png");
@@ -64,16 +60,21 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
     ui->pushButton_2->setIconSize(QSize(54, 52));
 
     //scorebored button icon
-    ui->pushButton->setIcon(QIcon("C:/HeydayLogo/Logo/score.jpg"));
-    ui->pushButton->setIconSize(QSize(40, 40));
+        ui->pushButton->setIcon(QIcon("C:/HeydayLogo/Logo/cup2.png"));
+        ui->pushButton->setIconSize(QSize(40, 40));
 
-    //shop button icon
-    ui->pushButton_3->setIcon(QIcon("C:/HeydayLogo/Logo/shop.jpg"));
-    ui->pushButton_3->setIconSize(QSize(61, 62));
+        //shop button icon
+        ui->pushButton_3->setIcon(QIcon("C:/HeydayLogo/Logo/shop2.png"));
+        ui->pushButton_3->setIconSize(QSize(90, 90));
 
-    //silo button icon
-    ui->pushButton_3->setIcon(QIcon("C:/HeydayLogo/Logo/shop.jpg"));
-    ui->pushButton_3->setIconSize(QSize(61, 62));
+        //silo button icon
+        ui->silo->setIcon(QIcon("C:/HeydayLogo/Logo/silo.png"));
+        ui->silo->setIconSize(QSize(110, 110));
+
+        //garner icon
+        ui->garner->setIcon(QIcon("C:/HeydayLogo/Logo/garner.png"));
+        ui->garner->setIconSize(QSize(110, 110));
+
 
 
 
@@ -166,8 +167,8 @@ void MainWindow::on_alfalfaLand_clicked()
 //Wheatland (Pouya)
 void MainWindow::on_WheatLand_clicked()
 {
-   // wh = new wheatland;
-    //wh->show();
+    wh = new wheatland;
+    wh->show();
 }
 
 

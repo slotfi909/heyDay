@@ -23,6 +23,24 @@ Widget::Widget(QWidget *parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
+
+    QPixmap bkgnd("C:/HeydayLogo/Logo/login.jpg");
+          bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+          QPalette palette;
+          palette.setBrush(QPalette::Window, bkgnd);
+          this->setPalette(palette);
+
+          this->setWindowTitle("Login");
+
+          setWindowIcon(QIcon("C:/HeydayLogo/Logo/heyday1.jpg"));
+
+          ui->pushButton_2->setIcon(QIcon("C:/HeydayLogo/Logo/loginbut.png"));
+          ui->pushButton_2->setIconSize(QSize(54, 52));
+
+          ui->pushButton->setIcon(QIcon("C:/HeydayLogo/Logo/makeaccbut.jpg"));
+          ui->pushButton->setIconSize(QSize(54, 52));
+
+
 }
 
 Widget::~Widget()
@@ -57,11 +75,10 @@ struct temp p;
 
                    peyda=0;
 
-                  m=new MainWindow(this,p.shenaseP);
+                  m = new MainWindow(this,p.shenaseP);
                   this->close();
 
                   m->show();
-
 
                }
 

@@ -19,7 +19,15 @@ wheatland::wheatland(QWidget *parent) :
     this->setWindowTitle("Wheat Land");
 
     //set background
-    this->setStyleSheet("background-color: lightyellow");
+    //this->setStyleSheet("background-color: lightyellow");
+    QPixmap bkgnd("C:/HeydayLogo/Logo/wheatlandback.jpg");
+       bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+       QPalette palette;
+       palette.setBrush(QPalette::Window/*Background*/, bkgnd);
+       this->setPalette(palette);
+
+       //window icon
+       setWindowIcon(QIcon("C:/HeydayLogo/Logo/wheat2.jpg"));
 
     //upgrade icon
     ui->upGrade->setIcon(QIcon("C:/HeydayLogo/Logo/upgrade2.png"));
