@@ -1,42 +1,10 @@
 #include "storage.h"
-#include "milk.h"
-storage::storage(){
-capacity=5;
-level=1;
-numNail=1;
-numAlfalfa=1;
-numShovel=0;
-numMilk=0;
-numFleece=0;
-isBeingUpgraded=0;
-}
-
-// functions
-void storage::upgrade(person& player){
-    bool canGetUpgraded=0;
-   if(level<player.level)
-    if(numNail>=level)
-     if(numShovel>=level-1)
-      if(player.coin>=(pow(level,3)*10))
-         canGetUpgraded=1;
-
-        if(canGetUpgraded){
-                cout<<"are you sure?\nenter y for yes and n for no\n";
-        char input;
-        cin >>input;
-        if(input=='n'){
-            return;
-             //upgrade didn't happen
-        }
-            isBeingUpgraded=1;
-storageTime=time(0);
-        cout<<"storage is upgrading(it takes 5 days to complete!)\n";
+#include "ui_storage.h"
 
 
-        }
-        else
-        cout<<"storage can't upgrade!";
-
+storage::~storage()
+{
+    delete ui;
 }
 int storage::getLevel(){return level;}
 int storage::getCapacity(){return capacity;}
@@ -87,6 +55,41 @@ void storage::addEgg(int numAddedEgg){
     }
 
     }
+
+//#include "storage.h"
+//#include "milk.h"
+
+
+// functions
+/*
+void storage::upgrade(person& player){
+    bool canGetUpgraded=0;
+   if(level<player.level)
+    if(numNail>=level)
+     if(numShovel>=level-1)
+      if(player.coin>=(pow(level,3)*10))
+         canGetUpgraded=1;
+
+        if(canGetUpgraded){
+                cout<<"are you sure?\nenter y for yes and n for no\n";
+        char input;
+        cin >>input;
+        if(input=='n'){
+            return;
+             //upgrade didn't happen
+        }
+            isBeingUpgraded=1;
+storageTime=time(0);
+        cout<<"storage is upgrading(it takes 5 days to complete!)\n";
+
+
+        }
+        else
+        cout<<"storage can't upgrade!";
+
+}
+
+
 void storage::addMilk(milk AddedMilk){
         if(AddedMilk.getAmount()+allMerchandises()<=capacity){
 
@@ -108,6 +111,7 @@ void storage::addMilk(milk AddedMilk){
     }
 
 }
+*/
 void storage::addFleece(int numAddedFleece){
       if(numAddedFleece+allMerchandises()<=capacity){
 
@@ -120,6 +124,7 @@ void storage::addFleece(int numAddedFleece){
         cout<<"not enough capacity!";
     }
 }
+/*
 void storage::checkSpoiledMilk(){
 for(int i=0;i<100;i++){
     if(time(0)>=10*24*3600+milklist[i].getDate()){ // if 10 days has passed since the produce date
@@ -128,6 +133,37 @@ for(int i=0;i<100;i++){
 
     }
 }
+
+
+}
+*/
+
+
+storage::storage(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::storage)
+{
+    ui->setupUi(this);
+
+    capacity=5;
+    level=1;
+    numNail=1;
+    numAlfalfa=1;
+    numShovel=0;
+    numMilk=0;
+    numFleece=0;
+    isBeingUpgraded=0;
+
+    char tmpstr[3];
+        ui->label_2->setText(itoa(this->level,tmpstr,10));
+        ui->label_4->setText(itoa(this->capacity,tmpstr,10));
+        ui->label_6->setText(itoa(this->numShovel,tmpstr,10));
+        ui->label_8->setText(itoa(this->numNail,tmpstr,10));
+        ui->label_10->setText(itoa(this->numAlfalfa,tmpstr,10));
+        ui->label_12->setText(itoa(this->numEgg,tmpstr,10));
+        ui->label_14->setText(itoa(this->numMilk,tmpstr,10));
+        ui->label_16->setText(itoa(this->numFleece,tmpstr,10));
+
 
 
 }

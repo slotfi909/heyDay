@@ -1,9 +1,34 @@
 #include "silo.h"
+#include "ui_silo.h"
+#include <iostream>
+#include <string.h>
 #include <math.h>
-    silo::silo(){
+
+using namespace std;
+silo::silo(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::silo)
+{
     numWheat=1;
     capacity=10;
-    }
+    level=1;
+    ui->setupUi(this);
+char tmpstr[3];
+    ui->label_2->setText(itoa(this->getLevel(),tmpstr,10));
+    ui->label_4->setText(itoa(this->getCapaticy(),tmpstr,10));
+    ui->label_6->setText(itoa(this->getNumWheat(),tmpstr,10));
+
+
+}
+
+silo::~silo()
+{
+    delete ui;
+}
+
+
+
+/*
     void silo::upgrade(person& player,const storage& playerStorage){
         bool canGetUpgraded=0;
 
@@ -27,6 +52,7 @@
         cout<<"silo can't upgrade!";
 
     }
+    */
     int silo::getCapaticy(){return capacity;}
     int silo::getNumWheat(){return numWheat;}
     int silo::getLevel(){return level;}
@@ -39,18 +65,15 @@
     else
         cout<<"not enough space!\n";
     }
-void silo::checkForUpgrade(person& player){
+/*
+    void silo::checkForUpgrade(person& player){
 {
 if(isBeingUpgraded){
         if(time(0)>4*24*3600+siloTime){ // 4 days has passed
                   capacity*=2;
               player.exp+=level*2;
               cout <<"storage upgraded successfully!";
-/* // needed things must be decreased?
-numNail-=2*level;
-    player.coin-=(power(2,2*level)*100));
-      playerStorage.numShovel-=level-2;
-*/
+
 
         }
 else
@@ -60,8 +83,10 @@ else
     cout <<"silo is not upgrading!";
 
 }
+*/
 
 
 
-}
+
+
 
