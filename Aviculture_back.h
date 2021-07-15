@@ -40,10 +40,10 @@ public:
 	int isfull();
 	int addchicken(int num);
 	int removechicken(int num);
-	int starting_upgrade();
+	//int starting_upgrade();
 	void upgrading();//zamani
-	int feeding();
+	//int feeding();
 	void cropready();//zamani
-	int removal();
+	//int removal();
 	void Update_file();//distructor
 };

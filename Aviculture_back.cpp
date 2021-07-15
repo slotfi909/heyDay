@@ -124,7 +124,7 @@ int Aviculture_back::removechicken(int num) {
 	return 1;
 
 }
-//dakhel slot ha.......................................
+/*dakhel slot ha.......................................
 int Aviculture_back::starting_upgrade()
 {
 	if (owner.getlevel() < 3)
@@ -134,13 +134,13 @@ int Aviculture_back::starting_upgrade()
 	else if (owner.getcoin() < 10)
 		return 4;
 	
-	start_day_of_upgrading = /*getday()*/;
+	start_day_of_upgrading = /*getday();
 		
 		//owner.setCoin(owner.getCoin() - 10);
 		//owner.setExp(owner.getExp() + 5);
 		//va anbar ke codesh felan nist;
 		return 1;
-}
+}*/
 //zamani....................................................
 void Aviculture_back::upgrading() {
 	if (/*getday()*/ -start_day_of_upgrading >= 3) {
@@ -149,20 +149,20 @@ void Aviculture_back::upgrading() {
 		level++;
 	}
 }
-//dakhel slot ha..................................................
+/*/dakhel slot ha..................................................
 int Aviculture_back::feeding() {
 	if (current == 0)
 		return 2;//morghi braye ghaza dadan nist;
 	else if (havecrop)
 		return 3;//mahsolat jam avari nashodeand
-	else if (/*tabe ke check kone silo be andaze curren gandom dare ya na*/)
+	else if (/*tabe ke check kone silo be andaze curren gandom dare ya na)
 		return 4;//gandom kafi nist;
 		
-			start_day_of_produce = /*getday()*/;
+			start_day_of_produce = /*getday();
 			isfed = true;
 			//gandom ra kam mikonim;
 			//owner.setExp(owner.getExp() + 1);
-}
+}*/
 //zamani //////////////
 
 void Aviculture_back::cropready() {
@@ -172,13 +172,13 @@ void Aviculture_back::cropready() {
 		start_day_of_produce = -1;
 	}
 }
-//dakhel slot ha...............................
+/*/dakhel slot ha...............................
 int Aviculture_back::removal() {
 	if (isfed && !havecrop)
 		return 2; //farayande tokhomgozari tamam nashode ast;
 	else if (!havecrop)
 		return 3; //mahsoli baray bardasht nist;
-	else if (/*check inke aya anbar zarfiat tommorgh be teadad current dare aya?*/)
+	else if (/*check inke aya anbar zarfiat tommorgh be teadad current dare aya?)
 		return 4; //anbar ja nadard;
 
 		//set tokhme dakhel anbar
@@ -186,7 +186,7 @@ int Aviculture_back::removal() {
 		havecrop = false;
 		return 1;
 }
-
+*/
 void Aviculture_back::Update_file() {
 
 	temp p;
