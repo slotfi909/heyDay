@@ -19,8 +19,8 @@ m.day=day;
 m.shenaseP=shenase;
 m.tedad=tedad;
 m.spoiled=0;
-ofstream outfile;//for writing in new file.
-outfile.open("milk.txt",ios::app);
+std::ofstream outfile;//for writing in new file.
+outfile.open("milk.txt",std::ios::app);
 outfile.write((char*)&m,sizeof(m));
 outfile.close();
 }
@@ -35,13 +35,13 @@ bool spoiled;//kharab shode =>1 , kharab nashode=>0.
 }m;
 
 
-ifstream infile;
-infile.open("milk.txt",ios::in);
+std::ifstream infile;
+infile.open("milk.txt",std::ios::in);
 if(infile.is_open()){
 
-infile.seekg(0,ios::end);
+infile.seekg(0,std::ios::end);
 int size=infile.tellg();
-infile.seekg(0,ios::beg);
+infile.seekg(0,std::ios::beg);
 while(infile.tellg()<size){
     infile.read((char*)&m,sizeof(m));
     if(m.shenaseP==shenase)

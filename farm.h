@@ -3,7 +3,7 @@
 #include "person.h"
 #include <QMutex>
 #include <fstream>
-using namespace std;
+//using namespace std;
 class Farm
 {
 public:
