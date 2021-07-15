@@ -1,9 +1,9 @@
 #include "Aviculture.h"
-#define AVICULTURE "E:/lessons/term 2/AP/project/Aviculture_logo/Aviculture.png"
-#define STATUS "E:/lessons/term 2/AP/project/Aviculture_logo/2230690.png"
-#define FEEDING "E:/lessons/term 2/AP/project/Aviculture_logo/5247235.png"
-#define REMOVAL "E:/lessons/term 2/AP/project/Aviculture_logo/5466852.png"
-#define UPGRADING "E:/lessons/term 2/AP/project/Aviculture_logo/6154580.png"
+#define AVICULTURE "C:/HeydayLogo/Aviculture_logo/Aviculture.png"
+#define STATUS "C:/HeydayLogo/Aviculture_logo/2230690.png"
+#define FEEDING "C:/HeydayLogo/Aviculture_logo/5247235.png"
+#define REMOVAL "C:/HeydayLogo/Aviculture_logo/5466852.png"
+#define UPGRADING "C:/HeydayLogo/Aviculture_logo/6154580.png"
 
 Aviculture::Aviculture(QWidget *parent, farm* _Myfarm)
     : QWidget(parent)
