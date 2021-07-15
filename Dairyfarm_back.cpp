@@ -9,7 +9,7 @@ struct temp {
 	int shenaseP;
 	bool isfed;
 	bool havecrop;
-	bool dastresi;
+	
 };
 
 Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
@@ -25,7 +25,7 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 		fin.open("Dairyfarm.txt", ios::app);
 	}
 	bool find = 1;
-	while (fin) {
+	while (!fin.eof()) {
 		fin.read((char*)&A, sizeof(temp));
 		if (A.shenaseP == _shenaseP) {
 			current = A.current;
@@ -36,7 +36,6 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 			shenaseP = A.shenaseP;
 			isfed = A.isfed;
 			havecrop = A.havecrop;
-			dastresi = A.dastresi;
 			find = 0;
 			break;
 		}
@@ -51,7 +50,7 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 		shenaseP = _shenaseP;
 		isfed = false;
 		havecrop = false;
-		dastresi = false;
+
 		//..................
 		A.current = 0;
 		A.capacity = 2;
@@ -61,7 +60,7 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 		A.shenaseP = _shenaseP;
 		A.isfed = false;
 		A.havecrop = false;
-		A.dastresi = false;
+	
 
 		fout.open("Dairyfarm.txt", ios::app);
 		fout.write((char*)&A, sizeof(temp));
@@ -75,9 +74,26 @@ Dairyfarm_back::~Dairyfarm_back() {
 void Dairyfarm_back::setcurrent(int _current) { current = _current; }
 void Dairyfarm_back::setcapacity(int _capacity) { capacity = _capacity; }
 void Dairyfarm_back::setlevel(int _level) { level = _level; }
+void Dairyfarm_back::set_start_day_of_upgrading(int _start_day_of_upgrading) { start_day_of_upgrading = _start_day_of_upgrading; }
+void Dairyfarm_back::set_start_day_of_produce(int _start_day_of_produce) { start_day_of_produce = _start_day_of_produce; }
+void Dairyfarm_back::setshenaseP(int _shenaseP) { shenaseP = _shenaseP; }
+void Dairyfarm_back::setisfed(bool _isfed) { isfed = _isfed; }
+void Dairyfarm_back::sethavecrop(bool _havecrop) { havecrop = _havecrop; }
+
 int Dairyfarm_back::getcurrent() { return current; }
 int Dairyfarm_back::getcapacity() { return capacity; }
 int Dairyfarm_back::getlevel() { return level; }
+int Dairyfarm_back::get_start_day_of_upgrading() { return start_day_of_upgrading; }
+int Dairyfarm_back::get_start_day_of_produce() { return start_day_of_produce; }
+int Dairyfarm_back::getshenaseP() { return shenaseP; }
+bool Dairyfarm_back::getisfed() { return isfed; }
+bool Dairyfarm_back::gethavecrop() { return havecrop; }
+
+int Dairyfarm_back::isfull() {
+	if (current == capacity)
+		return 0;
+	return capacity - current;
+}
 
 
 int Dairyfarm_back::addcow(int num) {
@@ -102,7 +118,7 @@ int Dairyfarm_back::removecow(int num) {
 	current -= num;
 	return 1;
 }
-
+/*
 int Dairyfarm_back::starting_upgrade() {
 	if (owner.getlevel() < 5)
 		return 2
@@ -111,14 +127,14 @@ int Dairyfarm_back::starting_upgrade() {
 	else if (owner.getcoin() < 15)
 		return 4;
 
-	start_day_of_upgrading = /*getday()*/;
+	start_day_of_upgrading = /*getday();
 
 	//owner.setCoin(owner.getCoin() - 15);
 	//owner.setExp(owner.getExp() + 6);
 	//va anbar ke codesh felan nist;
 	return 1;
-}
-
+}*/
+//zamani..........
 void Dairyfarm_back::upgrading() {
 	if (/*getday()*/ -start_day_of_upgrading >= 5) {
 		capacity *= 2;
@@ -126,21 +142,21 @@ void Dairyfarm_back::upgrading() {
 		level++;
 	}
 }
-
+/*
 int Dairyfarm_back::feeding() {
 	if (current == 0)
 		return 2;//morghi braye ghaza dadan nist;
 	else if (havecrop)
 		return 3;//mahsolat jam avari nashodeand
-	else if (/*tabe ke check kone anbar be andaze 2*curren yonje dare ya na*/)
+	else if (/*tabe ke check kone anbar be andaze 2*curren yonje dare ya na)
 		return 4;//yonje kafi nist;
 
-	start_day_of_produce = /*getday()*/;
+	start_day_of_produce = /*getday();
 	isfed = true;
 	//yonje ra kam mikonim;
 	//owner.setExp(owner.getExp() + 3);
-}
-
+}*/
+//zamani..........
 void Dairyfarm_back::cropready() {
 	if (isfed && (/*getday()*/-start_day_of_produce >= 3)) {
 		havecrop = true;
@@ -148,13 +164,13 @@ void Dairyfarm_back::cropready() {
 		start_day_of_produce = -1;
 	}
 }
-
+/*
 int Dairyfarm_back::removal() {
 	if (isfed && !havecrop)
 		return 2; //farayande dorost kardan shir tamam nashode ast;
 	else if (!havecrop)
 		return 3; //mahsoli baray bardasht nist;
-	else if (/*check inke aya anbar zarfiat shir be teadad current dare aya?*/)
+	else if (/*check inke aya anbar zarfiat shir be teadad current dare aya?)
 		return 4; //anbar ja nadard;
 
 		//set shir dakhel anbar
@@ -162,7 +178,7 @@ int Dairyfarm_back::removal() {
 	havecrop = false;
 	return 1;
 }
-
+*/
 void Dairyfarm_back::Update_file() {
 
 	temp p;
@@ -187,7 +203,7 @@ void Dairyfarm_back::Update_file() {
 				p.isfed = isfed;
 				p.havecrop = havecrop;
 				p.shenaseP = shenaseP;
-				p.dastresi = dastresi;
+		
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}
