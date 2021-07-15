@@ -10,7 +10,7 @@ struct temp {
 	int shenaseP;
 	bool isfed;
 	bool havecrop;
-	bool dastresi;
+	
 };
 
 Aviculture_back::Aviculture_back(int _shenaseP)
@@ -27,7 +27,7 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 		fin.open("Aviculture.txt", ios::app);
 	}
 	bool find = 1;
-	while (fin) {
+	while (!fin.eof()) {/////////////////////taghir dar hame
 		fin.read((char*)&A, sizeof(temp));
 		if (A.shenaseP == _shenaseP) {
 			current = A.current;
@@ -38,7 +38,6 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 			shenaseP = A.shenaseP;
 			isfed = A.isfed;
 			havecrop = A.havecrop;
-			dastresi = A.dastresi;
 			find = 0;
 			break;
 		}
@@ -53,7 +52,6 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 		shenaseP = _shenaseP;
 	    isfed = false;
 		havecrop = false;
-		dastresi = false;
 		//..................
 		A.current = 0;
 		A.capacity = 2;
@@ -63,7 +61,6 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 		A.shenaseP = _shenaseP;
 		A.isfed = false;
 		A.havecrop = false;
-		A.dastresi = false;
 
 		fout.open("Aviculture.txt",ios::app);
 		fout.write((char*)&A, sizeof(temp));
@@ -79,9 +76,27 @@ Aviculture_back::~Aviculture_back() {
 void Aviculture_back::setcurrent(int _current) { current = _current; }
 void Aviculture_back::setcapacity(int _capacity) { capacity = _capacity; }
 void Aviculture_back::setlevel(int _level) { level = _level; }
+void Aviculture_back::set_start_day_of_upgrading(int _start_day_of_upgrading) { start_day_of_upgrading = _start_day_of_upgrading; }
+void Aviculture_back::set_start_day_of_produce(int _start_day_of_produce) { start_day_of_produce = _start_day_of_produce; }
+void Aviculture_back::setshenaseP(int _shenaseP) { shenaseP = _shenaseP; }
+void Aviculture_back::setisfed(bool _isfed) { isfed = _isfed; }
+void Aviculture_back::sethavecrop(bool _havecrop) { havecrop = _havecrop; }
+
 int Aviculture_back::getcurrent() { return current; }
 int Aviculture_back::getcapacity() { return capacity; }
 int Aviculture_back::getlevel() { return level; }
+int Aviculture_back::get_start_day_of_upgrading() { return start_day_of_upgrading; }
+int Aviculture_back::get_start_day_of_produce() { return start_day_of_produce; }
+int Aviculture_back::getshenaseP() { return shenaseP; }
+bool Aviculture_back::getisfed() { return isfed; }
+bool Aviculture_back::gethavecrop() { return havecrop; }
+
+int Aviculture_back::isfull() {
+	if (current == capacity)
+		return 0;
+	return capacity - current;
+}
+
 
 int Aviculture_back::addchicken(int num)
 {
@@ -109,7 +124,7 @@ int Aviculture_back::removechicken(int num) {
 	return 1;
 
 }
-
+//dakhel slot ha.......................................
 int Aviculture_back::starting_upgrade()
 {
 	if (owner.getlevel() < 3)
@@ -126,7 +141,7 @@ int Aviculture_back::starting_upgrade()
 		//va anbar ke codesh felan nist;
 		return 1;
 }
-
+//zamani....................................................
 void Aviculture_back::upgrading() {
 	if (/*getday()*/ -start_day_of_upgrading >= 3) {
 		capacity *= 2;
@@ -134,7 +149,7 @@ void Aviculture_back::upgrading() {
 		level++;
 	}
 }
-
+//dakhel slot ha..................................................
 int Aviculture_back::feeding() {
 	if (current == 0)
 		return 2;//morghi braye ghaza dadan nist;
@@ -148,6 +163,7 @@ int Aviculture_back::feeding() {
 			//gandom ra kam mikonim;
 			//owner.setExp(owner.getExp() + 1);
 }
+//zamani //////////////
 
 void Aviculture_back::cropready() {
 	if (isfed && (/*getday()*/-start_day_of_produce >= 2)) {
@@ -156,7 +172,7 @@ void Aviculture_back::cropready() {
 		start_day_of_produce = -1;
 	}
 }
-
+//dakhel slot ha...............................
 int Aviculture_back::removal() {
 	if (isfed && !havecrop)
 		return 2; //farayande tokhomgozari tamam nashode ast;
@@ -195,7 +211,6 @@ void Aviculture_back::Update_file() {
 				p.isfed = isfed;
 				p.havecrop = havecrop;
 				p.shenaseP = shenaseP;
-				p.dastresi = dastresi;
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}
