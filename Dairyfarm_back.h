@@ -39,11 +39,11 @@ public:
 	int isfull();
 	int addcow(int);
 	int removecow(int);
-	int starting_upgrade();
+	//int starting_upgrade();
 	void upgrading();
-	int feeding();
+	//int feeding();
 	void cropready();
-	int removal();
+	//int removal();
 	void Update_file();
 
 };
