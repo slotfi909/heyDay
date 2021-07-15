@@ -9,7 +9,7 @@ struct temp {
 	int shenaseP;
 	bool isfed;
 	bool havecrop;
-	bool dastresi;
+
 };
 
 Sheepcote_back::Sheepcote_back(int _shenaseP) {
@@ -26,7 +26,7 @@ Sheepcote_back::Sheepcote_back(int _shenaseP) {
 		fin.open("Sheepcote.txt", ios::app);
 	}
 	bool find = 1;
-	while (fin) {
+	while (!fin.eof()) {
 		fin.read((char*)&A, sizeof(temp));
 		if (A.shenaseP == _shenaseP) {
 			current = A.current;
@@ -37,7 +37,6 @@ Sheepcote_back::Sheepcote_back(int _shenaseP) {
 			shenaseP = A.shenaseP;
 			isfed = A.isfed;
 			havecrop = A.havecrop;
-			dastresi = A.dastresi;
 			find = 0;
 			break;
 		}
@@ -52,7 +51,7 @@ Sheepcote_back::Sheepcote_back(int _shenaseP) {
 		shenaseP = _shenaseP;
 		isfed = false;
 		havecrop = false;
-		dastresi = false;
+
 		//..................
 		A.current = 0;
 		A.capacity = 2;
@@ -62,7 +61,7 @@ Sheepcote_back::Sheepcote_back(int _shenaseP) {
 		A.shenaseP = _shenaseP;
 		A.isfed = false;
 		A.havecrop = false;
-		A.dastresi = false;
+
 
 		fout.open("Sheepcote.txt", ios::app);
 		fout.write((char*)&A, sizeof(temp));
@@ -77,9 +76,26 @@ Sheepcote_back::~Sheepcote_back() {
 void Sheepcote_back::setcurrent(int _current) { current = _current; }
 void Sheepcote_back::setcapacity(int _capacity) { capacity = _capacity; }
 void Sheepcote_back::setlevel(int _level) { level = _level; }
+void Sheepcote_back::set_start_day_of_upgrading(int _start_day_of_upgrading) { start_day_of_upgrading = _start_day_of_upgrading; }
+void Sheepcote_back::set_start_day_of_produce(int _start_day_of_produce) { start_day_of_produce = _start_day_of_produce; }
+void Sheepcote_back::setshenaseP(int _shenaseP) { shenaseP = _shenaseP; }
+void Sheepcote_back::setisfed(bool _isfed) { isfed = _isfed; }
+void Sheepcote_back::sethavecrop(bool _havecrop) { havecrop = _havecrop; }
+
 int Sheepcote_back::getcurrent() { return current; }
 int Sheepcote_back::getcapacity() { return capacity; }
 int Sheepcote_back::getlevel() { return level; }
+int Sheepcote_back::get_start_day_of_upgrading() { return start_day_of_upgrading; }
+int Sheepcote_back::get_start_day_of_produce() { return start_day_of_produce; }
+int Sheepcote_back::getshenaseP() { return shenaseP; }
+bool Sheepcote_back::getisfed() { return isfed; }
+bool Sheepcote_back::gethavecrop() { return havecrop; }
+
+int Sheepcote_back::isfull() {
+	if (current == capacity)
+		return 0;
+	return capacity - current;
+}
 
 int Sheepcote_back::addsheep(int num) {
 	if (capacity - current < num)
@@ -103,7 +119,7 @@ int Sheepcote_back::removesheep(int num) {
 	current -= num;
 	return 1;
 }
-
+/*
 int Sheepcote_back::starting_upgrade() {
 	if (owner.getlevel() < 7)
 		return 2
@@ -114,14 +130,15 @@ int Sheepcote_back::starting_upgrade() {
 	else if (get.shavel() < 1)
 		return 5;
 
-	start_day_of_upgrading = /*getday()*/;
+	start_day_of_upgrading = /*getday();
 
 	//owner.setCoin(owner.getCoin() - 50);
 	//owner.setExp(owner.getExp() + 15);
 	//va anbar ke codesh felan nist;
 	return 1;
 }
-
+*/
+//zamani....
 void Sheepcote_back::upgrading() {
 	if (/*getday()*/ -start_day_of_upgrading >= 9) {
 		capacity *= 2;
@@ -129,35 +146,36 @@ void Sheepcote_back::upgrading() {
 		level++;
 	}
 }
-
+/*
 int Sheepcote_back::feeding() {
 	if (current == 0)
 		return 2;//morghi braye ghaza dadan nist;
 	else if (havecrop)
 		return 3;//mahsolat jam avari nashodeand
-	else if (/*tabe ke check kone anbar be andaze curren yonje dare ya na*/)
+	else if (/*tabe ke check kone anbar be andaze curren yonje dare ya na)
 		return 4;//yonje kafi nist;
 
-	start_day_of_produce = /*getday()*/;
+	start_day_of_produce = /*getday();
 	isfed = true;
 	//yonje ra kam mikonim;
 	//owner.setExp(owner.getExp() + 7);
 }
-
+*/
+//zamani.........
 void Sheepcote_back::cropready() {
-	if (isfed && (/*getday()*/-start_day_of_get_food >= 10) {
+	if (isfed && (/*getday()*/-start_day_of_produce >= 10) {
 		havecrop = true;
 	    isfed = false;
     	start_day_of_produce = -1;
 	}
 }
-
+/*
 int Sheepcote_back::removal() {
 	if (isfed && !havecrop)
 		return 2; //farayande dorost kardan shir tamam nashode ast;
 	else if (!havecrop)
 		return 3; //mahsoli baray bardasht nist;
-	else if (/*check inke aya anbar zarfiat pashm be teadad current dare aya?*/)
+	else if (/*check inke aya anbar zarfiat pashm be teadad current dare aya?)
 		return 4; //anbar ja nadard;
 	else if (owner.getcoin() < current)
 		return 5;//coin kafi nist;
@@ -169,7 +187,7 @@ int Sheepcote_back::removal() {
 	havecrop = false;
 	return 1;
 }
-
+*/
 void Sheepcote_back::Update_file() {
 
 	temp p;
@@ -194,7 +212,6 @@ void Sheepcote_back::Update_file() {
 				p.isfed = isfed;
 				p.havecrop = havecrop;
 				p.shenaseP = shenaseP;
-				p.dastresi = dastresi;
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}
