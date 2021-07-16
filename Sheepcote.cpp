@@ -38,7 +38,7 @@ Sheepcote::Sheepcote(QWidget *parent, farm* _Myfarm)
 
     setLayout(Layout);
 
-    connect(btn1, SIGNAL(clicked()), this, SLOT(ststus()));
+    connect(btn1, SIGNAL(clicked()), this, SLOT(status()));
     connect(btn2, SIGNAL(clicked()), this, SLOT(feeding()));
     connect(btn3, SIGNAL(clicked()), this, SLOT(removal()));
     connect(btn4, SIGNAL(clicked()), this, SLOT(starting_upgrade()));
