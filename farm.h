@@ -4,10 +4,12 @@
 #include "Aviculture_back.h"
 #include "Dairyfarm_back.h"
 #include "Sheepcote_back.h"
+#include "alfalfaField.h"
 #include "silo.h"
 #include "storage.h"
 #include <QMutex>
 #include <fstream>
+#include <wheatland_back.h>
 //using namespace std;
 class Farm
 {
@@ -18,6 +20,8 @@ public:
    Aviculture_back myAvi;
    Dairyfarm_back myDai;
    Sheepcote_back myShe;
+   alfalfaField myAlf;
+   wheatland_back myWhe;
    silo mySil;
    storage1 mySto;
    void write_milk(int shenase ,int tedad,int day);
