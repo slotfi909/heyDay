@@ -38,36 +38,49 @@ Sheepcote::Sheepcote(QWidget *parent, farm* _Myfarm)
 
     setLayout(Layout);
 
-    connect(btn1, SIGNAL(clicked()), this, SLOT(status()));
+    connect(btn1, SIGNAL(clicked()), this, SLOT(ststus()));
     connect(btn2, SIGNAL(clicked()), this, SLOT(feeding()));
     connect(btn3, SIGNAL(clicked()), this, SLOT(removal()));
     connect(btn4, SIGNAL(clicked()), this, SLOT(starting_upgrade()));
 
-    ui.setupUi(this);
+   // ui.setupUi(this);
 }
 
 void Sheepcote::status() {
-    QString str = QString("current number of sheeps: %1\ncapacity of Sheepcote: %2\nlevel of Sheepcote: %3").arg(/*myFarm->mySheepcote.getcurrent()*/).arg(/*myFarm->mySheepcote.getcapacity()*/).arg(/*myFarm->mySheepcote.getlevel()*/);
-
+    if (myFarm->mySheepcote.getupgrading() && myFarm->owner.getday() - myFarm->mySheepcote.get_start_day_of_upgrading >= 9) {
+        myFarm->mySheepcote.setcapacity(myFarm->mySheepcote.getcapacity() * 2);
+        myFarm->mySheepcote.set_start_day_of_upgrading(2147483640);
+        myFarm->mySheepcote.setlevel(myFarm->mySheepcote.getlevel() + 1);
+        myFarm->mySheepcote.setupgrading(false);
+    }
+    QString str = QString("current number of sheeps: %1\ncapacity of Sheepcote: %2\nlevel of Sheepcote: %3").arg(myFarm->mySheepcote.getcurrent()).arg(myFarm->mySheepcote.getcapacity()).arg(myFarm->mySheepcote.getlevel());
+    
     QMessageBox::information(this, "status", str);
 }
 
 void Sheepcote::feeding() {
     QString str;
 
-    if (/*myFarm->mySheepcote.getcurrent()*/ == 0)
+    if (myFarm->mySheepcote.getupgrading() && myFarm->owner.getday() - myFarm->mySheepcote.get_start_day_of_upgrading >= 9) {
+        myFarm->mySheepcote.setcapacity(myFarm->mySheepcote.getcapacity() * 2);
+        myFarm->mySheepcote.set_start_day_of_upgrading(2147483640);
+        myFarm->mySheepcote.setlevel(myFarm->mySheepcote.getlevel() + 1);
+        myFarm->mySheepcote.setupgrading(false);
+    }
+
+    if (myFarm->mySheepcote.getcurrent() == 0)
         str = "there is no sheep for feeding";
-    else if (/*myFarm->mySheepcote.gethavecrop()*/)
+    else if (myFarm->mySheepcote.gethavecrop())
         str = "sheeps have fleece you should harvest your crops first";
-    else if (/*myFarm->mystorage.getNumAlfalfa()*/ </*myFarm->myaviculture.getcurrent()*/)
+    else if (myFarm->mystorage.getNumAlfalfa() <myFarm->mySheepcote.getcurrent())
         str = "not enough Alfalfa";
-    else if (/*myFarm->mySheepcote.getisfed()*/)
+    else if (myFarm->mySheepcote.getisfed())
         str = "sheeps have been fed already you should wait until their fleece grow";
     else {
-        // myFarm->mySheepcote.set_start_day_of_produce(myFarm->owner.getday());
-        // myFarm->mySheepcote.setisfed(true);
-       //  myFarm->mystorage.addFleece(myFarm->mySheepcote.getcurrent() * -1);
-         //myFarm->owner.setExp(myFarm->owner.getExp() + 7);
+         myFarm->mySheepcote.set_start_day_of_produce(myFarm->owner.getday());
+         myFarm->mySheepcote.setisfed(true);
+         myFarm->mystorage.addFleece(myFarm->mySheepcote.getcurrent() * -1);
+         myFarm->owner.setExp(myFarm->owner.getExp() + 7);
         str = "sheeps fed successfully";
     }
     QMessageBox::information(this, "feeding", str);
@@ -77,9 +90,22 @@ void Sheepcote::feeding() {
 void Sheepcote::removal() {
     QString str;
 
-    if (myFarm->Sheepcote.getisfed() && !myFarm->Sheepcote.gethavecrop())
+    if (myFarm->mySheepcote.getupgrading() && myFarm->owner.getday() - myFarm->mySheepcote.get_start_day_of_upgrading >= 9) {
+        myFarm->mySheepcote.setcapacity(myFarm->mySheepcote.getcapacity() * 2);
+        myFarm->mySheepcote.set_start_day_of_upgrading(2147483640);
+        myFarm->mySheepcote.setlevel(myFarm->mySheepcote.getlevel() + 1);
+        myFarm->mySheepcote.setupgrading(false);
+    }
+
+    if (myFarm->mySheepcote.getisfed() && (myFarm->owner.getday() - myFarm->mySheepcote.get_start_day_of_produce >= 10)) {
+        myFarm->mySheepcote.sethavecrop(true);
+        myFarm->mySheepcote.setisfed(false);
+        myFarm->mySheepcote.set_start_day_of_produce(-1);
+    }
+
+    if (myFarm->mySheepcote.getisfed() && !myFarm->mySheepcote.gethavecrop())
         str = "sheeps have been fed but their fleece have not grown already";
-    else if (!myFarm->Sheepcote.gethavecrop())
+    else if (!myFarm->mySheepcote.gethavecrop())
         str = "there is no fleece for croping";
     else if (myFarm->mystorage.getCapacity() < myFarm->Dairyfarm.getcurrent())
         str = "garner has no place";
@@ -98,6 +124,13 @@ void Sheepcote::removal() {
 void Sheepcote::starting_upgrade() {
     QString str;
 
+    if (myFarm->mySheepcote.getupgrading() && myFarm->owner.getday() - myFarm->mySheepcote.get_start_day_of_upgrading >= 9) {
+        myFarm->mySheepcote.setcapacity(myFarm->mySheepcote.getcapacity() * 2);
+        myFarm->mySheepcote.set_start_day_of_upgrading(2147483640);
+        myFarm->mySheepcote.setlevel(myFarm->mySheepcote.getlevel() + 1);
+        myFarm->mySheepcote.setupgrading(false);
+    }
+
     if (myFarm->owner.getLevel() < 7)
         str = "At least level 7 is required!";
     else if (myFarm->mystorage.getNail() < 3)
@@ -106,13 +139,15 @@ void Sheepcote::starting_upgrade() {
         str = "At least 50 coin is required!";
     else if(myFarm->mystorage.getShovel() < 1)
         str = "At least 1 shovel is required!";
+    else if (myFarm->mySheepcote.getupgrading())
+        str = "upgrading. you should wait 9 days";
     else {
-         myFarm->Sheepcote.set_start_day_of_start_day_of_upgrading(myFarm->owner.getday());
+         myFarm->mySheepcote.set_start_day_of_start_day_of_upgrading(myFarm->owner.getday());
 
-        //myFarm->owner.setCoin(myFarm->owner.getCoin() - 50);
-        //myFarm->owner.setExp(myFarm->owner.getExp() + 15);
-        //myFarm->mystorage.addNail(-3);
-        //myFarm->mystorage.addshavel(-1);
+        myFarm->owner.setCoin(myFarm->owner.getCoin() - 50);
+        myFarm->owner.setExp(myFarm->owner.getExp() + 15);
+        myFarm->mystorage.addNail(-3);
+        myFarm->mystorage.addshavel(-1);
 
         str = "start upgrading. It takes nine days";
     }

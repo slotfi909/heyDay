@@ -12,12 +12,14 @@ class Dairyfarm_back
 	int shenaseP;
 	bool isfed;
 	bool havecrop;
-	
+	bool upgrading;
+
 
 public:
 
 	Dairyfarm_back(int);
 	~Dairyfarm_back();
+
 	void setcurrent(int _current);
 	void setcapacity(int _capacity);
 	void setlevel(int _level);
@@ -26,6 +28,7 @@ public:
 	void setshenaseP(int _shenaseP);
 	void setisfed(bool _isfed);
 	void sethavecrop(bool _havecrop);
+	void setupgrading(bool _upgrading);
 
 	int getcurrent();
 	int getcapacity();
@@ -35,14 +38,15 @@ public:
 	int getshenaseP();
 	bool getisfed();
 	bool gethavecrop();
+	bool getupgrading();
 
 	int isfull();
 	int addcow(int);
 	int removecow(int);
 	//int starting_upgrade();
-	void upgrading();
+	//void upgrading();
 	//int feeding();
-	void cropready();
+	//void cropready();
 	//int removal();
 	void Update_file();
 

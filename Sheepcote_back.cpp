@@ -1,18 +1,20 @@
 #include "Sheepcote_back.h"
 
-struct temp {
-	int current;
-	int capacity;
-	int level;
-	int start_day_of_upgrading;
-	int start_day_of_produce;
-	int shenaseP;
-	bool isfed;
-	bool havecrop;
 
-};
 
 Sheepcote_back::Sheepcote_back(int _shenaseP) {
+
+	struct temp {
+		int current;
+		int capacity;
+		int level;
+		int start_day_of_upgrading;
+		int start_day_of_produce;
+		int shenaseP;
+		bool isfed;
+		bool havecrop;
+
+	};
 
 	temp A;
 
@@ -81,6 +83,7 @@ void Sheepcote_back::set_start_day_of_produce(int _start_day_of_produce) { start
 void Sheepcote_back::setshenaseP(int _shenaseP) { shenaseP = _shenaseP; }
 void Sheepcote_back::setisfed(bool _isfed) { isfed = _isfed; }
 void Sheepcote_back::sethavecrop(bool _havecrop) { havecrop = _havecrop; }
+void Sheepcote_back::setupgrading(bool _upgrading) { upgrading = _upgrading; }
 
 int Sheepcote_back::getcurrent() { return current; }
 int Sheepcote_back::getcapacity() { return capacity; }
@@ -90,6 +93,8 @@ int Sheepcote_back::get_start_day_of_produce() { return start_day_of_produce; }
 int Sheepcote_back::getshenaseP() { return shenaseP; }
 bool Sheepcote_back::getisfed() { return isfed; }
 bool Sheepcote_back::gethavecrop() { return havecrop; }
+bool Sheepcote_back::getupgrading() { return upgrading; }
+
 
 int Sheepcote_back::isfull() {
 	if (current == capacity)
@@ -139,13 +144,14 @@ int Sheepcote_back::starting_upgrade() {
 }
 */
 //zamani....
+/*
 void Sheepcote_back::upgrading() {
-	if (/*getday()*/ -start_day_of_upgrading >= 9) {
+	if (/*getday() -start_day_of_upgrading >= 9) {
 		capacity *= 2;
 		start_day_of_upgrading = -1;
 		level++;
 	}
-}
+}*/
 /*
 int Sheepcote_back::feeding() {
 	if (current == 0)
@@ -162,8 +168,9 @@ int Sheepcote_back::feeding() {
 }
 */
 //zamani.........
-/*void Sheepcote_back::cropready() {
-    if (isfed && (getday()-start_day_of_produce >= 10) {
+/*
+void Sheepcote_back::cropready() {
+	if (isfed && (/*getday()-start_day_of_produce >= 10) {
 		havecrop = true;
 	    isfed = false;
     	start_day_of_produce = -1;
@@ -189,6 +196,18 @@ int Sheepcote_back::removal() {
 }
 */
 void Sheepcote_back::Update_file() {
+
+	struct temp {
+		int current;
+		int capacity;
+		int level;
+		int start_day_of_upgrading;
+		int start_day_of_produce;
+		int shenaseP;
+		bool isfed;
+		bool havecrop;
+
+	};
 
 	temp p;
 

@@ -1,20 +1,23 @@
 #include "Aviculture_back.h"
 #pragma warning(disable: 4996)
 
-struct temp {
-	int current;
-	int capacity;
-	int level;
-	int start_day_of_upgrading;
-	int start_day_of_produce;
-	int shenaseP;
-	bool isfed;
-	bool havecrop;
-	
-};
+
 
 Aviculture_back::Aviculture_back(int _shenaseP)
 {
+
+	struct temp {
+		int current;
+		int capacity;
+		int level;
+		int start_day_of_upgrading;
+		int start_day_of_produce;
+		int shenaseP;
+		bool isfed;
+		bool havecrop;
+		bool upgrading;
+	};
+
 	temp A;
 
 	ifstream fin;
@@ -38,6 +41,7 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 			shenaseP = A.shenaseP;
 			isfed = A.isfed;
 			havecrop = A.havecrop;
+			upgrading = A.upgrading;
 			find = 0;
 			break;
 		}
@@ -47,21 +51,22 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 		current = 0;
 		capacity = 2;
 		level = 1;
-		start_day_of_upgrading = -1;
-		start_day_of_produce = -1;
+		start_day_of_upgrading = 2147483640;
+		start_day_of_produce = 2147483640;
 		shenaseP = _shenaseP;
 	    isfed = false;
 		havecrop = false;
+		upgrading = false;
 		//..................
 		A.current = 0;
 		A.capacity = 2;
 		A.level = 1;
-		A.start_day_of_upgrading = -1;
-		A.start_day_of_produce = -1;
+		A.start_day_of_upgrading = 2147483640;
+		A.start_day_of_produce = 2147483640;
 		A.shenaseP = _shenaseP;
 		A.isfed = false;
 		A.havecrop = false;
-
+		A.upgrading = false;
 		fout.open("Aviculture.txt",ios::app);
 		fout.write((char*)&A, sizeof(temp));
 		fout.close();
@@ -81,6 +86,7 @@ void Aviculture_back::set_start_day_of_produce(int _start_day_of_produce) { star
 void Aviculture_back::setshenaseP(int _shenaseP) { shenaseP = _shenaseP; }
 void Aviculture_back::setisfed(bool _isfed) { isfed = _isfed; }
 void Aviculture_back::sethavecrop(bool _havecrop) { havecrop = _havecrop; }
+void Aviculture_back::setupgrading(bool _upgrading) { upgrading = _upgrading; }
 
 int Aviculture_back::getcurrent() { return current; }
 int Aviculture_back::getcapacity() { return capacity; }
@@ -90,6 +96,7 @@ int Aviculture_back::get_start_day_of_produce() { return start_day_of_produce; }
 int Aviculture_back::getshenaseP() { return shenaseP; }
 bool Aviculture_back::getisfed() { return isfed; }
 bool Aviculture_back::gethavecrop() { return havecrop; }
+bool Aviculture_back::getupgrading() { return upgrading; }
 
 int Aviculture_back::isfull() {
 	if (current == capacity)
@@ -142,13 +149,14 @@ int Aviculture_back::starting_upgrade()
 		return 1;
 }*/
 //zamani....................................................
+/*
 void Aviculture_back::upgrading() {
-	if (/*getday()*/ -start_day_of_upgrading >= 3) {
+	if (/*getday() -start_day_of_upgrading >= 3) {
 		capacity *= 2;
 		start_day_of_upgrading = -1;
 		level++;
 	}
-}
+}*/
 /*/dakhel slot ha..................................................
 int Aviculture_back::feeding() {
 	if (current == 0)
@@ -164,14 +172,14 @@ int Aviculture_back::feeding() {
 			//owner.setExp(owner.getExp() + 1);
 }*/
 //zamani //////////////
-
+/*
 void Aviculture_back::cropready() {
-	if (isfed && (/*getday()*/-start_day_of_produce >= 2)) {
+	if (isfed && (/*getday()-start_day_of_produce >= 2)) {
 		havecrop = true;
 		isfed = false;
 		start_day_of_produce = -1;
 	}
-}
+}*/
 /*/dakhel slot ha...............................
 int Aviculture_back::removal() {
 	if (isfed && !havecrop)
@@ -188,6 +196,20 @@ int Aviculture_back::removal() {
 }
 */
 void Aviculture_back::Update_file() {
+
+	struct temp {
+		int current;
+		int capacity;
+		int level;
+		int start_day_of_upgrading;
+		int start_day_of_produce;
+		int shenaseP;
+		bool isfed;
+		bool havecrop;
+		bool upgrading;
+
+	};
+
 
 	temp p;
 

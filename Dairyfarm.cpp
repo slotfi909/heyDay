@@ -37,38 +37,51 @@ Dairyfarm::Dairyfarm(QWidget *parent, farm* _Myfarm)
 
     setLayout(Layout);
 
-    connect(btn1, SIGNAL(clicked()), this, SLOT(status()));
+    connect(btn1, SIGNAL(clicked()), this, SLOT(ststus()));
     connect(btn2, SIGNAL(clicked()), this, SLOT(feeding()));
     connect(btn3, SIGNAL(clicked()), this, SLOT(removal()));
     connect(btn4, SIGNAL(clicked()), this, SLOT(starting_upgrade()));
 
 
-    ui.setupUi(this);
+   // ui.setupUi(this);
 }
 
 void Dairyfarm::status() {
-    QString str = QString("current number of cows: %1\ncapacity of Dairyfarm: %2\nlevel of Dairyfarm: %3").arg(/*myFarm->myDairyfarm.getcurrent()*/).arg(/*myFarm->myDairyfarm.getcapacity()*/).arg(/*myFarm->myDairyfarm.getlevel()*/);
-
+    if (myFarm->myDairyfarm.getupgrading() && myFarm->owner.getday() - myFarm->myDairyfarm.get_start_day_of_upgrading >= 5) {
+        myFarm->myDairyfarm.setcapacity(myFarm->myDairyfarm.getcapacity() * 2);
+        myFarm->myDairyfarm.set_start_day_of_upgrading(2147483640);
+        myFarm->myDairyfarm.setlevel(myFarm->myDairyfarm.getlevel() + 1);
+        myFarm->myDairyfarm.setupgrading(false);
+    }
+    QString str = QString("current number of cows: %1\ncapacity of Dairyfarm: %2\nlevel of Dairyfarm: %3").arg(myFarm->myDairyfarm.getcurrent()).arg(myFarm->myDairyfarm.getcapacity()).arg(myFarm->myDairyfarm.getlevel());
+    
     QMessageBox::information(this, "status", str);
 }
 
 void Dairyfarm::feeding() {
     QString str;
 
-    if (/*myFarm->myDairyfarm.getcurrent()*/ == 0)
+    if (myFarm->myDairyfarm.getupgrading() && myFarm->owner.getday() - myFarm->myDairyfarm.get_start_day_of_upgrading >= 5) {
+        myFarm->myDairyfarm.setcapacity(myFarm->myDairyfarm.getcapacity() * 2);
+        myFarm->myDairyfarm.set_start_day_of_upgrading(2147483640);
+        myFarm->myDairyfarm.setlevel(myFarm->myDairyfarm.getlevel() + 1);
+        myFarm->myDairyfarm.setupgrading(false);
+    }
+
+    if (myFarm->myDairyfarm.getcurrent() == 0)
         str = "there is no cow for feeding";
-    else if (/*myFarm->myDairyfarm.gethavecrop()*/)
+    else if (myFarm->myDairyfarm.gethavecrop())
         str = "cows have milk you should harvest your crops first";
-    else if (/*myFarm->mystorage.getNumAlfalfa()*/</*myFarm->myaviculture.getcurrent()*2*/)
+    else if (myFarm->mystorage.getNumAlfalfa()<myFarm->myDairyfarm.getcurrent()*2)
         str = "not enough Alfalfa";
-    else if (/*myFarm->myDairyfarm.getisfed()*/)
+    else if (myFarm->myDairyfarm.getisfed())
         str = "hens have been fed already you should wait until they make milk";
     else {
-       // myFarm->myDairyfarm.set_start_day_of_produce(myFarm->owner.getday());
-       // myFarm->myDairyfarm.setisfed(true);
-      //  myFarm->mystorage.addWheat(myFarm->myaviculture.getcurrent() * -2);
-        //myFarm->owner.setExp(myFarm->owner.getExp() + 3);
-        str = "hens fed successfully";
+        myFarm->myDairyfarm.set_start_day_of_produce(myFarm->owner.getday());
+        myFarm->myDairyfarm.setisfed(true);
+        myFarm->mystorage.addWheat(myFarm->myDairyfarm.getcurrent() * -2);
+        myFarm->owner.setExp(myFarm->owner.getExp() + 3);
+        str = "cows fed successfully";
     }
     QMessageBox::information(this, "feeding", str);
 }
@@ -76,16 +89,29 @@ void Dairyfarm::feeding() {
 void Dairyfarm::removal() {
     QString str;
 
-    if (myFarm->Dairyfarm.getisfed() && !myFarm->Dairyfarm.gethavecrop())
-        str = "cows have been fed but they have not make milk already";
-    else if (!myFarm->Dairyfarm.gethavecrop())
-        str = "there is no milk for milch";
-    else if (myFarm->mystorage.getCapacity() < myFarm->Dairyfarm.getcurrent())
+    if (myFarm->myDairyfarm.getupgrading() && myFarm->owner.getday() - myFarm->myDairyfarm.get_start_day_of_upgrading >= 5) {
+        myFarm->myDairyfarm.setcapacity(myFarm->myDairyfarm.getcapacity() * 2);
+        myFarm->myDairyfarm.set_start_day_of_upgrading(2147483640);
+        myFarm->myDairyfarm.setlevel(myFarm->myDairyfarm.getlevel() + 1);
+        myFarm->myDairyfarm.setupgrading(false);
+    }
+
+    if (myFarm->myDairyfarm.getisfed() && (myFarm->owner.getday() - myFarm->myDairyfarm.get_start_day_of_produce >= 3)) {
+        myFarm->myDairyfarm.sethavecrop(true);
+        myFarm->myDairyfarm.setisfed(false);
+        myFarm->myDairyfarm.set_start_day_of_produce(-1);
+    }
+
+    if (myFarm->myDairyfarm.getisfed() && !myFarm->myDairyfarm.gethavecrop())
+        str = "cows have been fed but they have not made milk already";
+    else if (!myFarm->myDairyfarm.gethavecrop())
+        str = "there is no milk for milching";
+    else if (myFarm->mystorage.getCapacity() < myFarm->myDairyfarm.getcurrent())
         str = "garner has no place";
     else {
-         myFarm->mystorage.addMilk(myFarm->Dairyfarm.getcurrent());
+         myFarm->mystorage.addMilk(myFarm->myDairyfarm.getcurrent());
          myFarm->owner.setExp(myFarm->owner.getExp() + 5);
-        myFarm->Dairyfarm.sethavecrop(false);
+        myFarm->myDairyfarm.sethavecrop(false);
         str = "done successfully";
     }
     QMessageBox::information(this, "removal", str);
@@ -94,18 +120,26 @@ void Dairyfarm::removal() {
 void Dairyfarm::starting_upgrade() {
     QString str;
 
+    if (myFarm->myDairyfarm.getupgrading() && myFarm->owner.getday() - myFarm->myDairyfarm.get_start_day_of_upgrading >= 5) {
+        myFarm->myDairyfarm.setcapacity(myFarm->myDairyfarm.getcapacity() * 2);
+        myFarm->myDairyfarm.set_start_day_of_upgrading(2147483640);
+        myFarm->myDairyfarm.setlevel(myFarm->myDairyfarm.getlevel() + 1);
+        myFarm->myDairyfarm.setupgrading(false);
+    }
+
     if (myFarm->owner.getLevel() < 5)
         str = "At least level 5 is required!";
     else if (myFarm->mystorage.getNail() < 2)
         str = "At least 2 nail is required!";
     else if (myFarm->owner.getCoin() < 15)
         str = "At least 15 coin is required!";
+    else if (myFarm->myDairyfarm.getupgrading())
+        str = "upgrading. you should wait 5 days";
     else {
-        // myFarm->Dairyfarm.set_start_day_of_start_day_of_upgrading(myFarm->owner.getday());
-
-        //myFarm->owner.setCoin(myFarm->owner.getCoin() - 15);
-        //myFarm->owner.setExp(myFarm->owner.getExp() + 6);
-      //  myFarm->mystorage.addNail(-2);
+        myFarm->myDairyfarm.set_start_day_of_start_day_of_upgrading(myFarm->owner.getday());
+        myFarm->owner.setCoin(myFarm->owner.getCoin() - 15);
+        myFarm->owner.setExp(myFarm->owner.getExp() + 6);
+        myFarm->mystorage.addNail(-2);
         str = "start upgrading. It takes five days";
     }
     QMessageBox::information(this, "upgrading", str);

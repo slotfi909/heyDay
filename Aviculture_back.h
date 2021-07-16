@@ -12,7 +12,8 @@ class Aviculture_back
 	int shenaseP;
 	bool isfed;
 	bool havecrop;
-	
+	bool upgrading;
+
 
 public:
 
@@ -27,6 +28,7 @@ public:
 	void setshenaseP(int _shenaseP);
 	void setisfed(bool _isfed);
 	void sethavecrop(bool _havecrop);
+	void setupgrading(bool _upgrading);
 
 	int getcurrent();
 	int getcapacity();
@@ -36,14 +38,15 @@ public:
 	int getshenaseP();
 	bool getisfed();
 	bool gethavecrop();
+	bool getupgrading();
 
 	int isfull();
 	int addchicken(int num);
 	int removechicken(int num);
 	//int starting_upgrade();
-	void upgrading();//zamani
+	//void upgrading();//zamani
 	//int feeding();
-	void cropready();//zamani
+	//void cropready();//zamani
 	//int removal();
 	void Update_file();//distructor
 };

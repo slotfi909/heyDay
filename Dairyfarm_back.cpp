@@ -1,18 +1,21 @@
 #include "Dairyfarm_back.h"
 
-struct temp {
-	int current;
-	int capacity;
-	int level;
-	int start_day_of_upgrading;
-	int start_day_of_produce;
-	int shenaseP;
-	bool isfed;
-	bool havecrop;
-	
-};
+
 
 Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
+
+	struct temp {
+		int current;
+		int capacity;
+		int level;
+		int start_day_of_upgrading;
+		int start_day_of_produce;
+		int shenaseP;
+		bool isfed;
+		bool havecrop;
+
+	};
+
 	temp A;
 	
 	ifstream fin;
@@ -79,6 +82,7 @@ void Dairyfarm_back::set_start_day_of_produce(int _start_day_of_produce) { start
 void Dairyfarm_back::setshenaseP(int _shenaseP) { shenaseP = _shenaseP; }
 void Dairyfarm_back::setisfed(bool _isfed) { isfed = _isfed; }
 void Dairyfarm_back::sethavecrop(bool _havecrop) { havecrop = _havecrop; }
+void Dairyfarm_back::setupgrading(bool _upgrading) { upgrading = _upgrading; }
 
 int Dairyfarm_back::getcurrent() { return current; }
 int Dairyfarm_back::getcapacity() { return capacity; }
@@ -88,6 +92,8 @@ int Dairyfarm_back::get_start_day_of_produce() { return start_day_of_produce; }
 int Dairyfarm_back::getshenaseP() { return shenaseP; }
 bool Dairyfarm_back::getisfed() { return isfed; }
 bool Dairyfarm_back::gethavecrop() { return havecrop; }
+bool Dairyfarm_back::getupgrading() { return upgrading; }
+
 
 int Dairyfarm_back::isfull() {
 	if (current == capacity)
@@ -135,13 +141,14 @@ int Dairyfarm_back::starting_upgrade() {
 	return 1;
 }*/
 //zamani..........
+/*
 void Dairyfarm_back::upgrading() {
-	if (/*getday()*/ -start_day_of_upgrading >= 5) {
+	if (/*getday() -start_day_of_upgrading >= 5) {
 		capacity *= 2;
 		start_day_of_upgrading = -1;
 		level++;
 	}
-}
+}*/
 /*
 int Dairyfarm_back::feeding() {
 	if (current == 0)
@@ -157,13 +164,14 @@ int Dairyfarm_back::feeding() {
 	//owner.setExp(owner.getExp() + 3);
 }*/
 //zamani..........
+/*
 void Dairyfarm_back::cropready() {
-	if (isfed && (/*getday()*/-start_day_of_produce >= 3)) {
+	if (isfed && (/*getday()-start_day_of_produce >= 3)) {
 		havecrop = true;
 		isfed = false;
 		start_day_of_produce = -1;
 	}
-}
+}*/
 /*
 int Dairyfarm_back::removal() {
 	if (isfed && !havecrop)
@@ -180,6 +188,18 @@ int Dairyfarm_back::removal() {
 }
 */
 void Dairyfarm_back::Update_file() {
+
+	struct temp {
+		int current;
+		int capacity;
+		int level;
+		int start_day_of_upgrading;
+		int start_day_of_produce;
+		int shenaseP;
+		bool isfed;
+		bool havecrop;
+
+	};
 
 	temp p;
 

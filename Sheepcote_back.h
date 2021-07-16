@@ -7,14 +7,16 @@ class Sheepcote_back
 	int current;
 	int capacity;
 	int level;
-	bool isfed;
-	bool havecrop;
 	int start_day_of_upgrading;
 	int start_day_of_produce;
 	int shenaseP;
+	bool isfed;
+	bool havecrop;
+	bool upgrading;
 
 
 public:
+
 	Sheepcote_back(int);
 	~Sheepcote_back();
 
@@ -26,6 +28,7 @@ public:
 	void setshenaseP(int _shenaseP);
 	void setisfed(bool _isfed);
 	void sethavecrop(bool _havecrop);
+	void setupgrading(bool _upgrading);
 
 	int getcurrent();
 	int getcapacity();
@@ -35,14 +38,15 @@ public:
 	int getshenaseP();
 	bool getisfed();
 	bool gethavecrop();
+	bool getupgrading();
 
 	int isfull();
 	int addsheep(int);
 	int removesheep(int);
 	//int starting_upgrade();
-	void upgrading();
+	//void upgrading();
 	//int feeding();
-	void cropready();
+	//void cropready();
 	//int removal();
 	void Update_file();
 };
