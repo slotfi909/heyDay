@@ -4,8 +4,6 @@
 #include <stdbool.h>
 #include <fstream>
 
-using namespace std;
-
 class storage1{
 
 private:

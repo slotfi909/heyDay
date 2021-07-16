@@ -3,8 +3,8 @@
 #include "QMessageBox"
 #include "farm.h"
 
-int tmpId=1,tmpCapacity=10,tmpLevel=1,tmpNumNail=10,tmpNumAlfalfa=0,tmpNumShovel=1,tmpNumEgg=0,tmpNumMilk=0,tmpNumFleece=0,tmpUpgrafeStartTime=0;
-bool tmpIsBeingUpgraded=false;
+int tmpIds=1,tmpCapacitys=5,tmpLevels=1,tmpNumNails=0,tmpNumAlfalfas=1,tmpNumShovels=1,tmpNumEggs=0,tmpNumMilks=0,tmpNumFleeces=0,tmpUpgrafeStartTimes=0;
+bool tmpIsBeingUpgradeds=false;
 DialogStorage::~DialogStorage()
 {
     delete ui;
@@ -27,17 +27,17 @@ DialogStorage::DialogStorage(QWidget *parent,Farm *_myfarm) :
       if ( storage1.peek() == std::ifstream::traits_type::eof() )
           {
                //file is empty
-               storage2 << tmpId << ' ' << tmpLevel << ' ' << tmpNumNail<< ' ' << tmpNumAlfalfa<< ' ' << tmpNumShovel <<' '<<tmpNumEgg<<' '<<tmpNumMilk<<' '<<tmpNumFleece<<' '<<tmpUpgrafeStartTime<<' '<<tmpIsBeingUpgraded<< '\n';
+               storage2 << tmpIds << ' ' << tmpLevels << ' ' << tmpNumNails<< ' ' << tmpNumAlfalfas<< ' ' << tmpNumShovels <<' '<<tmpNumEggs <<' '<<tmpNumMilks <<' '<<tmpNumFleeces <<' '<<tmpUpgrafeStartTimes <<' '<<tmpIsBeingUpgradeds << '\n';
 
-               myfarm->mySto.level=tmpLevel;
-               myfarm->mySto.numNail=tmpNumNail;
-               myfarm->mySto.numAlfalfa=tmpNumAlfalfa;
-               myfarm->mySto.numShovel=tmpNumShovel;
-               myfarm->mySto.numEgg=tmpNumEgg;
-               myfarm->mySto.numMilk=tmpNumMilk;
-               myfarm->mySto.numFleece=tmpNumFleece;
-               myfarm->mySto.upgradeStartTime=tmpUpgrafeStartTime;
-               myfarm->mySto.isBeingUpgraded=tmpIsBeingUpgraded;
+               myfarm->mySto.level=tmpLevels;
+               myfarm->mySto.numNail=tmpNumNails;
+               myfarm->mySto.numAlfalfa=tmpNumAlfalfas;
+               myfarm->mySto.numShovel=tmpNumShovels;
+               myfarm->mySto.numEgg=tmpNumEggs;
+               myfarm->mySto.numMilk=tmpNumMilks;
+               myfarm->mySto.numFleece=tmpNumFleeces;
+               myfarm->mySto.upgradeStartTime=tmpUpgrafeStartTimes;
+               myfarm->mySto.isBeingUpgraded=tmpIsBeingUpgradeds;
 
                storage2.close();
                storage1.close();
@@ -47,19 +47,19 @@ DialogStorage::DialogStorage(QWidget *parent,Farm *_myfarm) :
 
          else {
                //file is not empty
-               while (storage1>>tmpId>>tmpLevel>>tmpNumNail>>tmpNumAlfalfa>>tmpNumShovel>>tmpNumEgg>>tmpNumMilk>>tmpNumFleece>>tmpUpgrafeStartTime>>tmpIsBeingUpgraded )
+               while (storage1>>tmpIds>>tmpLevels>>tmpNumNails>>tmpNumAlfalfas>>tmpNumShovels>>tmpNumEggs>>tmpNumMilks>>tmpNumFleeces>>tmpUpgrafeStartTimes>>tmpIsBeingUpgradeds )
                 {
-                    if (tmpId == myfarm->owner.getShenaseP())
+                    if (tmpIds == myfarm->owner.getShenaseP())
                     {
-                        myfarm->mySto.level=tmpLevel;
-                        myfarm->mySto.numNail=tmpNumNail;
-                        myfarm->mySto.numAlfalfa=tmpNumAlfalfa;
-                        myfarm->mySto.numShovel=tmpNumShovel;
-                        myfarm->mySto.numEgg=tmpNumEgg;
-                        myfarm->mySto.numMilk=tmpNumMilk;
-                        myfarm->mySto.numFleece=tmpNumFleece;
-                        myfarm->mySto.upgradeStartTime=tmpUpgrafeStartTime;
-                        myfarm->mySto.isBeingUpgraded=tmpIsBeingUpgraded;
+                        myfarm->mySto.level=tmpLevels;
+                        myfarm->mySto.numNail=tmpNumNails;
+                        myfarm->mySto.numAlfalfa=tmpNumAlfalfas;
+                        myfarm->mySto.numShovel=tmpNumShovels;
+                        myfarm->mySto.numEgg=tmpNumEggs;
+                        myfarm->mySto.numMilk=tmpNumMilks;
+                        myfarm->mySto.numFleece=tmpNumFleeces;
+                        myfarm->mySto.upgradeStartTime=tmpUpgrafeStartTimes;
+                        myfarm->mySto.isBeingUpgraded=tmpIsBeingUpgradeds;
 
                       break;
                     }
@@ -114,3 +114,4 @@ int DialogStorage::checkForUpgrade(){
 
 
 }
+

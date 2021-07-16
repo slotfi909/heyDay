@@ -1,6 +1,6 @@
 #ifndef SILO_H
 #define SILO_H
-#include<storage.h>
+
 class silo{
 int capacity;
 int numWheat;
