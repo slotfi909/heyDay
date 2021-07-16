@@ -110,6 +110,7 @@ void Dairyfarm::removal() {
         str = "garner has no place";
     else {
          myFarm->mySto.addMilk(myFarm->myDai.getcurrent());
+        myFarm->write_milk(myFarm->owner.getShenaseP(),myFarm->myDai.getcurrent(),myFarm->owner.getDay());
          myFarm->owner.setExp(myFarm->owner.getExp() + 5);
         myFarm->myDai.sethavecrop(false);
         str = "done successfully";
