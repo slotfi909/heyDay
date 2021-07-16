@@ -1,14 +1,17 @@
 #include "silo.h"
 #include <math.h>
-silo::silo(int shenaseP){
+
         struct temp {
   int numWheat;
   int capacity;
   int level;
-  unsigned int siloTime;
+  unsigned int upgradeStartTime;
   int shenaseP;
-  bool isBeingUpgradede;
+  bool isBeingUpgraded;
 };
+
+silo::silo(int shenaseP){
+
 
   temp A;
 
@@ -28,9 +31,9 @@ silo::silo(int shenaseP){
       numWheat=A.numWheat;
       capacity = A.capacity;
       level = A.level;
-      siloTime=A.siloTime;
+      upgradeStartTime=A.upgradeStartTime;
       shenaseP = A.shenaseP;
-      isBeingUpgrade=A.isBeingUpgradede;
+      isBeingUpgrad=A.isBeingUpgraded;
             find=0;
       break;
     }
@@ -40,14 +43,14 @@ silo::silo(int shenaseP){
     numWheat=0;
       capacity = 10;
       level = 1;
-      siloTime=0;
-      isBeingUpgrade=0;
+      upgradeStartTime=0;
+      isBeingUpgraded=0;
     //..................
     A.numWheat=0;
       A.capacity = 10;
       A.level = 1;
-      A.siloTime=0;
-      A.isBeingUpgrade=0;
+      A.upgradeStartTime=0;
+      A.isBeingUpgraded=0;
             A.shenaseP=shenaseP;
 
     fout.open("silo.txt",ios::app);
@@ -59,16 +62,16 @@ silo::silo(int shenaseP){
     int silo::getCapaticy(){return capacity;}
     int silo::getNumWheat(){return numWheat;}
     int silo::getLevel(){return level;}
-    void silo::addWheat(int addedWheatNumber){
+    int silo::addWheat(int addedWheatNumber){
     int freeSpace=capacity-numWheat;
     if(addedWheatNumber<=freeSpace){
         numWheat+=addedWheatNumber;
-        // cout<<"added successfully!\n";
-    }
+return 1;
+}
     else
-        cout<<"not enough space!\n";
-    }
-void silo::checkForUpgrade(int shenase){
+return 0;
+}
+void silo::checkForUpgrade(int shenaseP){
     
 }
 bool silo::isFull(){
@@ -76,4 +79,36 @@ if(numWheat==capacity)
     return true;
 else
     return false;
+}
+  void storage::update_file() {
+
+	temp p;
+
+	ofstream outfile;//for writing in new file.
+	ifstream infile;//for reading.
+
+	infile.open("silo.txt", ios::in);
+	if (infile.is_open()) {
+		outfile.open("silo-temp.txt", ios::out);//make file.
+		infile.seekg(0, ios::end);
+		int size = infile.tellg();
+		infile.seekg(0, ios_base::beg);
+		while (infile.tellg() < size) {
+			infile.read((char*)&p, sizeof(p));
+			if (shenaseP == p.shenaseP) {
+
+       p.numWheat=numWheat;
+   p.capacity=capacity;
+   p.level=level;
+  p.upgradeStartTime=upgradeStartTime;
+   p.shenaseP=shenaseP;
+   p.isBeingUpgraded=isBeingUpgraded;
+			}
+			outfile.write((char*)&p, sizeof(p));
+		}
+		outfile.close();
+		infile.close();
+		remove("silo.txt");
+		rename("silo-temp.txt", "silo.txt");
+	}
 }

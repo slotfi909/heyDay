@@ -14,13 +14,12 @@ private:
     int numEgg; // level 2
     int numMilk; // level 4
     int numFleece; // level 6
-    unsigned int storageTime;
+    unsigned int upgradeStartTime;
     bool isBeingUpgraded;
 
 
 public:
-storage(int shenase);
-~storage();
+storage(int shenaseP);
     int getLevel();
     int getCapacity();
     int getNail();
@@ -36,7 +35,8 @@ storage(int shenase);
     int addEgg(int numAddedEgg);
     int addMilk(int numAddedMilk);
     int addFleece(int numAddedFleece);
-
-
+    void update_file();
+    void upgrade(); //
+    void checkForUpgrade(); //
 
 };
