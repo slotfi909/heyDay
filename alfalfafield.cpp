@@ -71,24 +71,9 @@ A.isBeingPlanted=0;
     }
 //functions
 int alfalfaField::getArea(){return area;}
-void alfalfaField::upgrade(){
-    
-}
-void alfalfaField::planting(){
-    
-}
-void alfalfaField::harvest(){
-    
-}
-void alfalfaField::plow(){
-    
-}
-void alfalfaField::checkForUpgrade(){
-    
-}
-void alfalfaField::checkForPlow(){
 
-}
+    
+
 void alfalfaField::update_file() {
 
 	temp p;

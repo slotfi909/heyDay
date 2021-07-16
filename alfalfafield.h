@@ -12,18 +12,12 @@ unsigned int plantStartTime;
 bool isBeingUpgraded;
 bool isBeingPlowed;
 bool isBeingPlanted;
-
+int shenaseP;
 public:
 //constructor
 alfalfaField(int shenaseP=1);
 //functions
 int getArea();
-    void upgrade(); //
-void planting(); //
-void harvest(); /// 
-void plow();  ///
-void checkForUpgrade(); //
-void checkForPlow();  //
 void update_file();
 
 friend class storage;

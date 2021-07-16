@@ -49,5 +49,5 @@ storage1(int shenase);
     void setFleece(int _fleece){numFleece=_fleece;}
 void update_file();
 
-
+friend class DialogStorage;
 };

@@ -24,7 +24,7 @@ silo::silo(int shenaseP){
     fout.close();
     fin.open("silo.txt", ios::app);
   }
-  bool find = 1;
+  bool isFirst = 1;
   while (!fin.eof()) {/////////////////////taghir dar hame
     fin.read((char*)&A, sizeof(temp));
     if (A.shenaseP == shenaseP) {
@@ -34,12 +34,12 @@ silo::silo(int shenaseP){
       upgradeStartTime=A.upgradeStartTime;
       shenaseP = A.shenaseP;
       isBeingUpgraded=A.isBeingUpgraded;
-            find=0;
+            isFirst=0;
       break;
     }
   }
   fin.close();
-  if (find) {    //first login
+  if (isFirst) {    //first login
     numWheat=0;
       capacity = 10;
       level = 1;
@@ -72,9 +72,7 @@ return 1;
     else
 return 0;
 }
-void silo::checkForUpgrade(int shenaseP){
-    
-}
+//void silo::checkForUpgrade(){    }
 bool silo::isFull(){
 if(numWheat==capacity)
     return true;
@@ -83,20 +81,20 @@ else
 }
   void silo::update_file() {
 
-	temp p;
+    temp p;
 
-	ofstream outfile;//for writing in new file.
-	ifstream infile;//for reading.
+    ofstream outfile;//for writing in new file.
+    ifstream infile;//for reading.
 
-	infile.open("silo.txt", ios::in);
-	if (infile.is_open()) {
-		outfile.open("silo-temp.txt", ios::out);//make file.
-		infile.seekg(0, ios::end);
-		int size = infile.tellg();
-		infile.seekg(0, ios_base::beg);
-		while (infile.tellg() < size) {
-			infile.read((char*)&p, sizeof(p));
-			if (shenaseP == p.shenaseP) {
+    infile.open("silo.txt", ios::in);
+    if (infile.is_open()) {
+        outfile.open("silo-temp.txt", ios::out);//make file.
+        infile.seekg(0, ios::end);
+        int size = infile.tellg();
+        infile.seekg(0, ios_base::beg);
+        while (infile.tellg() < size) {
+            infile.read((char*)&p, sizeof(p));
+            if (shenaseP == p.shenaseP) {
 
        p.numWheat=numWheat;
    p.capacity=capacity;
@@ -104,12 +102,12 @@ else
   p.upgradeStartTime=upgradeStartTime;
    p.shenaseP=shenaseP;
    p.isBeingUpgraded=isBeingUpgraded;
-			}
-			outfile.write((char*)&p, sizeof(p));
-		}
-		outfile.close();
-		infile.close();
-		remove("silo.txt");
-		rename("silo-temp.txt", "silo.txt");
-	}
+            }
+            outfile.write((char*)&p, sizeof(p));
+        }
+        outfile.close();
+        infile.close();
+        remove("silo.txt");
+        rename("silo-temp.txt", "silo.txt");
+    }
 }

@@ -7,17 +7,19 @@ int numWheat;
 int level;
 unsigned int upgradeStartTime;
 bool isBeingUpgraded;
+int shenaseP;
 public:
     //constructor
-    silo(int shenaseP);
+    silo(int shenaseP=1);
     int getCapaticy();
     int getNumWheat();
     int getLevel();
     int addWheat(int addedWheatNumber);
-    void checkForUpgrade(int shenaseP); // //shenasep mikhad?
+//    void checkForUpgrade();
     bool isFull();
     friend class storage;
     friend class alfalfaField;
+    friend class DialogSilo;
     void update_file();
 
 };
