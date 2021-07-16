@@ -17,14 +17,14 @@ alfalfaField::alfalfaField(int shenaseP){
 
   temp A;
 
-  ifstream fin;
-  ofstream fout;
+  std::ifstream fin;
+  std::ofstream fout;
   fin.open("alfalfaField.txt");
   if (!fin) { // if fin is empty
     fin.close();
     fout.open("alfalfaField.txt");
     fout.close();
-    fin.open("alfalfaField.txt", ios::app);
+    fin.open("alfalfaField.txt", std::ios::app);
   }
   bool isFirst = 1;
   while (!fin.eof()) {/////////////////////taghir dar hame
@@ -63,7 +63,7 @@ A.isBeingPlowed=0;
 A.isBeingPlanted=0;
             A.shenaseP=shenaseP;
 
-    fout.open("alfalfaField.txt",ios::app);
+    fout.open("alfalfaField.txt",std::ios::app);
     fout.write((char*)&A, sizeof(temp));
     fout.close();
   }
@@ -78,15 +78,15 @@ void alfalfaField::update_file() {
 
 	temp p;
 
-	ofstream outfile;//for writing in new file.
-	ifstream infile;//for reading.
+    std::ofstream outfile;//for writing in new file.
+    std::ifstream infile;//for reading.
 
-	infile.open("alfalfaField.txt", ios::in);
+    infile.open("alfalfaField.txt", std::ios::in);
 	if (infile.is_open()) {
-		outfile.open("alfalfaField-temp.txt", ios::out);//make file.
-		infile.seekg(0, ios::end);
+        outfile.open("alfalfaField-temp.txt", std::ios::out);//make file.
+        infile.seekg(0, std::ios::end);
 		int size = infile.tellg();
-		infile.seekg(0, ios_base::beg);
+        infile.seekg(0, std::ios_base::beg);
 		while (infile.tellg() < size) {
 			infile.read((char*)&p, sizeof(p));
 			if (shenaseP == p.shenaseP) {
