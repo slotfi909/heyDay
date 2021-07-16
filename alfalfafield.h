@@ -18,12 +18,13 @@ public:
 alfalfaField(int shenase);
 //functions
 int getArea();
-    void upgrade();
-void planting();
-void harvest();
-void plow();
-void checkForUpgrade();
-void checkForPlow();
+    void upgrade(); //
+void planting(); //
+void harvest(); /// 
+void plow();  ///
+void checkForUpgrade(); //
+void checkForPlow();  //
+void update_file();
 
 friend class storage;
 friend class silo;

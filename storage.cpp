@@ -147,6 +147,45 @@ storage1::storage1(int shenaseP){
     
 }
 
+
+void storage1::update_file() {
+
+	temp p;
+
+	ofstream outfile;//for writing in new file.
+	ifstream infile;//for reading.
+
+	infile.open("storage.txt", ios::in);
+	if (infile.is_open()) {
+		outfile.open("storage-temp.txt", ios::out);//make file.
+		infile.seekg(0, ios::end);
+		int size = infile.tellg();
+		infile.seekg(0, ios_base::beg);
+		while (infile.tellg() < size) {
+			infile.read((char*)&p, sizeof(p));
+			if (shenaseP == p.shenaseP) {
+p.capacity=capacity;
+p.level=level;
+     p.numNail=numNail;
+    p.numAlfalfa=numAlfalfa ;
+    p.numShovel=numShovel ;
+    p.numEgg=numEgg; // level 2
+     p.numMilk=numMilk; // level 4
+     p.numFleece=numFleece; // level 6
+    p.upgradeStartTime=upgradeStartTime;
+     p.isBeingUpgraded=isBeingUpgraded;
+    p.shenaseP=shenaseP;
+			}
+			outfile.write((char*)&p, sizeof(p));
+		}
+		outfile.close();
+		infile.close();
+		remove("storage.txt");
+		rename("storage-temp.txt", "storage.txt");
+	}
+}
+
+
     int storage1::getNail(){return numNail;}
     int storage1::getAlfalfa(){return numAlfalfa;}
     int storage1::getShovel(){return numShovel;}
