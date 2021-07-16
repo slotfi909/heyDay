@@ -1,6 +1,7 @@
 #ifndef ALFALFAFIELD_H
 #define ALFALFAFIELD_H
 #include <fstream>
+#include <stdbool.h>
 class alfalfaField{ // opens in level 3
 
 int area;

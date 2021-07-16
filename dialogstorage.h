@@ -8,7 +8,6 @@
 //#include <person.h>
 #include <math.h>
 #include <stdbool.h>
-
 namespace Ui {
 class DialogStorage;
 }

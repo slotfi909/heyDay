@@ -4,7 +4,7 @@ storage1::~storage1()
 
 }
 
-struct temp {
+            struct temp {
     int capacity;
     int level;
     int numNail;
@@ -98,14 +98,14 @@ storage1::storage1(int shenaseP){
 
  temp A;
 
-  std::ifstream fin;
-  std::ofstream fout;
+  ifstream fin;
+  ofstream fout;
   fin.open("storage.txt");
     if (!fin) { // if fin is empty
     fin.close();
     fout.open("storage.txt");
     fout.close();
-    fin.open("storage.txt", std::ios::app);
+    fin.open("storage.txt", ios::app);
   }
   bool isFirst = 1;
 
@@ -153,7 +153,7 @@ storage1::storage1(int shenaseP){
     A.isBeingUpgraded=0;
     A.shenaseP=shenaseP;
 
-    fout.open("storag.txt",std::ios::app);
+    fout.open("storag.txt",ios::app);
     fout.write((char*)&A, sizeof(temp));
     fout.close();
 
@@ -167,15 +167,15 @@ void storage1::update_file() {
 
     temp p;
 
-    std::ofstream outfile;//for writing in new file.
-    std::ifstream infile;//for reading.
+    ofstream outfile;//for writing in new file.
+    ifstream infile;//for reading.
 
-    infile.open("storage.txt", std::ios::in);
+    infile.open("storage.txt", ios::in);
     if (infile.is_open()) {
-        outfile.open("storage-temp.txt", std::ios::out);//make file.
-        infile.seekg(0, std::ios::end);
+        outfile.open("storage-temp.txt", ios::out);//make file.
+        infile.seekg(0, ios::end);
         int size = infile.tellg();
-        infile.seekg(0, std::ios_base::beg);
+        infile.seekg(0, ios_base::beg);
         while (infile.tellg() < size) {
             infile.read((char*)&p, sizeof(p));
             if (shenaseP == p.shenaseP) {

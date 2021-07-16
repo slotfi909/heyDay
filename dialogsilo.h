@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "farm.h"
+#include <stdbool.h>
 namespace Ui {
 class DialogSilo;
 }
