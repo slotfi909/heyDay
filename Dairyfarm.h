@@ -13,7 +13,7 @@ class Dairyfarm : public QWidget
     Q_OBJECT
 
 public:
-    Dairyfarm(QWidget *parent = Q_NULLPTR, farm* _Myfarm);
+    Dairyfarm(QWidget *parent = Q_NULLPTR, Farm* _Myfarm = Q_NULLPTR);
 
 public slots:
     void status();
@@ -22,7 +22,7 @@ public slots:
     void starting_upgrade();
 private:
 
-    farm* myFarm;
+    Farm* myFarm;
     QVBoxLayout* Layout;
     QPushButton* btn1;
     QPushButton* btn2;

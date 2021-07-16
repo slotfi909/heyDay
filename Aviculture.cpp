@@ -5,7 +5,7 @@
 #define REMOVAL "C:/HeydayLogo/Aviculture_logo/5466852.png"
 #define UPGRADING "C:/HeydayLogo/Aviculture_logo/6154580.png"
 
-Aviculture::Aviculture(QWidget *parent, farm* _Myfarm)
+Aviculture::Aviculture(QWidget *parent, Farm* _Myfarm)
     : QWidget(parent)
 {
     myFarm = _Myfarm;
@@ -46,13 +46,13 @@ Aviculture::Aviculture(QWidget *parent, farm* _Myfarm)
 }
 
 void Aviculture::status() {
-    if (myFarm->myaviculture.getupgrading() && myFarm->owner.getday() - myFarm->myaviculture.get_start_day_of_upgrading >= 3) {
-        myFarm->myaviculture.setcapacity(myFarm->myaviculture.getcapacity() * 2);
-        myFarm->myaviculture.set_start_day_of_upgrading(2147483640);
-        myFarm->myaviculture.setlevel(myFarm->myaviculture.getlevel() + 1);
-        myFarm->myaviculture.setupgrading(false);
+    if (myFarm->myAvi.getupgrading() && myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading >= 3) {
+        myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
+        myFarm->myAvi.set_start_day_of_upgrading(2147483640);
+        myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);
+        myFarm->myAvi.setupgrading(false);
     }
-    QString str = QString("current number of chickens: %1\ncapacity of aviculture: %2\nlevel of aviculture: %3").arg(myFarm->myaviculture.getcurrent()).arg(myFarm->myaviculture.getcapacity()).arg(myFarm->myaviculture.getlevel());
+    QString str = QString("current number of chickens: %1\ncapacity of aviculture: %2\nlevel of aviculture: %3").arg(myFarm->myAvi.getcurrent()).arg(myFarm->myAvi.getcapacity()).arg(myFarm->myAvi.getlevel());
 
     QMessageBox::information(this, "status", str);
 }
@@ -60,25 +60,25 @@ void Aviculture::status() {
 void Aviculture::feeding() {
     QString str;
     //in bakhsh be aval store azafe konam;................................................
-    if (myFarm->myaviculture.getupgrading() && myFarm->owner.getday() - myFarm->myaviculture.get_start_day_of_upgrading >= 3) {
-        myFarm->myaviculture.setcapacity(myFarm->myaviculture.getcapacity() * 2);
-        myFarm->myaviculture.set_start_day_of_upgrading(2147483640);
-        myFarm->myaviculture.setlevel(myFarm->myaviculture.getlevel() + 1);
-        myFarm->myaviculture.setupgrading(false);
+    if (myFarm->myAvi.getupgrading() && myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading >= 3) {
+        myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
+        myFarm->myAvi.set_start_day_of_upgrading(2147483640);
+        myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);
+        myFarm->myAvi.setupgrading(false);
     }
     //....................................................................................
-    if (myFarm->myaviculture.getcurrent() == 0)
+    if (myFarm->myAvi.getcurrent() == 0)
         str = "there is no chicken for feeding";
-    else if (myFarm->myaviculture.gethavecrop())
+    else if (myFarm->myAvi.gethavecrop())
         str = "hens have egg you should harvest your crops first";
-    else if (myFarm->mysilo.getNumWheat()<myFarm->myaviculture.getcurrent())
+    else if (myFarm->mySil.getNumWheat()<myFarm->myAvi.getcurrent())
         str = "not enough wheat";
-    else if (myFarm->myaviculture.getisfed())
+    else if (myFarm->myAvi.getisfed())
         str = "hens have been fed already you should wait until they lay";
     else {
-        myFarm->myaviculture.set_start_day_of_produce(myFarm->owner.getday());
-        myFarm->myaviculture.setisfed(true);
-        myFarm->mysilo.addWheat(myFarm->myaviculture.getcurrent() * -1);
+        myFarm->myAvi.set_start_day_of_produce(myFarm->owner.getDay());
+        myFarm->myAvi.setisfed(true);
+        myFarm->mySil.addWheat(myFarm->myAvi.getcurrent() * -1);
         myFarm->owner.setExp(myFarm->owner.getExp() + 1);
         str = "hens fed successfully";
     }
@@ -88,29 +88,29 @@ void Aviculture::feeding() {
 void Aviculture::removal() {
     QString str;
 
-    if (myFarm->myaviculture.getupgrading() && myFarm->owner.getday() - myFarm->myaviculture.get_start_day_of_upgrading >= 3) {
-        myFarm->myaviculture.setcapacity(myFarm->myaviculture.getcapacity() * 2);
-        myFarm->myaviculture.set_start_day_of_upgrading(2147483640);
-        myFarm->myaviculture.setlevel(myFarm->myaviculture.getlevel() + 1);
-        myFarm->myaviculture.setupgrading(false);
+    if (myFarm->myAvi.getupgrading() && myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading >= 3) {
+        myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
+        myFarm->myAvi.set_start_day_of_upgrading(2147483640);
+        myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);
+        myFarm->myAvi.setupgrading(false);
     }
 
-    if (myFarm->myaviculture.getisfed() && (myFarm->owner.getday() - myFarm->myaviculture.get_start_day_of_produce >= 2)) {
-        myFarm->myaviculture.sethavecrop(true);
-        myFarm->myaviculture.setisfed(false);
-        myFarm->myaviculture.set_start_day_of_produce(-1);
+    if (myFarm->myAvi.getisfed() && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_produce >= 2)) {
+        myFarm->myAvi.sethavecrop(true);
+        myFarm->myAvi.setisfed(false);
+        myFarm->myAvi.set_start_day_of_produce(-1);
     }
 
-    if (myFarm->myaviculture.getisfed() && !myFarm->myaviculture.gethavecrop())
+    if (myFarm->myAvi.getisfed() && !myFarm->myAvi.gethavecrop())
         str = "hens have been fed but they have not laid already";
-    else if (!myFarm->myaviculture.gethavecrop())
+    else if (!myFarm->myAvi.gethavecrop())
         str = "there is no egg for removal";
-    else if (myFarm->mystorage.getCapacity()< myFarm->myaviculture.getcurrent())
+    else if (myFarm->mySto.getCapacity()< myFarm->myAvi.getcurrent())
         str = "garner has no place";
     else {
-        myFarm->mystorage.addEgg(myFarm->myaviculture.getcurrent());
+        myFarm->mySto.addEgg(myFarm->myAvi.getcurrent());
         myFarm->owner.setExp(myFarm->owner.getExp() + 2);
-        myFarm->myaviculture.sethavecrop(false);
+        myFarm->myAvi.sethavecrop(false);
         str = "done successfully";
     }
     QMessageBox::information(this, "removal", str);
@@ -119,27 +119,27 @@ void Aviculture::removal() {
 void Aviculture::starting_upgrade() {
     QString str;
 
-    if (myFarm->myaviculture.getupgrading()  && myFarm->owner.getday() - myFarm->myaviculture.get_start_day_of_upgrading >= 3) {
-        myFarm->myaviculture.setcapacity(myFarm->myaviculture.getcapacity() * 2);
-        myFarm->myaviculture.set_start_day_of_upgrading(2147483640);
-        myFarm->myaviculture.setlevel(myFarm->myaviculture.getlevel() + 1);
-        myFarm->myaviculture.setupgrading(false);
+    if (myFarm->myAvi.getupgrading()  && myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading >= 3) {
+        myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
+        myFarm->myAvi.set_start_day_of_upgrading(2147483640);
+        myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);
+        myFarm->myAvi.setupgrading(false);
     }
 
     if (myFarm->owner.getLevel() < 3)
         str = "At least level 3 is required!";
-    else if (myFarm->mystorage.getNail() < 1)
+    else if (myFarm->mySto.getNail() < 1)
         str = "At least 1 nail is required!";
     else if (myFarm->owner.getCoin() < 10)
         str = "At least 10 coin is required!";
-    else if (myFarm->myaviculture.getupgrading())
+    else if (myFarm->myAvi.getupgrading())
         str = "upgrading. you should wait 3 days";
     else{
-         myFarm->myaviculture.set_start_day_of_upgrading(myFarm->owner.getday());
-         myFarm->myaviculture.setupgrading(true);
+         myFarm->myAvi.set_start_day_of_upgrading(myFarm->owner.getDay());
+         myFarm->myAvi.setupgrading(true);
          myFarm->owner.setCoin(myFarm->owner.getCoin() - 10);
          myFarm->owner.setExp(myFarm->owner.getExp() + 5);
-         myFarm->mystorage.addNail(-1);
+         myFarm->mySto.addNail(-1);
         str = "start upgrading. It takes three days";
     }
     QMessageBox::information(this, "upgrading", str);
