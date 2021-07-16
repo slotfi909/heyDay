@@ -16,11 +16,11 @@ class DialogAlfalfaField : public QDialog
 public:
     explicit DialogAlfalfaField(QWidget *parent = nullptr,Farm *_myfarm = nullptr);
     ~DialogAlfalfaField();
-
-    void checkForUpgrade();
+int checkForPlow();
+    int checkForUpgrade();
     friend class storage;
     friend class silo;
-
+void update_file();
 private slots:
     void on_pushButton_3_clicked();
 

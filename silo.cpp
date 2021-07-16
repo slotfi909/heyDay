@@ -66,6 +66,7 @@ silo::silo(int shenaseP){
     int freeSpace=capacity-numWheat;
     if(addedWheatNumber<=freeSpace){
         numWheat+=addedWheatNumber;
+capacity++;
 return 1;
 }
     else
