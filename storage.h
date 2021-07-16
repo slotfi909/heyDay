@@ -17,9 +17,9 @@ private:
     int numEgg; // level 2
     int numMilk; // level 4
     int numFleece; // level 6
-    unsigned int storageTime;
+    unsigned int upgradeStartTime;
     bool isBeingUpgraded;
-
+int shenaseP;
 
 public:
 storage1(int shenase);
@@ -39,7 +39,15 @@ storage1(int shenase);
     int addEgg(int numAddedEgg);
     int addMilk(int numAddedMilk);
     int addFleece(int numAddedFleece);
-
+    void setLevel(int _level){level=_level;}
+    void setCapacity(int _capacity){capacity=_capacity;}
+    void setNail(int _nail){numNail=_nail;}
+    void setAlfalfa(int _alfalfa){numAlfalfa=_alfalfa;}
+    void setShovel(int _shovel){numShovel=_shovel;}
+    void setEgg(int _egg){numEgg=_egg;}
+    void setMilk(int _milk){numMilk=_milk;}
+    void setFleece(int _fleece){numFleece=_fleece;}
+void update_file();
 
 
 };
