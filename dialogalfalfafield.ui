@@ -111,19 +111,6 @@
     <string>harvest</string>
    </property>
   </widget>
-  <widget class="QProgressBar" name="progressBar">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>30</y>
-     <width>118</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="value">
-    <number>0</number>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
@@ -135,6 +122,19 @@
    </property>
    <property name="text">
     <string>plant</string>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="progressBar">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>20</y>
+     <width>118</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="value">
+    <number>24</number>
    </property>
   </widget>
  </widget>

@@ -6,16 +6,16 @@ class alfalfaField{ // opens in level 3
 
 int area;
 bool isPlowed;
-unsigned int plowTime_Start;
-unsigned int alfalfaFieldTime;
-unsigned int plantTime;
+unsigned int plowStartTime;
+unsigned int upgradeStartTime;
+unsigned int plantStartTime;
 bool isBeingUpgraded;
 bool isBeingPlowed;
 bool isBeingPlanted;
 
 public:
 //constructor
-alfalfaField(int shenase);
+alfalfaField(int shenaseP=1);
 //functions
 int getArea();
     void upgrade(); //
@@ -28,6 +28,7 @@ void update_file();
 
 friend class storage;
 friend class silo;
+friend class DialogAlfalfaField;
 };
 
 #endif // ALFALFAFIELD_H

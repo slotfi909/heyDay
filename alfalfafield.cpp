@@ -9,6 +9,7 @@ unsigned int plantStartTime;
 bool isBeingUpgraded;
 bool isBeingPlowed;
 bool isBeingPlanted;
+int shenaseP;
 };
 
 //constructor
