@@ -39,7 +39,7 @@ void DialogFormakeAccount::on_makeaccPush_clicked()
         QString repass=ui->LineEditPass_2->text();
         p.username=ui->LineEditUser->text();
         p.email=ui->LineEditEmail->text();
-        p.coin=0;
+        p.coin=20;
         p.exp=0;
         p.level=1;
         p.maxExp=10;
