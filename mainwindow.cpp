@@ -17,6 +17,7 @@ void runthread(QLabel*L1,Farm *myfarm,MainWindow*t){
             L1->setText("day : "+QString::number(myfarm->owner.getDay()));
             myfarm->owner.changeExp(1);
             myfarm->owner.changeLevel();
+        myfarm->mySto.addMilk(myfarm->read_milk(myfarm->owner.getShenaseP(),myfarm->owner.getDay()));
             t->showCoin();
            t->showLevel();
             t->showXp();
@@ -137,6 +138,20 @@ void MainWindow::showCoin()
 //shop button (AmirAli)
 void MainWindow::on_pushButton_3_clicked()
 {
+    
+            myfarm->mymutex.lock();
+            //
+
+            myfarm->owner.setDay(myfarm->owner.getDay()+1);
+            L1->setText("day : "+QString::number(myfarm->owner.getDay()));
+            myfarm->owner.changeExp(1);
+            myfarm->owner.changeLevel();
+        myfarm->mySto.addMilk(myfarm->read_milk(myfarm->owner.getShenaseP(),myfarm->owner.getDay()));
+            t->showCoin();
+           t->showLevel();
+            t->showXp();
+             //
+            myfarm->mymutex.unlock();
 
 }
 
