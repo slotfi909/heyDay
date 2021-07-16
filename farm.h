@@ -19,7 +19,7 @@ public:
    Dairyfarm_back myDai;
    Sheepcote_back myShe;
    silo mySil;
-   storage mySto;
+   storage1 mySto;
    void write_milk(int shenase ,int tedad,int day);
    int read_milk(int shenase,int day);
 

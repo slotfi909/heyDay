@@ -162,13 +162,13 @@ int Sheepcote_back::feeding() {
 }
 */
 //zamani.........
-void Sheepcote_back::cropready() {
-	if (isfed && (/*getday()*/-start_day_of_produce >= 10) {
+/*void Sheepcote_back::cropready() {
+    if (isfed && (getday()-start_day_of_produce >= 10) {
 		havecrop = true;
 	    isfed = false;
     	start_day_of_produce = -1;
 	}
-}
+}*/
 /*
 int Sheepcote_back::removal() {
 	if (isfed && !havecrop)

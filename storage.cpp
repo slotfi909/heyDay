@@ -1,77 +1,55 @@
 #include "storage.h"
+storage1::~storage1()
+{
 
-           struct temp {
-    int capacity;
-    int level;
-    int numNail;
-    int numAlfalfa ;
-    int numShovel ;
-    int numEgg; // level 2
-    int numMilk; // level 4
-    int numFleece; // level 6
-    unsigned int upgradeStartTime;
-    bool isBeingUpgraded;
-    int shenaseP;
-
-};
-int storage::getLevel(){return level;}
-int storage::getCapacity(){return capacity;}
-int storage::allMerchandises(){
+}
+int storage1::getLevel(){return level;}
+int storage1::getCapacity(){return capacity;}
+int storage1::allMerchandises(){
 return (numNail+numFleece+numEgg+numMilk+numShovel+numAlfalfa);
 }
-int storage::addNail(int numAddedNail){
+int storage1::addNail(int numAddedNail){
         if(numAddedNail+allMerchandises()<=capacity){
            numNail+=numAddedNail;
            return 1;
         }
-else
+
        return 0;
     }
-int storage::addAlfalfa(int numAddedAlfalfa){
+
+    int storage1::addAlfalfa(int numAddedAlfalfa){
         if(numAddedAlfalfa+allMerchandises()<=capacity){
 
     numAlfalfa+=numAddedAlfalfa;
     return 1;
         }
-else
 return 0;
 
     }
-int storage::addShovel(int numAddedShovel){
+
+    int storage1::addShovel(int numAddedShovel){
       if(numAddedShovel+allMerchandises()<=capacity){
             numShovel+=numAddedShovel;
 return 1;
 
 }
-else
 return 0;
     }
-int storage::addEgg(int numAddedEgg){
+
+    int storage1::addEgg(int numAddedEgg){
     if(numAddedEgg+allMerchandises()<=capacity){
     if(level>=2){
     numEgg+=numAddedEgg;
     return 1;
     }
     }
-else
 return 0;
 
 
 
     }
-int storage::addMilk(int numAddedMilk){
-  if(numAddedMilk+allMerchandises()<=capacity){
-    if(level>=4){
-    numMilk+=numAddedMilk;
-    return 1;
-    }
-    }
-else
-return 0;
 
-    
-}
-int storage::addFleece(int numAddedFleece){
+    int storage1::addFleece(int numAddedFleece){
       if(numAddedFleece+allMerchandises()<=capacity){
 
   if(level>=6){
@@ -84,7 +62,25 @@ return 0;
 
 
 }
-storage::storage(int shenaseP){
+
+
+
+
+storage1::storage1(int shenaseP){
+            struct temp {
+    int capacity;
+    int level;
+    int numNail;
+    int numAlfalfa ;
+    int numShovel ;
+    int numEgg; // level 2
+    int numMilk; // level 4
+    int numFleece; // level 6
+    unsigned int storageTime;
+    bool isBeingUpgraded;
+    int shenaseP;
+
+};
  temp A;
 
   ifstream fin;
@@ -110,7 +106,7 @@ storage::storage(int shenaseP){
             numEgg=A.numEgg;
             numMilk=A.numMilk;
             numFleece=A.numFleece;
-            upgradeStartTime=A.upgradeStartTime;
+            storageTime=A.storageTime;
             isBeingUpgraded=A.isBeingUpgraded;
             shenaseP=A.shenaseP;
             isFirst=0;
@@ -127,7 +123,7 @@ storage::storage(int shenaseP){
     numEgg=0; // level 2
     numMilk=0; // level 4
     numFleece=0; // level 6
-    upgradeStartTime=0;
+    storageTime=0;
     isBeingUpgraded=0;
 //....................................
     A.capacity=5;
@@ -138,11 +134,11 @@ storage::storage(int shenaseP){
     A.numEgg=0; // level 2
     A.numMilk=0; // level 4
     A.numFleece=0; // level 6
-    A.upgradeStartTime=0;
+    A.storageTime=0;
     A.isBeingUpgraded=0;
     A.shenaseP=shenaseP;
 
-    fout.open("storage.txt",ios::app);
+    fout.open("storag.txt",ios::app);
     fout.write((char*)&A, sizeof(temp));
     fout.close();
     
@@ -150,52 +146,10 @@ storage::storage(int shenaseP){
     
     
 }
-int storage::getNail(){return numNail;}
-int storage::getAlfalfa(){return numAlfalfa;}
-int storage::getShovel(){return numShovel;}
-int storage::getEgg(){return numEgg;}
-int storage::getMilk(){return numMilk;}
-int storage::getFleece(){return numFleece;}
-void storage::update_file() {
 
-	temp p;
-
-	ofstream outfile;//for writing in new file.
-	ifstream infile;//for reading.
-
-	infile.open("storage.txt", ios::in);
-	if (infile.is_open()) {
-		outfile.open("storage-temp.txt", ios::out);//make file.
-		infile.seekg(0, ios::end);
-		int size = infile.tellg();
-		infile.seekg(0, ios_base::beg);
-		while (infile.tellg() < size) {
-			infile.read((char*)&p, sizeof(p));
-			if (shenaseP == p.shenaseP) {
-p.capacity=capacity;
-p.level=level;
-     p.numNail=numNail;
-    p.numAlfalfa=numAlfalfa ;
-    p.numShovel=numShovel ;
-    p.numEgg=numEgg; // level 2
-     p.numMilk=numMilk; // level 4
-     p.numFleece=numFleece; // level 6
-    p.upgradeStartTime=upgradeStartTime;
-     p.isBeingUpgraded=isBeingUpgraded;
-    p.shenaseP=shenaseP;
-			}
-			outfile.write((char*)&p, sizeof(p));
-		}
-		outfile.close();
-		infile.close();
-		remove("storage.txt");
-		rename("storage-temp.txt", "storage.txt");
-	}
-}
-void storage::upgrade(){
-        
-    }
-void storage::checkForUpgrade(){
-        
-    }
-
+    int storage1::getNail(){return numNail;}
+    int storage1::getAlfalfa(){return numAlfalfa;}
+    int storage1::getShovel(){return numShovel;}
+    int storage1::getEgg(){return numEgg;}
+    int storage1::getMilk(){return numMilk;}
+    int storage1::getFleece(){return numFleece;}
