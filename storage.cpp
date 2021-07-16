@@ -27,7 +27,7 @@ return (numNail+numFleece+numEgg+numMilk+numShovel+numAlfalfa);
 int storage1::addNail(int numAddedNail){
         if(numAddedNail+allMerchandises()<=capacity){
            numNail+=numAddedNail;
-           capacity++;
+
 
            return 1;
 
@@ -40,7 +40,7 @@ int storage1::addNail(int numAddedNail){
         if(numAddedAlfalfa+allMerchandises()<=capacity){
 
     numAlfalfa+=numAddedAlfalfa;
-    capacity++;
+
 
     return 1;
 
@@ -52,7 +52,7 @@ return 0;
     int storage1::addShovel(int numAddedShovel){
       if(numAddedShovel+allMerchandises()<=capacity){
             numShovel+=numAddedShovel;
-            capacity++;
+      
 
 return 1;
 
@@ -64,7 +64,7 @@ return 0;
     if(numAddedEgg+allMerchandises()<=capacity){
     if(level>=2){
     numEgg+=numAddedEgg;
-    capacity++;
+
 
     return 1;
     }
@@ -74,21 +74,30 @@ return 0;
 
 
     }
-
-    int storage1::addFleece(int numAddedFleece){
+int storage1::addMilk(int numAddedMilk){
       if(numAddedFleece+allMerchandises()<=capacity){
 
-  if(level>=6){
-    numFleece+=numAddedFleece;
-    capacity++;
+  if(level>=4){
+    numMilk+=numAddedMilk;
+   
 
     return 1;
   }
 
       }
 return 0;
+}
+    int storage1::addFleece(int numAddedFleece){
+      if(numAddedFleece+allMerchandises()<=capacity){
 
+  if(level>=6){
+    numFleece+=numAddedFleece;
 
+    return 1;
+  }
+
+      }
+return 0;
 }
 
 
