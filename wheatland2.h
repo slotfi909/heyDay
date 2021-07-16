@@ -2,6 +2,7 @@
 #define WHEATLAND2_H
 
 #include <QDialog>
+#include "farm.h"
 
 namespace Ui {
 class wheatland2;
@@ -12,8 +13,9 @@ class wheatland2 : public QDialog
     Q_OBJECT
 
 public:
-    explicit wheatland2(QWidget *parent = nullptr, int _id = 1);
+    wheatland2(QWidget *parent = Q_NULLPTR, Farm *_myfarm = nullptr);
     ~wheatland2();
+    void keshtUpDate(int);
 public:
     void upDate();
 private slots:
@@ -25,13 +27,7 @@ private slots:
 
 private:
     Ui::wheatland2 *ui;
-    int area;
-    bool isKeshting;
-    int keshtAmount;
-    int startDay;
-    int startMonth;
-    int startYear;
-    int id;
+    Farm *myfarm;
 };
 
 #endif // WHEATLAND2_H

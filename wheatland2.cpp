@@ -1,33 +1,22 @@
 #include "wheatland2.h"
 #include "ui_wheatland2.h"
-#include <person.h>
 #include <QMessageBox>
 #include <fstream>
-using namespace std;
 
-person0* player;
+
+
 bool endOfFarming = false;
 int tmpId = 1, tmpArea = 5, tmpIsKeshting = 0, tmpAmountKeshting = 0, thisDay = 0, tmpday = 0, startDayFarming = 0;
 
-int difDate(int dd1, int mm1, int yyyy1);
-void keshtUpDate(int _keshtAmount);
 
-//this function updates day of player's game
-void wheatland2::upDate(){
-
-   thisDay = player->getDay();
-}
-
-
-wheatland2::wheatland2(QWidget *parent, int _id) :
+wheatland2::wheatland2(QWidget *parent, Farm * _myfarm) :
     QDialog(parent),
     ui(new Ui::wheatland2)
 {
     ui->setupUi(this);
 
     //for getting day of player
-    player = new person0(_id);
-    thisDay = player->getDay();
+    myfarm = _myfarm;
 
 
     this->setWindowTitle("Wheat Land");
@@ -60,53 +49,51 @@ wheatland2::wheatland2(QWidget *parent, int _id) :
     ui->kesht->setIconSize(QSize(100, 100));
 
 
-    //seting id of wheatland
-    tmpId = _id;
-
-
     //setting data with opening the wheatland file
-      ifstream wheat("wheat.txt");
-      ofstream wheat2("Wheat2.txt");
-      if ( wheat.peek() == std::ifstream::traits_type::eof() )
-      {
-           //file is empty
-           wheat2 << tmpId << ' ' << tmpArea << ' ' << tmpIsKeshting<< ' ' << tmpAmountKeshting<< ' ' << startDayFarming << '\n';
-           area = tmpArea;
-           isKeshting = tmpIsKeshting;
-           keshtAmount = tmpAmountKeshting;
-           startDay = startDayFarming;
-           wheat2.close();
-           wheat.close();
-           remove("wheat.txt");
-           rename("wheat2.txt", "wheat.txt");
-      }
-      else {
-         //file is not empty
-         while (wheat >> tmpId >> tmpArea >> tmpIsKeshting >> tmpAmountKeshting >> startDayFarming )
+          std::ifstream wheat("wheat.txt");
+          std::ofstream wheat2("Wheat2.txt");
+          if ( wheat.peek() == std::ifstream::traits_type::eof() )
           {
-              if (tmpId == _id)
+               //file is empty
+               wheat2 << tmpId << ' ' << tmpArea << ' ' << tmpIsKeshting<< ' ' << tmpAmountKeshting<< ' ' << startDayFarming << '\n';
+               myfarm->myWheatLandBack.setArea( tmpArea );
+               myfarm->myWheatLandBack.setIsKeshting(tmpIsKeshting);
+               myfarm->myWheatLandBack.setKeshtAmount( tmpAmountKeshting );
+               myfarm->myWheatLandBack.setStartDay( startDayFarming );
+               wheat2.close();
+               wheat.close();
+               remove("wheat.txt");
+               rename("wheat2.txt", "wheat.txt");
+          }
+          else {
+             //file is not empty
+             while (wheat >> tmpId >> tmpArea >> tmpIsKeshting >> tmpAmountKeshting >> startDayFarming )
               {
-                area = tmpArea;
-                isKeshting = tmpIsKeshting;
-                keshtAmount = tmpAmountKeshting;
-                startDay = startDayFarming;
-                break;
-              }
-           wheat.close();
-           wheat2.close();
-           remove("wheat2.txt");
-         }
-      }
-
+                  if (tmpId == myfarm->owner.getShenaseP())
+                  {
+                      myfarm->myWheatLandBack.setArea( tmpArea );
+                      myfarm->myWheatLandBack.setIsKeshting(tmpIsKeshting);
+                      myfarm->myWheatLandBack.setKeshtAmount( tmpAmountKeshting );
+                      myfarm->myWheatLandBack.setStartDay( startDayFarming );
+                    break;
+                  }
+               wheat.close();
+               wheat2.close();
+               remove("wheat2.txt");
+             }
+          }
 
       //ui progressBar setup
-      if(tmpIsKeshting == false)
+      if(myfarm->myWheatLandBack.getIsKeshting() == false)
+      {
           ui->progressBar->setValue(0);
+          endOfFarming = true;
+      }
       else
       {
-          ui->progressBar->setValue(( player->getDay() - startDayFarming ) * 100 / 2);
+          ui->progressBar->setValue(( myfarm->owner.getDay() - myfarm->myWheatLandBack.getKeshtStartDay() ) * 100 / 2);
 
-          if( ( ( player->getDay() - startDayFarming ) * 100 / 2 ) >= 100){
+          if( ( ( myfarm->owner.getDay() - myfarm->myWheatLandBack.getKeshtStartDay() ) * 100 / 2 ) >= 100){
               endOfFarming = true;
           }
           else{
@@ -116,7 +103,7 @@ wheatland2::wheatland2(QWidget *parent, int _id) :
 
 
         //ui area display
-        ui->AreaLabel->setText(QString::number(tmpArea));
+        ui->AreaLabel->setText(QString::number(myfarm->myWheatLandBack.getArea()));
 
 
 }
@@ -128,31 +115,53 @@ wheatland2::~wheatland2()
 
 void wheatland2::on_kesht_clicked()
 {
-    if(!tmpIsKeshting)
-    {
-       if ( ui->keshtSize->text().toInt() > tmpArea )
-           QMessageBox::critical(this,"ERROR","Not enough space availble!");
-       else if( ui->keshtSize->text().isEmpty() )
-           QMessageBox::critical(this,"ERROR","LineEdit can not be Empty!");
-       else{
-           keshtUpDate(ui->keshtSize->text().toInt());
-           QMessageBox::information(this,"DONE","Farming has begone!");
-       }
+    //check if we have enough wheat in silo
+    int ans = 1;
+    //if(myfarm->mySil->getwheat() < _keshtAmount)
+       //ans = 0;
+    //else
+       //ans = 1;
+
+
+    //enough wheat is availble
+    if (ans == 1)
+      {
+       if( myfarm->myWheatLandBack.getIsKeshting() == false )
+        {
+          if ( ui->keshtSize->text().toInt() > myfarm->myWheatLandBack.getArea() )
+              QMessageBox::critical(this,"ERROR","Not enough space availble!");
+          else if( ui->keshtSize->text().isEmpty() )
+              QMessageBox::critical(this,"ERROR","LineEdit can not be Empty!");
+          else{
+              keshtUpDate(ui->keshtSize->text().toInt());
+              endOfFarming = false;
+              QMessageBox::information(this,"DONE","Farming has begone!");
+              }
+        }
+        else
+         {
+            QMessageBox::critical(this,"ERROR","Farming is already in progress!");
+         }
     }
-    else
-    {
-        QMessageBox::critical(this,"ERROR","Farming is already in progress!");
+    else{
+            QMessageBox::critical(this,"ERROR","Not enouph wheat is availble in silo!");
     }
+
 }
 
 
 void wheatland2::on_bardasht_clicked()
 {
-    if(endOfFarming)
+    if( myfarm->myWheatLandBack.getIsKeshting() == true )
     {
-        //add wealth to garner and update file
+       if( myfarm->owner.getDay() - myfarm->myWheatLandBack.getKeshtStartDay() >= 2 )
+       {
+           //add wealth to garner and update file
+           //myfarm->mySil->setWheat( myfarm->mySilo->getwheat() + myfarm->myWheatLandBack->getAmount() );
+             myfarm->myWheatLandBack.setIsKeshting(false);
+       }
     }
-    else if(tmpIsKeshting == 0){
+    else if( myfarm->myWheatLandBack.getIsKeshting() == false ){
         QMessageBox::critical(this,"ERROR","You must farm first!");
     }
     else{
@@ -163,25 +172,38 @@ void wheatland2::on_bardasht_clicked()
 
 void wheatland2::on_upGrade_clicked()
 {
-
+    if(myfarm->owner.getCoin() > 5 && myfarm->owner.getLevel() > 1)
+    {
+        myfarm->myWheatLandBack.upGrade(myfarm->owner.getDay());
+    }
+    else{
+        QMessageBox::critical(this,"ERROR","You can not do that right now!");
+    }
 }
 
 
-void keshtUpDate(int _keshtAmount) {
+void wheatland2::keshtUpDate(int _keshtAmount) {
 
-    ofstream temp("temp.txt");
-    ifstream wheat("wheat.txt");
+    myfarm->myWheatLandBack.setIsKeshting(true);
+
+    myfarm->myWheatLandBack.setKeshtAmount(_keshtAmount);
+
+    myfarm->myWheatLandBack.setStartDay(myfarm->owner.getDay());
+
+
+    std::ofstream temp("temp.txt");
+    std::ifstream wheat("wheat.txt");
     int tmpId2 = 1,tmpArea2 = 5, tmpIsKeshting2 = 0, tmpAmountKeshting2 = 0, tmpdayFarmStart = 0 ;
     while (wheat >> tmpId2 >> tmpArea2 >> tmpIsKeshting2 >> tmpAmountKeshting2 >> tmpdayFarmStart )
     {
-        if (tmpId == tmpId2)
+        if (myfarm->owner.getShenaseP() == tmpId2)
         {
             tmpIsKeshting2 = 1;
-            tmpIsKeshting = 1;
+
             tmpAmountKeshting2 = _keshtAmount;
-            tmpAmountKeshting = _keshtAmount;
-            tmpdayFarmStart = player->getDay();
-            tmpday = player->getDay();
+
+            tmpdayFarmStart = myfarm->owner.getDay();
+
             break;
         }
         temp << tmpId2 << ' ' << tmpArea2 << ' ' << tmpIsKeshting2 << ' ' << tmpAmountKeshting2 << ' ' << tmpdayFarmStart << '\n';
@@ -190,4 +212,5 @@ void keshtUpDate(int _keshtAmount) {
     wheat.close();
     remove("wheat.txt");
     rename("temp.txt", "wheat.txt");
+
 }
