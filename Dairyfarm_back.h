@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-using namespace std;
+//using namespace std;
 class Dairyfarm_back
 {
 	int current;

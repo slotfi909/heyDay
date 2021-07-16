@@ -47,7 +47,7 @@ Dairyfarm::Dairyfarm(QWidget *parent, Farm* _Myfarm)
 }
 
 void Dairyfarm::status() {
-    if (myFarm->myDai.getupgrading() && myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading >= 5) {
+    if ((myFarm->myDai.getupgrading()) && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading() >= 5)) {
         myFarm->myDai.setcapacity(myFarm->myDai.getcapacity() * 2);
         myFarm->myDai.set_start_day_of_upgrading(2147483640);
         myFarm->myDai.setlevel(myFarm->myDai.getlevel() + 1);
@@ -61,7 +61,7 @@ void Dairyfarm::status() {
 void Dairyfarm::feeding() {
     QString str;
 
-    if (myFarm->myDai.getupgrading() && myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading >= 5) {
+    if ((myFarm->myDai.getupgrading()) && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading() >= 5)) {
         myFarm->myDai.setcapacity(myFarm->myDai.getcapacity() * 2);
         myFarm->myDai.set_start_day_of_upgrading(2147483640);
         myFarm->myDai.setlevel(myFarm->myDai.getlevel() + 1);
@@ -72,7 +72,7 @@ void Dairyfarm::feeding() {
         str = "there is no cow for feeding";
     else if (myFarm->myDai.gethavecrop())
         str = "cows have milk you should harvest your crops first";
-    else if (myFarm->mySto.getNumAlfalfa()<myFarm->myDai.getcurrent()*2)
+    else if (myFarm->mySto.getAlfalfa()<myFarm->myDai.getcurrent()*2)
         str = "not enough Alfalfa";
     else if (myFarm->myDai.getisfed())
         str = "hens have been fed already you should wait until they make milk";
@@ -89,14 +89,14 @@ void Dairyfarm::feeding() {
 void Dairyfarm::removal() {
     QString str;
 
-    if (myFarm->myDai.getupgrading() && myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading >= 5) {
+    if ((myFarm->myDai.getupgrading()) && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading() >= 5)) {
         myFarm->myDai.setcapacity(myFarm->myDai.getcapacity() * 2);
         myFarm->myDai.set_start_day_of_upgrading(2147483640);
         myFarm->myDai.setlevel(myFarm->myDai.getlevel() + 1);
         myFarm->myDai.setupgrading(false);
     }
 
-    if (myFarm->myDai.getisfed() && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_produce >= 3)) {
+    if ((myFarm->myDai.getisfed()) && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_produce() >= 3)) {
         myFarm->myDai.sethavecrop(true);
         myFarm->myDai.setisfed(false);
         myFarm->myDai.set_start_day_of_produce(-1);
@@ -120,7 +120,7 @@ void Dairyfarm::removal() {
 void Dairyfarm::starting_upgrade() {
     QString str;
 
-    if (myFarm->myDai.getupgrading() && myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading >= 5) {
+    if ((myFarm->myDai.getupgrading()) && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading() >= 5)) {
         myFarm->myDai.setcapacity(myFarm->myDai.getcapacity() * 2);
         myFarm->myDai.set_start_day_of_upgrading(2147483640);
         myFarm->myDai.setlevel(myFarm->myDai.getlevel() + 1);
@@ -136,7 +136,7 @@ void Dairyfarm::starting_upgrade() {
     else if (myFarm->myDai.getupgrading())
         str = "upgrading. you should wait 5 days";
     else {
-        myFarm->myDai.set_start_day_of_start_day_of_upgrading(myFarm->owner.getDay());
+        myFarm->myDai.set_start_day_of_upgrading(myFarm->owner.getDay());
         myFarm->owner.setCoin(myFarm->owner.getCoin() - 15);
         myFarm->owner.setExp(myFarm->owner.getExp() + 6);
         myFarm->mySto.addNail(-2);

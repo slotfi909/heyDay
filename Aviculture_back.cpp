@@ -20,14 +20,14 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 
 	temp A;
 
-	ifstream fin;
-	ofstream fout;
+	std::ifstream fin;
+	std::ofstream fout;
 	fin.open("Aviculture.txt");
 	if (!fin) {
 		fin.close();
 		fout.open("Aviculture.txt");
 		fout.close();
-		fin.open("Aviculture.txt", ios::app);
+		fin.open("Aviculture.txt", std::ios::app);
 	}
 	bool find = 1;
 	while (!fin.eof()) {/////////////////////taghir dar hame
@@ -67,7 +67,7 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 		A.isfed = false;
 		A.havecrop = false;
 		A.upgrading = false;
-		fout.open("Aviculture.txt",ios::app);
+		fout.open("Aviculture.txt", std::ios::app);
 		fout.write((char*)&A, sizeof(temp));
 		fout.close();
 	}
@@ -213,15 +213,15 @@ void Aviculture_back::Update_file() {
 
 	temp p;
 
-	ofstream outfile;//for writing in new file.
-	ifstream infile;//for reading.
+	std::ofstream outfile;//for writing in new file.
+	std::ifstream infile;//for reading.
 
-	infile.open("Aviculture.txt", ios::in);
+	infile.open("Aviculture.txt", std::ios::in);
 	if (infile.is_open()) {
-		outfile.open("Aviculture-temp.txt", ios::out);//make file.
-		infile.seekg(0, ios::end);
+		outfile.open("Aviculture-temp.txt", std::ios::out);//make file.
+		infile.seekg(0, std::ios::end);
 		int size = infile.tellg();
-		infile.seekg(0, ios_base::beg);
+		infile.seekg(0, std::ios_base::beg);
 		while (infile.tellg() < size) {
 			infile.read((char*)&p, sizeof(p));
 			if (shenaseP == p.shenaseP) {
@@ -233,12 +233,13 @@ void Aviculture_back::Update_file() {
 				p.isfed = isfed;
 				p.havecrop = havecrop;
 				p.shenaseP = shenaseP;
+				p.upgrading = upgrading;
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}
 		outfile.close();
 		infile.close();
-		remove("Aviculture.txt");
-		rename("Aviculture-temp.txt", "Aviculture.txt");
+		std::remove("Aviculture.txt");
+		std::rename("Aviculture-temp.txt", "Aviculture.txt");
 	}
 }

@@ -46,7 +46,7 @@ Aviculture::Aviculture(QWidget *parent, Farm* _Myfarm)
 }
 
 void Aviculture::status() {
-    if (myFarm->myAvi.getupgrading() && myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading >= 3) {
+    if ((myFarm->myAvi.getupgrading()) && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading()) >= 3) {
         myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
         myFarm->myAvi.set_start_day_of_upgrading(2147483640);
         myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);
@@ -60,7 +60,7 @@ void Aviculture::status() {
 void Aviculture::feeding() {
     QString str;
     //in bakhsh be aval store azafe konam;................................................
-    if (myFarm->myAvi.getupgrading() && myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading >= 3) {
+    if ((myFarm->myAvi.getupgrading()) && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading()) >= 3) {
         myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
         myFarm->myAvi.set_start_day_of_upgrading(2147483640);
         myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);
@@ -88,14 +88,14 @@ void Aviculture::feeding() {
 void Aviculture::removal() {
     QString str;
 
-    if (myFarm->myAvi.getupgrading() && myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading >= 3) {
+    if ((myFarm->myAvi.getupgrading()) && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading()) >= 3) {
         myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
         myFarm->myAvi.set_start_day_of_upgrading(2147483640);
         myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);
         myFarm->myAvi.setupgrading(false);
     }
 
-    if (myFarm->myAvi.getisfed() && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_produce >= 2)) {
+    if ((myFarm->myAvi.getisfed()) && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_produce() >= 2)) {
         myFarm->myAvi.sethavecrop(true);
         myFarm->myAvi.setisfed(false);
         myFarm->myAvi.set_start_day_of_produce(-1);
@@ -119,7 +119,7 @@ void Aviculture::removal() {
 void Aviculture::starting_upgrade() {
     QString str;
 
-    if (myFarm->myAvi.getupgrading()  && myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading >= 3) {
+    if ((myFarm->myAvi.getupgrading()) && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading()) >= 3) {
         myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
         myFarm->myAvi.set_start_day_of_upgrading(2147483640);
         myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);

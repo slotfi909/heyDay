@@ -13,19 +13,20 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 		int shenaseP;
 		bool isfed;
 		bool havecrop;
+		bool upgrading;
 
 	};
 
 	temp A;
 	
-	ifstream fin;
-	ofstream fout;
+	std::ifstream fin;
+	std::ofstream fout;
 	fin.open("Dairyfarm.txt");
 	if (!fin) {
 		fin.close();
 		fout.open("Dairyfarm.txt");
 		fout.close();
-		fin.open("Dairyfarm.txt", ios::app);
+		fin.open("Dairyfarm.txt", std::ios::app);
 	}
 	bool find = 1;
 	while (!fin.eof()) {
@@ -39,6 +40,7 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 			shenaseP = A.shenaseP;
 			isfed = A.isfed;
 			havecrop = A.havecrop;
+			upgrading = A.upgrading;
 			find = 0;
 			break;
 		}
@@ -53,7 +55,7 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 		shenaseP = _shenaseP;
 		isfed = false;
 		havecrop = false;
-
+		upgrading = false;
 		//..................
 		A.current = 0;
 		A.capacity = 2;
@@ -63,9 +65,10 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 		A.shenaseP = _shenaseP;
 		A.isfed = false;
 		A.havecrop = false;
-	
+		A.upgrading = false;
 
-		fout.open("Dairyfarm.txt", ios::app);
+
+		fout.open("Dairyfarm.txt", std::ios::app);
 		fout.write((char*)&A, sizeof(temp));
 		fout.close();
 	}
@@ -198,20 +201,21 @@ void Dairyfarm_back::Update_file() {
 		int shenaseP;
 		bool isfed;
 		bool havecrop;
+		bool upgrading;
 
 	};
 
 	temp p;
 
-	ofstream outfile;//for writing in new file.
-	ifstream infile;//for reading.
+	std::ofstream outfile;//for writing in new file.
+	std::ifstream infile;//for reading.
 
-	infile.open("Dairyfarm.txt", ios::in);
+	infile.open("Dairyfarm.txt", std::ios::in);
 	if (infile.is_open()) {
-		outfile.open("Dairyfarm-temp.txt", ios::out);//make file.
-		infile.seekg(0, ios::end);
+		outfile.open("Dairyfarm-temp.txt", std::ios::out);//make file.
+		infile.seekg(0, std::ios::end);
 		int size = infile.tellg();
-		infile.seekg(0, ios_base::beg);
+		infile.seekg(0, std::ios_base::beg);
 		while (infile.tellg() < size) {
 			infile.read((char*)&p, sizeof(p));
 			if (shenaseP == p.shenaseP) {
@@ -223,13 +227,13 @@ void Dairyfarm_back::Update_file() {
 				p.isfed = isfed;
 				p.havecrop = havecrop;
 				p.shenaseP = shenaseP;
-		
+				p.upgrading = upgrading;
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}
 		outfile.close();
 		infile.close();
-		remove("Dairyfarm.txt");
-		rename("Dairyfarm-temp.txt", "Dairyfarm.txt");
+		std::remove("Dairyfarm.txt");
+		std::rename("Dairyfarm-temp.txt", "Dairyfarm.txt");
 	}
 }

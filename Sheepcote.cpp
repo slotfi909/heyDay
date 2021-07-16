@@ -47,7 +47,7 @@ Sheepcote::Sheepcote(QWidget *parent, Farm* _Myfarm)
 }
 
 void Sheepcote::status() {
-    if (myFarm->myShe.getupgrading() && myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading >= 9) {
+    if ((myFarm->myShe.getupgrading()) && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading() >= 9)) {
         myFarm->myShe.setcapacity(myFarm->myShe.getcapacity() * 2);
         myFarm->myShe.set_start_day_of_upgrading(2147483640);
         myFarm->myShe.setlevel(myFarm->myShe.getlevel() + 1);
@@ -61,7 +61,7 @@ void Sheepcote::status() {
 void Sheepcote::feeding() {
     QString str;
 
-    if (myFarm->myShe.getupgrading() && myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading >= 9) {
+    if ((myFarm->myShe.getupgrading()) && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading() >= 9)) {
         myFarm->myShe.setcapacity(myFarm->myShe.getcapacity() * 2);
         myFarm->myShe.set_start_day_of_upgrading(2147483640);
         myFarm->myShe.setlevel(myFarm->myShe.getlevel() + 1);
@@ -72,7 +72,7 @@ void Sheepcote::feeding() {
         str = "there is no sheep for feeding";
     else if (myFarm->myShe.gethavecrop())
         str = "sheeps have fleece you should harvest your crops first";
-    else if (myFarm->mySto.getNumAlfalfa() <myFarm->myShe.getcurrent())
+    else if (myFarm->mySto.getAlfalfa() <myFarm->myShe.getcurrent())
         str = "not enough Alfalfa";
     else if (myFarm->myShe.getisfed())
         str = "sheeps have been fed already you should wait until their fleece grow";
@@ -90,14 +90,14 @@ void Sheepcote::feeding() {
 void Sheepcote::removal() {
     QString str;
 
-    if (myFarm->myShe.getupgrading() && myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading >= 9) {
+    if ((myFarm->myShe.getupgrading()) && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading() >= 9)) {
         myFarm->myShe.setcapacity(myFarm->myShe.getcapacity() * 2);
         myFarm->myShe.set_start_day_of_upgrading(2147483640);
         myFarm->myShe.setlevel(myFarm->myShe.getlevel() + 1);
         myFarm->myShe.setupgrading(false);
     }
 
-    if (myFarm->myShe.getisfed() && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_produce >= 10)) {
+    if ((myFarm->myShe.getisfed()) && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_produce() >= 10)) {
         myFarm->myShe.sethavecrop(true);
         myFarm->myShe.setisfed(false);
         myFarm->myShe.set_start_day_of_produce(-1);
@@ -107,7 +107,7 @@ void Sheepcote::removal() {
         str = "sheeps have been fed but their fleece have not grown already";
     else if (!myFarm->myShe.gethavecrop())
         str = "there is no fleece for croping";
-    else if (myFarm->mySto.getCapacity() < myFarm->Dairyfarm.getcurrent())
+    else if (myFarm->mySto.getCapacity() < myFarm->myShe.getcurrent())
         str = "garner has no place";
     else if (myFarm->owner.getCoin()< myFarm->myShe.getcurrent())
         str = QString("At least %1 coin is required!").arg(myFarm->myShe.getcurrent());
@@ -124,7 +124,7 @@ void Sheepcote::removal() {
 void Sheepcote::starting_upgrade() {
     QString str;
 
-    if (myFarm->myShe.getupgrading() && myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading >= 9) {
+    if ((myFarm->myShe.getupgrading()) && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading() >= 9)) {
         myFarm->myShe.setcapacity(myFarm->myShe.getcapacity() * 2);
         myFarm->myShe.set_start_day_of_upgrading(2147483640);
         myFarm->myShe.setlevel(myFarm->myShe.getlevel() + 1);
@@ -142,12 +142,12 @@ void Sheepcote::starting_upgrade() {
     else if (myFarm->myShe.getupgrading())
         str = "upgrading. you should wait 9 days";
     else {
-         myFarm->myShe.set_start_day_of_start_day_of_upgrading(myFarm->owner.getDay());
+         myFarm->myShe.set_start_day_of_upgrading(myFarm->owner.getDay());
 
         myFarm->owner.setCoin(myFarm->owner.getCoin() - 50);
         myFarm->owner.setExp(myFarm->owner.getExp() + 15);
         myFarm->mySto.addNail(-3);
-        myFarm->mySto.addshavel(-1);
+        myFarm->mySto.addShovel(-1);
 
         str = "start upgrading. It takes nine days";
     }
