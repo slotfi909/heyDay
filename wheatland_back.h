@@ -20,6 +20,7 @@ public:
     void setKeshtAmount(int _keshtAmount){keshtAmount = _keshtAmount;};
     void setArea(int _area){area = _area;};
     void setStartDay(int _startDay){startDay = _startDay;};
+    void upDateFile();
 
 private:
     int area;
