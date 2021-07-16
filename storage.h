@@ -1,42 +1,11 @@
-#ifndef STORAGE_H
-#define STORAGE_H
-
-#include <QDialog>
-//#include "milk.h"
 #include <time.h>
 #include <iostream>
-//#include <person.h>
 #include <math.h>
 #include <stdbool.h>
 using namespace std;
-namespace Ui {
-class storage;
-}
-
-class storage : public QDialog
-{
-    Q_OBJECT
-
-public:
-    explicit storage(QWidget *parent = nullptr);
-    ~storage();
-//    void upgrade(person& player);
-    int getLevel();
-    int getCapacity();
-    int allMerchandises();
-    void addNail(int numAddedNail);
-    void addAlfalfa(int numAddedAlfalfa);
-    void addShovel(int numAddedShovel);
-    void addEgg(int numAddedEgg);
-//    void addMilk(milk AddedMilk);
-    void addFleece(int numAddedFleece);
-    void checkSpoiledMilk();
-    //friends
-    friend class alfalfaField;
-    friend class silo;
+class storage{
 
 private:
-    Ui::storage *ui;
     int capacity;
     int level;
     int numNail;
@@ -47,12 +16,27 @@ private:
     int numFleece; // level 6
     unsigned int storageTime;
     bool isBeingUpgraded;
-//    milk* milklist;
+
+
+public:
+storage(int shenase);
+~storage();
+    int getLevel();
+    int getCapacity();
+    int getNail();
+    int getAlfalfa();
+    int getShovel();
+    int getEgg();
+    int getMilk();
+    int getFleece();
+    int allMerchandises();
+    int addNail(int numAddedNail);
+    int addAlfalfa(int numAddedAlfalfa);
+    int addShovel(int numAddedShovel);
+    int addEgg(int numAddedEgg);
+    int addMilk(int numAddedMilk);
+    int addFleece(int numAddedFleece);
+
+
+
 };
-
-#endif // STORAGE_H
-
-
-
-
-

@@ -1,58 +1,61 @@
 #include "silo.h"
-#include "ui_silo.h"
-#include <iostream>
-#include <string.h>
 #include <math.h>
+silo::silo(int shenaseP){
+        struct temp {
+  int numWheat;
+  int capacity;
+  int level;
+  unsigned int siloTime;
+  int shenaseP;
+  bool isBeingUpgradede;
+};
 
-using namespace std;
-silo::silo(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::silo)
-{
-    numWheat=1;
-    capacity=10;
-    level=1;
-    ui->setupUi(this);
-char tmpstr[3];
-    ui->label_2->setText(itoa(this->getLevel(),tmpstr,10));
-    ui->label_4->setText(itoa(this->getCapaticy(),tmpstr,10));
-    ui->label_6->setText(itoa(this->getNumWheat(),tmpstr,10));
+  temp A;
 
+  ifstream fin;
+  ofstream fout;
+  fin.open("silo.txt");
+  if (!fin) {
+    fin.close();
+    fout.open("silo.txt");
+    fout.close();
+    fin.open("silo.txt", ios::app);
+  }
+  bool find = 1;
+  while (!fin.eof()) {/////////////////////taghir dar hame
+    fin.read((char*)&A, sizeof(temp));
+    if (A.shenaseP == shenaseP) {
+      numWheat=A.numWheat;
+      capacity = A.capacity;
+      level = A.level;
+      siloTime=A.siloTime;
+      shenaseP = A.shenaseP;
+      isBeingUpgrade=A.isBeingUpgradede;
+            find=0;
+      break;
+    }
+  }
+  fin.close();
+  if (find) {    //first login
+    numWheat=0;
+      capacity = 10;
+      level = 1;
+      siloTime=0;
+      isBeingUpgrade=0;
+    //..................
+    A.numWheat=0;
+      A.capacity = 10;
+      A.level = 1;
+      A.siloTime=0;
+      A.isBeingUpgrade=0;
+            A.shenaseP=shenaseP;
 
-}
-
-silo::~silo()
-{
-    delete ui;
-}
-
-
-
-/*
-    void silo::upgrade(person& player,const storage& playerStorage){
-        bool canGetUpgraded=0;
-
-   if(level<(player.level)-2)
-    if(playerStorage.numNail>=2*level)
-     if(player.coin>=(pow(2,2*level)*100))
-      if(playerStorage.numShovel>=level-2)
-         canGetUpgraded=1;
-
-        if(canGetUpgraded){
-                cout<<"are you sure?\nenter y for yes and n for no\n";
-        char input;
-        cin>>input;
-        if(input=='n')
-            return;
-              isBeingUpgraded=1;
-              siloTime=time(0);
-     cout<<"silo is upgrading(it takes 5 days to complete!)\n";
-        }
-        else
-        cout<<"silo can't upgrade!";
+    fout.open("silo.txt",ios::app);
+    fout.write((char*)&A, sizeof(temp));
+    fout.close();
+  }
 
     }
-    */
     int silo::getCapaticy(){return capacity;}
     int silo::getNumWheat(){return numWheat;}
     int silo::getLevel(){return level;}
@@ -60,33 +63,17 @@ silo::~silo()
     int freeSpace=capacity-numWheat;
     if(addedWheatNumber<=freeSpace){
         numWheat+=addedWheatNumber;
-        cout<<"added successfully!\n";
+        // cout<<"added successfully!\n";
     }
     else
         cout<<"not enough space!\n";
     }
-/*
-    void silo::checkForUpgrade(person& player){
-{
-if(isBeingUpgraded){
-        if(time(0)>4*24*3600+siloTime){ // 4 days has passed
-                  capacity*=2;
-              player.exp+=level*2;
-              cout <<"storage upgraded successfully!";
-
-
-        }
-else
-    cout <<"not enough time has passed!";
+void silo::checkForUpgrade(int shenase){
+    
 }
+bool silo::isFull(){
+if(numWheat==capacity)
+    return true;
 else
-    cout <<"silo is not upgrading!";
-
+    return false;
 }
-*/
-
-
-
-
-
-

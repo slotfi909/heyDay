@@ -1,153 +1,92 @@
-#include "alfalfafield.h"
-#include "ui_alfalfafield.h"
+#include "alfalfaField.h"
 
-#include <person.h>
-#include <QMessageBox>
-#include <fstream>
-using namespace std;
+//constructor
+alfalfaField::alfalfaField(int shenaseP){
+        struct temp {
+int area;
+bool isPlowed;
+unsigned int plowTime_Start;
+unsigned int alfalfaFieldTime;
+unsigned int plantTime;
+bool isBeingUpgraded;
+bool isBeingPlowed;
+bool isBeingPlanted;
+};
 
-person0* player;
+  temp A;
 
-int tmpArea=4,tmpday=0,tmpId=1,tmpPlowStartDay=0,tmpUpgradeStartDay=0,tmpPlantStartDay=0;
-bool tmpIsPlowed=0,tmpIsBeingPlowed=0,tmpIsBeingUpgraded=0,tmpIsBeingPlanted=0;
-
-//order in file
-//
-//id--area--day--isplowed--isbeingplowed--isbeingupgraded--isbeingplanted--plowStartDay--upgradeStartDay--plantStartDay
-alfalfaField::alfalfaField(QWidget *parent,int _id) :
-    QDialog(parent),
-    ui(new Ui::alfalfaField)
-{
-    ui->setupUi(this);
-    player = new person0(_id);
-    tmpday=player->getDay();
-    tmpId=_id;
-    
-    ifstream alfalfaField1("alfalfaField1.txt");
-        ofstream alfalfaField2("alfalfaField2.txt");
-
-        if ( alfalfaField1.peek() == std::ifstream::traits_type::eof() )
-        {
-             //file is empty
-             alfalfaField2 << tmpId << ' ' << tmpArea << ' ' << tmpday<< ' ' << tmpIsPlowed<< ' ' << tmpIsBeingPlowed <<' '<<tmpIsBeingUpgraded<<' '<< tmpIsBeingPlanted<<tmpPlowStartDay<<' '<<tmpUpgradeStartDay<<' '<<tmpPlantStartDay<<'\n';
-             area = tmpArea;
-             day=tmpday;
-             isPlowed=tmpIsPlowed;
-             isBeingPlowed=tmpIsBeingPlowed;
-             isBeingUpgraded=tmpIsBeingUpgraded;
-             isBeingPlanted=tmpIsBeingPlanted;
-             plowStartDay=tmpPlowStartDay;
-             upgradeStartDay=tmpUpgradeStartDay;
-             plantStartDay=tmpPlantStartDay;
-             alfalfaField2.close();
-             alfalfaField1.close();
-             remove("alfalfaField1.txt");
-             rename("alfalfaField2.txt", "alfalfaField1.txt");
-        }
-        else {
-           //file is not empty
-           while (alfalfaField1 >> tmpId >> tmpArea >> tmpday >> tmpIsPlowed >> tmpIsBeingPlowed>>tmpIsBeingUpgraded>>tmpIsBeingPlanted>>tmpPlowStartDay>>tmpUpgradeStartDay>>tmpPlantStartDay )
-            {
-                if (tmpId == _id)
-                {
-                    area = tmpArea;
-                    day=tmpday;
-                    isPlowed=tmpIsPlowed;
-                    isBeingPlowed=tmpIsBeingPlowed;
-                    isBeingUpgraded=tmpIsBeingUpgraded;
-                    isBeingPlanted=tmpIsBeingPlanted;
-                    plowStartDay=tmpPlowStartDay;
-                    upgradeStartDay=tmpUpgradeStartDay;
-                    plantStartDay=tmpPlantStartDay;
-                  break;
-             alfalfaField1.close();
-             alfalfaField2.close();
-             remove("alfalfaField2.txt");
-           }
-           }
-        }
-        
-        
-        //ui progressBar setup
-        if(tmpIsBeingPlanted == false)
-            ui->progressBar->setValue(0);
-        
-        else
-        {
-            ui->progressBar->setValue(( player->getDay() - tmpPlantStartDay ) * 100 / 2);
+  ifstream fin;
+  ofstream fout;
+  fin.open("alfalfaField.txt");
+  if (!fin) { // if fin is empty
+    fin.close();
+    fout.open("alfalfaField.txt");
+    fout.close();
+    fin.open("alfalfaField.txt", ios::app);
   }
-ui->label_2->setText(QString::number(tmpArea));
+  bool isFirst = 1;
+  while (!fin.eof()) {/////////////////////taghir dar hame
+    fin.read((char*)&A, sizeof(temp));
+    if (A.shenaseP == shenaseP) {
+area=A.area;
+isPlowed=A.isPlowed;
+ plowTime_Start=A.plowTime_Start;
+ alfalfaFieldTime=A.alfalfaFieldTime;
+ plantTime=A.plantTime;
+ isBeingUpgraded=A.isBeingUpgraded;
+ isBeingPlowed=A.isBeingPlowed;
+ isBeingPlanted=A.isBeingPlanted;
+            isFirst=0;
+      break;
+    }
+  }
+  fin.close();
+  if (isFirst) {    //first login
+area=4;
+isPlowed=0;
+ plowTime_Start=0;
+ alfalfaFieldTime=0;
+ plantTime=0;
+ isBeingUpgraded=0;
+ isBeingPlowed=0;
+ isBeingPlanted=0;
+    //..................
+A.area=4;
+A.isPlowed=0;
+A.plowTime_Start=0;
+A.alfalfaFieldTime=0;
+A.plantTime=0;
+A.isBeingUpgraded=0;
+A.isBeingPlowed=0;
+A.isBeingPlanted=0;
+            A.shenaseP=shenaseP;
 
-        
-}
+    fout.open("alfalfaField.txt",ios::app);
+    fout.write((char*)&A, sizeof(temp));
+    fout.close();
+  }
 
-alfalfaField::~alfalfaField()
-{
-    delete ui;
-}
-
-
+    }
+//functions
 int alfalfaField::getArea(){return area;}
-void alfalfaField::plow(){
-isPlowed=true;
-}
-
-
-
-
-
-
-
-
-void alfalfaField::on_pushButton_3_clicked() //plant
-{
-    
-
-        if(!tmpIsBeingPlanted)
-        {
-           if ( ui->lineEdit->text().toInt() > tmpArea )
-               QMessageBox::critical(this,"ERROR","Not enough space availble!");
-//           else if( ui->lineEdit->text().isEmpty() )
-//               QMessageBox::critical(this,"ERROR","LineEdit can not be Empty!");
-//           else{
-//               keshtUpDate(ui->lineEdit->text().toInt());
-//               QMessageBox::information(this,"DONE","Farming has begone!");
-           }
-        else
-        {
-            QMessageBox::critical(this,"ERROR","planting is already in progress!");
-        }
-
-    
+void alfalfaField::upgrade(){
     
 }
-
-
-void alfalfaField::on_pushButton_2_clicked() // harvest
-{
-    if(tmpIsBeingPlanted){
- if(player->getDay()>=tmpPlantStartDay+2) // enough days has passed
-
- {
-
- }
- else{
-     QMessageBox::critical(this,"ERROR","not enough time has passed!");
-
- }
-}
-    else{
-        QMessageBox::critical(this,"ERROR","You must farm first!");
-    }
-    }
-
-
-void alfalfaField::on_pushButton_clicked() //upgrade
-{
+void alfalfaField::planting(){
     
 }
-
-void alfalfaField::upDate(){
-
-   day = player->getDay();
+void alfalfaField::harvest(){
+    
 }
+void alfalfaField::plow(){}
+void alfalfaField::checkForUpgrade(){}
+void alfalfaField::checkForPlow(){
+
+}
+
+
+
+
+
+
+

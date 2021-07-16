@@ -1,39 +1,23 @@
 #ifndef SILO_H
 #define SILO_H
-
-#include <QDialog>
-
-namespace Ui {
-class silo;
-}
-
-class silo : public QDialog
-{
-    Q_OBJECT
-
+#include<storage.h>
+class silo{
+int capacity;
+int numWheat;
+int level;
+unsigned int siloTime;
+bool isBeingUpgraded;
 public:
-    explicit silo(QWidget *parent = nullptr);
-    ~silo();
-
-//    void upgrade(person& player,const storage& playerStorage);
+    //constructor
+    silo(int shenase);
     int getCapaticy();
     int getNumWheat();
     int getLevel();
     void addWheat(int addedWheatNumber);
-//void checkForUpgrade(person& player);
+void checkForUpgrade(int shenase);
+bool isFull();
     friend class storage;
     friend class alfalfaField;
-
-private:
-    Ui::silo *ui;
-    int capacity;
-    int numWheat;
-    int level;
-    unsigned int siloTime;
-    bool isBeingUpgraded;
 };
 
 #endif // SILO_H
-
-
-

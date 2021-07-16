@@ -1,169 +1,155 @@
 #include "storage.h"
-#include "ui_storage.h"
-
-
 storage::~storage()
 {
-    delete ui;
+
 }
 int storage::getLevel(){return level;}
 int storage::getCapacity(){return capacity;}
 int storage::allMerchandises(){
-//cout<<'\n'<<"numNail:"<<numNail<<'\n';
-//cout<<'\n'<<"numFleece:"<<numFleece<<'\n';
-//cout<<'\n'<<"numEgg:"<<numEgg<<'\n';
-//cout<<'\n'<<"numMilk:"<<numMilk<<'\n';
-//cout<<'\n'<<"numShovel:"<<numShovel<<'\n';
-//cout<<'\n'<<"numAlfalfa:"<<numAlfalfa<<'\n';
 return (numNail+numFleece+numEgg+numMilk+numShovel+numAlfalfa);
 }
-void storage::addNail(int numAddedNail){
+int storage::addNail(int numAddedNail){
         if(numAddedNail+allMerchandises()<=capacity){
            numNail+=numAddedNail;
+           return 1;
         }
-    else{
-        cout<<"not enough capacity!";
+
+       return 0;
     }
-    }
-void storage::addAlfalfa(int numAddedAlfalfa){
+
+    int storage::addAlfalfa(int numAddedAlfalfa){
         if(numAddedAlfalfa+allMerchandises()<=capacity){
 
     numAlfalfa+=numAddedAlfalfa;
+    return 1;
         }
-    else{
-        cout<<"not enough capacity!";
+return 0;
+
     }
-    }
-void storage::addShovel(int numAddedShovel){
+
+    int storage::addShovel(int numAddedShovel){
       if(numAddedShovel+allMerchandises()<=capacity){
             numShovel+=numAddedShovel;
+return 1;
 
 }
-    else{
-        cout<<"not enough capacity!";
+return 0;
     }
-    }
-void storage::addEgg(int numAddedEgg){
+
+    int storage::addEgg(int numAddedEgg){
     if(numAddedEgg+allMerchandises()<=capacity){
-    if(level>=2)
+    if(level>=2){
     numEgg+=numAddedEgg;
-    else
-        cout<<"can't add any egg due to low level!";
+    return 1;
     }
-    else{
-        cout<<"not enough capacity!";
     }
-
-    }
-
-//#include "storage.h"
-//#include "milk.h"
+return 0;
 
 
-// functions
-/*
-void storage::upgrade(person& player){
-    bool canGetUpgraded=0;
-   if(level<player.level)
-    if(numNail>=level)
-     if(numShovel>=level-1)
-      if(player.coin>=(pow(level,3)*10))
-         canGetUpgraded=1;
-
-        if(canGetUpgraded){
-                cout<<"are you sure?\nenter y for yes and n for no\n";
-        char input;
-        cin >>input;
-        if(input=='n'){
-            return;
-             //upgrade didn't happen
-        }
-            isBeingUpgraded=1;
-storageTime=time(0);
-        cout<<"storage is upgrading(it takes 5 days to complete!)\n";
-
-
-        }
-        else
-        cout<<"storage can't upgrade!";
-
-}
-
-
-void storage::addMilk(milk AddedMilk){
-        if(AddedMilk.getAmount()+allMerchandises()<=capacity){
-
-   if(level>=4){
-    numMilk+=AddedMilk.getAmount();
-    for(int i=0;i<100;i++){
-        if(milklist+i==0)
-        milklist[i]=AddedMilk;
 
     }
 
-    }
-    else
-        cout<<"can't add any milk due to low level!";
-    }
-
-    else{
-        cout<<"not enough capacity!";
-    }
-
-}
-*/
-void storage::addFleece(int numAddedFleece){
+    int storage::addFleece(int numAddedFleece){
       if(numAddedFleece+allMerchandises()<=capacity){
 
-  if(level>=6)
+  if(level>=6){
     numFleece+=numAddedFleece;
-    else
-        cout<<"can't add any fleece due to low level!";
+    return 1;
+  }
+
       }
-          else{
-        cout<<"not enough capacity!";
+return 0;
+
+
+}
+
+
+
+
+storage::storage(int shenaseP){
+            struct temp {
+    int capacity;
+    int level;
+    int numNail;
+    int numAlfalfa ;
+    int numShovel ;
+    int numEgg; // level 2
+    int numMilk; // level 4
+    int numFleece; // level 6
+    unsigned int storageTime;
+    bool isBeingUpgraded;
+    int shenaseP;
+
+};
+ temp A;
+
+  ifstream fin;
+  ofstream fout;
+  fin.open("storage.txt");
+    if (!fin) { // if fin is empty
+    fin.close();
+    fout.open("storage.txt");
+    fout.close();
+    fin.open("storage.txt", ios::app);
+  }
+  bool isFirst = 1;
+
+ while (!fin.eof()) {
+    fin.read((char*)&A, sizeof(temp));
+    if (A.shenaseP == shenaseP) {
+            //////////////
+            capacity=A.capacity;
+            level=A.level;
+            numNail=A.numNail;
+            numAlfalfa=A.numAlfalfa;
+            numShovel=A.numShovel;
+            numEgg=A.numEgg;
+            numMilk=A.numMilk;
+            numFleece=A.numFleece;
+            storageTime=A.storageTime;
+            isBeingUpgraded=A.isBeingUpgraded;
+            shenaseP=A.shenaseP;
+            isFirst=0;
+      break;
     }
-}
-/*
-void storage::checkSpoiledMilk(){
-for(int i=0;i<100;i++){
-    if(time(0)>=10*24*3600+milklist[i].getDate()){ // if 10 days has passed since the produce date
-       numMilk-=milklist[i].getAmount();
-//        (milklist+i)=0;
+  }
 
-    }
-}
-
-
-}
-*/
-
-
-storage::storage(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::storage)
-{
-    ui->setupUi(this);
-
+ if (isFirst) {    //first login
     capacity=5;
     level=1;
     numNail=1;
-    numAlfalfa=1;
+    numAlfalfa=1 ;
     numShovel=0;
-    numMilk=0;
-    numFleece=0;
+    numEgg=0; // level 2
+    numMilk=0; // level 4
+    numFleece=0; // level 6
+    storageTime=0;
     isBeingUpgraded=0;
+//....................................
+    A.capacity=5;
+    A.level=1;
+    A.numNail=1;
+    A.numAlfalfa=1 ;
+    A.numShovel=0;
+    A.numEgg=0; // level 2
+    A.numMilk=0; // level 4
+    A.numFleece=0; // level 6
+    A.storageTime=0;
+    A.isBeingUpgraded=0;
+    A.shenaseP=shenaseP;
 
-    char tmpstr[3];
-        ui->label_2->setText(itoa(this->level,tmpstr,10));
-        ui->label_4->setText(itoa(this->capacity,tmpstr,10));
-        ui->label_6->setText(itoa(this->numShovel,tmpstr,10));
-        ui->label_8->setText(itoa(this->numNail,tmpstr,10));
-        ui->label_10->setText(itoa(this->numAlfalfa,tmpstr,10));
-        ui->label_12->setText(itoa(this->numEgg,tmpstr,10));
-        ui->label_14->setText(itoa(this->numMilk,tmpstr,10));
-        ui->label_16->setText(itoa(this->numFleece,tmpstr,10));
-
-
-
+    fout.open("storage.txt",ios::app);
+    fout.write((char*)&A, sizeof(temp));
+    fout.close();
+    
+  }
+    
+    
 }
+
+    int storage::getNail(){return numNail;}
+    int storage::getAlfalfa(){return numAlfalfa;}
+    int storage::getShovel(){return numShovel;}
+    int storage::getEgg(){return numEgg;}
+    int storage::getMilk(){return numMilk;}
+    int storage::getFleece(){return numFleece;}
