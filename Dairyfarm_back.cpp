@@ -31,7 +31,10 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 		fin.open("Dairyfarm.txt", std::ios::app);
 	}
 	bool find = 1;
-	while (!fin.eof()) {
+	fin.seekg(0, std::ios::end);
+	int size = fin.tellg();
+	fin.seekg(0, std::ios::beg);
+	while (size < fin.tellg()) {
 		fin.read((char*)&A, sizeof(temp));
 		if (A.shenaseP == _shenaseP) {
 			current = A.current;
@@ -233,7 +236,7 @@ void Dairyfarm_back::Update_file() {
 		outfile.open("Dairyfarm-temp.txt", std::ios::out);//make file.
 		infile.seekg(0, std::ios::end);
 		int size = infile.tellg();
-		infile.seekg(0, std::ios_base::beg);
+		infile.seekg(0, std::ios::beg);
 		while (infile.tellg() < size) {
 			infile.read((char*)&p, sizeof(p));
 			if (shenaseP == p.shenaseP) {

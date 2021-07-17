@@ -30,10 +30,13 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 		fin.close();
 		fout.open("Aviculture.txt");
 		fout.close();
-		fin.open("Aviculture.txt", std::ios::app);
+		fin.open("Aviculture.txt", std::ios::in);
 	}
 	bool find = 1;
-	while (!fin.eof()) {/////////////////////taghir dar hame
+	fin.seekg(0, std::ios::end);
+	int size = fin.tellg();
+	fin.seekg(0, std::ios::beg);
+	while (size<fin.tellg()) {/////////////////////taghir dar hame
 		fin.read((char*)&A, sizeof(temp));
 		if (A.shenaseP == _shenaseP) {
 			current = A.current;
@@ -241,7 +244,7 @@ void Aviculture_back::Update_file() {
 		outfile.open("Aviculture-temp.txt", std::ios::out);//make file.
 		infile.seekg(0, std::ios::end);
 		int size = infile.tellg();
-		infile.seekg(0, std::ios_base::beg);
+		infile.seekg(0, std::ios::beg);
 		while (infile.tellg() < size) {
 			infile.read((char*)&p, sizeof(p));
 			if (shenaseP == p.shenaseP) {
