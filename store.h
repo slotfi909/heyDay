@@ -18,8 +18,9 @@ class store : public QWidget
 public:
     store(QWidget *parent = nullptr,Farm *_m=NULL);
     ~store();
+    getAmount *ge;
 
-private slots:
+public slots:
     void slotToSell(int,int);
     void slotToBuy(int,int);
     void on_pushButton_2_clicked();
@@ -43,9 +44,12 @@ private slots:
 
     void on_pushButton_10_clicked();
 
+private slots:
+    void on_pushButton_11_clicked();
+
 private:
     Ui::store *ui;
     Farm *myfarm;
-    getAmount *ge;
+
 };
 #endif // STORE_H

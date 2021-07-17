@@ -8,8 +8,7 @@ store::store(QWidget *parent,Farm*_m)
     ui->setupUi(this);
  myfarm=_m;
 
-connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
-connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
+
 
 }
 
@@ -241,13 +240,18 @@ if ((myfarm->myShe.getupgrading()) && (myfarm->owner.getDay() - myfarm->myShe.ge
 void store::on_pushButton_2_clicked()
 {
     ge=new getAmount(this,20,30,myfarm->owner.getCoin(),myfarm->mySto.getNail(),9);
+    connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
+    connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
+
 }
 
 
 void store::on_pushButton_clicked()
 {
     ge=new getAmount(this,2,3,myfarm->owner.getCoin(),myfarm->mySil.getNumWheat(),1);
+    connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
+    connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
 }
 
@@ -256,6 +260,8 @@ void store::on_pushButton_3_clicked()
 {
     if(myfarm->owner.getLevel()>=2){
     ge=new getAmount(this,15,20,myfarm->owner.getCoin(),myfarm->myAvi.getcurrent(),3);
+    connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
+    connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
     }else {
          QMessageBox::information(this,"ERROR","YOU need level 2");
@@ -267,6 +273,8 @@ void store::on_pushButton_4_clicked()
 {
     if(myfarm->owner.getLevel()>=3){
     ge=new getAmount(this,4,6,myfarm->owner.getCoin(),myfarm->mySil.getNumWheat(),2);
+    connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
+    connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
     }else {
         QMessageBox::information(this,"ERROR","YOU need level 3");
@@ -278,6 +286,8 @@ void store::on_pushButton_5_clicked()
 {
     if(myfarm->owner.getLevel()>=4){
     ge=new getAmount(this,50,70,myfarm->owner.getCoin(),myfarm->myDai.getcurrent(),5);
+    connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
+    connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
     }else {
         QMessageBox::information(this,"ERROR","YOU need level 4");
@@ -289,6 +299,8 @@ void store::on_pushButton_6_clicked()
 {
     if(myfarm->owner.getLevel()>=2){
     ge=new getAmount(this,8,0,myfarm->owner.getCoin(),myfarm->mySto.getEgg(),4);
+    connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
+    connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
     }else{
     QMessageBox::information(this,"ERROR","YOU need level 2");
@@ -300,6 +312,8 @@ void store::on_pushButton_7_clicked()
 {
     if(myfarm->owner.getLevel()>=6){
     ge=new getAmount(this,70,80,myfarm->owner.getCoin(),myfarm->myShe.getcurrent(),7);
+    connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
+    connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
     }else {
          QMessageBox::information(this,"ERROR","YOU need level 7");
@@ -313,6 +327,8 @@ void store::on_pushButton_8_clicked()
 {
     if(myfarm->owner.getLevel()>=4){
     ge=new getAmount(this,12,0,myfarm->owner.getCoin(),myfarm->mySto.getMilk(),6);
+    connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
+    connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
     }else {
          QMessageBox::information(this,"ERROR","YOU need level 4");
@@ -323,6 +339,8 @@ void store::on_pushButton_8_clicked()
 void store::on_pushButton_9_clicked()
 {
     ge=new getAmount(this,30,50,myfarm->owner.getCoin(),myfarm->mySto.getShovel(),10);
+    connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
+    connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
 }
 
@@ -331,9 +349,17 @@ void store::on_pushButton_10_clicked()
 {
     if(myfarm->owner.getLevel()>=6){
     ge=new getAmount(this,23,0,myfarm->owner.getCoin(),myfarm->mySto.getFleece(),8);
+    connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
+    connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
     }else {
      QMessageBox::information(this,"ERROR","YOU need level 7");
     }
+}
+
+
+void store::on_pushButton_11_clicked()
+{
+    this->close();
 }
 
