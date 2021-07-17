@@ -205,7 +205,7 @@ void MainWindow::on_WheatLand_clicked()
 void MainWindow::on_Aviculture_clicked()
 {
     if(myfarm.owner.getLevel() > 1){
-        Avi=new Aviculture(this);
+        Avi=new Aviculture(this,&myfarm);
         Avi->show();
     }
     else{
@@ -217,7 +217,7 @@ void MainWindow::on_Aviculture_clicked()
 void MainWindow::on_Dairyfarm_clicked()
 {
     if(myfarm.owner.getLevel() > 3){
-        Da = new Dairyfarm(this);
+        Da = new Dairyfarm(this,&myfarm);
         Da->show();
     }
     else{
@@ -229,7 +229,7 @@ void MainWindow::on_Dairyfarm_clicked()
 void MainWindow::on_Sheepcote_clicked()
 {
     if(myfarm.owner.getLevel() > 5){
-        Sh = new Sheepcote(this);
+        Sh = new Sheepcote(this,&myfarm);
         Sh->show();
     }
     else{
