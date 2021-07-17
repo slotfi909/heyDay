@@ -25,7 +25,7 @@ public slots:
 private:
 
     Farm* myFarm;
-    QVBoxLayout* Layout;
+    QVBoxLayout* mLayout;
     QPushButton* btn1;
     QPushButton* btn2;
     QPushButton* btn3;

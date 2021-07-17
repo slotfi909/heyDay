@@ -2,18 +2,19 @@
 #include "ui_scoreboard.h"
 #include <QDataStream>
 #include <QFile>
-using namespace std;
+
 
 struct tempo{
-QString name;
-QString pass;
-QString username;
-QString email;
-int coin;
-int exp;
-int level;
-int shenaseP;
-int maxExp;
+    QString name;
+    QString pass;
+    QString username;
+    QString email;
+    int coin;
+    int exp;
+    int level;
+    int shenaseP;
+    int maxExp;
+    int day;
 };
 
 bool compareTwoStudents(tempo a, tempo b)
@@ -28,7 +29,7 @@ bool compareTwoStudents(tempo a, tempo b)
 }
 
 QDataStream &operator>>(QDataStream &in, struct tempo &p){
-    in >> p.name >> p.pass >>p.username>>p.email>>p.coin>>p.exp>>p.level>>p.shenaseP>>p.maxExp;
+    in >> p.name >> p.pass >>p.username>>p.email>>p.coin>>p.exp>>p.level>>p.shenaseP>>p.maxExp >> p.day;
     return in;
 }
 
@@ -64,7 +65,7 @@ scoreboard::scoreboard(QWidget *parent) :
         }
         ui->listWidget->addItem("RANK      USERNAME      LEVEL      EXP");
         int ranker = 1;
-        sort(p, p + i, compareTwoStudents);
+        std::sort(p, p + i, compareTwoStudents);
         for (int j = 0; j < i ; j++ ) {
             if((p[j-1].level != p[j].level || p[j-1].exp != p[j].exp) && j != 0)
                 ranker++;
