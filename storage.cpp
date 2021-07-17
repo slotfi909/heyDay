@@ -162,7 +162,7 @@ storage1::storage1(int shenaseP){
     A.isBeingUpgraded=0;
     A.shenaseP=shenaseP;
 
-    fout.open("storag.txt",std::ios::app);
+    fout.open("storage.txt",std::ios::app);
     fout.write((char*)&A, sizeof(temp));
     fout.close();
 
