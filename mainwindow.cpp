@@ -181,8 +181,8 @@ myfarm.mySto.addMilk(myfarm.read_milk(myfarm.owner.getShenaseP(),myfarm.owner.ge
 void MainWindow::on_silo_clicked()
 {
     Sil = new DialogSilo(this,&myfarm);
+//    Sil->checkForUpgrade();
     Sil->show();
-
 }
 
 //garner button(Soroosh)

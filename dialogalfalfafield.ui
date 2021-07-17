@@ -22,6 +22,9 @@
      <height>13</height>
     </rect>
    </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>area:</string>
    </property>
@@ -34,6 +37,9 @@
      <width>47</width>
      <height>13</height>
     </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
    </property>
    <property name="text">
     <string/>
@@ -58,6 +64,9 @@
      <height>21</height>
     </rect>
    </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>input:</string>
    </property>
@@ -79,9 +88,9 @@
    <property name="geometry">
     <rect>
      <x>230</x>
-     <y>270</y>
+     <y>262</y>
      <width>47</width>
-     <height>13</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="autoFillBackground">

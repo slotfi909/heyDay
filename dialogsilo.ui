@@ -38,6 +38,9 @@
      <height>13</height>
     </rect>
    </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -67,6 +70,9 @@
      <height>13</height>
     </rect>
    </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -95,6 +101,9 @@
      <width>47</width>
      <height>13</height>
     </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
    </property>
    <property name="text">
     <string/>

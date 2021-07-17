@@ -38,6 +38,9 @@
      <height>13</height>
     </rect>
    </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -67,6 +70,9 @@
      <height>13</height>
     </rect>
    </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -83,6 +89,9 @@
    <layout class="QFormLayout" name="formLayout">
     <item row="0" column="0">
      <widget class="QLabel" name="label_5">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string>shovel:</string>
       </property>
@@ -90,6 +99,9 @@
     </item>
     <item row="0" column="1">
      <widget class="QLabel" name="label_6">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -97,6 +109,9 @@
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_7">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string>nail:</string>
       </property>
@@ -104,6 +119,9 @@
     </item>
     <item row="1" column="1">
      <widget class="QLabel" name="label_8">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -111,6 +129,9 @@
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="label_9">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string>alfalfa:</string>
       </property>
@@ -118,6 +139,9 @@
     </item>
     <item row="2" column="1">
      <widget class="QLabel" name="label_10">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -125,6 +149,9 @@
     </item>
     <item row="3" column="0">
      <widget class="QLabel" name="label_11">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string>egg:</string>
       </property>
@@ -132,6 +159,9 @@
     </item>
     <item row="4" column="0">
      <widget class="QLabel" name="label_13">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string>milk:</string>
       </property>
@@ -139,6 +169,9 @@
     </item>
     <item row="4" column="1">
      <widget class="QLabel" name="label_14">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -146,6 +179,9 @@
     </item>
     <item row="5" column="0">
      <widget class="QLabel" name="label_15">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string>fleece:</string>
       </property>
@@ -153,6 +189,9 @@
     </item>
     <item row="5" column="1">
      <widget class="QLabel" name="label_16">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -160,6 +199,9 @@
     </item>
     <item row="3" column="1">
      <widget class="QLabel" name="label_12">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
       <property name="text">
        <string/>
       </property>

@@ -20,6 +20,8 @@ DialogSilo::DialogSilo(QWidget *parent,Farm *_myfarm) :
     myfarm = _myfarm;
     this->setWindowTitle("silo");
 
+    //"C:\HeydayLogo\Logo\silo.jpg"
+
     QPixmap bkgndSil("C:/HeydayLogo/Logo/silo.jpg");
     bkgndSil = bkgndSil.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette paletteSil;
