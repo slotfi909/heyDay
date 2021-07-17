@@ -55,3 +55,4 @@ while(infile.tellg()<size){
 }
  return 0;
 }
+

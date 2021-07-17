@@ -29,7 +29,7 @@ silo::silo(int shenaseP){
   fin.seekg(0,std::ios::end);
     int size=fin.tellg();
     fin.seekg(0,std::ios::beg);
-   while (size<fin.tellg()) {
+   while (size>fin.tellg()) {
    //////////////////////////////
 //  while (!fin.eof()) {/////////////////////taghir dar hame
     fin.read((char*)&A, sizeof(temp));

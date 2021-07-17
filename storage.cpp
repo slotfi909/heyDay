@@ -98,7 +98,7 @@ return 0;
 }
 
 
-storage1::storage1(int shenaseP){
+storage1::storage1(int _shenaseP){
 
  temp A;
 
@@ -118,11 +118,11 @@ storage1::storage1(int shenaseP){
   fin.seekg(0,std::ios::end);
     int size=fin.tellg();
     fin.seekg(0,std::ios::beg);
-   while (size<fin.tellg()) {
+   while (size>fin.tellg()) {
  ///////////////////////////////////////
 // while (!fin.eof()) {
     fin.read((char*)&A, sizeof(temp));
-    if (A.shenaseP == shenaseP) {
+    if (A.shenaseP == _shenaseP) {
             //////////////
             capacity=A.capacity;
             level=A.level;
@@ -151,6 +151,7 @@ storage1::storage1(int shenaseP){
     numFleece=0; // level 6
     upgradeStartTime=0;
     isBeingUpgraded=0;
+    shenaseP=_shenaseP;
 //....................................
     A.capacity=5;
     A.level=1;
@@ -162,7 +163,7 @@ storage1::storage1(int shenaseP){
     A.numFleece=0; // level 6
     A.upgradeStartTime=0;
     A.isBeingUpgraded=0;
-    A.shenaseP=shenaseP;
+    A.shenaseP=_shenaseP;
 
     fout.open("storage.txt",std::ios::app);
     fout.write((char*)&A, sizeof(temp));

@@ -210,10 +210,9 @@ void MainWindow::on_silo_clicked()
 //garner button(Soroosh)
 void MainWindow::on_garner_clicked()
 {
+
     sto=new DialogStorage(this,&myfarm);
-    if(sto->checkForUpgrade()){
-        QMessageBox::information(this,"good New !","storage upgrade suucessfully");
-    }
+
     sto->show();
 
 }

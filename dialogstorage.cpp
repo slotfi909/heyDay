@@ -19,7 +19,9 @@ DialogStorage::DialogStorage(QWidget *parent,Farm *_myfarm) :
     //for getting day of player
       myfarm = _myfarm;
       this->setWindowTitle("storage");
-
+      if(checkForUpgrade()){
+          QMessageBox::information(this,"good New !","storage upgrade suucessfully");
+      }
 
       QPixmap bkgndSto("C:/HeydayLogo/Logo/storage.jpg");
       bkgndSto = bkgndSto.scaled(this->size(), Qt::IgnoreAspectRatio);
