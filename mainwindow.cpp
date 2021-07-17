@@ -16,7 +16,10 @@ void runthread(QLabel*L1,Farm *myfarm,MainWindow*t){
             myfarm->owner.setDay(myfarm->owner.getDay()+1);
             L1->setText("day : "+QString::number(myfarm->owner.getDay()));
             myfarm->owner.changeExp(1);
-            myfarm->owner.changeLevel();
+            if(myfarm->owner.changeLevel()){
+                emit t->showmessage();
+
+            }
         myfarm->mySto.addMilk(myfarm->read_milk(myfarm->owner.getShenaseP(),myfarm->owner.getDay()));
             t->showCoin();
            t->showLevel();
@@ -84,6 +87,8 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
 
     Qt=QThread::create(runthread,ui->label_5,&myfarm,this);
     Qt->start();
+
+    connect(this,SIGNAL(showmessage()),this,SLOT(on_shoewMessage_signal()));
 
 }
 
@@ -161,7 +166,9 @@ void MainWindow::on_pushButton_2_clicked()
     myfarm.owner.setDay(myfarm.owner.getDay()+1);
     ui->label_5->setText("day : "+QString::number(myfarm.owner.getDay()));
     myfarm.owner.changeExp(1);
-    myfarm.owner.changeLevel();
+    if(myfarm.owner.changeLevel()){
+        QMessageBox::information(this,"congratulation","You reach level "+QString::number(myfarm.owner.getLevel()));
+    }
 myfarm.mySto.addMilk(myfarm.read_milk(myfarm.owner.getShenaseP(),myfarm.owner.getDay()));
     showCoin();
    showLevel();
@@ -190,6 +197,7 @@ void MainWindow::on_garner_clicked()
 void MainWindow::on_alfalfaLand_clicked()
 {
     Alf = new DialogAlfalfaField(this,&myfarm);
+    Alf->show();
 
 }
 
@@ -235,5 +243,11 @@ void MainWindow::on_Sheepcote_clicked()
     else{
         QMessageBox::critical(this,"Error","At least level 6 is required!");
     }
+}
+
+void MainWindow::on_shoewMessage_signal()
+{
+    QMessageBox::information(this,"congratulation","You reach level "+QString::number(myfarm.owner.getLevel()));
+
 }
 
