@@ -5,6 +5,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QDialog>
+#include <QLabel>
 #include <QMessageBox>
 #include "farm.h"
 
@@ -20,6 +21,7 @@ public slots:
     void feeding();
     void removal();
     void starting_upgrade();
+    void sakhtan();
 private:
 
     Farm* myFarm;
@@ -28,6 +30,8 @@ private:
     QPushButton* btn2;
     QPushButton* btn3;
     QPushButton* btn4;
-
+    QLabel* lbl;
+    QPushButton* btn5;
+    QPushButton* btn6;
    // Ui::DairyfarmClass ui;
 };

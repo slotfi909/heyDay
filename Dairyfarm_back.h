@@ -13,7 +13,9 @@ class Dairyfarm_back
 	bool isfed;
 	bool havecrop;
 	bool upgrading;
-
+	bool isbuildingmade;//
+	bool isbuildingmaking;//
+	int start_day_of_building;//
 
 public:
 
@@ -29,6 +31,9 @@ public:
 	void setisfed(bool _isfed);
 	void sethavecrop(bool _havecrop);
 	void setupgrading(bool _upgrading);
+	void setisbuildingmade(bool _isbuildingmade);
+	void setisbuildingmaking(bool _isbuildingmaking);
+	void set_start_day_of_building(int _start_day_of_building);
 
 	int getcurrent();
 	int getcapacity();
@@ -39,6 +44,9 @@ public:
 	bool getisfed();
 	bool gethavecrop();
 	bool getupgrading();
+	bool getisbuildingmade();
+	bool getisbuildingmaking();
+	int get_start_day_of_building();
 
 	int isfull();
 	int addcow(int);

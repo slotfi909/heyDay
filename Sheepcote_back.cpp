@@ -14,7 +14,9 @@ Sheepcote_back::Sheepcote_back(int _shenaseP) {
 		bool isfed;
 		bool havecrop;
 		bool upgrading;
-
+		bool isbuildingmade;//
+		bool isbuildingmaking;//
+		int start_day_of_building;//
 	};
 
 	temp A;
@@ -41,7 +43,9 @@ Sheepcote_back::Sheepcote_back(int _shenaseP) {
 			isfed = A.isfed;
 			havecrop = A.havecrop;
 			upgrading = A.upgrading;
-
+			start_day_of_building = A.start_day_of_building;
+			isbuildingmade = A.isbuildingmade;
+			isbuildingmaking = A.isbuildingmaking;
 			find = 0;
 			break;
 		}
@@ -57,6 +61,9 @@ Sheepcote_back::Sheepcote_back(int _shenaseP) {
 		isfed = false;
 		havecrop = false;
 		upgrading = false;
+		start_day_of_building = -1;
+		isbuildingmade = false;
+		isbuildingmaking = false;
 		//..................
 		A.current = 0;
 		A.capacity = 2;
@@ -67,7 +74,9 @@ Sheepcote_back::Sheepcote_back(int _shenaseP) {
 		A.isfed = false;
 		A.havecrop = false;
 		A.upgrading = false;
-
+		A.start_day_of_building = -1;
+		A.isbuildingmade = false;
+		A.isbuildingmaking = false;
 		fout.open("Sheepcote.txt", std::ios::app);
 		fout.write((char*)&A, sizeof(temp));
 		fout.close();
@@ -87,6 +96,9 @@ void Sheepcote_back::setshenaseP(int _shenaseP) { shenaseP = _shenaseP; }
 void Sheepcote_back::setisfed(bool _isfed) { isfed = _isfed; }
 void Sheepcote_back::sethavecrop(bool _havecrop) { havecrop = _havecrop; }
 void Sheepcote_back::setupgrading(bool _upgrading) { upgrading = _upgrading; }
+void Sheepcote_back::setisbuildingmade(bool _isbuildingmade) { isbuildingmade = _isbuildingmade; }
+void Sheepcote_back::setisbuildingmaking(bool _isbuildingmaking) { isbuildingmaking = _isbuildingmaking; }
+void Sheepcote_back::set_start_day_of_building(int _start_day_of_building) { start_day_of_building = _start_day_of_building; }
 
 int Sheepcote_back::getcurrent() { return current; }
 int Sheepcote_back::getcapacity() { return capacity; }
@@ -97,7 +109,9 @@ int Sheepcote_back::getshenaseP() { return shenaseP; }
 bool Sheepcote_back::getisfed() { return isfed; }
 bool Sheepcote_back::gethavecrop() { return havecrop; }
 bool Sheepcote_back::getupgrading() { return upgrading; }
-
+bool Sheepcote_back::getisbuildingmade() { return isbuildingmade; }
+bool Sheepcote_back::getisbuildingmaking() { return isbuildingmaking; }
+int Sheepcote_back::get_start_day_of_building() { return start_day_of_building; }
 
 int Sheepcote_back::isfull() {
 	if (current == capacity)
@@ -210,7 +224,9 @@ void Sheepcote_back::Update_file() {
 		bool isfed;
 		bool havecrop;
 		bool upgrading;
-
+		bool isbuildingmade;//
+		bool isbuildingmaking;//
+		int start_day_of_building;//
 	};
 
 	temp p;
@@ -236,6 +252,9 @@ void Sheepcote_back::Update_file() {
 				p.havecrop = havecrop;
 				p.shenaseP = shenaseP;
 				p.upgrading = upgrading;
+				p.start_day_of_building = start_day_of_building;
+				p.isbuildingmade = isbuildingmade;
+				p.isbuildingmaking = isbuildingmaking;
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}

@@ -4,13 +4,15 @@
 #define FEEDING "C:/HeydayLogo/Sheepcote_logo/3382344.png"
 #define REMOVAL "C:/HeydayLogo/Sheepcote_logo/5332241.png"
 #define UPGRADING "C:/HeydayLogot/Aviculture_logo/6154580.png"
+#define DRAHALSAKHT "C:/HeydayLogo/Aviculture_logo/1958813.png"
+#define SAKHTAN "C:/HeydayLogo/Aviculture_logo/5250128.png"
 
-
-Sheepcote::Sheepcote(QWidget *parent, Farm* _Myfarm)
+Sheepcote::Sheepcote(QWidget* parent, Farm* _Myfarm)
     : QWidget(parent)
 {
     myFarm = _Myfarm;
     Layout = new QVBoxLayout();
+    lbl = new QLabel();
     btn1 = new QPushButton();
     btn1->setIcon(QIcon(STATUS));
     btn1->setIconSize(QSize(65, 65));
@@ -31,10 +33,40 @@ Sheepcote::Sheepcote(QWidget *parent, Farm* _Myfarm)
     btn4->setIconSize(QSize(65, 65));
     btn4->setToolTip("upgrading");
 
-    Layout->addWidget(btn1);
-    Layout->addWidget(btn2);
-    Layout->addWidget(btn3);
-    Layout->addWidget(btn4);
+    btn5 = new QPushButton();
+    btn5->setIcon(QIcon(DRAHALSAKHT));
+    btn5->setIconSize(QSize(65, 65));
+    btn5->setToolTip("under constraction");
+
+    btn6 = new QPushButton();
+    btn6->setIcon(QIcon(SAKHTAN));
+    btn6->setIconSize(QSize(65, 65));
+    btn6->setToolTip("make building");
+
+    if (myFarm->myShe.getisbuildingmaking() && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_building() >= 10)) {
+        myFarm->myShe.setisbuildingmade(true);
+        myFarm->myShe.get_start_day_of_building(2147483640);
+        myFarm->myShe.setisbuildingmaking(false);
+    }
+    else if (!myFarm->myShe.getisbuildingmade() && myFarm->myShe.getisbuildingmaking()) {
+        Layout->addWidget(btn5);
+        QString str = QString("%1 days pass it takes 10 days").arg(myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_building());
+        lbl->setText(str);
+        Layout->addWidget(lbl);
+    }
+
+    if (!myFarm->myShe.getisbuildingmaking() && !myFarm->myShe.getisbuildingmade()) {
+        Layout->addWidget(btn6);
+        lbl->setText("if you wanna build your Sheepcote click the butten (you should be atleast level 6 and need 4 nail and 50 coin,2 shovel)");
+        Layout->addWidget(lbl);
+    }
+    else if (myFarm->myShe.getisbuildingmade()) {
+
+        Layout->addWidget(btn1);
+        Layout->addWidget(btn2);
+        Layout->addWidget(btn3);
+        Layout->addWidget(btn4);
+    }
 
     setLayout(Layout);
 
@@ -42,8 +74,10 @@ Sheepcote::Sheepcote(QWidget *parent, Farm* _Myfarm)
     connect(btn2, SIGNAL(clicked()), this, SLOT(feeding()));
     connect(btn3, SIGNAL(clicked()), this, SLOT(removal()));
     connect(btn4, SIGNAL(clicked()), this, SLOT(starting_upgrade()));
+    connect(btn5, SIGNAL(clicked()), this, SLOT(close()));
+    connect(btn6, SIGNAL(clicked()), this, SLOT(sakhtan()));
 
-   // ui.setupUi(this);
+    // ui.setupUi(this);
 }
 
 void Sheepcote::status() {
@@ -54,7 +88,7 @@ void Sheepcote::status() {
         myFarm->myShe.setupgrading(false);
     }
     QString str = QString("current number of sheeps: %1\ncapacity of Sheepcote: %2\nlevel of Sheepcote: %3").arg(myFarm->myShe.getcurrent()).arg(myFarm->myShe.getcapacity()).arg(myFarm->myShe.getlevel());
-    
+
     QMessageBox::information(this, "status", str);
 }
 
@@ -72,15 +106,15 @@ void Sheepcote::feeding() {
         str = "there is no sheep for feeding";
     else if (myFarm->myShe.gethavecrop())
         str = "sheeps have fleece you should harvest your crops first";
-    else if (myFarm->mySto.getAlfalfa() <myFarm->myShe.getcurrent())
+    else if (myFarm->mySto.getAlfalfa() < myFarm->myShe.getcurrent())
         str = "not enough Alfalfa";
     else if (myFarm->myShe.getisfed())
         str = "sheeps have been fed already you should wait until their fleece grow";
     else {
-         myFarm->myShe.set_start_day_of_produce(myFarm->owner.getDay());
-         myFarm->myShe.setisfed(true);
-         myFarm->mySto.addAlfalfa(myFarm->myShe.getcurrent() * -1);
-         myFarm->owner.setExp(myFarm->owner.getExp() + 7);
+        myFarm->myShe.set_start_day_of_produce(myFarm->owner.getDay());
+        myFarm->myShe.setisfed(true);
+        myFarm->mySto.addAlfalfa(myFarm->myShe.getcurrent() * -1);
+        myFarm->owner.setExp(myFarm->owner.getExp() + 7);
         str = "sheeps fed successfully";
     }
     QMessageBox::information(this, "feeding", str);
@@ -109,7 +143,7 @@ void Sheepcote::removal() {
         str = "there is no fleece for croping";
     else if (myFarm->mySto.getCapacity() < myFarm->myShe.getcurrent())
         str = "garner has no place";
-    else if (myFarm->owner.getCoin()< myFarm->myShe.getcurrent())
+    else if (myFarm->owner.getCoin() < myFarm->myShe.getcurrent())
         str = QString("At least %1 coin is required!").arg(myFarm->myShe.getcurrent());
     else {
         myFarm->mySto.addFleece(myFarm->myShe.getcurrent());
@@ -137,12 +171,12 @@ void Sheepcote::starting_upgrade() {
         str = "At least 2 nail is required!";
     else if (myFarm->owner.getCoin() < 50)
         str = "At least 50 coin is required!";
-    else if(myFarm->mySto.getShovel() < 1)
+    else if (myFarm->mySto.getShovel() < 1)
         str = "At least 1 shovel is required!";
     else if (myFarm->myShe.getupgrading())
         str = "upgrading. you should wait 9 days";
     else {
-         myFarm->myShe.set_start_day_of_upgrading(myFarm->owner.getDay());
+        myFarm->myShe.set_start_day_of_upgrading(myFarm->owner.getDay());
 
         myFarm->owner.setCoin(myFarm->owner.getCoin() - 50);
         myFarm->owner.setExp(myFarm->owner.getExp() + 15);
@@ -153,4 +187,28 @@ void Sheepcote::starting_upgrade() {
     }
     QMessageBox::information(this, "upgrading", str);
 
+}
+
+void Sheepcote::sakhtan() {
+    QString str;
+
+    if (myFarm->owner.getLevel() < 6)
+        str = "At least level 6 is required!";
+    else if (myFarm->mySto.getNail() < 4)
+        str = "At least 4 nail is required!";
+    else if (myFarm->owner.getCoin() < 50)
+        str = "At least 50 coin is required!";
+    else if (myFarm->owner.getShovel() < 2)
+        str = "At least 2 shovel is required!";
+    else {
+        myFarm->myShe.setisbuildingmaking(true);
+        myFarm->myShe.set_start_day_of_building(myFarm->owner.getDay());
+        myFarm->owner.setCoin(myFarm->owner.getCoin() - 50);
+        myFarm->owner.setExp(myFarm->owner.getExp() + 20);
+        myFarm->mySto.addNail(-4);
+        myFarm->mySto.addShovel(-2);
+
+        str = "start building. It takes 10 days";
+    }
+    QMessageBox::information(this, "building", str);
 }

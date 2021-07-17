@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QDialog>
 #include <QMessageBox>
+#include <QLabel>
 #include "farm.h"
 
 class Sheepcote : public QWidget
@@ -20,6 +21,7 @@ public slots:
     void feeding();
     void removal();
     void starting_upgrade();
+    void sakhtan();
 private:
 
     Farm* myFarm;
@@ -28,6 +30,8 @@ private:
     QPushButton* btn2;
     QPushButton* btn3;
     QPushButton* btn4;
-
+    QLabel* lbl;
+    QPushButton* btn5;
+    QPushButton* btn6;
    // Ui::SheepcoteClass ui;
 };

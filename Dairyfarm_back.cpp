@@ -14,7 +14,9 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 		bool isfed;
 		bool havecrop;
 		bool upgrading;
-
+		bool isbuildingmade;//
+		bool isbuildingmaking;//
+		int start_day_of_building;//
 	};
 
 	temp A;
@@ -41,6 +43,9 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 			isfed = A.isfed;
 			havecrop = A.havecrop;
 			upgrading = A.upgrading;
+			start_day_of_building = A.start_day_of_building;
+			isbuildingmade = A.isbuildingmade;
+			isbuildingmaking = A.isbuildingmaking;
 			find = 0;
 			break;
 		}
@@ -56,6 +61,9 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 		isfed = false;
 		havecrop = false;
 		upgrading = false;
+		start_day_of_building = -1;
+		isbuildingmade = false;
+		isbuildingmaking = false;
 		//..................
 		A.current = 0;
 		A.capacity = 2;
@@ -66,7 +74,9 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 		A.isfed = false;
 		A.havecrop = false;
 		A.upgrading = false;
-
+		A.start_day_of_building = -1;
+		A.isbuildingmade = false;
+		A.isbuildingmaking = false;
 
 		fout.open("Dairyfarm.txt", std::ios::app);
 		fout.write((char*)&A, sizeof(temp));
@@ -86,6 +96,9 @@ void Dairyfarm_back::setshenaseP(int _shenaseP) { shenaseP = _shenaseP; }
 void Dairyfarm_back::setisfed(bool _isfed) { isfed = _isfed; }
 void Dairyfarm_back::sethavecrop(bool _havecrop) { havecrop = _havecrop; }
 void Dairyfarm_back::setupgrading(bool _upgrading) { upgrading = _upgrading; }
+void Dairyfarm_back::setisbuildingmade(bool _isbuildingmade) { isbuildingmade = _isbuildingmade; }
+void Dairyfarm_back::setisbuildingmaking(bool _isbuildingmaking) { isbuildingmaking = _isbuildingmaking; }
+void Dairyfarm_back::set_start_day_of_building(int _start_day_of_building) { start_day_of_building = _start_day_of_building; }
 
 int Dairyfarm_back::getcurrent() { return current; }
 int Dairyfarm_back::getcapacity() { return capacity; }
@@ -96,6 +109,9 @@ int Dairyfarm_back::getshenaseP() { return shenaseP; }
 bool Dairyfarm_back::getisfed() { return isfed; }
 bool Dairyfarm_back::gethavecrop() { return havecrop; }
 bool Dairyfarm_back::getupgrading() { return upgrading; }
+bool Dairyfarm_back::getisbuildingmade() { return isbuildingmade; }
+bool Dairyfarm_back::getisbuildingmaking() { return isbuildingmaking; }
+int Dairyfarm_back::get_start_day_of_building() { return start_day_of_building; }
 
 
 int Dairyfarm_back::isfull() {
@@ -202,7 +218,9 @@ void Dairyfarm_back::Update_file() {
 		bool isfed;
 		bool havecrop;
 		bool upgrading;
-
+		bool isbuildingmade;//
+		bool isbuildingmaking;//
+		int start_day_of_building;//
 	};
 
 	temp p;
@@ -228,6 +246,9 @@ void Dairyfarm_back::Update_file() {
 				p.havecrop = havecrop;
 				p.shenaseP = shenaseP;
 				p.upgrading = upgrading;
+				p.start_day_of_building = start_day_of_building;
+				p.isbuildingmade = isbuildingmade;
+				p.isbuildingmaking = isbuildingmaking;
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}

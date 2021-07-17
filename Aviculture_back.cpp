@@ -16,6 +16,9 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 		bool isfed;
 		bool havecrop;
 		bool upgrading;
+		bool isbuildingmade;//
+		bool isbuildingmaking;//
+		int start_day_of_building;//
 	};
 
 	temp A;
@@ -42,6 +45,9 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 			isfed = A.isfed;
 			havecrop = A.havecrop;
 			upgrading = A.upgrading;
+			start_day_of_building = A.start_day_of_building;
+			isbuildingmade = A.isbuildingmade;
+			isbuildingmaking = A.isbuildingmaking;
 			find = 0;
 			break;
 		}
@@ -57,6 +63,9 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 	    isfed = false;
 		havecrop = false;
 		upgrading = false;
+		start_day_of_building = -1;
+		isbuildingmade = false;
+		isbuildingmaking = false;
 		//..................
 		A.current = 0;
 		A.capacity = 2;
@@ -67,6 +76,9 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 		A.isfed = false;
 		A.havecrop = false;
 		A.upgrading = false;
+		A.start_day_of_building = -1;
+		A.isbuildingmade = false;
+		A.isbuildingmaking = false;
 		fout.open("Aviculture.txt", std::ios::app);
 		fout.write((char*)&A, sizeof(temp));
 		fout.close();
@@ -87,6 +99,9 @@ void Aviculture_back::setshenaseP(int _shenaseP) { shenaseP = _shenaseP; }
 void Aviculture_back::setisfed(bool _isfed) { isfed = _isfed; }
 void Aviculture_back::sethavecrop(bool _havecrop) { havecrop = _havecrop; }
 void Aviculture_back::setupgrading(bool _upgrading) { upgrading = _upgrading; }
+void Aviculture_back::setisbuildingmade(bool _isbuildingmade) { isbuildingmade = _isbuildingmade; }
+void Aviculture_back::setisbuildingmaking(bool _isbuildingmaking) { isbuildingmaking = _isbuildingmaking; }
+void Aviculture_back::set_start_day_of_building(int _start_day_of_building) { start_day_of_building = _start_day_of_building; }
 
 int Aviculture_back::getcurrent() { return current; }
 int Aviculture_back::getcapacity() { return capacity; }
@@ -97,6 +112,9 @@ int Aviculture_back::getshenaseP() { return shenaseP; }
 bool Aviculture_back::getisfed() { return isfed; }
 bool Aviculture_back::gethavecrop() { return havecrop; }
 bool Aviculture_back::getupgrading() { return upgrading; }
+bool Aviculture_back::getisbuildingmade() { return isbuildingmade; }
+bool Aviculture_back::getisbuildingmaking() { return isbuildingmaking; }
+int Aviculture_back::get_start_day_of_building() { return start_day_of_building; }
 
 int Aviculture_back::isfull() {
 	if (current == capacity)
@@ -203,11 +221,13 @@ void Aviculture_back::Update_file() {
 		int level;
 		int start_day_of_upgrading;
 		int start_day_of_produce;
+		int start_day_of_building;//
 		int shenaseP;
 		bool isfed;
 		bool havecrop;
 		bool upgrading;
-
+		bool isbuildingmade;//
+		bool isbuildingmaking;//
 	};
 
 
@@ -234,6 +254,9 @@ void Aviculture_back::Update_file() {
 				p.havecrop = havecrop;
 				p.shenaseP = shenaseP;
 				p.upgrading = upgrading;
+				p.start_day_of_building = start_day_of_building;
+				p.isbuildingmade = isbuildingmade;
+				p.isbuildingmaking = isbuildingmaking;
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}
