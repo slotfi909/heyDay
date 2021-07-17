@@ -11,41 +11,37 @@ Aviculture::Aviculture(QWidget* parent, Farm* _Myfarm)
     : QWidget(parent)
 {
     myFarm = _Myfarm;
-    Layout = new QVBoxLayout();
-    lbl = new QLabel();
-    btn1 = new QPushButton();
+    QDialog* wdg = new QDialog(this);
+    QVBoxLayout* Layout = new QVBoxLayout();
+    QLabel* lbl = new QLabel();
+    QPushButton* btn1 = new QPushButton();
     btn1->setIcon(QIcon(STATUS));
     btn1->setIconSize(QSize(65, 65));
     btn1->setToolTip("status");
-
-    btn2 = new QPushButton();
+    QPushButton* btn2 = new QPushButton();
     btn2->setIcon(QIcon(FEEDING));
     btn2->setIconSize(QSize(65, 65));
     btn2->setToolTip("feeding");
-
-    btn3 = new QPushButton();
+    QPushButton* btn3 = new QPushButton();
     btn3->setIcon(QIcon(REMOVAL));
     btn3->setIconSize(QSize(65, 65));
     btn3->setToolTip("removal");
-
-    btn4 = new QPushButton();
+    QPushButton* btn4 = new QPushButton();
     btn4->setIcon(QIcon(UPGRADING));
     btn4->setIconSize(QSize(65, 65));
     btn4->setToolTip("upgrading");
-
-    btn5 = new QPushButton();
+    QPushButton* btn5 = new QPushButton();
     btn5->setIcon(QIcon(DRAHALSAKHT));
     btn5->setIconSize(QSize(65, 65));
     btn5->setToolTip("under constraction");
-
-    btn6 = new QPushButton();
+    QPushButton* btn6 = new QPushButton();
     btn6->setIcon(QIcon(SAKHTAN));
     btn6->setIconSize(QSize(65, 65));
     btn6->setToolTip("make building");
 
     if (myFarm->myAvi.getisbuildingmaking() && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_building() >= 3)) {
         myFarm->myAvi.setisbuildingmade(true);
-        myFarm->myAvi.set_start_day_of_building(2147483640);
+        myFarm->myAvi.get_start_day_of_building(2147483640);
         myFarm->myAvi.setisbuildingmaking(false);
     }
     else if (!myFarm->myAvi.getisbuildingmade() && myFarm->myAvi.getisbuildingmaking()) {
@@ -68,7 +64,10 @@ Aviculture::Aviculture(QWidget* parent, Farm* _Myfarm)
         Layout->addWidget(btn4);
     }
 
-    setLayout(Layout);
+  //  setLayout(Layout);
+
+    wdg->setLayout(Layout);
+    wdg->show();
 
     connect(btn1, SIGNAL(clicked()), this, SLOT(status()));
     connect(btn2, SIGNAL(clicked()), this, SLOT(feeding()));
