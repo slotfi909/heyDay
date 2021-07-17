@@ -23,12 +23,12 @@ Sheepcote_back::Sheepcote_back(int _shenaseP) {
 
 	std::ifstream fin;
 	std::ofstream fout;
-	fin.open("Sheepcote.txt");
+	fin.open("Sheepcote.txt", std::ios::in);
 	if (!fin) {
 		fin.close();
 		fout.open("Sheepcote.txt");
 		fout.close();
-		fin.open("Sheepcote.txt", std::ios::app);
+		fin.open("Sheepcote.txt", std::ios::in);
 	}
 	bool find = 1;
 	fin.seekg(0, std::ios::end);

@@ -23,12 +23,12 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 	
 	std::ifstream fin;
 	std::ofstream fout;
-	fin.open("Dairyfarm.txt");
+	fin.open("Dairyfarm.txt", std::ios::in);
 	if (!fin) {
 		fin.close();
 		fout.open("Dairyfarm.txt");
 		fout.close();
-		fin.open("Dairyfarm.txt", std::ios::app);
+		fin.open("Dairyfarm.txt", std::ios::in);
 	}
 	bool find = 1;
 	fin.seekg(0, std::ios::end);

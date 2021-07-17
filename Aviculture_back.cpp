@@ -25,7 +25,7 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 
 	std::ifstream fin;
 	std::ofstream fout;
-	fin.open("Aviculture.txt");
+	fin.open("Aviculture.txt", std::ios::in);
 	if (!fin) {
 		fin.close();
 		fout.open("Aviculture.txt");
