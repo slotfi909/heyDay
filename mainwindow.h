@@ -70,6 +70,7 @@ private:
     Sheepcote *Sh;
     Dairyfarm *Da;
     QThread *Qt;
+    QThread *Qt2;
     scoreboard *sc;
     wheatland2 *wh;
     DialogAlfalfaField *Alf;
