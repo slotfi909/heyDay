@@ -18,7 +18,7 @@ store::~store()
 }
 
 void store::slotToSell(int kodom,int tedad){
-
+    myfarm->mymutex.lock();
     if(kodom==1){
 
         if(myfarm->mySil.addWheat(-tedad)){
@@ -122,12 +122,13 @@ void store::slotToSell(int kodom,int tedad){
             }
     }
 
-
+   myfarm->mymutex.unlock();
 
 
 
 }
 void store::slotToBuy(int kodom,int tedad){
+    myfarm->mymutex.lock();
     //tavabe check kamel shodan upgrade
      if ((myfarm->myAvi.getupgrading()) && (myfarm->owner.getDay() - myfarm->myAvi.get_start_day_of_upgrading()) >= 3) {
         myfarm->myAvi.setcapacity(myfarm->myAvi.getcapacity() * 2);
@@ -234,6 +235,7 @@ if ((myfarm->myShe.getupgrading()) && (myfarm->owner.getDay() - myfarm->myShe.ge
             QMessageBox::information(this,"success","BUY successfully");
             }
     }
+    myfarm->mymutex.unlock();
 }
 
 //nail
@@ -258,6 +260,7 @@ void store::on_pushButton_clicked()
 
 void store::on_pushButton_3_clicked()
 {
+    myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=2){
     ge=new getAmount(this,15,20,myfarm->owner.getCoin(),myfarm->myAvi.getcurrent(),myfarm->myAvi.getcapacity(),3);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
@@ -266,11 +269,13 @@ void store::on_pushButton_3_clicked()
     }else {
          QMessageBox::information(this,"ERROR","YOU need level 2");
     }
+    myfarm->mymutex.unlock();
 }
 
 
 void store::on_pushButton_4_clicked()
 {
+    myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=3){
     ge=new getAmount(this,4,6,myfarm->owner.getCoin(),myfarm->mySil.getNumWheat(),myfarm->mySto.getCapacity(),2);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
@@ -279,11 +284,13 @@ void store::on_pushButton_4_clicked()
     }else {
         QMessageBox::information(this,"ERROR","YOU need level 3");
     }
+    myfarm->mymutex.unlock();
 }
 
 
 void store::on_pushButton_5_clicked()
 {
+    myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=4){
     ge=new getAmount(this,50,70,myfarm->owner.getCoin(),myfarm->myDai.getcurrent(),myfarm->myDai.getcapacity(),5);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
@@ -292,11 +299,13 @@ void store::on_pushButton_5_clicked()
     }else {
         QMessageBox::information(this,"ERROR","YOU need level 4");
     }
+    myfarm->mymutex.unlock();
 }
 
 
 void store::on_pushButton_6_clicked()
 {
+    myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=2){
     ge=new getAmount(this,8,0,myfarm->owner.getCoin(),myfarm->mySto.getEgg(),myfarm->mySto.getCapacity(),4);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
@@ -305,11 +314,13 @@ void store::on_pushButton_6_clicked()
     }else{
     QMessageBox::information(this,"ERROR","YOU need level 2");
     }
+    myfarm->mymutex.unlock();
 }
 
 
 void store::on_pushButton_7_clicked()
 {
+    myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=6){
     ge=new getAmount(this,70,80,myfarm->owner.getCoin(),myfarm->myShe.getcurrent(),myfarm->myShe.getcapacity(),7);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
@@ -319,12 +330,13 @@ void store::on_pushButton_7_clicked()
          QMessageBox::information(this,"ERROR","YOU need level 7");
     }
 
-
+    myfarm->mymutex.unlock();
 }
 
 
 void store::on_pushButton_8_clicked()
 {
+    myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=4){
     ge=new getAmount(this,12,0,myfarm->owner.getCoin(),myfarm->mySto.getMilk(),myfarm->mySto.getCapacity(),6);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
@@ -333,6 +345,7 @@ void store::on_pushButton_8_clicked()
     }else {
          QMessageBox::information(this,"ERROR","YOU need level 4");
     }
+    myfarm->mymutex.unlock();
 }
 
 
@@ -347,6 +360,7 @@ void store::on_pushButton_9_clicked()
 
 void store::on_pushButton_10_clicked()
 {
+    myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=6){
     ge=new getAmount(this,23,0,myfarm->owner.getCoin(),myfarm->mySto.getFleece(),myfarm->mySto.getCapacity(),8);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
@@ -355,6 +369,7 @@ void store::on_pushButton_10_clicked()
     }else {
      QMessageBox::information(this,"ERROR","YOU need level 7");
     }
+    myfarm->mymutex.lock();
 }
 
 

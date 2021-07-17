@@ -29,6 +29,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="capacity">
+     <property name="text">
+      <string>capacity</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="label">
      <property name="text">
       <string>how much</string>
