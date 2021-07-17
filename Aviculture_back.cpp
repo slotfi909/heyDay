@@ -87,7 +87,7 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 }
 
 Aviculture_back::~Aviculture_back() {
-    //Update_file();
+	Update_file();
 }
 
 void Aviculture_back::setcurrent(int _current) { current = _current; }
@@ -221,13 +221,13 @@ void Aviculture_back::Update_file() {
 		int level;
 		int start_day_of_upgrading;
 		int start_day_of_produce;
-		int start_day_of_building;//
 		int shenaseP;
 		bool isfed;
 		bool havecrop;
 		bool upgrading;
 		bool isbuildingmade;//
 		bool isbuildingmaking;//
+		int start_day_of_building;//
 	};
 
 
