@@ -6,12 +6,15 @@
 #include <QPixmap>
 #include "scoreboard.h"
 #include "farm.h"
-#include "exthread.h"
 #include "Aviculture.h"
 #include "Sheepcote.h"
 #include "Dairyfarm.h"
 #include "QProgressBar"
-//#include "wheatland.h"
+#include "wheatland2.h"
+#include "dialogalfalfafield.h"
+#include "dialogsilo.h"
+#include "dialogstorage.h"
+#include "store.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -65,12 +68,13 @@ private:
     Aviculture *Avi;
     Sheepcote *Sh;
     Dairyfarm *Da;
-    //Exthread Ex;
     QThread *Qt;
     scoreboard *sc;
-    //wheatland *wh;
-
-
+    wheatland2 *wh;
+    DialogAlfalfaField *Alf;
+    DialogSilo * Sil;
+    DialogStorage * sto;
+    store * stor;
 
 };
 #endif // MAINWINDOW_H

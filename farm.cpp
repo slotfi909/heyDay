@@ -1,6 +1,6 @@
 #include "farm.h"
 
-Farm::Farm(int shenase):owner(shenase),myAvi(shenase),myDai(shenase),myShe(shenase),mySil(shenase),mySto(shenase)
+Farm::Farm(int shenase):owner(shenase),myAvi(shenase),myDai(shenase),myShe(shenase),mySil(shenase),mySto(shenase),myWhe(shenase),myAlf(shenase)
 {
 
 

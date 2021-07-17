@@ -3,8 +3,8 @@
 #include <math.h>
 #include <stdbool.h>
 #include <fstream>
-
-using namespace std;
+#pragma once
+//using namespace std;
 
 class storage1{
 

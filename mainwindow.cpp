@@ -139,50 +139,56 @@ void MainWindow::showCoin()
 void MainWindow::on_pushButton_3_clicked()
 {
     
-            myfarm->mymutex.lock();
-            //
-
-            myfarm->owner.setDay(myfarm->owner.getDay()+1);
-            L1->setText("day : "+QString::number(myfarm->owner.getDay()));
-            myfarm->owner.changeExp(1);
-            myfarm->owner.changeLevel();
-        myfarm->mySto.addMilk(myfarm->read_milk(myfarm->owner.getShenaseP(),myfarm->owner.getDay()));
-            t->showCoin();
-           t->showLevel();
-            t->showXp();
-             //
-            myfarm->mymutex.unlock();
+  stor=new store(this,&myfarm);
+  stor->show();
 
 }
 
 //next day button(AmirAli)
 void MainWindow::on_pushButton_2_clicked()
 {
+    myfarm.mymutex.lock();
+    //
 
+    myfarm.owner.setDay(myfarm.owner.getDay()+1);
+    ui->label_5->setText("day : "+QString::number(myfarm.owner.getDay()));
+    myfarm.owner.changeExp(1);
+    myfarm.owner.changeLevel();
+myfarm.mySto.addMilk(myfarm.read_milk(myfarm.owner.getShenaseP(),myfarm.owner.getDay()));
+    showCoin();
+   showLevel();
+    showXp();
+     //
+    myfarm.mymutex.unlock();
 }
 
 //silo button (Soroosh)
 void MainWindow::on_silo_clicked()
 {
+    Sil = new DialogSilo(this,&myfarm);
+    Sil->show();
 
 }
 
 //garner button(Soroosh)
 void MainWindow::on_garner_clicked()
 {
+    sto=new DialogStorage(this,&myfarm);
+    sto->show();
 
 }
 
 //alfalfa land(Soroosh)
 void MainWindow::on_alfalfaLand_clicked()
 {
+    Alf = new DialogAlfalfaField(this,&myfarm);
 
 }
 
 //Wheatland (Pouya)
 void MainWindow::on_WheatLand_clicked()
 {
-    wh = new wheatland;
+    wh = new wheatland2(this,&myfarm);
     wh->show();
 }
 

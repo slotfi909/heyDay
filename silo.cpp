@@ -15,14 +15,14 @@ silo::silo(int shenaseP){
 
   temp A;
 
-  ifstream fin;
-  ofstream fout;
+  std::ifstream fin;
+  std::ofstream fout;
   fin.open("silo.txt");
   if (!fin) {
     fin.close();
     fout.open("silo.txt");
     fout.close();
-    fin.open("silo.txt", ios::app);
+    fin.open("silo.txt", std::ios::app);
   }
   bool isFirst = 1;
   while (!fin.eof()) {/////////////////////taghir dar hame
@@ -53,7 +53,7 @@ silo::silo(int shenaseP){
       A.isBeingUpgraded=0;
             A.shenaseP=shenaseP;
 
-    fout.open("silo.txt",ios::app);
+    fout.open("silo.txt",std::ios::app);
     fout.write((char*)&A, sizeof(temp));
     fout.close();
   }
@@ -83,15 +83,15 @@ else
 
     temp p;
 
-    ofstream outfile;//for writing in new file.
-    ifstream infile;//for reading.
+    std::ofstream outfile;//for writing in new file.
+    std::ifstream infile;//for reading.
 
-    infile.open("silo.txt", ios::in);
+    infile.open("silo.txt", std::ios::in);
     if (infile.is_open()) {
-        outfile.open("silo-temp.txt", ios::out);//make file.
-        infile.seekg(0, ios::end);
+        outfile.open("silo-temp.txt", std::ios::out);//make file.
+        infile.seekg(0, std::ios::end);
         int size = infile.tellg();
-        infile.seekg(0, ios_base::beg);
+        infile.seekg(0, std::ios_base::beg);
         while (infile.tellg() < size) {
             infile.read((char*)&p, sizeof(p));
             if (shenaseP == p.shenaseP) {

@@ -130,25 +130,25 @@ void store::slotToSell(int kodom,int tedad){
 }
 void store::slotToBuy(int kodom,int tedad){
     //tavabe check kamel shodan upgrade
-     if ((myFarm->myAvi.getupgrading()) && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading()) >= 3) {
-        myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
-        myFarm->myAvi.set_start_day_of_upgrading(2147483640);
-        myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);
-        myFarm->myAvi.setupgrading(false);
+     if ((myfarm->myAvi.getupgrading()) && (myfarm->owner.getDay() - myfarm->myAvi.get_start_day_of_upgrading()) >= 3) {
+        myfarm->myAvi.setcapacity(myfarm->myAvi.getcapacity() * 2);
+        myfarm->myAvi.set_start_day_of_upgrading(2147483640);
+        myfarm->myAvi.setlevel(myfarm->myAvi.getlevel() + 1);
+        myfarm->myAvi.setupgrading(false);
     }
 
- if ((myFarm->myDai.getupgrading()) && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading()) >= 5) {
-        myFarm->myDai.setcapacity(myFarm->myDai.getcapacity() * 2);
-        myFarm->myDai.set_start_day_of_upgrading(2147483640);
-        myFarm->myDai.setlevel(myFarm->myDai.getlevel() + 1);
-        myFarm->myDai.setupgrading(false);
+ if ((myfarm->myDai.getupgrading()) && (myfarm->owner.getDay() - myfarm->myDai.get_start_day_of_upgrading()) >= 5) {
+        myfarm->myDai.setcapacity(myfarm->myDai.getcapacity() * 2);
+        myfarm->myDai.set_start_day_of_upgrading(2147483640);
+        myfarm->myDai.setlevel(myfarm->myDai.getlevel() + 1);
+        myfarm->myDai.setupgrading(false);
     }
 
-if ((myFarm->myShe.getupgrading()) && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading()) >= 9) {
-        myFarm->myShe.setcapacity(myFarm->myShe.getcapacity() * 2);
-        myFarm->myShe.set_start_day_of_upgrading(2147483640);
-        myFarm->myShe.setlevel(myFarm->myShe.getlevel() + 1);
-        myFarm->myShe.setupgrading(false);
+if ((myfarm->myShe.getupgrading()) && (myfarm->owner.getDay() - myfarm->myShe.get_start_day_of_upgrading()) >= 9) {
+        myfarm->myShe.setcapacity(myfarm->myShe.getcapacity() * 2);
+        myfarm->myShe.set_start_day_of_upgrading(2147483640);
+        myfarm->myShe.setlevel(myfarm->myShe.getlevel() + 1);
+        myfarm->myShe.setupgrading(false);
     }
     //...........
     if(kodom==1){
