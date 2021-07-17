@@ -117,6 +117,7 @@ MainWindow::~MainWindow()
 {
 
     Qt->terminate();
+    Qt2->terminate();
     myfarm.owner.Update_file();
     myfarm.myAlf.update_file();
     myfarm.myAvi.Update_file();
