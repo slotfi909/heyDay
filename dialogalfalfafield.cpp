@@ -34,21 +34,24 @@ int hAlf=ui->pushButton->height();
     //upgrade icon
     ui->pushButton->setIcon(QIcon("C:/HeydayLogo/Logo/upgrade2.png"));
     ui->pushButton->setIconSize(QSize(wAlf,hAlf));
+    ui->pushButton->setToolTip("upgrade");
 
 
     //harvest icon
     ui->pushButton_2->setIcon(QIcon("C:/HeydayLogo/Logo/harvest.png"));
     ui->pushButton_2->setIconSize(QSize(wAlf,hAlf));
+    ui->pushButton_2->setToolTip("harvest");
 
 
     //planting icon
     ui->pushButton_3->setIcon(QIcon("C:/HeydayLogo/Logo/plant.png"));
     ui->pushButton_3->setIconSize(QSize(wAlf,hAlf));
+    ui->pushButton_3->setToolTip("plant");
 
     //plow icon
-    ui->pushButton_4->setIcon(QIcon("C:/HeydayLogo/Logo/plow.jpg"));
+    ui->pushButton_4->setIcon(QIcon("C:/HeydayLogo/Logo/plow1.png"));
     ui->pushButton_4->setIconSize(QSize(wAlf,hAlf));
-
+    ui->pushButton_4->setToolTip("plow");
     }
 
 

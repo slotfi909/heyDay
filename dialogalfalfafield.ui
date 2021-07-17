@@ -84,6 +84,9 @@
      <height>13</height>
     </rect>
    </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>plating:</string>
    </property>
@@ -94,8 +97,11 @@
      <x>10</x>
      <y>263</y>
      <width>51</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>upgrading:</string>
@@ -120,7 +126,7 @@
      <x>280</x>
      <y>10</y>
      <width>118</width>
-     <height>23</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="value">
@@ -133,8 +139,11 @@
      <x>210</x>
      <y>10</y>
      <width>47</width>
-     <height>21</height>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>plowing:</string>
@@ -150,7 +159,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>plow</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
@@ -163,7 +172,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>upgrade</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_2">
@@ -176,7 +185,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>harvest</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">
@@ -189,7 +198,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>plant</string>
+    <string/>
    </property>
   </widget>
  </widget>

@@ -22,6 +22,9 @@
      <height>13</height>
     </rect>
    </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>level:</string>
    </property>
@@ -47,6 +50,9 @@
      <width>47</width>
      <height>13</height>
     </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>capacity:</string>
