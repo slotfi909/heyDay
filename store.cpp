@@ -23,7 +23,7 @@ void store::slotToSell(int kodom,int tedad){
 
         if(myfarm->mySil.addWheat(-tedad)){
             myfarm->owner.changeCoin(tedad*2);
-            //myfarm->owner.changeExp(1);
+            myfarm->owner.changeExp(1);
             QMessageBox::information(this,"success","SELL successfully");
     }
     }else if(kodom==2){
@@ -31,7 +31,7 @@ void store::slotToSell(int kodom,int tedad){
 
         if(myfarm->mySto.addAlfalfa(-tedad)){
             myfarm->owner.changeCoin(tedad*4);
-            //myfarm->owner.changeExp(2);
+            myfarm->owner.changeExp(2);
             QMessageBox::information(this,"success","SELL successfully");
     }
         }else if (kodom==3){
@@ -44,7 +44,7 @@ void store::slotToSell(int kodom,int tedad){
             QMessageBox::information(this,"ERROR","Products have not been collected");
           if(x==1){
                myfarm->owner.changeCoin(tedad*15);
-            //myfarm->owner.changeExp(5);
+            myfarm->owner.changeExp(5);
             QMessageBox::information(this,"success","SELL successfully");
             }
         }else if(kodom==4){
@@ -53,7 +53,7 @@ void store::slotToSell(int kodom,int tedad){
 
           if(x==1){
                myfarm->owner.changeCoin(tedad*8);
-            //myfarm->owner.changeExp(3);
+            myfarm->owner.changeExp(3);
             QMessageBox::information(this,"success","SELL successfully");
             }
       //QMessageBox::information(this,"ERROR","You cant buy eggs from shop");
@@ -68,7 +68,7 @@ void store::slotToSell(int kodom,int tedad){
             QMessageBox::information(this,"ERROR","Products have not been collected");
           if(x==1){
                myfarm->owner.changeCoin(tedad*50);
-            //myfarm->owner.changeExp(10);
+            myfarm->owner.changeExp(10);
             QMessageBox::information(this,"success","SELL successfully");
             }
     }
@@ -78,7 +78,7 @@ void store::slotToSell(int kodom,int tedad){
 
           if(x==1){
                myfarm->owner.changeCoin(tedad*12);
-            //myfarm->owner.changeExp(5);
+            myfarm->owner.changeExp(5);
             QMessageBox::information(this,"success","SELL successfully");
             }
 
@@ -93,7 +93,7 @@ void store::slotToSell(int kodom,int tedad){
             QMessageBox::information(this,"ERROR","Products have not been collected");
           if(x==1){
                myfarm->owner.changeCoin(tedad*70);
-           // myfarm->owner.changeExp(15);
+            myfarm->owner.changeExp(15);
             QMessageBox::information(this,"success","SELL successfully");
             }
     }else if(kodom==8){
@@ -109,7 +109,7 @@ void store::slotToSell(int kodom,int tedad){
 
           if(x==1){
                myfarm->owner.changeCoin(tedad*20);
-           // myfarm->owner.changeExp(4);
+            myfarm->owner.changeExp(4);
             QMessageBox::information(this,"success","SELL successfully");
             }
     }else if(kodom==10){
@@ -117,7 +117,7 @@ void store::slotToSell(int kodom,int tedad){
 
           if(x==1){
                myfarm->owner.changeCoin(tedad*30);
-            //myfarm->owner.changeExp(8);
+            myfarm->owner.changeExp(8);
             QMessageBox::information(this,"success","SELL successfully");
             }
     }
@@ -149,7 +149,7 @@ if ((myfarm->myShe.getupgrading()) && (myfarm->owner.getDay() - myfarm->myShe.ge
         myfarm->myShe.setlevel(myfarm->myShe.getlevel() + 1);
         myfarm->myShe.setupgrading(false);
     }
-    //...........
+    //...............
     if(kodom==1){
 
         if(myfarm->mySil.addWheat(tedad)){
@@ -239,7 +239,7 @@ if ((myfarm->myShe.getupgrading()) && (myfarm->owner.getDay() - myfarm->myShe.ge
 //nail
 void store::on_pushButton_2_clicked()
 {
-    ge=new getAmount(this,20,30,myfarm->owner.getCoin(),myfarm->mySto.getNail(),9);
+    ge=new getAmount(this,20,30,myfarm->owner.getCoin(),myfarm->mySto.getNail(),myfarm->mySto.getCapacity(),9);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
@@ -249,7 +249,7 @@ void store::on_pushButton_2_clicked()
 
 void store::on_pushButton_clicked()
 {
-    ge=new getAmount(this,2,3,myfarm->owner.getCoin(),myfarm->mySil.getNumWheat(),1);
+    ge=new getAmount(this,2,3,myfarm->owner.getCoin(),myfarm->mySil.getNumWheat(),myfarm->mySil.getCapaticy(),1);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
@@ -259,7 +259,7 @@ void store::on_pushButton_clicked()
 void store::on_pushButton_3_clicked()
 {
     if(myfarm->owner.getLevel()>=2){
-    ge=new getAmount(this,15,20,myfarm->owner.getCoin(),myfarm->myAvi.getcurrent(),3);
+    ge=new getAmount(this,15,20,myfarm->owner.getCoin(),myfarm->myAvi.getcurrent(),myfarm->myAvi.getcapacity(),3);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
@@ -272,7 +272,7 @@ void store::on_pushButton_3_clicked()
 void store::on_pushButton_4_clicked()
 {
     if(myfarm->owner.getLevel()>=3){
-    ge=new getAmount(this,4,6,myfarm->owner.getCoin(),myfarm->mySil.getNumWheat(),2);
+    ge=new getAmount(this,4,6,myfarm->owner.getCoin(),myfarm->mySil.getNumWheat(),myfarm->mySto.getCapacity(),2);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
@@ -285,7 +285,7 @@ void store::on_pushButton_4_clicked()
 void store::on_pushButton_5_clicked()
 {
     if(myfarm->owner.getLevel()>=4){
-    ge=new getAmount(this,50,70,myfarm->owner.getCoin(),myfarm->myDai.getcurrent(),5);
+    ge=new getAmount(this,50,70,myfarm->owner.getCoin(),myfarm->myDai.getcurrent(),myfarm->myDai.getcapacity(),5);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
@@ -298,7 +298,7 @@ void store::on_pushButton_5_clicked()
 void store::on_pushButton_6_clicked()
 {
     if(myfarm->owner.getLevel()>=2){
-    ge=new getAmount(this,8,0,myfarm->owner.getCoin(),myfarm->mySto.getEgg(),4);
+    ge=new getAmount(this,8,0,myfarm->owner.getCoin(),myfarm->mySto.getEgg(),myfarm->mySto.getCapacity(),4);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
@@ -311,7 +311,7 @@ void store::on_pushButton_6_clicked()
 void store::on_pushButton_7_clicked()
 {
     if(myfarm->owner.getLevel()>=6){
-    ge=new getAmount(this,70,80,myfarm->owner.getCoin(),myfarm->myShe.getcurrent(),7);
+    ge=new getAmount(this,70,80,myfarm->owner.getCoin(),myfarm->myShe.getcurrent(),myfarm->myShe.getcapacity(),7);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
@@ -326,7 +326,7 @@ void store::on_pushButton_7_clicked()
 void store::on_pushButton_8_clicked()
 {
     if(myfarm->owner.getLevel()>=4){
-    ge=new getAmount(this,12,0,myfarm->owner.getCoin(),myfarm->mySto.getMilk(),6);
+    ge=new getAmount(this,12,0,myfarm->owner.getCoin(),myfarm->mySto.getMilk(),myfarm->mySto.getCapacity(),6);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
@@ -338,7 +338,7 @@ void store::on_pushButton_8_clicked()
 
 void store::on_pushButton_9_clicked()
 {
-    ge=new getAmount(this,30,50,myfarm->owner.getCoin(),myfarm->mySto.getShovel(),10);
+    ge=new getAmount(this,30,50,myfarm->owner.getCoin(),myfarm->mySto.getShovel(),myfarm->mySto.getCapacity(),10);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
@@ -348,7 +348,7 @@ void store::on_pushButton_9_clicked()
 void store::on_pushButton_10_clicked()
 {
     if(myfarm->owner.getLevel()>=6){
-    ge=new getAmount(this,23,0,myfarm->owner.getCoin(),myfarm->mySto.getFleece(),8);
+    ge=new getAmount(this,23,0,myfarm->owner.getCoin(),myfarm->mySto.getFleece(),myfarm->mySto.getCapacity(),8);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
