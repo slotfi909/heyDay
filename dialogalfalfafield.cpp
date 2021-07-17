@@ -2,9 +2,9 @@
 #include "ui_dialogalfalfafield.h"
 #include "QMessageBox"
 
-int tmpArea=4,tmpId=1;
-bool tmpIsPlowed=false,tmpIsBeingUpgraded=0,tmpIsBeingPlowed=0,tmpIsBeingPlanted=0;
-unsigned int tmpPlowStartTime=0,tmpUpgradeStartTime=0,tmpPlantStartTime=0;
+int tmpArea2=4,tmpId2=1;
+bool tmpIsPlowed2=false,tmpIsBeingUpgraded2=0,tmpIsBeingPlowed2=0,tmpIsBeingPlanted2=0;
+unsigned int tmpPlowStartTime2=0,tmpUpgradeStartTime2=0,tmpPlantStartTime2=0;
 
 DialogAlfalfaField::DialogAlfalfaField(QWidget *parent,Farm *_myfarm) :
     QDialog(parent),
@@ -14,22 +14,22 @@ DialogAlfalfaField::DialogAlfalfaField(QWidget *parent,Farm *_myfarm) :
     //for getting day of player
     myfarm = _myfarm;
     this->setWindowTitle("alfalfa Field");
-    std::ifstream alfalfaField1("alfalfaField.txt");
-    std::ofstream alfalfaField2("alfalfaField2.txt");
+    //std::ifstream alfalfaField1("alfalfaField.txt");
+   // std::ofstream alfalfaField2("alfalfaField2.txt");
     //order in file
 //    id--area--isplowed--isbeingplowed--isbeingupgraded--isbeingplanted--plowstarttime--upgradestarttime--plantstarttime
-    if ( alfalfaField1.peek() == std::ifstream::traits_type::eof() )
+   /* if ( alfalfaField1.peek() == std::ifstream::traits_type::eof() )
      {
           //file is empty
-          alfalfaField2 << tmpId << ' ' << tmpIsPlowed << ' ' << tmpIsBeingPlowed<< ' ' << tmpIsBeingUpgraded<< ' ' << tmpIsBeingPlanted <<' '<<tmpPlowStartTime<<' '<<tmpUpgradeStartTime<<' '<<tmpPlantStartTime<< '\n';
-          myfarm->myAlf.area= tmpArea ;
-          myfarm->myAlf.isPlowed= tmpIsPlowed ;
-          myfarm->myAlf.isBeingPlowed= tmpIsBeingPlowed ;
-          myfarm->myAlf.isBeingUpgraded= tmpIsBeingUpgraded ;
-          myfarm->myAlf.isBeingPlanted= tmpIsBeingPlanted ;
-          myfarm->myAlf.plowStartTime= tmpPlowStartTime ;
-          myfarm->myAlf.upgradeStartTime= tmpUpgradeStartTime ;
-          myfarm->myAlf.plantStartTime= tmpPlantStartTime ;
+          alfalfaField2 << tmpId2 << ' ' << tmpIsPlowed2 << ' ' << tmpIsBeingPlowed2<< ' ' << tmpIsBeingUpgraded2<< ' ' << tmpIsBeingPlanted2 <<' '<<tmpPlowStartTime2<<' '<<tmpUpgradeStartTime2<<' '<<tmpPlantStartTime2<< '\n';
+          myfarm->myAlf.area= tmpArea2 ;
+          myfarm->myAlf.isPlowed= tmpIsPlowed2 ;
+          myfarm->myAlf.isBeingPlowed= tmpIsBeingPlowed2 ;
+          myfarm->myAlf.isBeingUpgraded= tmpIsBeingUpgraded2 ;
+          myfarm->myAlf.isBeingPlanted= tmpIsBeingPlanted2 ;
+          myfarm->myAlf.plowStartTime= tmpPlowStartTime2 ;
+          myfarm->myAlf.upgradeStartTime= tmpUpgradeStartTime2 ;
+          myfarm->myAlf.plantStartTime= tmpPlantStartTime2 ;
 
 
           alfalfaField2.close();
@@ -40,18 +40,18 @@ DialogAlfalfaField::DialogAlfalfaField(QWidget *parent,Farm *_myfarm) :
 
     else {
           //file is not empty
-          while (alfalfaField1>>tmpId>>tmpIsPlowed>>tmpIsBeingPlowed>>tmpIsBeingUpgraded>>tmpIsBeingPlanted>>tmpPlowStartTime>>tmpUpgradeStartTime>>tmpPlantStartTime )
+          while (alfalfaField1>>tmpId2>>tmpIsPlowed2>>tmpIsBeingPlowed2>>tmpIsBeingUpgraded2>>tmpIsBeingPlanted2>>tmpPlowStartTime2>>tmpUpgradeStartTime2>>tmpPlantStartTime2 )
            {
-               if (tmpId == myfarm->owner.getShenaseP())
+               if (tmpId2 == myfarm->owner.getShenaseP())
                {
-                   myfarm->myAlf.area= tmpArea ;
-                   myfarm->myAlf.isPlowed= tmpIsPlowed ;
-                   myfarm->myAlf.isBeingPlowed= tmpIsBeingPlowed ;
-                   myfarm->myAlf.isBeingUpgraded= tmpIsBeingUpgraded ;
-                   myfarm->myAlf.isBeingPlanted= tmpIsBeingPlanted ;
-                   myfarm->myAlf.plowStartTime= tmpPlowStartTime ;
-                   myfarm->myAlf.upgradeStartTime= tmpUpgradeStartTime ;
-                   myfarm->myAlf.plantStartTime= tmpPlantStartTime ;
+                   myfarm->myAlf.area= tmpArea2 ;
+                   myfarm->myAlf.isPlowed= tmpIsPlowed2 ;
+                   myfarm->myAlf.isBeingPlowed= tmpIsBeingPlowed2 ;
+                   myfarm->myAlf.isBeingUpgraded= tmpIsBeingUpgraded2 ;
+                   myfarm->myAlf.isBeingPlanted= tmpIsBeingPlanted2 ;
+                   myfarm->myAlf.plowStartTime= tmpPlowStartTime2 ;
+                   myfarm->myAlf.upgradeStartTime= tmpUpgradeStartTime2 ;
+                   myfarm->myAlf.plantStartTime= tmpPlantStartTime2 ;
 
                  break;
                }
@@ -59,7 +59,7 @@ DialogAlfalfaField::DialogAlfalfaField(QWidget *parent,Farm *_myfarm) :
             alfalfaField2.close();
             remove("alfalfaField2.txt");
           }
-       }
+       }*/
 
     //ui progressBar setup
       if(myfarm->myAlf.isBeingPlanted == false){
@@ -86,7 +86,7 @@ DialogAlfalfaField::~DialogAlfalfaField()
 void DialogAlfalfaField::on_pushButton_3_clicked()//plant
 {
     if(myfarm->myAlf.isBeingPlanted==false){
- if(myfarm->mySto.getAlfalfa()>tmpArea){
+ if(myfarm->mySto.getAlfalfa()>tmpArea2){
   myfarm->myAlf.plantStartTime=myfarm->owner.getDay();
    myfarm->myAlf.isBeingPlanted=true;
     QMessageBox::critical(this,"OK","the planting has begun");

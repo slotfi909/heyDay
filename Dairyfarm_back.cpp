@@ -84,7 +84,7 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 	}
 }
 Dairyfarm_back::~Dairyfarm_back() {
-	Update_file();
+    //Update_file();
 }
 
 void Dairyfarm_back::setcurrent(int _current) { current = _current; }

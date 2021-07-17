@@ -5,8 +5,8 @@
 #include <math.h>
 #include "QMessageBox"
 
-int tmpId=1,tmpCapacity=10,tmpNumWheat=1,tmpLevel=1,tmpUpgradeStartTime=0;
-        bool tmpIsBeingUpgraded=0;
+int tmpId1=1,tmpCapacity1=10,tmpNumWheat1=1,tmpLevel1=1,tmpUpgradeStartTime1=0;
+        bool tmpIsBeingUpgraded1=0;
 
 using namespace std;
 DialogSilo::DialogSilo(QWidget *parent,Farm *_myfarm) :
@@ -20,20 +20,20 @@ DialogSilo::DialogSilo(QWidget *parent,Farm *_myfarm) :
     myfarm = _myfarm;
     this->setWindowTitle("silo");
 
-    std::ifstream silo1("silo.txt");
-    std::ofstream silo2("silo2.txt");
+   // std::ifstream silo1("silo.txt");
+    //std::ofstream silo2("silo2.txt");
 
-    //tmpId--tmpCapacity--tmpNumWheat--tmpLevel--tmpUpgradeStartTime--isBeingUpgraded
-        if ( silo1.peek() == std::ifstream::traits_type::eof() )
+    //tmpId1--tmpCapacity1--tmpNumWheat1--tmpLevel1--tmpUpgradeStartTime1--isBeingUpgraded
+       /* if ( silo1.peek() == std::ifstream::traits_type::eof() )
          {
               //file is empty
-              silo2 << tmpId << ' ' << tmpCapacity << ' ' << tmpNumWheat<< ' ' << tmpLevel<< ' ' << tmpUpgradeStartTime <<' '<<tmpIsBeingUpgraded<<'\n';
+              silo2 << tmpId1 << ' ' << tmpCapacity1 << ' ' << tmpNumWheat1<< ' ' << tmpLevel1<< ' ' << tmpUpgradeStartTime1 <<' '<<tmpIsBeingUpgraded1<<'\n';
 
-              myfarm->mySil.capacity=tmpCapacity;
-              myfarm->mySil.numWheat=tmpNumWheat;
-              myfarm->mySil.level=tmpLevel;
-              myfarm->mySil.upgradeStartTime=tmpUpgradeStartTime;
-              myfarm->mySil.isBeingUpgraded=tmpIsBeingUpgraded;
+              myfarm->mySil.capacity=tmpCapacity1;
+              myfarm->mySil.numWheat=tmpNumWheat1;
+              myfarm->mySil.level=tmpLevel1;
+              myfarm->mySil.upgradeStartTime=tmpUpgradeStartTime1;
+              myfarm->mySil.isBeingUpgraded=tmpIsBeingUpgraded1;
 
 
               silo2.close();
@@ -44,16 +44,16 @@ DialogSilo::DialogSilo(QWidget *parent,Farm *_myfarm) :
 
         else {
               //file is not empty
-              while (silo1>>tmpId>>tmpCapacity>>tmpNumWheat>>tmpLevel>>tmpUpgradeStartTime>>tmpIsBeingUpgraded)
+              while (silo1>>tmpId1>>tmpCapacity1>>tmpNumWheat1>>tmpLevel1>>tmpUpgradeStartTime1>>tmpIsBeingUpgraded1)
                {
-                   if (tmpId == myfarm->owner.getShenaseP())
+                   if (tmpId1 == myfarm->owner.getShenaseP())
                    {
 
-                       myfarm->mySil.capacity=tmpCapacity;
-                       myfarm->mySil.numWheat=tmpNumWheat;
-                       myfarm->mySil.level=tmpLevel;
-                       myfarm->mySil.upgradeStartTime=tmpUpgradeStartTime;
-                       myfarm->mySil.isBeingUpgraded=tmpIsBeingUpgraded;
+                       myfarm->mySil.capacity=tmpCapacity1;
+                       myfarm->mySil.numWheat=tmpNumWheat1;
+                       myfarm->mySil.level=tmpLevel1;
+                       myfarm->mySil.upgradeStartTime=tmpUpgradeStartTime1;
+                       myfarm->mySil.isBeingUpgraded=tmpIsBeingUpgraded1;
 
 
 
@@ -63,7 +63,7 @@ DialogSilo::DialogSilo(QWidget *parent,Farm *_myfarm) :
                 silo2.close();
                 remove("silo2.txt");
               }
-           }
+           }*/
 
         ui->label_2->setText(QString::number(myfarm->mySil.level));
         ui->label_4->setText(QString::number(myfarm->mySil.capacity));

@@ -3,7 +3,7 @@
 #include "QMessageBox"
 #include "farm.h"
 
-int tmpId=1,tmpCapacity=10,tmpLevel=1,tmpNumNail=10,tmpNumAlfalfa=0,tmpNumShovel=1,tmpNumEgg=0,tmpNumMilk=0,tmpNumFleece=0,tmpUpgrafeStartTime=0;
+int tmpId3=1,tmpCapacity=10,tmpLevel=1,tmpNumNail=10,tmpNumAlfalfa=0,tmpNumShovel=1,tmpNumEgg=0,tmpNumMilk=0,tmpNumFleece=0,tmpUpgrafeStartTime=0;
 bool tmpIsBeingUpgraded=false;
 DialogStorage::~DialogStorage()
 {
@@ -19,15 +19,14 @@ DialogStorage::DialogStorage(QWidget *parent,Farm *_myfarm) :
     //for getting day of player
       myfarm = _myfarm;
       this->setWindowTitle("storage");
-      std::ifstream storage1("storage.txt");
-      std::ofstream storage2("storage2.txt");
+
       //order in file
       //tmpCapacity--tmpLevel--tmpNumNail--tmpNumAlfalfa--tmpNumShovel--tmpNumEgg--tmpNumMilk--tmpNumFleece--tmpUpgradeStartTime--isBeingUpgraded
 
-      if ( storage1.peek() == std::ifstream::traits_type::eof() )
+     /* if ( storage1.peek() == std::ifstream::traits_type::eof() )
           {
                //file is empty
-               storage2 << tmpId << ' ' << tmpLevel << ' ' << tmpNumNail<< ' ' << tmpNumAlfalfa<< ' ' << tmpNumShovel <<' '<<tmpNumEgg<<' '<<tmpNumMilk<<' '<<tmpNumFleece<<' '<<tmpUpgrafeStartTime<<' '<<tmpIsBeingUpgraded<< '\n';
+               storage2 << tmpId3 << ' ' << tmpLevel << ' ' << tmpNumNail<< ' ' << tmpNumAlfalfa<< ' ' << tmpNumShovel <<' '<<tmpNumEgg<<' '<<tmpNumMilk<<' '<<tmpNumFleece<<' '<<tmpUpgrafeStartTime<<' '<<tmpIsBeingUpgraded<< '\n';
 
                myfarm->mySto.level=tmpLevel;
                myfarm->mySto.numNail=tmpNumNail;
@@ -47,9 +46,9 @@ DialogStorage::DialogStorage(QWidget *parent,Farm *_myfarm) :
 
          else {
                //file is not empty
-               while (storage1>>tmpId>>tmpLevel>>tmpNumNail>>tmpNumAlfalfa>>tmpNumShovel>>tmpNumEgg>>tmpNumMilk>>tmpNumFleece>>tmpUpgrafeStartTime>>tmpIsBeingUpgraded )
+               while (storage1>>tmpId3>>tmpLevel>>tmpNumNail>>tmpNumAlfalfa>>tmpNumShovel>>tmpNumEgg>>tmpNumMilk>>tmpNumFleece>>tmpUpgrafeStartTime>>tmpIsBeingUpgraded )
                 {
-                    if (tmpId == myfarm->owner.getShenaseP())
+                    if (tmpId3 == myfarm->owner.getShenaseP())
                     {
                         myfarm->mySto.level=tmpLevel;
                         myfarm->mySto.numNail=tmpNumNail;
@@ -67,7 +66,7 @@ DialogStorage::DialogStorage(QWidget *parent,Farm *_myfarm) :
                  storage2.close();
                  remove("storage2.txt");
                }
-            }
+            }*/
       ui->label_2->setText(QString::number(myfarm->mySto.level));
       ui->label_4->setText(QString::number(myfarm->mySto.capacity));
       ui->label_6->setText(QString::number(myfarm->mySto.getShovel()));

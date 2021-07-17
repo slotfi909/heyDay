@@ -92,6 +92,14 @@ MainWindow::~MainWindow()
 
     Qt->terminate();
     myfarm.owner.Update_file();
+    myfarm.myAlf.update_file();
+    myfarm.myAvi.Update_file();
+    myfarm.myDai.Update_file();
+    myfarm.myShe.Update_file();
+    myfarm.mySil.update_file();
+    myfarm.mySto.update_file();
+    myfarm.myWhe.upDateFile();
+
     delete ui;
 }
 

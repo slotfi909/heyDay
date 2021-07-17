@@ -87,7 +87,7 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 }
 
 Aviculture_back::~Aviculture_back() {
-	Update_file();
+    //Update_file();
 }
 
 void Aviculture_back::setcurrent(int _current) { current = _current; }
