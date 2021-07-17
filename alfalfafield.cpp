@@ -24,10 +24,16 @@ alfalfaField::alfalfaField(int shenaseP){
     fin.close();
     fout.open("alfalfaField.txt");
     fout.close();
-    fin.open("alfalfaField.txt", std::ios::app);
+    fin.open("alfalfaField.txt", std::ios::in);
   }
   bool isFirst = 1;
-  while (!fin.eof()) {/////////////////////taghir dar hame
+  //////////////////////
+  fin.seekg(0,std::ios::end);
+    int size=fin.tellg();
+    fin.seekg(0,std::ios::beg);
+   while (size<fin.tellg()) {
+   /////////////////////
+       //  while (!fin.eof()) {/////////////////////taghir dar hame
     fin.read((char*)&A, sizeof(temp));
     if (A.shenaseP == shenaseP) {
 area=A.area;

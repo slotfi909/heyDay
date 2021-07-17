@@ -22,10 +22,16 @@ silo::silo(int shenaseP){
     fin.close();
     fout.open("silo.txt");
     fout.close();
-    fin.open("silo.txt", std::ios::app);
+    fin.open("silo.txt", std::ios::in);
   }
   bool isFirst = 1;
-  while (!fin.eof()) {/////////////////////taghir dar hame
+  /////////////////////////
+  fin.seekg(0,std::ios::end);
+    int size=fin.tellg();
+    fin.seekg(0,std::ios::beg);
+   while (size<fin.tellg()) {
+   //////////////////////////////
+//  while (!fin.eof()) {/////////////////////taghir dar hame
     fin.read((char*)&A, sizeof(temp));
     if (A.shenaseP == shenaseP) {
       numWheat=A.numWheat;
@@ -66,7 +72,7 @@ silo::silo(int shenaseP){
     int freeSpace=capacity-numWheat;
     if(addedWheatNumber<=freeSpace){
         numWheat+=addedWheatNumber;
-capacity++;
+
 return 1;
 }
     else
