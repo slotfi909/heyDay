@@ -41,7 +41,7 @@ Dairyfarm::Dairyfarm(QWidget* parent, Farm* _Myfarm)
 
     if (myFarm->myDai.getisbuildingmaking() && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_building() >= 5)) {
         myFarm->myDai.setisbuildingmade(true);
-        myFarm->myDai.get_start_day_of_building(2147483640);
+        myFarm->myDai.set_start_day_of_building(2147483640);
         myFarm->myDai.setisbuildingmaking(false);
     }
     else if (!myFarm->myDai.getisbuildingmade() && myFarm->myDai.getisbuildingmaking()) {
@@ -188,7 +188,7 @@ void Dairyfarm::sakhtan() {
         str = "At least 3 nail is required!";
     else if (myFarm->owner.getCoin() < 20)
         str = "At least 20 coin is required!";
-    else if (myFarm->owner.getShovel() < 1)
+    else if (myFarm->mySto.getShovel() < 1)
         str = "At least 1 shovel is required!";
     else {
         myFarm->myDai.setisbuildingmaking(true);

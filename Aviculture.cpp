@@ -41,7 +41,7 @@ Aviculture::Aviculture(QWidget* parent, Farm* _Myfarm)
 
     if (myFarm->myAvi.getisbuildingmaking() && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_building() >= 3)) {
         myFarm->myAvi.setisbuildingmade(true);
-        myFarm->myAvi.get_start_day_of_building(2147483640);
+        myFarm->myAvi.set_start_day_of_building(2147483640);
         myFarm->myAvi.setisbuildingmaking(false);
     }
     else if (!myFarm->myAvi.getisbuildingmade() && myFarm->myAvi.getisbuildingmaking()) {

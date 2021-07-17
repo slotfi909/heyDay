@@ -41,7 +41,7 @@ Sheepcote::Sheepcote(QWidget* parent, Farm* _Myfarm)
 
     if (myFarm->myShe.getisbuildingmaking() && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_building() >= 10)) {
         myFarm->myShe.setisbuildingmade(true);
-        myFarm->myShe.get_start_day_of_building(2147483640);
+        myFarm->myShe.set_start_day_of_building(2147483640);
         myFarm->myShe.setisbuildingmaking(false);
     }
     else if (!myFarm->myShe.getisbuildingmade() && myFarm->myShe.getisbuildingmaking()) {
@@ -196,7 +196,7 @@ void Sheepcote::sakhtan() {
         str = "At least 4 nail is required!";
     else if (myFarm->owner.getCoin() < 50)
         str = "At least 50 coin is required!";
-    else if (myFarm->owner.getShovel() < 2)
+    else if (myFarm->mySto.getShovel() < 2)
         str = "At least 2 shovel is required!";
     else {
         myFarm->myShe.setisbuildingmaking(true);
