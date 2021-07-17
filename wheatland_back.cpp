@@ -1,6 +1,6 @@
 #include "wheatland_back.h"
 
-int tmpId = 1, tmpArea = 5, tmpIsKeshting = 0, tmpAmountKeshting = 0, thisDay = 0, tmpday = 0, startDayFarming = 0;
+int tmpIdWh = 1, tmpAreaWh = 5, tmpIsKeshtingWh = 0, tmpAmountKeshtingWh = 0, thisDayWh = 0, tmpdayWh = 0, startDayFarmingWh = 0;
 
 wheatland_back::wheatland_back(int _id)
 {
@@ -8,16 +8,21 @@ wheatland_back::wheatland_back(int _id)
     //seting id of wheatland
     id = _id;
 
+
+    int flag = 0;
+
+
     std::ifstream wheat("wheat.txt");
-    std::ofstream wheat2("Wheat2.txt");
+    std::ofstream wheat2("wheat2.txt");
     if ( wheat.peek() == std::ifstream::traits_type::eof() )
     {
          //file is empty
-         wheat2 << id << ' ' << tmpArea << ' ' << tmpIsKeshting<< ' ' << tmpAmountKeshting<< ' ' << startDayFarming << '\n';
-         area = tmpArea;
+         flag = 1;
+         wheat2 << id << ' ' << tmpAreaWh << ' ' << tmpIsKeshtingWh<< ' ' << tmpAmountKeshtingWh<< ' ' << startDayFarmingWh << '\n';
+         area = tmpAreaWh;
          isKeshting = true;
          keshtAmount = 0;
-         startDayFarming = 0;
+         startDayFarmingWh = 0;
          wheat2.close();
          wheat.close();
          remove("wheat.txt");
@@ -25,35 +30,61 @@ wheatland_back::wheatland_back(int _id)
     }
     else {
        //file is not empty
-       while (wheat >> tmpId >> tmpArea >> tmpIsKeshting >> tmpAmountKeshting >> startDayFarming )
+       while (wheat >> tmpIdWh >> tmpAreaWh >> tmpIsKeshtingWh >> tmpAmountKeshtingWh >> startDayFarmingWh )
         {
-            if (tmpId == id)
+            if (tmpIdWh == id)
             {
-                area = tmpArea;
-                isKeshting = tmpIsKeshting;
-                keshtAmount = tmpAmountKeshting;
-                startDay = startDayFarming;
-              break;
+                flag = 1;
+                area = tmpAreaWh;
+                isKeshting = tmpIsKeshtingWh;
+                keshtAmount = tmpAmountKeshtingWh;
+                startDay = startDayFarmingWh;
+                break;
             }
-         wheat.close();
-         wheat2.close();
-         remove("wheat2.txt");
        }
+       wheat.close();
+       wheat2.close();
+       remove("wheat2.txt");
     }
+
+
+    //Add new user
+    if(flag == 0){
+        std::ifstream wheatAdd("wheat.txt");
+        std::ofstream wheat2Add("wheat2.txt");
+        while (wheatAdd >> tmpIdWh >> tmpAreaWh >> tmpIsKeshtingWh >> tmpAmountKeshtingWh >> startDayFarmingWh )
+         {
+             wheat2Add << tmpIdWh << ' ' << tmpAreaWh << ' '  << tmpIsKeshtingWh << ' ' << tmpAmountKeshtingWh << ' ' << startDayFarmingWh << '\n';
+         }
+        wheat2Add << _id << ' ' << 5 << ' ' << 0 << ' ' << 0 << ' ' << 0 << '\n';
+        wheatAdd.close();
+        wheat2Add.close();
+        remove("wheat.txt");
+        rename("wheat2.txt", "wheat.txt");
+    }
+
 
 }
 
 int wheatland_back::upGrade(int _startDay)
 {
+
+    int flag = 0;
+
     std::ofstream temp("temp.txt");
     std::ifstream wheat("wheatlandUpgrade.txt");
     int tmpId2 = 1,tmpArea2 = 5, tmpIsupgrading= 0, tmpdayUpgradeStart = 0 ;
     if ( wheat.peek() == std::ifstream::traits_type::eof() )
     {
          //file is empty
+           flag = 1;
            isUpgrading = 1;
            startDayUpgrading = _startDay;
            temp << id << ' ' << area << ' ' << isUpgrading << ' ' << _startDay << '\n';
+           temp.close();
+           wheat.close();
+           remove("wheatlandUpgrade.txt");
+           rename("temp.txt", "wheatlandUpgrade.txt");
     }
     else
     {
@@ -61,15 +92,13 @@ int wheatland_back::upGrade(int _startDay)
     {
         if (id == tmpId2)
         {
+            flag = 1;
             if(tmpIsupgrading == 1)
                 return 0;
             tmpIsupgrading = true;
             isUpgrading = true;
-
             tmpdayUpgradeStart = _startDay;
             startDayUpgrading = _startDay;
-
-            break;
         }
         temp << tmpId2 << ' ' << tmpArea2 << ' ' << tmpIsupgrading << ' ' << tmpdayUpgradeStart << '\n';
     }
@@ -78,9 +107,28 @@ int wheatland_back::upGrade(int _startDay)
     remove("wheatlandUpgrade.txt");
     rename("temp.txt", "wheatlandUpgrade.txt");
     }
+
+    //add new upgrade
+    if( flag == 0 ){
+        std::ifstream wheatAddUpgrade("wheatlandUpgrade.txt");
+        std::ofstream wheat2AddUpgrade("tempUpgrade.txt");
+        while (wheatAddUpgrade >> tmpId2 >> tmpArea2 >> tmpIsupgrading >> tmpdayUpgradeStart  )
+         {
+             wheat2AddUpgrade << tmpId2 << ' ' << tmpArea2 << ' '  << tmpIsupgrading << ' ' << tmpdayUpgradeStart << '\n';
+         }
+        wheat2AddUpgrade << id << ' ' << 5 << ' ' << 0 << ' ' << 0 << ' ' << 0 << '\n';
+        wheatAddUpgrade.close();
+        wheat2AddUpgrade.close();
+        remove("wheatlandUpgrade.txt");
+        rename("tempUpgrade.txt", "wheatlandUpgrade.txt");
+    }
+
+
     isUpgrading = true;
     startDayUpgrading = _startDay;
     return 1;
+
+
 }
 
 void wheatland_back::upDateFile()
