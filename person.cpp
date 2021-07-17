@@ -127,9 +127,9 @@ void person0::Update_file(){
         if(exp==maxExp){
          level++;
          maxExp=2*maxExp+10;
-         exp=0;
+         return level;
         }
-        return level;
+        return 0;
     }
 
     int person0::getMaxExp(){return maxExp;}
