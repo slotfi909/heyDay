@@ -13,13 +13,9 @@ void runthread(QLabel*L1,Farm *myfarm,MainWindow*t){
             myfarm->mymutex.lock();
             //
 
-            myfarm->owner.setDay(myfarm->owner.getDay()+1);
-            L1->setText("day : "+QString::number(myfarm->owner.getDay()));
-            myfarm->owner.changeExp(1);
-            if(myfarm->owner.changeLevel()){
-                emit t->showmessage();
 
-            }
+            L1->setText("day : "+QString::number(myfarm->owner.getDay()));
+
         myfarm->mySto.addMilk(myfarm->read_milk(myfarm->owner.getShenaseP(),myfarm->owner.getDay()));
             t->showCoin();
            t->showLevel();
@@ -27,6 +23,28 @@ void runthread(QLabel*L1,Farm *myfarm,MainWindow*t){
              //
             myfarm->mymutex.unlock();
             _sleep(1000);
+
+    }
+}
+
+void runthread2(Farm *myfarm,MainWindow*t){
+
+    while(1){
+
+
+            myfarm->mymutex.lock();
+            //
+
+            myfarm->owner.setDay(myfarm->owner.getDay()+1);
+
+            myfarm->owner.changeExp(1);
+            if(myfarm->owner.changeLevel()){
+                emit t->showmessage();
+
+            }
+             //
+            myfarm->mymutex.unlock();
+            _sleep(30000);
 
     }
 }
@@ -87,6 +105,9 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
 
     Qt=QThread::create(runthread,ui->label_5,&myfarm,this);
     Qt->start();
+        
+        Qt2=QThread::create(runthread2,&myfarm,this);
+    Qt2->start();
 
     connect(this,SIGNAL(showmessage()),this,SLOT(on_shoewMessage_signal()));
 
