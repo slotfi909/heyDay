@@ -35,8 +35,7 @@ int storage1::addNail(int numAddedNail){
 
        return 0;
     }
-
-    int storage1::addAlfalfa(int numAddedAlfalfa){
+int storage1::addAlfalfa(int numAddedAlfalfa){
         if(numAddedAlfalfa+allMerchandises()<=capacity){
 
     numAlfalfa+=numAddedAlfalfa;
@@ -48,8 +47,7 @@ int storage1::addNail(int numAddedNail){
 return 0;
 
     }
-
-    int storage1::addShovel(int numAddedShovel){
+int storage1::addShovel(int numAddedShovel){
       if(numAddedShovel+allMerchandises()<=capacity){
             numShovel+=numAddedShovel;
       
@@ -59,8 +57,7 @@ return 1;
 }
 return 0;
     }
-
-    int storage1::addEgg(int numAddedEgg){
+int storage1::addEgg(int numAddedEgg){
     if(numAddedEgg+allMerchandises()<=capacity){
     if(level>=2){
     numEgg+=numAddedEgg;
@@ -87,7 +84,7 @@ int storage1::addMilk(int numAddedMilk){
       }
 return 0;
 }
-    int storage1::addFleece(int numAddedFleece){
+int storage1::addFleece(int numAddedFleece){
       if(numAddedFleece+allMerchandises()<=capacity){
 
   if(level>=6){
@@ -101,8 +98,6 @@ return 0;
 }
 
 
-
-
 storage1::storage1(int shenaseP){
 
  temp A;
@@ -114,11 +109,18 @@ storage1::storage1(int shenaseP){
     fin.close();
     fout.open("storage.txt");
     fout.close();
-    fin.open("storage.txt", std::ios::app);
-  }
-  bool isFirst = 1;
+//    fin.open("storage.txt", std::ios::app);
+    fin.open("storage.txt", std::ios::in);
 
- while (!fin.eof()) {
+    }
+  bool isFirst = 1;
+////////////////////////////////////////
+  fin.seekg(0,std::ios::end);
+    int size=fin.tellg();
+    fin.seekg(0,std::ios::beg);
+   while (size<fin.tellg()) {
+ ///////////////////////////////////////
+// while (!fin.eof()) {
     fin.read((char*)&A, sizeof(temp));
     if (A.shenaseP == shenaseP) {
             //////////////

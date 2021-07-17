@@ -68,7 +68,7 @@
   <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>130</x>
      <y>60</y>
      <width>160</width>
      <height>110</height>
@@ -124,13 +124,6 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
-     <widget class="QLabel" name="label_12">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
     <item row="4" column="0">
      <widget class="QLabel" name="label_13">
       <property name="text">
@@ -154,6 +147,13 @@
     </item>
     <item row="5" column="1">
      <widget class="QLabel" name="label_16">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLabel" name="label_12">
       <property name="text">
        <string/>
       </property>

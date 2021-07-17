@@ -20,53 +20,14 @@ DialogStorage::DialogStorage(QWidget *parent,Farm *_myfarm) :
       myfarm = _myfarm;
       this->setWindowTitle("storage");
 
-      //order in file
-      //tmpCapacity--tmpLevel--tmpNumNail--tmpNumAlfalfa--tmpNumShovel--tmpNumEgg--tmpNumMilk--tmpNumFleece--tmpUpgradeStartTime--isBeingUpgraded
 
-     /* if ( storage1.peek() == std::ifstream::traits_type::eof() )
-          {
-               //file is empty
-               storage2 << tmpId3 << ' ' << tmpLevel << ' ' << tmpNumNail<< ' ' << tmpNumAlfalfa<< ' ' << tmpNumShovel <<' '<<tmpNumEgg<<' '<<tmpNumMilk<<' '<<tmpNumFleece<<' '<<tmpUpgrafeStartTime<<' '<<tmpIsBeingUpgraded<< '\n';
+      QPixmap bkgndSto("C:/HeydayLogo/Logo/storage.jpg");
+      bkgndSto = bkgndSto.scaled(this->size(), Qt::IgnoreAspectRatio);
+      QPalette paletteSto;
+      paletteSto.setBrush(QPalette::Window/*Background*/, bkgndSto);
+      this->setPalette(paletteSto);
 
-               myfarm->mySto.level=tmpLevel;
-               myfarm->mySto.numNail=tmpNumNail;
-               myfarm->mySto.numAlfalfa=tmpNumAlfalfa;
-               myfarm->mySto.numShovel=tmpNumShovel;
-               myfarm->mySto.numEgg=tmpNumEgg;
-               myfarm->mySto.numMilk=tmpNumMilk;
-               myfarm->mySto.numFleece=tmpNumFleece;
-               myfarm->mySto.upgradeStartTime=tmpUpgrafeStartTime;
-               myfarm->mySto.isBeingUpgraded=tmpIsBeingUpgraded;
 
-               storage2.close();
-               storage1.close();
-               remove("storage.txt");
-               rename("storage2.txt", "storage.txt");
-          }
-
-         else {
-               //file is not empty
-               while (storage1>>tmpId3>>tmpLevel>>tmpNumNail>>tmpNumAlfalfa>>tmpNumShovel>>tmpNumEgg>>tmpNumMilk>>tmpNumFleece>>tmpUpgrafeStartTime>>tmpIsBeingUpgraded )
-                {
-                    if (tmpId3 == myfarm->owner.getShenaseP())
-                    {
-                        myfarm->mySto.level=tmpLevel;
-                        myfarm->mySto.numNail=tmpNumNail;
-                        myfarm->mySto.numAlfalfa=tmpNumAlfalfa;
-                        myfarm->mySto.numShovel=tmpNumShovel;
-                        myfarm->mySto.numEgg=tmpNumEgg;
-                        myfarm->mySto.numMilk=tmpNumMilk;
-                        myfarm->mySto.numFleece=tmpNumFleece;
-                        myfarm->mySto.upgradeStartTime=tmpUpgrafeStartTime;
-                        myfarm->mySto.isBeingUpgraded=tmpIsBeingUpgraded;
-
-                      break;
-                    }
-                 storage1.close();
-                 storage2.close();
-                 remove("storage2.txt");
-               }
-            }*/
       ui->label_2->setText(QString::number(myfarm->mySto.level));
       ui->label_4->setText(QString::number(myfarm->mySto.capacity));
       ui->label_6->setText(QString::number(myfarm->mySto.getShovel()));
@@ -81,22 +42,65 @@ DialogStorage::DialogStorage(QWidget *parent,Farm *_myfarm) :
 
 void DialogStorage::on_pushButton_clicked() // upgrade
 {
-
-    if(myfarm->mySto.getNail()>=myfarm->mySto.getLevel()){
+if(myfarm->mySto.isBeingUpgraded==false){
+    if(myfarm->mySto.getNail() >= myfarm->mySto.getLevel()){
         if(myfarm->mySto.getShovel()>=myfarm->mySto.getLevel()-1){
         if(myfarm->owner.getCoin()>=pow(myfarm->mySto.getLevel(),3)*10){
             myfarm->mySto.isBeingUpgraded=true;
             QMessageBox::critical(this,"OK","alfalfa field is upgrading!");
              myfarm->mySto.upgradeStartTime= myfarm->owner.getDay();
         }
-        }
+
+
+        else{
+        QMessageBox::critical(this,"ERROR","upgrade can't be done!\nmore coin is required!");
     }
-    else{
-        QMessageBox::critical(this,"ERROR","upgrade can't be done!");
+
+        }
+
+        //
+        else{
+            QMessageBox::critical(this,"ERROR","upgrade can't be done!\nmore shovel is required!");
+
+
 
     }
+
+
+
 
 }
+
+
+
+    //
+    else{
+
+    QMessageBox::critical(this,"ERROR","upgrade can't be done!\nmore nail is required!");
+}
+}
+ else{
+    QMessageBox::critical(this,"ERROR","upgrade is in process!");
+
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int DialogStorage::checkForUpgrade(){
     if(myfarm->mySto.isBeingUpgraded){

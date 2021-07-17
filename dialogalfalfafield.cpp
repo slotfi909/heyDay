@@ -19,12 +19,13 @@ DialogAlfalfaField::DialogAlfalfaField(QWidget *parent,Farm *_myfarm) :
     {
 
     //background
-    QPixmap bkgnd("C:/HeydayLogo/Logo/alfalfaback.jpg");
-    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Window/*Background*/, bkgnd);
-    this->setPalette(palette);
-
+    QPixmap bkgndAlf("C:/HeydayLogo/Logo/alfalfaback.jpg");
+    bkgndAlf = bkgndAlf.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette paletteAlf;
+    paletteAlf.setBrush(QPalette::Window/*Background*/, bkgndAlf);
+    this->setPalette(paletteAlf);
+int wAlf=ui->pushButton->width();
+int hAlf=ui->pushButton->height();
 
     //window icon
     setWindowIcon(QIcon("C:/HeydayLogo/Logo/alfalfa.jpg"));
@@ -32,21 +33,21 @@ DialogAlfalfaField::DialogAlfalfaField(QWidget *parent,Farm *_myfarm) :
 
     //upgrade icon
     ui->pushButton->setIcon(QIcon("C:/HeydayLogo/Logo/upgrade2.png"));
-    ui->pushButton->setIconSize(QSize(100, 100));
+    ui->pushButton->setIconSize(QSize(wAlf,hAlf));
 
 
     //harvest icon
     ui->pushButton_2->setIcon(QIcon("C:/HeydayLogo/Logo/harvest.png"));
-    ui->pushButton_2->setIconSize(QSize(100, 100));
+    ui->pushButton_2->setIconSize(QSize(wAlf,hAlf));
 
 
     //planting icon
     ui->pushButton_3->setIcon(QIcon("C:/HeydayLogo/Logo/plant.png"));
-    ui->pushButton_3->setIconSize(QSize(100, 100));
+    ui->pushButton_3->setIconSize(QSize(wAlf,hAlf));
 
     //plow icon
-    ui->pushButton_4->setIcon(QIcon("C:/HeydayLogo/Logo/plow.png"));
-    ui->pushButton_4->setIconSize(QSize(100, 100));
+    ui->pushButton_4->setIcon(QIcon("C:/HeydayLogo/Logo/plow.jpg"));
+    ui->pushButton_4->setIconSize(QSize(wAlf,hAlf));
 
     }
 
@@ -160,6 +161,9 @@ void DialogAlfalfaField::on_pushButton_2_clicked()//harvest
 
 void DialogAlfalfaField::on_pushButton_clicked()//upgrade
 {
+
+    if(myfarm->myAlf.isBeingUpgraded==false)
+    {
     if(myfarm->mySto.getShovel()>=2*myfarm->myAlf.getArea()){
         if(myfarm->owner.getCoin()>=5*myfarm->myAlf.getArea()){
             myfarm->myAlf.isBeingUpgraded=true;
@@ -179,6 +183,10 @@ void DialogAlfalfaField::on_pushButton_clicked()//upgrade
         QMessageBox::critical(this,"ERROR","upgrade can't be done!\nmore shovel is needed!");
 
     }
+}
+    else
+        QMessageBox::critical(this,"ERROR","upgrade is in process!");
+
 }
 
 int DialogAlfalfaField::checkForUpgrade(){

@@ -40,13 +40,13 @@ silo::silo(int shenaseP){
   }
   fin.close();
   if (isFirst) {    //first login
-    numWheat=0;
+    numWheat=1;
       capacity = 10;
       level = 1;
       upgradeStartTime=0;
       isBeingUpgraded=0;
     //..................
-    A.numWheat=0;
+    A.numWheat=1;
       A.capacity = 10;
       A.level = 1;
       A.upgradeStartTime=0;
