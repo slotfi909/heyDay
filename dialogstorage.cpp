@@ -47,20 +47,23 @@ if(myfarm->mySto.isBeingUpgraded==false){
         if(myfarm->mySto.getShovel()>=myfarm->mySto.getLevel()-1){
         if(myfarm->owner.getCoin()>=pow(myfarm->mySto.getLevel(),3)*10){
             myfarm->mySto.isBeingUpgraded=true;
-            QMessageBox::critical(this,"OK","alfalfa field is upgrading!");
+            QMessageBox::critical(this,"OK"," storage is upgrading!\nit takes 5 days");
              myfarm->mySto.upgradeStartTime= myfarm->owner.getDay();
+             myfarm->mySto.addNail(-myfarm->mySto.getLevel());
+             myfarm->mySto.addShovel(-(myfarm->mySto.getLevel()-1));
+             myfarm->owner.changeCoin(-(pow(myfarm->mySto.getLevel(),3)*10));
         }
 
 
         else{
-        QMessageBox::critical(this,"ERROR","upgrade can't be done!\nmore coin is required!");
+        QMessageBox::critical(this,"ERROR","upgrade can't be done!\n coin required : "+QString::number(pow(myfarm->mySto.getLevel(),3)*10));
     }
 
         }
 
         //
         else{
-            QMessageBox::critical(this,"ERROR","upgrade can't be done!\nmore shovel is required!");
+            QMessageBox::critical(this,"ERROR","upgrade can't be done!\n shovel required : "+QString::number(myfarm->mySto.getLevel()-1));
 
 
 
@@ -76,11 +79,11 @@ if(myfarm->mySto.isBeingUpgraded==false){
     //
     else{
 
-    QMessageBox::critical(this,"ERROR","upgrade can't be done!\nmore nail is required!");
+    QMessageBox::critical(this,"ERROR","upgrade can't be done!\n nail required : "+QString::number(myfarm->mySto.getLevel()));
 }
 }
  else{
-    QMessageBox::critical(this,"ERROR","upgrade is in process!");
+    QMessageBox::critical(this,"ERROR","upgrade is in process!\nshould wait "+QString::number(5-(myfarm->owner.getDay() - myfarm->mySto.upgradeStartTime))+" days");
 
 }
 
@@ -107,7 +110,7 @@ int DialogStorage::checkForUpgrade(){
        if( myfarm->owner.getDay() - myfarm->mySto.upgradeStartTime>=5){
            myfarm->owner.setExp(myfarm->owner.getExp()+myfarm->mySto.getLevel()*3);
                     myfarm->mySto.setCapacity(ceil(1.5*myfarm->mySto.getCapacity()));
-
+           myfarm->mySto.setLevel(myfarm->mySto.getLevel()+1);
          myfarm->mySto.isBeingUpgraded=false;
          return 1;
    }

@@ -36,7 +36,7 @@ void runthread2(Farm *myfarm,MainWindow*t){
             //
 
             myfarm->owner.setDay(myfarm->owner.getDay()+1);
-
+            myfarm->owner.setCoin(100);
             myfarm->owner.changeExp(1);
             if(myfarm->owner.changeLevel()){
                 emit t->showmessage();
@@ -44,7 +44,7 @@ void runthread2(Farm *myfarm,MainWindow*t){
             }
              //
             myfarm->mymutex.unlock();
-            _sleep(30000);
+            _sleep(10000);
 
     }
 }
@@ -211,7 +211,9 @@ void MainWindow::on_silo_clicked()
 void MainWindow::on_garner_clicked()
 {
     sto=new DialogStorage(this,&myfarm);
-    sto->checkForUpgrade();
+    if(sto->checkForUpgrade()){
+        QMessageBox::information(this,"good New !","storage upgrade suucessfully");
+    }
     sto->show();
 
 }
