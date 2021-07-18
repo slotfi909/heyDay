@@ -203,7 +203,7 @@ myfarm.mySto.addMilk(myfarm.read_milk(myfarm.owner.getShenaseP(),myfarm.owner.ge
 void MainWindow::on_silo_clicked()
 {
     Sil = new DialogSilo(this,&myfarm);
-    Sil->checkForUpgrade();
+//    Sil->checkForUpgrade();
     Sil->show();
 }
 
@@ -212,7 +212,7 @@ void MainWindow::on_garner_clicked()
 {
 
     sto=new DialogStorage(this,&myfarm);
-
+//    sto->checkForUpgrade();
     sto->show();
 
 }
@@ -221,7 +221,7 @@ void MainWindow::on_garner_clicked()
 void MainWindow::on_alfalfaLand_clicked()
 {
     Alf = new DialogAlfalfaField(this,&myfarm);
-    Alf->checkForUpgrade();
+//    Alf->checkForUpgrade();
     Alf->show();
 
 }

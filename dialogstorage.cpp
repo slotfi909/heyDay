@@ -2,6 +2,7 @@
 #include "ui_dialogstorage.h"
 #include "QMessageBox"
 #include "farm.h"
+#include <QString>
 
 int tmpId3=1,tmpCapacity=10,tmpLevel=1,tmpNumNail=10,tmpNumAlfalfa=0,tmpNumShovel=1,tmpNumEgg=0,tmpNumMilk=0,tmpNumFleece=0,tmpUpgrafeStartTime=0;
 bool tmpIsBeingUpgraded=false;
@@ -19,15 +20,16 @@ DialogStorage::DialogStorage(QWidget *parent,Farm *_myfarm) :
     //for getting day of player
       myfarm = _myfarm;
       this->setWindowTitle("storage");
+
       if(checkForUpgrade()){
-          QMessageBox::information(this,"good New !","storage upgrade suucessfully");
+          QMessageBox::information(this,"good News !","storage upgraded suucessfully");
       }
 
-      QPixmap bkgndSto("C:/HeydayLogo/Logo/storage.jpg");
-      bkgndSto = bkgndSto.scaled(this->size(), Qt::IgnoreAspectRatio);
-      QPalette paletteSto;
-      paletteSto.setBrush(QPalette::Window/*Background*/, bkgndSto);
-      this->setPalette(paletteSto);
+//      QPixmap bkgndSto("C:/HeydayLogo/Logo/storage.jpg");
+//      bkgndSto = bkgndSto.scaled(this->size(), Qt::IgnoreAspectRatio);
+//      QPalette paletteSto;
+//      paletteSto.setBrush(QPalette::Window/*Background*/, bkgndSto);
+//      this->setPalette(paletteSto);
 
 
       ui->label_2->setText(QString::number(myfarm->mySto.level));
@@ -49,7 +51,9 @@ if(myfarm->mySto.isBeingUpgraded==false){
         if(myfarm->mySto.getShovel()>=myfarm->mySto.getLevel()-1){
         if(myfarm->owner.getCoin()>=pow(myfarm->mySto.getLevel(),3)*10){
             myfarm->mySto.isBeingUpgraded=true;
-            QMessageBox::critical(this,"OK"," storage is upgrading!\nit takes 5 days");
+
+            QMessageBox::information(this,"OK","alfalfa field is upgrading!\nit will take 5 days to complete!");
+
              myfarm->mySto.upgradeStartTime= myfarm->owner.getDay();
              myfarm->mySto.addNail(-myfarm->mySto.getLevel());
              myfarm->mySto.addShovel(-(myfarm->mySto.getLevel()-1));
@@ -58,14 +62,14 @@ if(myfarm->mySto.isBeingUpgraded==false){
 
 
         else{
-        QMessageBox::critical(this,"ERROR","upgrade can't be done!\n coin required : "+QString::number(pow(myfarm->mySto.getLevel(),3)*10));
+        QMessageBox::critical(this,"ERROR","upgrade can't be done!\nmore is coin required:"+QString::number(pow(myfarm->mySto.getLevel(),3)*10 - myfarm->owner.getCoin()));
     }
 
         }
 
         //
         else{
-            QMessageBox::critical(this,"ERROR","upgrade can't be done!\n shovel required : "+QString::number(myfarm->mySto.getLevel()-1));
+            QMessageBox::critical(this,"ERROR","upgrade can't be done!\nmore is shovel required:"+QString::number(myfarm->mySto.getLevel()-1 - myfarm->mySto.getShovel()));
 
 
 
@@ -81,29 +85,15 @@ if(myfarm->mySto.isBeingUpgraded==false){
     //
     else{
 
-    QMessageBox::critical(this,"ERROR","upgrade can't be done!\n nail required : "+QString::number(myfarm->mySto.getLevel()));
+    QMessageBox::critical(this,"ERROR","upgrade can't be done!\nmore nail is required:"+QString::number( myfarm->mySto.getLevel() - myfarm->mySto.getNail()));
 }
 }
  else{
-    QMessageBox::critical(this,"ERROR","upgrade is in process!\nshould wait "+QString::number(5-(myfarm->owner.getDay() - myfarm->mySto.upgradeStartTime))+" days");
+    QMessageBox::information(this,"ERROR","upgrade is in process!\nremaining days:"+QString::number(myfarm->mySto.upgradeStartTime + 5 - myfarm->owner.getDay()));
 
 }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
