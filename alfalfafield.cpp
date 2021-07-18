@@ -2,10 +2,13 @@
 
         struct temp {
 int area;
+int plantedArea;
 bool isPlowed;
 unsigned int plowStartTime;
 unsigned int upgradeStartTime;
 unsigned int plantStartTime;
+unsigned int buildStartTime;
+bool isBuilt;
 bool isBeingUpgraded;
 bool isBeingPlowed;
 bool isBeingPlanted;
@@ -44,6 +47,9 @@ isPlowed=A.isPlowed;
  isBeingUpgraded=A.isBeingUpgraded;
  isBeingPlowed=A.isBeingPlowed;
  isBeingPlanted=A.isBeingPlanted;
+ plantedArea=A.plantedArea;
+ isBuilt=A.isBuilt;
+ buildStartTime=A.buildStartTime;
             isFirst=0;
       break;
     }
@@ -58,6 +64,9 @@ isPlowed=0;
  isBeingUpgraded=0;
  isBeingPlowed=0;
  isBeingPlanted=0;
+ plantedArea=0;
+ isBuilt=0;
+ buildStartTime=0;
     //..................
 A.area=4;
 A.isPlowed=0;
@@ -67,7 +76,10 @@ A.plantStartTime=0;
 A.isBeingUpgraded=0;
 A.isBeingPlowed=0;
 A.isBeingPlanted=0;
-            A.shenaseP=shenaseP;
+A.shenaseP=shenaseP;
+A.plantedArea=0;
+A.isBuilt=0;
+A.buildStartTime=0;
 
     fout.open("alfalfaField.txt",std::ios::app);
     fout.write((char*)&A, sizeof(temp));
@@ -104,6 +116,9 @@ void alfalfaField::update_file() {
  p.isBeingUpgraded=isBeingUpgraded;
  p.isBeingPlowed=isBeingPlowed;
  p.isBeingPlanted=isBeingPlanted;
+ p.plantedArea=plantedArea;
+ p.isBuilt=isBuilt;
+ p.buildStartTime=buildStartTime;
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}

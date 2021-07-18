@@ -9,10 +9,13 @@ bool isPlowed;
 unsigned int plowStartTime;
 unsigned int upgradeStartTime;
 unsigned int plantStartTime;
+unsigned int buildStartTime;
 bool isBeingUpgraded;
 bool isBeingPlowed;
 bool isBeingPlanted;
+bool isBuilt;
 int shenaseP;
+int plantedArea;
 public:
 //constructor
 alfalfaField(int shenaseP=1);

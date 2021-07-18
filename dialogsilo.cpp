@@ -26,11 +26,11 @@ DialogSilo::DialogSilo(QWidget *parent,Farm *_myfarm) :
 
     //"C:\HeydayLogo\Logo\silo.jpg"
 
-    QPixmap bkgndSil("C:/HeydayLogo/Logo/silo.jpg");
-    bkgndSil = bkgndSil.scaled(this->size(), Qt::IgnoreAspectRatio);
-    QPalette paletteSil;
-    paletteSil.setBrush(QPalette::Window/*Background*/, bkgndSil);
-    this->setPalette(paletteSil);
+//    QPixmap bkgndSil("C:/HeydayLogo/Logo/silo.jpg");
+//    bkgndSil = bkgndSil.scaled(this->size(), Qt::IgnoreAspectRatio);
+//    QPalette paletteSil;
+//    paletteSil.setBrush(QPalette::Window/*Background*/, bkgndSil);
+//    this->setPalette(paletteSil);
 
 
         ui->label_2->setText(QString::number(myfarm->mySil.level));

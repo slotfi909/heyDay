@@ -17,8 +17,10 @@ public:
     explicit DialogAlfalfaField(QWidget *parent = nullptr,Farm *_myfarm = nullptr);
     ~DialogAlfalfaField();
 int checkForPlow();
-    int checkForUpgrade();
-    friend class storage;
+int checkForUpgrade();
+int checkForPlant();
+
+friend class storage;
     friend class silo;
 void update_file();
 private slots:
@@ -27,6 +29,8 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_pushButton_clicked();
+
+    void on_pushButton_4_clicked();
 
 private:
     Ui::DialogAlfalfaField *ui;

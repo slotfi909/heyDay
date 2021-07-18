@@ -2,6 +2,7 @@
 #include "ui_dialogalfalfafield.h"
 #include "QMessageBox"
 #include <QString>
+#include <QDialog>
 int tmpArea2=4,tmpId2=1;
 bool tmpIsPlowed2=false,tmpIsBeingUpgraded2=0,tmpIsBeingPlowed2=0,tmpIsBeingPlanted2=0;
 unsigned int tmpPlowStartTime2=0,tmpUpgradeStartTime2=0,tmpPlantStartTime2=0;
@@ -12,11 +13,13 @@ DialogAlfalfaField::DialogAlfalfaField(QWidget *parent,Farm *_myfarm) :
 {
     //for getting day of player
     myfarm = _myfarm;
-//    if(myfarm->owner.getLevel()>=3){
-    if(checkForUpgrade()){
-        QMessageBox::information(this,"good News !","alfalfa field upgraded suucessfully");
-    }
+//if(myfarm->myAlf.isBuilt){
 
+
+    //    if(myfarm->owner.getLevel()>=3){
+checkForUpgrade();
+checkForPlow();
+checkForPlant();
     ui->setupUi(this);
 
     this->setWindowTitle("alfalfa Field");
@@ -55,7 +58,8 @@ int hAlf=ui->pushButton->height();
     ui->pushButton_3->setToolTip("plant");
 
     //plow icon
-    ui->pushButton_4->setIcon(QIcon("C:/HeydayLogo/Logo/plow1.png"));
+//    ui->pushButton_4->setIcon(QIcon("C:/HeydayLogo/Logo/plow.png"));
+    ui->pushButton_4->setIcon(QIcon("C:/HeydayLogo/Logo/plow2.jpg"));
     ui->pushButton_4->setIconSize(QSize(wAlf,hAlf));
     ui->pushButton_4->setToolTip("plow");
     }
@@ -97,6 +101,9 @@ int hAlf=ui->pushButton->height();
 //else{
 //    QMessageBox::critical(this,"ERROR","least required level is 3!");
 //}
+
+
+
 }
 
 DialogAlfalfaField::~DialogAlfalfaField()
@@ -104,21 +111,20 @@ DialogAlfalfaField::~DialogAlfalfaField()
     delete ui;
 }
 
-
-
 void DialogAlfalfaField::on_pushButton_3_clicked()//plant
 {
 
 
 
-
+if(myfarm->myAlf.isPlowed==true){
     if(myfarm->myAlf.isBeingPlanted==false){
         if(!ui->lineEdit->text().isEmpty()){
       if(ui->lineEdit->text().toInt() <= myfarm->myAlf.getArea()){
  if(myfarm->mySto.getAlfalfa() >= ui->lineEdit->text().toInt()){
   myfarm->myAlf.plantStartTime=myfarm->owner.getDay();
    myfarm->myAlf.isBeingPlanted=true;
-    QMessageBox::information(this,"OK","the planting has begun");
+   myfarm->myAlf.plantedArea=ui->lineEdit->text().toInt();
+    QMessageBox::information(this,"OK","the planting has begun\nit needs 4 days complete");
     myfarm->owner.setExp(myfarm->owner.getExp()+2);
 myfarm->mySto.setAlfalfa(myfarm->mySto.getAlfalfa() - ui->lineEdit->text().toInt() );
 
@@ -148,18 +154,22 @@ myfarm->mySto.setAlfalfa(myfarm->mySto.getAlfalfa() - ui->lineEdit->text().toInt
 
     //
     else{
-        QMessageBox::critical(this,"OK","the planting is alredy happening");
+        QMessageBox::critical(this,"OK","the planting is alredy happening!\nremaining days:"+QString::number(myfarm->myAlf.plantStartTime + 4 - myfarm->owner.getDay()));
 
     }
 
 }
+else{
+    QMessageBox::critical(this,"ERROR","you must plow your alfalfa field first!");
 
+}
+}
 
 void DialogAlfalfaField::on_pushButton_2_clicked()//harvest
 {
     if(myfarm->myAlf.isBeingPlanted==true){
         if(myfarm->owner.getDay() - myfarm->myAlf.plantStartTime >=4){
-            myfarm->mySto.addAlfalfa(myfarm->myAlf.getArea()*2);
+            myfarm->mySto.addAlfalfa(myfarm->myAlf.plantedArea*2);
             QMessageBox::information(this,"OK","harvest is done!");
 
             myfarm->myAlf.isBeingPlanted=0;
@@ -181,7 +191,6 @@ void DialogAlfalfaField::on_pushButton_2_clicked()//harvest
 
  }
 }
-
 
 void DialogAlfalfaField::on_pushButton_clicked()//upgrade
 {
@@ -215,6 +224,30 @@ void DialogAlfalfaField::on_pushButton_clicked()//upgrade
 
 }
 
+void DialogAlfalfaField::on_pushButton_4_clicked() // plow
+{
+  if(myfarm->myAlf.isBeingPlowed==false){
+    if(myfarm->owner.getCoin()>= 5*myfarm->myAlf.area){
+
+    myfarm->myAlf.isBeingPlowed=true;
+    myfarm->owner.changeCoin(-5*myfarm->myAlf.area);
+    QMessageBox::information(this,"ERROR","alfalfa field is plowing!\nit will take 1 day to complete!");
+
+
+  }
+ //
+    else{
+        QMessageBox::critical(this,"ERROR","more coin is required:"+QString::number(5*myfarm->myAlf.area - myfarm->owner.getCoin()));
+
+  }
+
+  }
+ //
+  else{
+  QMessageBox::critical(this,"ERROR","plowing in process!\nremaining day:1");
+}
+}
+
 int DialogAlfalfaField::checkForUpgrade(){
  if(myfarm->myAlf.isBeingUpgraded){
     if( myfarm->owner.getDay()- myfarm->myAlf.upgradeStartTime>=3){
@@ -227,9 +260,9 @@ int DialogAlfalfaField::checkForUpgrade(){
       return 1;
 }
  }
- else{
+
  return 0;
-}
+
 }
 
 int DialogAlfalfaField::checkForPlow(){
@@ -244,4 +277,17 @@ int DialogAlfalfaField::checkForPlow(){
     }
  return 0;
 
+}
+
+int DialogAlfalfaField::checkForPlant(){
+    if(myfarm->myAlf.isBeingPlanted){
+        if(myfarm->owner.getDay()>=myfarm->myAlf.plantStartTime+4){
+            QMessageBox::information(this,"OK","alfalfa field planted!\nyou can harvest them now!");
+            return 1;
+
+        }
+    }
+
+
+    return 0;
 }
