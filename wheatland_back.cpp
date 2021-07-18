@@ -154,7 +154,7 @@ void wheatland_back::upDateFile()
             tmpIsUpgarding3 = isUpgrading;
             tmpStartDayUpgrading3 = startDayUpgrading;
         }
-        temp << tmpId3 << ' ' << tmpArea3 << ' ' << tmpIsKeshting3 << ' ' << tmpAmountKeshting3 << ' ' <<tmpIsUpgarding3 << ' ' << tmpStartDayUpgrading3 << '\n';
+        temp << tmpId3 << ' ' << tmpArea3 << ' ' << tmpIsKeshting3 << ' ' << tmpAmountKeshting3 << ' ' << startDayFarming3 << ' ' <<tmpIsUpgarding3 << ' ' << tmpStartDayUpgrading3 << '\n';
     }
     temp.close();
     wheat.close();
