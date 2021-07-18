@@ -16,10 +16,14 @@ public:
     int getKeshtStartDay(){return startDay;};
     int getArea(){return area;};
     int getAmount(){return keshtAmount;};
+    int getIsUpgrading(){return isUpgrading;};
+    int getStartDayUpgrading(){return startDayUpgrading;};
     void setIsKeshting(int _isKeshting){isKeshting = _isKeshting;};
     void setKeshtAmount(int _keshtAmount){keshtAmount = _keshtAmount;};
     void setArea(int _area){area = _area;};
     void setStartDay(int _startDay){startDay = _startDay;};
+    void setIsUpgrading(int _setIsUpgrading){isUpgrading = _setIsUpgrading;};
+    void setStartDayUpgrading(int _startDayUpgrading){ startDayUpgrading = _startDayUpgrading;};
     void upDateFile();
 
 private:

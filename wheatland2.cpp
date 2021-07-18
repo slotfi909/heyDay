@@ -64,9 +64,17 @@ wheatland2::wheatland2(QWidget *parent, Farm * _myfarm) :
           }
       }
 
+      if(myfarm->myWhe.getIsUpgrading() == true){
+          if( myfarm->owner.getDay() - myfarm->myWhe.getStartDayUpgrading() >= 2)
+          {
+              myfarm->myWhe.setArea( myfarm->myWhe.getArea() * 2 );
+              myfarm->myWhe.setIsUpgrading(0);
+              myfarm->myWhe.setStartDayUpgrading(0);
+              QMessageBox::information(this,"Upgrade","Wheatland Upgraded!");
+          }
+      }
 
         //ui area display
-       int tmp = myfarm->myWhe.getArea();
         ui->AreaLabel->setText(QString::number(myfarm->myWhe.getArea()));
 
 
@@ -140,8 +148,12 @@ void wheatland2::on_bardasht_clicked()
 
 void wheatland2::on_upGrade_clicked()
 {
-    if(myfarm->owner.getCoin() > 5 && myfarm->owner.getLevel() > 1)
+    if(myfarm->owner.getCoin() > 5 && myfarm->owner.getLevel() > 1 && myfarm->mySto.getShovel() >= 1)
     {
+        myfarm->owner.changeCoin(-5);
+        myfarm->owner.changeExp(3);
+        myfarm->mySto.addShovel(-1);
+
        int ans = myfarm->myWhe.upGrade(myfarm->owner.getDay());
        if(ans == 0)
             QMessageBox::critical(this,"ERROR","Upgrade already in progress!!!");
