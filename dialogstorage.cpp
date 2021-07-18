@@ -25,15 +25,15 @@ DialogStorage::DialogStorage(QWidget *parent,Farm *_myfarm) :
           QMessageBox::information(this,"good News !","storage upgraded suucessfully");
       }
 
-//      QPixmap bkgndSto("C:/HeydayLogo/Logo/storage.jpg");
-//      bkgndSto = bkgndSto.scaled(this->size(), Qt::IgnoreAspectRatio);
-//      QPalette paletteSto;
-//      paletteSto.setBrush(QPalette::Window/*Background*/, bkgndSto);
-//      this->setPalette(paletteSto);
+      QPixmap bkgndSto("C:/HeydayLogo/Logo/storage.jpg");
+      bkgndSto = bkgndSto.scaled(this->size(), Qt::IgnoreAspectRatio);
+      QPalette paletteSto;
+      paletteSto.setBrush(QPalette::Window/*Background*/, bkgndSto);
+      this->setPalette(paletteSto);
 
 
       ui->label_2->setText(QString::number(myfarm->mySto.level));
-      ui->label_4->setText(QString::number(myfarm->mySto.capacity));
+      ui->label_4->setText(QString::number(myfarm->mySto.capacity - myfarm->mySto.allMerchandises()));
       ui->label_6->setText(QString::number(myfarm->mySto.getShovel()));
       ui->label_8->setText(QString::number(myfarm->mySto.getNail()));
       ui->label_10->setText(QString::number(myfarm->mySto.getAlfalfa()));
@@ -52,7 +52,7 @@ if(myfarm->mySto.isBeingUpgraded==false){
         if(myfarm->owner.getCoin()>=pow(myfarm->mySto.getLevel(),3)*10){
             myfarm->mySto.isBeingUpgraded=true;
 
-            QMessageBox::information(this,"OK","alfalfa field is upgrading!\nit will take 5 days to complete!");
+            QMessageBox::information(this,"OK","storage is upgrading!\nit will take 5 days to complete!");
 
              myfarm->mySto.upgradeStartTime= myfarm->owner.getDay();
              myfarm->mySto.addNail(-myfarm->mySto.getLevel());

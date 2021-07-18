@@ -222,6 +222,7 @@ void MainWindow::on_alfalfaLand_clicked()
 {
     Alf = new DialogAlfalfaField(this,&myfarm);
 //    Alf->checkForUpgrade();
+//if(myfarm.owner.getLevel()>=3)
     Alf->show();
 
 }

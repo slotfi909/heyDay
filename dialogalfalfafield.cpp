@@ -10,12 +10,14 @@ DialogAlfalfaField::DialogAlfalfaField(QWidget *parent,Farm *_myfarm) :
     QDialog(parent),
     ui(new Ui::DialogAlfalfaField)
 {
-    ui->setupUi(this);
     //for getting day of player
     myfarm = _myfarm;
+//    if(myfarm->owner.getLevel()>=3){
     if(checkForUpgrade()){
         QMessageBox::information(this,"good News !","alfalfa field upgraded suucessfully");
     }
+
+    ui->setupUi(this);
 
     this->setWindowTitle("alfalfa Field");
 
@@ -91,7 +93,10 @@ int hAlf=ui->pushButton->height();
 
       ui->label_2->setText(QString::number(myfarm->myAlf.getArea()));
 
-
+//}
+//else{
+//    QMessageBox::critical(this,"ERROR","least required level is 3!");
+//}
 }
 
 DialogAlfalfaField::~DialogAlfalfaField()
@@ -121,7 +126,7 @@ myfarm->mySto.setAlfalfa(myfarm->mySto.getAlfalfa() - ui->lineEdit->text().toInt
       }
  //
  else{
-          QMessageBox::critical(this,"ERROR","more alafalfa is required!:"+QString::number(ui->lineEdit->text().toInt() - myfarm->mySto.getAlfalfa()));
+          QMessageBox::critical(this,"ERROR","more alafalfa is required:"+QString::number(ui->lineEdit->text().toInt() - myfarm->mySto.getAlfalfa()));
       }
     }
 

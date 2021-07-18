@@ -34,7 +34,7 @@ DialogSilo::DialogSilo(QWidget *parent,Farm *_myfarm) :
 
 
         ui->label_2->setText(QString::number(myfarm->mySil.level));
-        ui->label_4->setText(QString::number(myfarm->mySil.capacity));
+        ui->label_4->setText(QString::number(myfarm->mySil.capacity - myfarm->mySil.getNumWheat()));
         ui->label_6->setText(QString::number(myfarm->mySil.numWheat));
 
 
