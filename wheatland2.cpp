@@ -24,7 +24,7 @@ wheatland2::wheatland2(QWidget *parent, Farm * _myfarm) :
     QPixmap bkgnd("C:/HeydayLogo/Logo/wheatlandback.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
-    palette.setBrush(QPalette::Window/*Background*/, bkgnd);
+    palette.setBrush(QPalette::Window, bkgnd);
     this->setPalette(palette);
 
 
@@ -66,6 +66,7 @@ wheatland2::wheatland2(QWidget *parent, Farm * _myfarm) :
 
 
         //ui area display
+       int tmp = myfarm->myWhe.getArea();
         ui->AreaLabel->setText(QString::number(myfarm->myWhe.getArea()));
 
 
@@ -95,6 +96,7 @@ void wheatland2::on_kesht_clicked()
           else if( ui->keshtSize->text().isEmpty() )
               QMessageBox::critical(this,"ERROR","LineEdit can not be Empty!");
           else{
+              myfarm->mySil.addWheat(-myfarm->mySil.getNumWheat());
               keshtUpDate(ui->keshtSize->text().toInt());
               endOfFarming = false;
               QMessageBox::information(this,"DONE","Farming has begone!");
@@ -120,7 +122,11 @@ void wheatland2::on_bardasht_clicked()
        {
            //add wealth to garner and update file
             myfarm->mySil.addWheat( myfarm->myWhe.getAmount() * 2);
-             myfarm->myWhe.setIsKeshting(false);
+            myfarm->myWhe.setIsKeshting(false);
+            myfarm->myWhe.setStartDay(0);
+            myfarm->myWhe.setKeshtAmount(0);
+            ui->progressBar->setValue(0);
+            QMessageBox::information(this,"info","wheat added to silo!");
        }
     }
     else if( myfarm->myWhe.getIsKeshting() == false ){
@@ -153,8 +159,8 @@ void wheatland2::keshtUpDate(int _keshtAmount) {
 
     std::ofstream temp("temp.txt");
     std::ifstream wheat("wheat.txt");
-    int tmpId2 = 1,tmpArea2 = 5, tmpIsKeshting2 = 0, tmpAmountKeshting2 = 0, tmpdayFarmStart = 0 ;
-    while (wheat >> tmpId2 >> tmpArea2 >> tmpIsKeshting2 >> tmpAmountKeshting2 >> tmpdayFarmStart )
+    int tmpId2 = 1,tmpArea2 = 5, tmpIsKeshting2 = 0, tmpAmountKeshting2 = 0, tmpdayFarmStart = 0 , tmpIsupgrading = 0 ,tmpStartDauUpgrading = 0;
+    while (wheat >> tmpId2 >> tmpArea2 >> tmpIsKeshting2 >> tmpAmountKeshting2 >> tmpdayFarmStart >> tmpIsupgrading >> tmpStartDauUpgrading)
     {
         if (myfarm->owner.getShenaseP() == tmpId2)
         {
@@ -163,10 +169,8 @@ void wheatland2::keshtUpDate(int _keshtAmount) {
             tmpAmountKeshting2 = _keshtAmount;
 
             tmpdayFarmStart = myfarm->owner.getDay();
-
-            break;
         }
-        temp << tmpId2 << ' ' << tmpArea2 << ' ' << tmpIsKeshting2 << ' ' << tmpAmountKeshting2 << ' ' << tmpdayFarmStart << '\n';
+        temp << tmpId2 << ' ' << tmpArea2 << ' ' << tmpIsKeshting2 << ' ' << tmpAmountKeshting2 << ' ' << tmpdayFarmStart << ' ' << tmpIsupgrading << ' ' << tmpStartDauUpgrading << ' ' <<'\n';
     }
     temp.close();
     wheat.close();

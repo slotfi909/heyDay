@@ -1,6 +1,6 @@
 #include "wheatland_back.h"
 
-int tmpIdWh = 1, tmpAreaWh = 5, tmpIsKeshtingWh = 0, tmpAmountKeshtingWh = 0, thisDayWh = 0, tmpdayWh = 0, startDayFarmingWh = 0;
+int tmpIdWh = 1, tmpAreaWh = 5, tmpIsKeshtingWh = 0, tmpAmountKeshtingWh = 0, tmpdayWh = 0, startDayFarmingWh = 0, tmpisUpGrading = 0, tmpStartDayUpgrading = 0;
 
 wheatland_back::wheatland_back(int _id)
 {
@@ -14,11 +14,11 @@ wheatland_back::wheatland_back(int _id)
 
     std::ifstream wheat("wheat.txt");
     std::ofstream wheat2("wheat2.txt");
-    if ( wheat.peek() == std::ifstream::traits_type::eof() )
+   /* if ( wheat.peek() == std::ifstream::traits_type::eof() )
     {
          //file is empty
          flag = 1;
-         wheat2 << id << ' ' << tmpAreaWh << ' ' << tmpIsKeshtingWh<< ' ' << tmpAmountKeshtingWh<< ' ' << startDayFarmingWh << '\n';
+         wheat2 << id << ' ' << tmpAreaWh << ' ' << tmpIsKeshtingWh<< ' ' << tmpAmountKeshtingWh<< ' ' << startDayFarmingWh << ' ' << tmpisUpGrading << ' ' << tmpStartDayUpgrading <<'\n';
          area = tmpAreaWh;
          isKeshting = true;
          keshtAmount = 0;
@@ -28,9 +28,9 @@ wheatland_back::wheatland_back(int _id)
          remove("wheat.txt");
          rename("wheat2.txt", "wheat.txt");
     }
-    else {
+    else {*/
        //file is not empty
-       while (wheat >> tmpIdWh >> tmpAreaWh >> tmpIsKeshtingWh >> tmpAmountKeshtingWh >> startDayFarmingWh )
+       while (wheat >> tmpIdWh >> tmpAreaWh >> tmpIsKeshtingWh >> tmpAmountKeshtingWh >> startDayFarmingWh >> tmpisUpGrading >> tmpStartDayUpgrading )
         {
             if (tmpIdWh == id)
             {
@@ -39,30 +39,37 @@ wheatland_back::wheatland_back(int _id)
                 isKeshting = tmpIsKeshtingWh;
                 keshtAmount = tmpAmountKeshtingWh;
                 startDay = startDayFarmingWh;
+                isUpgrading = tmpisUpGrading;
+                startDayUpgrading = tmpStartDayUpgrading;
                 break;
             }
        }
        wheat.close();
        wheat2.close();
        remove("wheat2.txt");
-    }
+    //}
 
 
     //Add new user
     if(flag == 0){
-        std::ifstream wheatAdd("wheat.txt");
-        std::ofstream wheat2Add("wheat2.txt");
-        while (wheatAdd >> tmpIdWh >> tmpAreaWh >> tmpIsKeshtingWh >> tmpAmountKeshtingWh >> startDayFarmingWh )
+        std::ifstream wheatAddUser("wheat.txt");
+        std::ofstream wheatAddUserTmp("wheat2.txt");
+        while (wheatAddUser >> tmpIdWh >> tmpAreaWh >> tmpIsKeshtingWh >> tmpAmountKeshtingWh >> startDayFarmingWh >> tmpisUpGrading >> tmpStartDayUpgrading)
          {
-             wheat2Add << tmpIdWh << ' ' << tmpAreaWh << ' '  << tmpIsKeshtingWh << ' ' << tmpAmountKeshtingWh << ' ' << startDayFarmingWh << '\n';
+             wheatAddUserTmp << tmpIdWh << ' ' << tmpAreaWh << ' '  << tmpIsKeshtingWh << ' ' << tmpAmountKeshtingWh << ' ' << startDayFarmingWh << ' ' << tmpisUpGrading << ' ' << tmpStartDayUpgrading <<'\n';
          }
-        wheat2Add << _id << ' ' << 5 << ' ' << 0 << ' ' << 0 << ' ' << 0 << '\n';
-        wheatAdd.close();
-        wheat2Add.close();
+        wheatAddUserTmp << _id << ' ' << 5 << ' ' << 0 << ' ' << 0 << ' ' << 0 << ' ' << 0 << ' ' << 0 << '\n';
+        area = 5;
+        isKeshting = 0;
+        keshtAmount = 0;
+        startDay = 0;
+        isUpgrading = 0;
+        startDayUpgrading = 0;
+        wheatAddUser.close();
+        wheatAddUserTmp.close();
         remove("wheat.txt");
         rename("wheat2.txt", "wheat.txt");
     }
-
 
 }
 
@@ -135,19 +142,19 @@ void wheatland_back::upDateFile()
 {
     std::ofstream temp("temp.txt");
     std::ifstream wheat("wheat.txt");
-    int tmpId3 = 1, tmpArea3 = 5, tmpIsKeshting3 = 0, tmpAmountKeshting3 = 0, thisDay3 = 0, tmpday3 = 0, startDayFarming3 = 0;
-    while (wheat >> tmpId3 >> tmpArea3 >> tmpIsKeshting3 >> tmpAmountKeshting3 >> thisDay3 )
+    int tmpId3 = 1, tmpArea3 = 5, tmpIsKeshting3 = 0, tmpAmountKeshting3 = 0 ,startDayFarming3 = 0, tmpIsUpgarding3 = 0, tmpStartDayUpgrading3 = 0;
+    while (wheat >> tmpId3 >> tmpArea3 >> tmpIsKeshting3 >> tmpAmountKeshting3 >> startDayFarming3 >> tmpIsUpgarding3 >> tmpStartDayUpgrading3)
     {
         if (id == tmpId3)
         {
             tmpArea3 = area;
             tmpIsKeshting3 = isKeshting;
             tmpAmountKeshting3 = keshtAmount;
-            thisDay3 = startDay;
-
-            break;
+            startDayFarming3 = startDay;
+            tmpIsUpgarding3 = isUpgrading;
+            tmpStartDayUpgrading3 = startDayUpgrading;
         }
-        temp << tmpId3 << ' ' << tmpArea3 << ' ' << tmpIsKeshting3 << ' ' << tmpAmountKeshting3 << '\n';
+        temp << tmpId3 << ' ' << tmpArea3 << ' ' << tmpIsKeshting3 << ' ' << tmpAmountKeshting3 << ' ' <<tmpIsUpgarding3 << ' ' << tmpStartDayUpgrading3 << '\n';
     }
     temp.close();
     wheat.close();
