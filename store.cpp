@@ -269,22 +269,22 @@ void store::on_pushButton_clicked()
 
 void store::on_pushButton_3_clicked()
 {
-    myfarm->mymutex.lock();
-    if(myfarm->owner.getLevel()>=2){
+    //myfarm->mymutex.lock();
+    if(myfarm->myAvi.getisbuildingmade()){
     ge=new getAmount(this,15,20,myfarm->owner.getCoin(),myfarm->myAvi.getcurrent(),myfarm->myAvi.getcapacity()-myfarm->myAvi.getcurrent(),3);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
     }else {
-         QMessageBox::information(this,"ERROR","YOU need level 2");
+         QMessageBox::information(this,"ERROR","YOU should first build the building");
     }
-    myfarm->mymutex.unlock();
+   // myfarm->mymutex.unlock();
 }
 
 
 void store::on_pushButton_4_clicked()
 {
-    myfarm->mymutex.lock();
+   // myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=3){
     ge=new getAmount(this,4,6,myfarm->owner.getCoin(),myfarm->mySto.getAlfalfa(),myfarm->mySto.getCapacity()-myfarm->mySto.allMerchandises(),2);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
@@ -293,28 +293,28 @@ void store::on_pushButton_4_clicked()
     }else {
         QMessageBox::information(this,"ERROR","YOU need level 3");
     }
-    myfarm->mymutex.unlock();
+    //myfarm->mymutex.unlock();
 }
 
 
 void store::on_pushButton_5_clicked()
 {
-    myfarm->mymutex.lock();
-    if(myfarm->owner.getLevel()>=4){
+   // myfarm->mymutex.lock();
+    if(myfarm->myDai.getisbuildingmade()){
     ge=new getAmount(this,50,70,myfarm->owner.getCoin(),myfarm->myDai.getcurrent(),myfarm->myDai.getcapacity()-myfarm->myDai.getcurrent(),5);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
     }else {
-        QMessageBox::information(this,"ERROR","YOU need level 4");
+        QMessageBox::information(this,"ERROR","YOU should first build the building");
     }
-    myfarm->mymutex.unlock();
+   // myfarm->mymutex.unlock();
 }
 
 
 void store::on_pushButton_6_clicked()
 {
-    myfarm->mymutex.lock();
+   // myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=2){
     ge=new getAmount(this,8,0,myfarm->owner.getCoin(),myfarm->mySto.getEgg(),myfarm->mySto.getCapacity()-myfarm->mySto.allMerchandises(),4);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
@@ -323,29 +323,29 @@ void store::on_pushButton_6_clicked()
     }else{
     QMessageBox::information(this,"ERROR","YOU need level 2");
     }
-    myfarm->mymutex.unlock();
+    //myfarm->mymutex.unlock();
 }
 
 
 void store::on_pushButton_7_clicked()
 {
-    myfarm->mymutex.lock();
-    if(myfarm->owner.getLevel()>=6){
+    //myfarm->mymutex.lock();
+    if(myfarm->myShe.getisbuildingmade()){
     ge=new getAmount(this,70,80,myfarm->owner.getCoin(),myfarm->myShe.getcurrent(),myfarm->myShe.getcapacity()-myfarm->myShe.getcurrent(),7);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
     }else {
-         QMessageBox::information(this,"ERROR","YOU need level 7");
+         QMessageBox::information(this,"ERROR","YOU should first build the building");
     }
 
-    myfarm->mymutex.unlock();
+    //myfarm->mymutex.unlock();
 }
 
 
 void store::on_pushButton_8_clicked()
 {
-    myfarm->mymutex.lock();
+   // myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=4){
     ge=new getAmount(this,12,0,myfarm->owner.getCoin(),myfarm->mySto.getMilk(),myfarm->mySto.getCapacity()-myfarm->mySto.allMerchandises(),6);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
@@ -354,7 +354,7 @@ void store::on_pushButton_8_clicked()
     }else {
          QMessageBox::information(this,"ERROR","YOU need level 4");
     }
-    myfarm->mymutex.unlock();
+   // myfarm->mymutex.unlock();
 }
 
 
@@ -369,7 +369,7 @@ void store::on_pushButton_9_clicked()
 
 void store::on_pushButton_10_clicked()
 {
-    myfarm->mymutex.lock();
+    //myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=6){
     ge=new getAmount(this,23,0,myfarm->owner.getCoin(),myfarm->mySto.getFleece(),myfarm->mySto.getCapacity()-myfarm->mySto.allMerchandises(),8);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
@@ -378,7 +378,7 @@ void store::on_pushButton_10_clicked()
     }else {
      QMessageBox::information(this,"ERROR","YOU need level 7");
     }
-    myfarm->mymutex.lock();
+    //myfarm->mymutex.lock();
 }
 
 

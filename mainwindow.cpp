@@ -36,8 +36,21 @@ void runthread2(Farm *myfarm,MainWindow*t){
             //
 
             myfarm->owner.setDay(myfarm->owner.getDay()+1);
+
             myfarm->owner.setCoin(1000);
             myfarm->owner.setLevel(10);
+
+            myfarm->myAvi.checkbuilding(myfarm->owner.getDay());
+                       myfarm->myAvi.checkcrop(myfarm->owner.getDay());
+                       myfarm->myAvi.checkupdate(myfarm->owner.getDay());
+
+                       myfarm->myShe.checkbuilding(myfarm->owner.getDay());
+                       myfarm->myShe.checkcrop(myfarm->owner.getDay());
+                       myfarm->myShe.checkupdate(myfarm->owner.getDay());
+
+                       myfarm->myDai.checkbuilding(myfarm->owner.getDay());
+                       myfarm->myDai.checkcrop(myfarm->owner.getDay());
+                       myfarm->myDai.checkupdate(myfarm->owner.getDay());
 
             myfarm->owner.changeExp(1);
             if(myfarm->owner.changeLevel()){

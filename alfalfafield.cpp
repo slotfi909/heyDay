@@ -71,6 +71,7 @@ isPlowed=0;
  isBuilt=0;
  buildStartTime=0;
  isBeingBuilt=0;
+ shenaseP=_shenaseP;
     //..................
 A.area=4;
 A.isPlowed=0;
@@ -85,7 +86,7 @@ A.isBuilt=0;
 A.buildStartTime=0;
 A.isBeingBuilt=0;
 ////////////////////////
-A.shenaseP=1; //////////
+A.shenaseP=_shenaseP; //////////
 ////////////////////////
     fout.open("alfalfaField.txt",std::ios::app);
     fout.write((char*)&A, sizeof(temp));
