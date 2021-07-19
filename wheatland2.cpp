@@ -70,6 +70,7 @@ wheatland2::wheatland2(QWidget *parent, Farm * _myfarm) :
               myfarm->myWhe.setArea( myfarm->myWhe.getArea() * 2 );
               myfarm->myWhe.setIsUpgrading(0);
               myfarm->myWhe.setStartDayUpgrading(0);
+              myfarm->owner.changeExp(3);
               QMessageBox::information(this,"Upgrade","Wheatland Upgraded!");
           }
       }
@@ -133,16 +134,18 @@ void wheatland2::on_bardasht_clicked()
             myfarm->myWhe.setIsKeshting(false);
             myfarm->myWhe.setStartDay(0);
             myfarm->myWhe.setKeshtAmount(0);
+            myfarm->owner.changeExp(1);
             ui->progressBar->setValue(0);
             QMessageBox::information(this,"info","wheat added to silo!");
+       }
+       else{
+           QMessageBox::critical(this,"ERROR","Sorry,but you must wait!");
        }
     }
     else if( myfarm->myWhe.getIsKeshting() == false ){
         QMessageBox::critical(this,"ERROR","You must farm first!");
     }
-    else{
-        QMessageBox::critical(this,"ERROR","Sorry,but you must wait!");
-    }
+
 }
 
 
@@ -151,7 +154,6 @@ void wheatland2::on_upGrade_clicked()
     if(myfarm->owner.getCoin() > 5 && myfarm->owner.getLevel() > 1 && myfarm->mySto.getShovel() >= 1)
     {
         myfarm->owner.changeCoin(-5);
-        myfarm->owner.changeExp(3);
         myfarm->mySto.addShovel(-1);
 
        int ans = myfarm->myWhe.upGrade(myfarm->owner.getDay());
@@ -161,7 +163,14 @@ void wheatland2::on_upGrade_clicked()
             QMessageBox::information(this,"info","Upgrade strated successfully!");
     }
     else{
-        QMessageBox::critical(this,"ERROR","You can not do that right now!");
+        if(myfarm->owner.getCoin() < 5)
+        QMessageBox::critical(this,"ERROR","You need more coin!");
+        else if(myfarm->owner.getLevel() < 2){
+            QMessageBox::critical(this,"ERROR","Level 2 at least required!");
+        }
+        else{
+            QMessageBox::critical(this,"ERROR","You need at least one shovel!");
+        }
     }
 }
 
