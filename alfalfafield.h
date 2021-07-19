@@ -19,7 +19,7 @@ int shenaseP;
 int plantedArea;
 public:
 //constructor
-alfalfaField(int shenaseP=1);
+alfalfaField(int _shenaseP=1);
 //functions
 int getArea();
 void update_file();

@@ -36,7 +36,9 @@ void runthread2(Farm *myfarm,MainWindow*t){
             //
 
             myfarm->owner.setDay(myfarm->owner.getDay()+1);
-            myfarm->owner.setCoin(100);
+            myfarm->owner.setCoin(1000);
+            myfarm->owner.setLevel(10);
+
             myfarm->owner.changeExp(1);
             if(myfarm->owner.changeLevel()){
                 emit t->showmessage();

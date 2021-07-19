@@ -17,7 +17,7 @@ int shenaseP;
 };
 
 //constructor
-alfalfaField::alfalfaField(int shenaseP){
+alfalfaField::alfalfaField(int _shenaseP){
 
   temp A;
 
@@ -39,7 +39,7 @@ alfalfaField::alfalfaField(int shenaseP){
    /////////////////////
        //  while (!fin.eof()) {/////////////////////taghir dar hame
     fin.read((char*)&A, sizeof(temp));
-    if (A.shenaseP == shenaseP) {
+    if (A.shenaseP == _shenaseP) {
 area=A.area;
 isPlowed=A.isPlowed;
  plowStartTime=A.plowStartTime;
@@ -52,7 +52,7 @@ isPlowed=A.isPlowed;
  isBuilt=A.isBuilt;
  buildStartTime=A.buildStartTime;
  isBeingBuilt=A.isBeingBuilt;
- A.shenaseP = shenaseP;
+shenaseP=A.shenaseP;
             isFirst=0;
       break;
     }
@@ -84,7 +84,9 @@ A.plantedArea=0;
 A.isBuilt=0;
 A.buildStartTime=0;
 A.isBeingBuilt=0;
-
+////////////////////////
+A.shenaseP=1; //////////
+////////////////////////
     fout.open("alfalfaField.txt",std::ios::app);
     fout.write((char*)&A, sizeof(temp));
     fout.close();
@@ -114,9 +116,9 @@ void alfalfaField::update_file() {
 			if (shenaseP == p.shenaseP) {
  p.area=area;
  p.isPlowed=isPlowed;
-  p.plowStartTime=plowStartTime;
-  p.upgradeStartTime=upgradeStartTime;
-  p.plantStartTime=plantStartTime;
+ p.plowStartTime=plowStartTime;
+ p.upgradeStartTime=upgradeStartTime;
+ p.plantStartTime=plantStartTime;
  p.isBeingUpgraded=isBeingUpgraded;
  p.isBeingPlowed=isBeingPlowed;
  p.isBeingPlanted=isBeingPlanted;
