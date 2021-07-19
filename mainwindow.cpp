@@ -185,9 +185,13 @@ void MainWindow::showCoin()
 //shop button (AmirAli)
 void MainWindow::on_pushButton_3_clicked()
 {
-    
-  stor=new store(this,&myfarm);
-  stor->show();
+    if(myfarm.owner.getLevel() > 1){
+        stor=new store(this,&myfarm);
+        stor->show();
+    }
+    else{
+        QMessageBox::critical(this,"Error","At least level 2 is required!");
+    }
 
 }
 
