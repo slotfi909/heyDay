@@ -100,7 +100,7 @@ int wheatland_back::upGrade(int _startDay)
         if (id == tmpId2)
         {
             flag = 1;
-            if(tmpIsUpgarding2 == 1)
+            if(isUpgrading == 1)
                 return 0;
             tmpIsUpgarding2 = true;
             isUpgrading = true;
