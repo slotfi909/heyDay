@@ -19,7 +19,7 @@ public:
 int checkForPlow();
 int checkForUpgrade();
 int checkForPlant();
-
+int checkForBuild();
 friend class storage;
     friend class silo;
 void update_file();
@@ -31,6 +31,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_4_clicked();
+
+    void build();
 
 private:
     Ui::DialogAlfalfaField *ui;

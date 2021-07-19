@@ -12,6 +12,7 @@ bool isBuilt;
 bool isBeingUpgraded;
 bool isBeingPlowed;
 bool isBeingPlanted;
+bool isBeingBuilt;
 int shenaseP;
 };
 
@@ -50,6 +51,7 @@ isPlowed=A.isPlowed;
  plantedArea=A.plantedArea;
  isBuilt=A.isBuilt;
  buildStartTime=A.buildStartTime;
+ isBeingBuilt=A.isBeingBuilt;
             isFirst=0;
       break;
     }
@@ -67,6 +69,7 @@ isPlowed=0;
  plantedArea=0;
  isBuilt=0;
  buildStartTime=0;
+ isBeingBuilt=0;
     //..................
 A.area=4;
 A.isPlowed=0;
@@ -80,6 +83,7 @@ A.shenaseP=shenaseP;
 A.plantedArea=0;
 A.isBuilt=0;
 A.buildStartTime=0;
+A.isBeingBuilt=0;
 
     fout.open("alfalfaField.txt",std::ios::app);
     fout.write((char*)&A, sizeof(temp));
@@ -119,6 +123,7 @@ void alfalfaField::update_file() {
  p.plantedArea=plantedArea;
  p.isBuilt=isBuilt;
  p.buildStartTime=buildStartTime;
+ p.isBeingBuilt=isBeingBuilt;
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}

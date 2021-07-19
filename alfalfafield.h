@@ -14,6 +14,7 @@ bool isBeingUpgraded;
 bool isBeingPlowed;
 bool isBeingPlanted;
 bool isBuilt;
+bool isBeingBuilt;
 int shenaseP;
 int plantedArea;
 public:
