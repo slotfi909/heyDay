@@ -159,28 +159,7 @@ void store::slotToSell(int kodom,int tedad){
 }
 void store::slotToBuy(int kodom,int tedad){
     myfarm->mymutex.lock();
-    //tavabe check kamel shodan upgrade
-     if ((myfarm->myAvi.getupgrading()) && (myfarm->owner.getDay() - myfarm->myAvi.get_start_day_of_upgrading()) >= 3) {
-        myfarm->myAvi.setcapacity(myfarm->myAvi.getcapacity() * 2);
-        myfarm->myAvi.set_start_day_of_upgrading(2147483640);
-        myfarm->myAvi.setlevel(myfarm->myAvi.getlevel() + 1);
-        myfarm->myAvi.setupgrading(false);
-    }
-
- if ((myfarm->myDai.getupgrading()) && (myfarm->owner.getDay() - myfarm->myDai.get_start_day_of_upgrading()) >= 5) {
-        myfarm->myDai.setcapacity(myfarm->myDai.getcapacity() * 2);
-        myfarm->myDai.set_start_day_of_upgrading(2147483640);
-        myfarm->myDai.setlevel(myfarm->myDai.getlevel() + 1);
-        myfarm->myDai.setupgrading(false);
-    }
-
-if ((myfarm->myShe.getupgrading()) && (myfarm->owner.getDay() - myfarm->myShe.get_start_day_of_upgrading()) >= 9) {
-        myfarm->myShe.setcapacity(myfarm->myShe.getcapacity() * 2);
-        myfarm->myShe.set_start_day_of_upgrading(2147483640);
-        myfarm->myShe.setlevel(myfarm->myShe.getlevel() + 1);
-        myfarm->myShe.setupgrading(false);
-    }
-    //...............
+   
     if(kodom==1){
 
         if(myfarm->mySil.addWheat(tedad)){
