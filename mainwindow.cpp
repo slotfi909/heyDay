@@ -56,6 +56,8 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
 
     ui->setupUi(this);
 
+    this->setFixedSize(588,513);
+
     //menu title
     this->setWindowTitle("HeyDay");
 
@@ -113,6 +115,8 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
         ui->Dairyfarm->setIcon(QIcon("C:/HeydayLogo/Logo/cow.png"));
         ui->Dairyfarm->setIconSize(QSize(85, 85));
 
+        ui->alfalfaLand->setIcon(QIcon("C:/HeydayLogo/Logo/alfalfamenu.jpg"));
+        ui->alfalfaLand->setIconSize(QSize(80, 80));
 
     //multi thread
     Qt=QThread::create(runthread,ui->label_5,&myfarm,this);
@@ -145,6 +149,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+    myfarm.owner.Update_file();
     sc=new scoreboard(this);
     sc->setWindowIcon(QIcon("C:/HeydayLogo/Logo/score.jpg"));
     sc->setModal(true);
@@ -261,7 +266,6 @@ void MainWindow::on_Aviculture_clicked()
 //Dairyfarm (Ahmad)
 void MainWindow::on_Dairyfarm_clicked()
 {
-   
         Da = new Dairyfarm(this,&myfarm);
         Da->show();
 }
