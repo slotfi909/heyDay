@@ -51,6 +51,9 @@ public:
 	int isfull();
 	int addsheep(int);
 	int removesheep(int);
+	void checkcrop(int);
+	void checkupdate(int);
+	void checkbuilding(int);
 	//int starting_upgrade();
 	//void upgrading();
 	//int feeding();

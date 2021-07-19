@@ -39,12 +39,8 @@ Dairyfarm::Dairyfarm(QWidget* parent, Farm* _Myfarm)
     btn6->setIconSize(QSize(65, 65));
     btn6->setToolTip("make building");
 
-    if (myFarm->myDai.getisbuildingmaking() && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_building() >= 5)) {
-        myFarm->myDai.setisbuildingmade(true);
-        myFarm->myDai.set_start_day_of_building(2147483640);
-        myFarm->myDai.setisbuildingmaking(false);
-    }
-    else if (!myFarm->myDai.getisbuildingmade() && myFarm->myDai.getisbuildingmaking()) {
+   
+    if (!myFarm->myDai.getisbuildingmade() && myFarm->myDai.getisbuildingmaking()) {
         Layout->addWidget(btn5);
         QString str = QString("%1 days pass it takes 5 days").arg(myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_building());
         lbl->setText(str);
@@ -81,12 +77,6 @@ Dairyfarm::Dairyfarm(QWidget* parent, Farm* _Myfarm)
 }
 
 void Dairyfarm::status() {
-    if ((myFarm->myDai.getupgrading()) && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading() >= 5)) {
-        myFarm->myDai.setcapacity(myFarm->myDai.getcapacity() * 2);
-        myFarm->myDai.set_start_day_of_upgrading(2147483640);
-        myFarm->myDai.setlevel(myFarm->myDai.getlevel() + 1);
-        myFarm->myDai.setupgrading(false);
-    }
     QString str = QString("current number of cows: %1\ncapacity of Dairyfarm: %2\nlevel of Dairyfarm: %3").arg(myFarm->myDai.getcurrent()).arg(myFarm->myDai.getcapacity()).arg(myFarm->myDai.getlevel());
 
     QMessageBox::information(this, "status", str);
@@ -95,21 +85,14 @@ void Dairyfarm::status() {
 void Dairyfarm::feeding() {
     QString str;
 
-    if ((myFarm->myDai.getupgrading()) && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading() >= 5)) {
-        myFarm->myDai.setcapacity(myFarm->myDai.getcapacity() * 2);
-        myFarm->myDai.set_start_day_of_upgrading(2147483640);
-        myFarm->myDai.setlevel(myFarm->myDai.getlevel() + 1);
-        myFarm->myDai.setupgrading(false);
-    }
-
     if (myFarm->myDai.getcurrent() == 0)
         str = "there is no cow for feeding";
+    else if (myFarm->myDai.getisfed())
+        str = "hens have been fed already you should wait until they make milk";
     else if (myFarm->myDai.gethavecrop())
         str = "cows have milk you should harvest your crops first";
     else if (myFarm->mySto.getAlfalfa() < myFarm->myDai.getcurrent() * 2)
         str = "not enough Alfalfa";
-    else if (myFarm->myDai.getisfed())
-        str = "hens have been fed already you should wait until they make milk";
     else {
         myFarm->myDai.set_start_day_of_produce(myFarm->owner.getDay());
         myFarm->myDai.setisfed(true);
@@ -122,19 +105,6 @@ void Dairyfarm::feeding() {
 
 void Dairyfarm::removal() {
     QString str;
-
-    if ((myFarm->myDai.getupgrading()) && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading() >= 5)) {
-        myFarm->myDai.setcapacity(myFarm->myDai.getcapacity() * 2);
-        myFarm->myDai.set_start_day_of_upgrading(2147483640);
-        myFarm->myDai.setlevel(myFarm->myDai.getlevel() + 1);
-        myFarm->myDai.setupgrading(false);
-    }
-
-    if ((myFarm->myDai.getisfed()) && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_produce() >= 3)) {
-        myFarm->myDai.sethavecrop(true);
-        myFarm->myDai.setisfed(false);
-        myFarm->myDai.set_start_day_of_produce(-1);
-    }
 
     if (myFarm->myDai.getisfed() && !myFarm->myDai.gethavecrop())
         str = "cows have been fed but they have not made milk already";
@@ -155,12 +125,6 @@ void Dairyfarm::removal() {
 void Dairyfarm::starting_upgrade() {
     QString str;
 
-    if ((myFarm->myDai.getupgrading()) && (myFarm->owner.getDay() - myFarm->myDai.get_start_day_of_upgrading() >= 5)) {
-        myFarm->myDai.setcapacity(myFarm->myDai.getcapacity() * 2);
-        myFarm->myDai.set_start_day_of_upgrading(2147483640);
-        myFarm->myDai.setlevel(myFarm->myDai.getlevel() + 1);
-        myFarm->myDai.setupgrading(false);
-    }
     if (myFarm->myDai.getupgrading())
         str = "upgrading. you should wait 5 days";
     else  if (myFarm->owner.getLevel() < 5)
@@ -171,6 +135,7 @@ void Dairyfarm::starting_upgrade() {
         str = "At least 15 coin is required!";
     else {
         myFarm->myDai.set_start_day_of_upgrading(myFarm->owner.getDay());
+        myFarm->myDai.setupgrading(true);
         myFarm->owner.setCoin(myFarm->owner.getCoin() - 15);
         myFarm->owner.setExp(myFarm->owner.getExp() + 6);
         myFarm->mySto.addNail(-2);

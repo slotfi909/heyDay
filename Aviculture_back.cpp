@@ -36,7 +36,7 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 	fin.seekg(0, std::ios::end);
 	int size = fin.tellg();
 	fin.seekg(0, std::ios::beg);
-    while (size>fin.tellg()) {/////////////////////taghir dar hame
+	while (size<fin.tellg()) {/////////////////////taghir dar hame
 		fin.read((char*)&A, sizeof(temp));
 		if (A.shenaseP == _shenaseP) {
 			current = A.current;
@@ -152,6 +152,33 @@ int Aviculture_back::removechicken(int num) {
 	return 1;
 
 }
+
+void Aviculture_back::checkcrop(int _day) {
+	if (isfed && (_day - start_day_of_produce >= 2)) {
+		havecrop = true;
+		isfed=false;
+		start_day_of_produce = -1;
+	}
+}
+
+void Aviculture_back::checkupdate(int _day) {
+
+	if (upgrading && (_day - start_day_of_upgrading >= 3)) {
+		capacity *= 2;
+		start_day_of_upgrading = -1;
+		level++;
+		upgrading = false;
+	}
+}
+
+void Aviculture_back::checkbuilding(int _day) {
+	if (isbuildingmaking && (_day - start_day_of_building >= 3)) {
+		isbuildingmade = true;
+		start_day_of_building = -1;
+		isbuildingmaking = false;
+	}
+}
+
 /*dakhel slot ha.......................................
 int Aviculture_back::starting_upgrade()
 {
