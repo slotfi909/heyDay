@@ -33,10 +33,12 @@ int day;//roz vared shodan be storage.
 int tedad;//tedadi ke onroz vard storage shode.
 bool spoiled;//kharab shode =>1 , kharab nashode=>0.
 }m;
-
+int result=0;
 
 std::ifstream infile;
+std::ofstream outfile;//for writing in new file.
 infile.open("milk.txt",std::ios::in);
+outfile.open("milk-temp.txt",std::ios::app);
 if(infile.is_open()){
 
 infile.seekg(0,std::ios::end);
@@ -48,11 +50,16 @@ while(infile.tellg()<size){
     if(!m.spoiled)
     if((day-m.day)>=10){
        m.spoiled=1;
-       return -(m.tedad);//tedadi ke bayad az anbar kam beshe.
+       result= -(m.tedad);//tedadi ke bayad az anbar kam beshe.
     }
+    outfile.write((char*)&m,sizeof (m));
 
 }
+outfile.close();
 }
- return 0;
+infile.close();
+remove("milk.txt");
+rename("milk-temp.txt","milk.txt");
+ return result;
 }
 
