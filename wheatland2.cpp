@@ -110,7 +110,8 @@ void wheatland2::on_kesht_clicked()
           else if( ui->keshtSize->text().isEmpty() )
               QMessageBox::critical(this,"ERROR","LineEdit can not be Empty!");
           else{
-              myfarm->mySil.addWheat(-myfarm->mySil.getNumWheat());
+
+              myfarm->mySil.addWheat(-ui->keshtSize->text().toInt());
               keshtUpDate(ui->keshtSize->text().toInt());
               endOfFarming = false;
               QMessageBox::information(this,"DONE","Farming has begone!");
@@ -130,6 +131,7 @@ void wheatland2::on_kesht_clicked()
 
 void wheatland2::on_bardasht_clicked()
 {
+    if(myfarm->mySil.getCapaticy() - myfarm->mySil.getNumWheat() >= (myfarm->myWhe.getAmount()*2)){
     if( myfarm->myWhe.getIsKeshting() == true )
     {
        if( myfarm->owner.getDay() - myfarm->myWhe.getKeshtStartDay() >= 2 )
@@ -150,13 +152,17 @@ void wheatland2::on_bardasht_clicked()
     else if( myfarm->myWhe.getIsKeshting() == false ){
         QMessageBox::critical(this,"ERROR","You must farm first!");
     }
+    }
+    else{
+         QMessageBox::critical(this,"ERROR","Not enough space availble in silo!");
+    }
 
 }
 
 
 void wheatland2::on_upGrade_clicked()
 {
-    if(myfarm->owner.getCoin() > 5 && myfarm->owner.getLevel() > 1 && myfarm->mySto.getShovel() >= 1)
+    if(myfarm->owner.getCoin() >= 5 && myfarm->owner.getLevel() > 1 && myfarm->mySto.getShovel() >= 1)
     {
         myfarm->owner.changeCoin(-5);
         myfarm->mySto.addShovel(-1);
@@ -193,6 +199,8 @@ void wheatland2::keshtUpDate(int _keshtAmount) {
             tmpIsKeshting2 = 1;
 
             tmpAmountKeshting2 = _keshtAmount;
+
+            myfarm->myWhe.setKeshtAmount(_keshtAmount);
 
             tmpdayFarmStart = myfarm->owner.getDay();
         }
