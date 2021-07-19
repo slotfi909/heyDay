@@ -171,7 +171,7 @@ void MainWindow::showLevel()
 //Display persentage of XP
 void MainWindow::showXp()
 {
-   /*ui->XP->setValue( myfarm.owner.getExp()/myfarm.owner.getMaxExp() * 100 );*/
+   ui->exp2->setText(QString::number(myfarm.owner.getExp()));
 }
 
 
