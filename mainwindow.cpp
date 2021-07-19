@@ -91,22 +91,34 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
 
         //silo button icon
         ui->silo->setIcon(QIcon("C:/HeydayLogo/Logo/silo.png"));
-        ui->silo->setIconSize(QSize(110, 110));
+        ui->silo->setIconSize(QSize(95, 95));
 
         //garner icon
         ui->garner->setIcon(QIcon("C:/HeydayLogo/Logo/garner.png"));
-        ui->garner->setIconSize(QSize(110, 110));
+        ui->garner->setIconSize(QSize(90, 90));
+
+        //wheatland icon
+        ui->WheatLand->setIcon(QIcon("C:/HeydayLogo/Logo/wheatmenu.png"));
+        ui->WheatLand->setIconSize(QSize(90, 90));
 
 
+        ui->Sheepcote->setIcon(QIcon("C:/HeydayLogo/Logo/sheep.png"));
+        ui->Sheepcote->setIconSize(QSize(88, 88));
 
+
+        ui->Aviculture->setIcon(QIcon("C:/HeydayLogo/Logo/Aviculture.png"));
+        ui->Aviculture->setIconSize(QSize(85, 85));
+
+
+        ui->Dairyfarm->setIcon(QIcon("C:/HeydayLogo/Logo/cow.png"));
+        ui->Dairyfarm->setIconSize(QSize(85, 85));
 
 
     //multi thread
-
     Qt=QThread::create(runthread,ui->label_5,&myfarm,this);
     Qt->start();
         
-        Qt2=QThread::create(runthread2,&myfarm,this);
+    Qt2=QThread::create(runthread2,&myfarm,this);
     Qt2->start();
 
     connect(this,SIGNAL(showmessage()),this,SLOT(on_shoewMessage_signal()));
@@ -152,7 +164,7 @@ void MainWindow::showLevel()
 //Display persentage of XP
 void MainWindow::showXp()
 {
-   ui->XP->setValue( myfarm.owner.getExp()/myfarm.owner.getMaxExp() * 100 );
+   /*ui->XP->setValue( myfarm.owner.getExp()/myfarm.owner.getMaxExp() * 100 );*/
 }
 
 
