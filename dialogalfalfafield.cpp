@@ -302,6 +302,7 @@ void DialogAlfalfaField::build(){
            myfarm->mySto.addNail(-1);
            myfarm->owner.changeCoin(-15);
            myfarm->myAlf.buildStartTime=myfarm->owner.getDay();
+           myfarm->owner.setExp(myfarm->owner.getExp()+3);
 
        }
        else{

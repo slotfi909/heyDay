@@ -25,11 +25,11 @@ DialogStorage::DialogStorage(QWidget *parent,Farm *_myfarm) :
           QMessageBox::information(this,"good News !","storage upgraded suucessfully");
       }
 
-//      QPixmap bkgndSto("C:/HeydayLogo/Logo/storage.jpg");
-//      bkgndSto = bkgndSto.scaled(this->size(), Qt::IgnoreAspectRatio);
-//      QPalette paletteSto;
-//      paletteSto.setBrush(QPalette::Window/*Background*/, bkgndSto);
-//      this->setPalette(paletteSto);
+      QPixmap bkgndSto("C:/HeydayLogo/Logo/storage.jpg");
+      bkgndSto = bkgndSto.scaled(this->size(), Qt::IgnoreAspectRatio);
+      QPalette paletteSto;
+      paletteSto.setBrush(QPalette::Window/*Background*/, bkgndSto);
+      this->setPalette(paletteSto);
 
 
       ui->label_2->setText(QString::number(myfarm->mySto.level));
