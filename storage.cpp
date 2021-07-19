@@ -59,12 +59,12 @@ return 0;
     }
 int storage1::addEgg(int numAddedEgg){
     if(numAddedEgg+allMerchandises()<=capacity){
-    if(level>=2){
+//    if(level>=2){
     numEgg+=numAddedEgg;
 
 
     return 1;
-    }
+//    }
     }
 return 0;
 
@@ -74,12 +74,12 @@ return 0;
 int storage1::addMilk(int numAddedMilk){
       if(numAddedMilk+allMerchandises()<=capacity){
 
-  if(level>=4){
+//  if(level>=4){
     numMilk+=numAddedMilk;
    
 
     return 1;
-  }
+//  }
 
       }
 return 0;
@@ -87,11 +87,11 @@ return 0;
 int storage1::addFleece(int numAddedFleece){
       if(numAddedFleece+allMerchandises()<=capacity){
 
-  if(level>=6){
+//  if(level>=6){
     numFleece+=numAddedFleece;
 
     return 1;
-  }
+//  }
 
       }
 return 0;

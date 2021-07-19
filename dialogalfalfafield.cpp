@@ -70,7 +70,8 @@ int hAlf=ui->pushButton->height();
 
 
     //ui progressBar setup
-      if(myfarm->myAlf.isBeingPlanted == false){
+  /*
+    if(myfarm->myAlf.isBeingPlanted == false){
            ui->progressBar->setValue(0);
 
       }
@@ -96,7 +97,7 @@ int hAlf=ui->pushButton->height();
 
       }
 
-
+*/
 
 
       ui->label_2->setText(QString::number(myfarm->myAlf.getArea()));
@@ -367,7 +368,7 @@ int DialogAlfalfaField::checkForPlant(){
 
 int DialogAlfalfaField::checkForBuild(){
 if(myfarm->myAlf.isBeingBuilt){
-   if(myfarm->myAlf.buildStartTime - myfarm->owner.getDay()>=3){
+   if(myfarm->myAlf.buildStartTime - myfarm->owner.getDay()> 3){
        QMessageBox::information(this,"OK","alfalfa field successfully built!");
      myfarm->myAlf.isBeingBuilt=false;
      myfarm->myAlf.isBuilt=true;
