@@ -277,7 +277,7 @@ void store::on_pushButton_4_clicked()
 {
     myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=3){
-    ge=new getAmount(this,4,6,myfarm->owner.getCoin(),myfarm->mySil.getNumWheat(),myfarm->mySto.getCapacity()-myfarm->mySto.allMerchandises(),2);
+    ge=new getAmount(this,4,6,myfarm->owner.getCoin(),myfarm->mySto.getAlfalfa(),myfarm->mySto.getCapacity()-myfarm->mySto.allMerchandises(),2);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
@@ -292,7 +292,7 @@ void store::on_pushButton_5_clicked()
 {
     myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=4){
-    ge=new getAmount(this,50,70,myfarm->owner.getCoin(),myfarm->myDai.getcurrent(),myfarm->myDai.getcapacity()-myfarm->myDai.getcapacity(),5);
+    ge=new getAmount(this,50,70,myfarm->owner.getCoin(),myfarm->myDai.getcurrent(),myfarm->myDai.getcapacity()-myfarm->myDai.getcurrent(),5);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();

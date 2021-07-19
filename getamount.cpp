@@ -16,7 +16,7 @@ getAmount::getAmount(QWidget *parent,int _sell,int _buy,int _coin,int _tedad,int
     ui->tedad->setText(QString("tedad ")+QString::number(_tedad));
     ui->BUY->setText(QString("BUY ")+QString::number(_buy));
     ui->SELL->setText(QString("SELL ")+QString::number(_sell));
-    ui->capacity->setText(QString("Capacity ")+QString::number(_capacity));
+    ui->capacity->setText(QString("Free Sapce ")+QString::number(_capacity));
 }
 
 getAmount::~getAmount()
