@@ -21,6 +21,9 @@ DialogFormakeAccount::DialogFormakeAccount(QWidget *parent) :
            QPalette palette;
            palette.setBrush(QPalette::Window, bkgnd);
            this->setPalette(palette);
+
+           ui->LineEditPass->setEchoMode(QLineEdit::Password);
+           ui->LineEditPass_2->setEchoMode(QLineEdit::Password);
 }
 
 DialogFormakeAccount::~DialogFormakeAccount()

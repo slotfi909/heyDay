@@ -23,7 +23,7 @@ void store::slotToSell(int kodom,int tedad){
 
         if(myfarm->mySil.addWheat(-tedad)){
             myfarm->owner.changeCoin(tedad*2);
-            myfarm->owner.changeExp(1);
+            myfarm->owner.changeExp(6);
             QMessageBox::information(this,"success","SELL successfully");
     }
     }else if(kodom==2){
@@ -31,7 +31,7 @@ void store::slotToSell(int kodom,int tedad){
 
         if(myfarm->mySto.addAlfalfa(-tedad)){
             myfarm->owner.changeCoin(tedad*4);
-            myfarm->owner.changeExp(2);
+            myfarm->owner.changeExp(6);
             QMessageBox::information(this,"success","SELL successfully");
     }
         }else if (kodom==3){
@@ -44,7 +44,7 @@ void store::slotToSell(int kodom,int tedad){
             QMessageBox::information(this,"ERROR","Products have not been collected");
           if(x==1){
                myfarm->owner.changeCoin(tedad*15);
-            myfarm->owner.changeExp(5);
+            myfarm->owner.changeExp(6);
             QMessageBox::information(this,"success","SELL successfully");
             }
         }else if(kodom==4){
@@ -53,7 +53,7 @@ void store::slotToSell(int kodom,int tedad){
 
           if(x==1){
                myfarm->owner.changeCoin(tedad*8);
-            myfarm->owner.changeExp(3);
+            myfarm->owner.changeExp(6);
             QMessageBox::information(this,"success","SELL successfully");
             }
       //QMessageBox::information(this,"ERROR","You cant buy eggs from shop");
@@ -68,17 +68,18 @@ void store::slotToSell(int kodom,int tedad){
             QMessageBox::information(this,"ERROR","Products have not been collected");
           if(x==1){
                myfarm->owner.changeCoin(tedad*50);
-            myfarm->owner.changeExp(10);
+            myfarm->owner.changeExp(6);
             QMessageBox::information(this,"success","SELL successfully");
             }
     }
     else if (kodom==6){
 
         int x=myfarm->mySto.addMilk(-tedad);
-
+          //delete milk
           if(x==1){
                myfarm->owner.changeCoin(tedad*12);
-            myfarm->owner.changeExp(5);
+               myfarm->sell_milk(myfarm->owner.getShenaseP(),tedad);
+            myfarm->owner.changeExp(6);
             QMessageBox::information(this,"success","SELL successfully");
             }
 
@@ -93,7 +94,7 @@ void store::slotToSell(int kodom,int tedad){
             QMessageBox::information(this,"ERROR","Products have not been collected");
           if(x==1){
                myfarm->owner.changeCoin(tedad*70);
-            myfarm->owner.changeExp(15);
+            myfarm->owner.changeExp(6);
             QMessageBox::information(this,"success","SELL successfully");
             }
     }else if(kodom==8){
@@ -101,7 +102,7 @@ void store::slotToSell(int kodom,int tedad){
 
           if(x==1){
                myfarm->owner.changeCoin(tedad*23);
-            //myfarm->owner.changeExp(10);
+            myfarm->owner.changeExp(6);
             QMessageBox::information(this,"success","SELL successfully");
             }
     }else if(kodom==9){
@@ -109,7 +110,7 @@ void store::slotToSell(int kodom,int tedad){
 
           if(x==1){
                myfarm->owner.changeCoin(tedad*20);
-            myfarm->owner.changeExp(4);
+            myfarm->owner.changeExp(6);
             QMessageBox::information(this,"success","SELL successfully");
             }
     }else if(kodom==10){
@@ -117,7 +118,7 @@ void store::slotToSell(int kodom,int tedad){
 
           if(x==1){
                myfarm->owner.changeCoin(tedad*30);
-            myfarm->owner.changeExp(8);
+            myfarm->owner.changeExp(6);
             QMessageBox::information(this,"success","SELL successfully");
             }
     }
@@ -155,7 +156,7 @@ if ((myfarm->myShe.getupgrading()) && (myfarm->owner.getDay() - myfarm->myShe.ge
 
         if(myfarm->mySil.addWheat(tedad)){
             myfarm->owner.changeCoin(-tedad*3);
-            myfarm->owner.changeExp(1);
+            myfarm->owner.changeExp(2);
             QMessageBox::information(this,"success","BUY successfully");
     }
     }else if(kodom==2){
@@ -176,7 +177,7 @@ if ((myfarm->myShe.getupgrading()) && (myfarm->owner.getDay() - myfarm->myShe.ge
             QMessageBox::information(this,"ERROR","Products have not been collected");
           if(x==1){
                myfarm->owner.changeCoin(-tedad*20);
-            myfarm->owner.changeExp(5);
+            myfarm->owner.changeExp(2);
             QMessageBox::information(this,"success","BUY successfully");
             }
         }else if(kodom==4){
@@ -194,7 +195,7 @@ if ((myfarm->myShe.getupgrading()) && (myfarm->owner.getDay() - myfarm->myShe.ge
             QMessageBox::information(this,"ERROR","Products have not been collected");
           if(x==1){
                myfarm->owner.changeCoin(-tedad*70);
-            myfarm->owner.changeExp(10);
+            myfarm->owner.changeExp(2);
             QMessageBox::information(this,"success","BUY successfully");
             }
     }
@@ -213,7 +214,7 @@ if ((myfarm->myShe.getupgrading()) && (myfarm->owner.getDay() - myfarm->myShe.ge
             QMessageBox::information(this,"ERROR","Products have not been collected");
           if(x==1){
                myfarm->owner.changeCoin(-tedad*80);
-            myfarm->owner.changeExp(15);
+            myfarm->owner.changeExp(2);
             QMessageBox::information(this,"success","BUY successfully");
             }
     }else if(kodom==8){
@@ -223,15 +224,15 @@ if ((myfarm->myShe.getupgrading()) && (myfarm->owner.getDay() - myfarm->myShe.ge
 
           if(x==1){
                myfarm->owner.changeCoin(-tedad*30);
-            myfarm->owner.changeExp(4);
+            myfarm->owner.changeExp(2);
             QMessageBox::information(this,"success","BUY successfully");
             }
     }else if(kodom==10){
         int x=myfarm->mySto.addShovel(tedad);
 
           if(x==1){
-               myfarm->owner.changeCoin(tedad*50);
-            myfarm->owner.changeExp(8);
+               myfarm->owner.changeCoin(-tedad*50);
+            myfarm->owner.changeExp(2);
             QMessageBox::information(this,"success","BUY successfully");
             }
     }
@@ -277,7 +278,7 @@ void store::on_pushButton_4_clicked()
 {
     myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=3){
-    ge=new getAmount(this,4,6,myfarm->owner.getCoin(),myfarm->mySil.getNumWheat(),myfarm->mySto.getCapacity()-myfarm->mySto.allMerchandises(),2);
+    ge=new getAmount(this,4,6,myfarm->owner.getCoin(),myfarm->mySto.getAlfalfa(),myfarm->mySto.getCapacity()-myfarm->mySto.allMerchandises(),2);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();
@@ -292,7 +293,7 @@ void store::on_pushButton_5_clicked()
 {
     myfarm->mymutex.lock();
     if(myfarm->owner.getLevel()>=4){
-    ge=new getAmount(this,50,70,myfarm->owner.getCoin(),myfarm->myDai.getcurrent(),myfarm->myDai.getcapacity()-myfarm->myDai.getcapacity(),5);
+    ge=new getAmount(this,50,70,myfarm->owner.getCoin(),myfarm->myDai.getcurrent(),myfarm->myDai.getcapacity()-myfarm->myDai.getcurrent(),5);
     connect(ge,SIGNAL(mysell(int,int)),this,SLOT(slotToSell(int,int)));
     connect(ge,SIGNAL(mybuy(int,int)),this,SLOT(slotToBuy(int,int)));
     ge->show();

@@ -24,6 +24,8 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->passlineEdit->setEchoMode(QLineEdit::Password);
+
     QPixmap bkgnd("C:/HeydayLogo/Logo/login.jpg");
           bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
           QPalette palette;

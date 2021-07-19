@@ -26,6 +26,7 @@ public:
    storage1 mySto;
    void write_milk(int shenase ,int tedad,int day);
    int read_milk(int shenase,int day);
+   void sell_milk(int shenase,int tedad);
 
 };
 

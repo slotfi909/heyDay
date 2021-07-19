@@ -69,12 +69,13 @@ Dairyfarm::Dairyfarm(QWidget* parent, Farm* _Myfarm)
 
    // setLayout(Layout);
 
-    connect(btn1, SIGNAL(clicked()), this, SLOT(ststus()));
+    connect(btn1, SIGNAL(clicked()), this, SLOT(status()));
     connect(btn2, SIGNAL(clicked()), this, SLOT(feeding()));
     connect(btn3, SIGNAL(clicked()), this, SLOT(removal()));
     connect(btn4, SIGNAL(clicked()), this, SLOT(starting_upgrade()));
-    connect(btn5, SIGNAL(clicked()), this, SLOT(close()));
+    connect(btn5, SIGNAL(clicked()), wdg, SLOT(close()));
     connect(btn6, SIGNAL(clicked()), this, SLOT(sakhtan()));
+    connect(btn6, SIGNAL(clicked()), wdg, SLOT(close()));
 
     // ui.setupUi(this);
 }
@@ -160,15 +161,14 @@ void Dairyfarm::starting_upgrade() {
         myFarm->myDai.setlevel(myFarm->myDai.getlevel() + 1);
         myFarm->myDai.setupgrading(false);
     }
-
-    if (myFarm->owner.getLevel() < 5)
+    if (myFarm->myDai.getupgrading())
+        str = "upgrading. you should wait 5 days";
+    else  if (myFarm->owner.getLevel() < 5)
         str = "At least level 5 is required!";
     else if (myFarm->mySto.getNail() < 2)
         str = "At least 2 nail is required!";
     else if (myFarm->owner.getCoin() < 15)
         str = "At least 15 coin is required!";
-    else if (myFarm->myDai.getupgrading())
-        str = "upgrading. you should wait 5 days";
     else {
         myFarm->myDai.set_start_day_of_upgrading(myFarm->owner.getDay());
         myFarm->owner.setCoin(myFarm->owner.getCoin() - 15);

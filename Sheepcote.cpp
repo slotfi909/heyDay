@@ -3,7 +3,7 @@
 #define STATUS "C:/HeydayLogo/Aviculture_logo/2230690.png"
 #define FEEDING "C:/HeydayLogo/Sheepcote_logo/3382344.png"
 #define REMOVAL "C:/HeydayLogo/Sheepcote_logo/5332241.png"
-#define UPGRADING "C:/HeydayLogot/Aviculture_logo/6154580.png"
+#define UPGRADING "C:/HeydayLogo/Aviculture_logo/6154580.png"
 #define DRAHALSAKHT "C:/HeydayLogo/Aviculture_logo/1958813.png"
 #define SAKHTAN "C:/HeydayLogo/Aviculture_logo/5250128.png"
 
@@ -56,6 +56,7 @@ Sheepcote::Sheepcote(QWidget* parent, Farm* _Myfarm)
         lbl->setText("if you wanna build your Sheepcote click the butten (you should be atleast level 6 and need 4 nail and 50 coin,2 shovel)");
         Layout->addWidget(lbl);
     }
+
     else if (myFarm->myShe.getisbuildingmade()) {
 
         Layout->addWidget(btn1);
@@ -68,12 +69,13 @@ Sheepcote::Sheepcote(QWidget* parent, Farm* _Myfarm)
     wdg->show();
     //setLayout(Layout);
 
-    connect(btn1, SIGNAL(clicked()), this, SLOT(ststus()));
+    connect(btn1, SIGNAL(clicked()), this, SLOT(status()));
     connect(btn2, SIGNAL(clicked()), this, SLOT(feeding()));
     connect(btn3, SIGNAL(clicked()), this, SLOT(removal()));
     connect(btn4, SIGNAL(clicked()), this, SLOT(starting_upgrade()));
-    connect(btn5, SIGNAL(clicked()), this, SLOT(close()));
+    connect(btn5, SIGNAL(clicked()), wdg, SLOT(close()));
     connect(btn6, SIGNAL(clicked()), this, SLOT(sakhtan()));
+    connect(btn6, SIGNAL(clicked()), wdg, SLOT(close()));
 
     // ui.setupUi(this);
 }
@@ -163,16 +165,16 @@ void Sheepcote::starting_upgrade() {
         myFarm->myShe.setupgrading(false);
     }
 
-    if (myFarm->owner.getLevel() < 7)
+    if (myFarm->myShe.getupgrading())
+        str = "upgrading. you should wait 9 days";
+    else if (myFarm->owner.getLevel() < 7)
         str = "At least level 7 is required!";
     else if (myFarm->mySto.getNail() < 3)
         str = "At least 2 nail is required!";
     else if (myFarm->owner.getCoin() < 50)
         str = "At least 50 coin is required!";
     else if (myFarm->mySto.getShovel() < 1)
-        str = "At least 1 shovel is required!";
-    else if (myFarm->myShe.getupgrading())
-        str = "upgrading. you should wait 9 days";
+        str = "At least 1 shovel is required!"; 
     else {
         myFarm->myShe.set_start_day_of_upgrading(myFarm->owner.getDay());
 
