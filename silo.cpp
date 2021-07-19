@@ -10,7 +10,7 @@
   bool isBeingUpgraded;
 };
 
-silo::silo(int shenaseP){
+silo::silo(int _shenaseP){
 
 
   temp A;
@@ -33,7 +33,7 @@ silo::silo(int shenaseP){
    //////////////////////////////
 //  while (!fin.eof()) {/////////////////////taghir dar hame
     fin.read((char*)&A, sizeof(temp));
-    if (A.shenaseP == shenaseP) {
+    if (A.shenaseP == _shenaseP) {
       numWheat=A.numWheat;
       capacity = A.capacity;
       level = A.level;
@@ -51,13 +51,14 @@ silo::silo(int shenaseP){
       level = 1;
       upgradeStartTime=0;
       isBeingUpgraded=0;
+      shenaseP=_shenaseP;
     //..................
     A.numWheat=1;
       A.capacity = 10;
       A.level = 1;
       A.upgradeStartTime=0;
       A.isBeingUpgraded=0;
-            A.shenaseP=shenaseP;
+            A.shenaseP=_shenaseP;
 
     fout.open("silo.txt",std::ios::app);
     fout.write((char*)&A, sizeof(temp));
