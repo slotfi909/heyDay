@@ -73,9 +73,9 @@ Aviculture::Aviculture(QWidget* parent, Farm* _Myfarm)
     connect(btn2, SIGNAL(clicked()), this, SLOT(feeding()));
     connect(btn3, SIGNAL(clicked()), this, SLOT(removal()));
     connect(btn4, SIGNAL(clicked()), this, SLOT(starting_upgrade()));
-    connect(btn5, SIGNAL(clicked()), this, SLOT(close()));
+    connect(btn5, SIGNAL(clicked()), wdg, SLOT(close()));
     connect(btn6, SIGNAL(clicked()), this, SLOT(sakhtan()));
-
+    connect(btn6, SIGNAL(clicked()), wdg, SLOT(close()));
     //  ui.setupUi(this);
 
 }
@@ -161,14 +161,14 @@ void Aviculture::starting_upgrade() {
         myFarm->myAvi.setupgrading(false);
     }
 
-    if (myFarm->owner.getLevel() < 3)
+    if (myFarm->myAvi.getupgrading())
+        str = "upgrading. you should wait 3 days";
+    else if (myFarm->owner.getLevel() < 3)
         str = "At least level 3 is required!";
     else if (myFarm->mySto.getNail() < 1)
         str = "At least 1 nail is required!";
     else if (myFarm->owner.getCoin() < 10)
         str = "At least 10 coin is required!";
-    else if (myFarm->myAvi.getupgrading())
-        str = "upgrading. you should wait 3 days";
     else {
         myFarm->myAvi.set_start_day_of_upgrading(myFarm->owner.getDay());
         myFarm->myAvi.setupgrading(true);
