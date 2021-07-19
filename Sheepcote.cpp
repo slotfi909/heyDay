@@ -39,12 +39,7 @@ Sheepcote::Sheepcote(QWidget* parent, Farm* _Myfarm)
     btn6->setIconSize(QSize(65, 65));
     btn6->setToolTip("make building");
 
-    if (myFarm->myShe.getisbuildingmaking() && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_building() >= 10)) {
-        myFarm->myShe.setisbuildingmade(true);
-        myFarm->myShe.set_start_day_of_building(2147483640);
-        myFarm->myShe.setisbuildingmaking(false);
-    }
-    else if (!myFarm->myShe.getisbuildingmade() && myFarm->myShe.getisbuildingmaking()) {
+     if (!myFarm->myShe.getisbuildingmade() && myFarm->myShe.getisbuildingmaking()) {
         Layout->addWidget(btn5);
         QString str = QString("%1 days pass it takes 10 days").arg(myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_building());
         lbl->setText(str);
@@ -81,12 +76,7 @@ Sheepcote::Sheepcote(QWidget* parent, Farm* _Myfarm)
 }
 
 void Sheepcote::status() {
-    if ((myFarm->myShe.getupgrading()) && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading() >= 9)) {
-        myFarm->myShe.setcapacity(myFarm->myShe.getcapacity() * 2);
-        myFarm->myShe.set_start_day_of_upgrading(2147483640);
-        myFarm->myShe.setlevel(myFarm->myShe.getlevel() + 1);
-        myFarm->myShe.setupgrading(false);
-    }
+    
     QString str = QString("current number of sheeps: %1\ncapacity of Sheepcote: %2\nlevel of Sheepcote: %3").arg(myFarm->myShe.getcurrent()).arg(myFarm->myShe.getcapacity()).arg(myFarm->myShe.getlevel());
 
     QMessageBox::information(this, "status", str);
@@ -95,21 +85,16 @@ void Sheepcote::status() {
 void Sheepcote::feeding() {
     QString str;
 
-    if ((myFarm->myShe.getupgrading()) && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading() >= 9)) {
-        myFarm->myShe.setcapacity(myFarm->myShe.getcapacity() * 2);
-        myFarm->myShe.set_start_day_of_upgrading(2147483640);
-        myFarm->myShe.setlevel(myFarm->myShe.getlevel() + 1);
-        myFarm->myShe.setupgrading(false);
-    }
+  
 
     if (myFarm->myShe.getcurrent() == 0)
         str = "there is no sheep for feeding";
+    else if (myFarm->myShe.getisfed())
+        str = "sheeps have been fed already you should wait until their fleece grow";
     else if (myFarm->myShe.gethavecrop())
         str = "sheeps have fleece you should harvest your crops first";
     else if (myFarm->mySto.getAlfalfa() < myFarm->myShe.getcurrent())
         str = "not enough Alfalfa";
-    else if (myFarm->myShe.getisfed())
-        str = "sheeps have been fed already you should wait until their fleece grow";
     else {
         myFarm->myShe.set_start_day_of_produce(myFarm->owner.getDay());
         myFarm->myShe.setisfed(true);
@@ -123,19 +108,7 @@ void Sheepcote::feeding() {
 
 void Sheepcote::removal() {
     QString str;
-
-    if ((myFarm->myShe.getupgrading()) && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading() >= 9)) {
-        myFarm->myShe.setcapacity(myFarm->myShe.getcapacity() * 2);
-        myFarm->myShe.set_start_day_of_upgrading(2147483640);
-        myFarm->myShe.setlevel(myFarm->myShe.getlevel() + 1);
-        myFarm->myShe.setupgrading(false);
-    }
-
-    if ((myFarm->myShe.getisfed()) && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_produce() >= 10)) {
-        myFarm->myShe.sethavecrop(true);
-        myFarm->myShe.setisfed(false);
-        myFarm->myShe.set_start_day_of_produce(-1);
-    }
+   
 
     if (myFarm->myShe.getisfed() && !myFarm->myShe.gethavecrop())
         str = "sheeps have been fed but their fleece have not grown already";
@@ -158,28 +131,20 @@ void Sheepcote::removal() {
 void Sheepcote::starting_upgrade() {
     QString str;
 
-    if ((myFarm->myShe.getupgrading()) && (myFarm->owner.getDay() - myFarm->myShe.get_start_day_of_upgrading() >= 9)) {
-        myFarm->myShe.setcapacity(myFarm->myShe.getcapacity() * 2);
-        myFarm->myShe.set_start_day_of_upgrading(2147483640);
-        myFarm->myShe.setlevel(myFarm->myShe.getlevel() + 1);
-        myFarm->myShe.setupgrading(false);
-    }
-
     if (myFarm->myShe.getupgrading())
         str = "upgrading. you should wait 9 days";
     else if (myFarm->owner.getLevel() < 7)
         str = "At least level 7 is required!";
     else if (myFarm->mySto.getNail() < 3)
-        str = "At least 2 nail is required!";
+        str = "At least 3 nail is required!";
     else if (myFarm->owner.getCoin() < 50)
         str = "At least 50 coin is required!";
     else if (myFarm->mySto.getShovel() < 1)
         str = "At least 1 shovel is required!"; 
     else {
         myFarm->myShe.set_start_day_of_upgrading(myFarm->owner.getDay());
-
+        myFarm->myShe.setupgrading(true);
         myFarm->owner.setCoin(myFarm->owner.getCoin() - 50);
-        myFarm->owner.setExp(myFarm->owner.getExp() + 15);
         myFarm->mySto.addNail(-3);
         myFarm->mySto.addShovel(-1);
 

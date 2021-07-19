@@ -39,12 +39,8 @@ Aviculture::Aviculture(QWidget* parent, Farm* _Myfarm)
     btn6->setIconSize(QSize(65, 65));
     btn6->setToolTip("make building");
 
-    if (myFarm->myAvi.getisbuildingmaking() && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_building() >= 3)) {
-        myFarm->myAvi.setisbuildingmade(true);
-        myFarm->myAvi.set_start_day_of_building(2147483640);
-        myFarm->myAvi.setisbuildingmaking(false);
-    }
-    else if (!myFarm->myAvi.getisbuildingmade() && myFarm->myAvi.getisbuildingmaking()) {
+    
+    if (!myFarm->myAvi.getisbuildingmade() && myFarm->myAvi.getisbuildingmaking()) {
         Layout->addWidget(btn5);
         QString str = QString("%1 days pass it takes 3 days").arg(myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_building());
         lbl->setText(str);
@@ -81,12 +77,7 @@ Aviculture::Aviculture(QWidget* parent, Farm* _Myfarm)
 }
 
 void Aviculture::status() {
-    if ((myFarm->myAvi.getupgrading()) && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading()) >= 3) {
-        myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
-        myFarm->myAvi.set_start_day_of_upgrading(2147483640);
-        myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);
-        myFarm->myAvi.setupgrading(false);
-    }
+   
     QString str = QString("current number of chickens: %1\ncapacity of aviculture: %2\nlevel of aviculture: %3").arg(myFarm->myAvi.getcurrent()).arg(myFarm->myAvi.getcapacity()).arg(myFarm->myAvi.getlevel());
 
     QMessageBox::information(this, "status", str);
@@ -94,22 +85,15 @@ void Aviculture::status() {
 
 void Aviculture::feeding() {
     QString str;
-    //in bakhsh be aval store azafe konam;................................................
-    if ((myFarm->myAvi.getupgrading()) && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading()) >= 3) {
-        myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
-        myFarm->myAvi.set_start_day_of_upgrading(2147483640);
-        myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);
-        myFarm->myAvi.setupgrading(false);
-    }
-    //....................................................................................
+   
     if (myFarm->myAvi.getcurrent() == 0)
         str = "there is no chicken for feeding";
+    else if (myFarm->myAvi.getisfed())
+        str = "hens have been fed already you should wait until they lay";
     else if (myFarm->myAvi.gethavecrop())
         str = "hens have egg you should harvest your crops first";
     else if (myFarm->mySil.getNumWheat() < myFarm->myAvi.getcurrent())
         str = "not enough wheat";
-    else if (myFarm->myAvi.getisfed())
-        str = "hens have been fed already you should wait until they lay";
     else {
         myFarm->myAvi.set_start_day_of_produce(myFarm->owner.getDay());
         myFarm->myAvi.setisfed(true);
@@ -122,19 +106,6 @@ void Aviculture::feeding() {
 
 void Aviculture::removal() {
     QString str;
-
-    if ((myFarm->myAvi.getupgrading()) && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading()) >= 3) {
-        myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
-        myFarm->myAvi.set_start_day_of_upgrading(2147483640);
-        myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);
-        myFarm->myAvi.setupgrading(false);
-    }
-
-    if ((myFarm->myAvi.getisfed()) && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_produce() >= 2)) {
-        myFarm->myAvi.sethavecrop(true);
-        myFarm->myAvi.setisfed(false);
-        myFarm->myAvi.set_start_day_of_produce(-1);
-    }
 
     if (myFarm->myAvi.getisfed() && !myFarm->myAvi.gethavecrop())
         str = "hens have been fed but they have not laid already";
@@ -153,13 +124,6 @@ void Aviculture::removal() {
 
 void Aviculture::starting_upgrade() {
     QString str;
-
-    if ((myFarm->myAvi.getupgrading()) && (myFarm->owner.getDay() - myFarm->myAvi.get_start_day_of_upgrading()) >= 3) {
-        myFarm->myAvi.setcapacity(myFarm->myAvi.getcapacity() * 2);
-        myFarm->myAvi.set_start_day_of_upgrading(2147483640);
-        myFarm->myAvi.setlevel(myFarm->myAvi.getlevel() + 1);
-        myFarm->myAvi.setupgrading(false);
-    }
 
     if (myFarm->myAvi.getupgrading())
         str = "upgrading. you should wait 3 days";

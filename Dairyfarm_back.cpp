@@ -34,7 +34,7 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 	fin.seekg(0, std::ios::end);
 	int size = fin.tellg();
 	fin.seekg(0, std::ios::beg);
-    while (size > fin.tellg()) {
+	while (size < fin.tellg()) {
 		fin.read((char*)&A, sizeof(temp));
 		if (A.shenaseP == _shenaseP) {
 			current = A.current;
@@ -145,6 +145,32 @@ int Dairyfarm_back::removecow(int num) {
 		return 4;//mahsolat jam avari nashodeand
 	current -= num;
 	return 1;
+}
+
+void Dairyfarm_back::checkcrop(int _day) {
+	if (isfed && (_day - start_day_of_produce >= 3)) {
+		havecrop = true;
+		isfed = false;
+		start_day_of_produce = -1;
+	}
+}
+
+void Dairyfarm_back::checkupdate(int _day) {
+
+	if (upgrading && (_day - start_day_of_upgrading >= 5)) {
+		capacity *= 2;
+		start_day_of_upgrading = -1;
+		level++;
+		upgrading = false;
+	}
+}
+
+void Dairyfarm_back::checkbuilding(int _day) {
+	if (isbuildingmaking && (_day - start_day_of_building >= 5)) {
+		isbuildingmade = true;
+		start_day_of_building = -1;
+		isbuildingmaking = false;
+	}
 }
 /*
 int Dairyfarm_back::starting_upgrade() {
