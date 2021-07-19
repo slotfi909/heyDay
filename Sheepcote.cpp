@@ -149,7 +149,7 @@ void Sheepcote::removal() {
         myFarm->mySto.addFleece(myFarm->myShe.getcurrent());
         myFarm->owner.setExp(myFarm->owner.getExp() + 9);
         myFarm->myShe.sethavecrop(false);
-        myFarm->owner.setCoin(myFarm->owner.getCoin() - 15);
+        myFarm->owner.setCoin(myFarm->owner.getCoin() - myFarm->myShe.getcurrent());
         str = "done successfully";
     }
     QMessageBox::information(this, "removal", str);
