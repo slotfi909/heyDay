@@ -125,6 +125,7 @@ if(myfarm->myAlf.isPlowed==true){
    myfarm->myAlf.isBeingPlanted=true;
    myfarm->myAlf.plantedArea=ui->lineEdit->text().toInt();
     QMessageBox::information(this,"OK","the planting has begun\nit needs 4 days complete");
+    myfarm->myAlf.isPlowed=false;
     myfarm->owner.setExp(myfarm->owner.getExp()+2);
 myfarm->mySto.setAlfalfa(myfarm->mySto.getAlfalfa() - ui->lineEdit->text().toInt() );
 
@@ -169,11 +170,15 @@ void DialogAlfalfaField::on_pushButton_2_clicked()//harvest
 {
     if(myfarm->myAlf.isBeingPlanted==true){
         if(myfarm->owner.getDay() - myfarm->myAlf.plantStartTime >=4){
+          if(myfarm->mySto.getCapacity() - myfarm->mySto.allMerchandises() >= myfarm->myAlf.plantedArea*2){
             myfarm->mySto.addAlfalfa(myfarm->myAlf.plantedArea*2);
-            QMessageBox::information(this,"OK","harvest is done!");
-
+            QMessageBox::information(this,"OK","harvest is done!\nalfalfa added to storage:"+QString::number(myfarm->myAlf.plantedArea*2));
             myfarm->myAlf.isBeingPlanted=0;
             myfarm->owner.setExp(myfarm->owner.getExp()+2);
+          }
+          else{
+              QMessageBox::critical(this,"ERROR","not enough free space in storage!\nyou must upgrade storage first.");
+                        }
 
         }
 
@@ -226,7 +231,8 @@ void DialogAlfalfaField::on_pushButton_clicked()//upgrade
 
 void DialogAlfalfaField::on_pushButton_4_clicked() // plow
 {
-  if(myfarm->myAlf.isBeingPlowed==false){
+  if(myfarm->myAlf.isBeingPlanted==false){
+    if(myfarm->myAlf.isBeingPlowed==false){
     if(myfarm->owner.getCoin()>= 5*myfarm->myAlf.area){
 
     myfarm->myAlf.isBeingPlowed=true;
@@ -246,6 +252,10 @@ void DialogAlfalfaField::on_pushButton_4_clicked() // plow
   else{
   QMessageBox::critical(this,"ERROR","plowing in process!\nremaining day:1");
 }
+  }
+  else{
+      QMessageBox::critical(this,"ERROR","you can't plow now!\n the field is being planted.");
+  }
 }
 
 int DialogAlfalfaField::checkForUpgrade(){

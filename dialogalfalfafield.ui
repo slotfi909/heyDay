@@ -75,9 +75,9 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>260</y>
+     <y>270</y>
      <width>118</width>
-     <height>31</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="value">
@@ -87,10 +87,10 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>262</y>
-     <width>47</width>
-     <height>21</height>
+     <x>220</x>
+     <y>270</y>
+     <width>61</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="autoFillBackground">
@@ -104,8 +104,8 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>263</y>
-     <width>51</width>
+     <y>270</y>
+     <width>61</width>
      <height>21</height>
     </rect>
    </property>
@@ -120,9 +120,9 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>260</y>
+     <y>270</y>
      <width>118</width>
-     <height>31</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="value">
@@ -133,9 +133,9 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>10</y>
+     <y>20</y>
      <width>118</width>
-     <height>31</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="value">
@@ -145,10 +145,10 @@
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>10</y>
-     <width>47</width>
-     <height>31</height>
+     <x>220</x>
+     <y>20</y>
+     <width>61</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="autoFillBackground">
