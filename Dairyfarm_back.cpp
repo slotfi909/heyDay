@@ -34,7 +34,7 @@ Dairyfarm_back::Dairyfarm_back(int _shenaseP) {
 	fin.seekg(0, std::ios::end);
 	int size = fin.tellg();
 	fin.seekg(0, std::ios::beg);
-	while (size < fin.tellg()) {
+	while (size > fin.tellg()) {
 		fin.read((char*)&A, sizeof(temp));
 		if (A.shenaseP == _shenaseP) {
 			current = A.current;
