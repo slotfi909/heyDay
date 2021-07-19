@@ -52,6 +52,7 @@ isPlowed=A.isPlowed;
  isBuilt=A.isBuilt;
  buildStartTime=A.buildStartTime;
  isBeingBuilt=A.isBeingBuilt;
+ A.shenaseP = shenaseP;
             isFirst=0;
       break;
     }
@@ -62,7 +63,7 @@ area=4;
 isPlowed=0;
  plowStartTime=0;
  upgradeStartTime=0;
- plantStartTime=0;
+ plantStartTime=0;  //
  isBeingUpgraded=0;
  isBeingPlowed=0;
  isBeingPlanted=0;
@@ -75,11 +76,10 @@ A.area=4;
 A.isPlowed=0;
 A.plowStartTime=0;
 A.upgradeStartTime=0;
-A.plantStartTime=0;
+A.plantStartTime=0; //
 A.isBeingUpgraded=0;
 A.isBeingPlowed=0;
 A.isBeingPlanted=0;
-A.shenaseP=shenaseP;
 A.plantedArea=0;
 A.isBuilt=0;
 A.buildStartTime=0;
@@ -124,6 +124,7 @@ void alfalfaField::update_file() {
  p.isBuilt=isBuilt;
  p.buildStartTime=buildStartTime;
  p.isBeingBuilt=isBeingBuilt;
+ p.shenaseP=shenaseP;
 			}
 			outfile.write((char*)&p, sizeof(p));
 		}
