@@ -54,8 +54,13 @@ wheatland2::wheatland2(QWidget *parent, Farm * _myfarm) :
       }
       else
       {
-          ui->progressBar->setValue(( myfarm->owner.getDay() - myfarm->myWhe.getKeshtStartDay() ) * 100 / 2);
-
+          int percent =  (myfarm->owner.getDay() - myfarm->myWhe.getKeshtStartDay()) * 100 / 2;
+          if(percent >= 100 )
+              ui->progressBar->setValue(100);
+          else if(percent == 50)
+              ui->progressBar->setValue(50);
+          else
+              ui->progressBar->setValue(0);
           if( ( ( myfarm->owner.getDay() - myfarm->myWhe.getKeshtStartDay() ) * 100 / 2 ) >= 100){
               endOfFarming = true;
           }
