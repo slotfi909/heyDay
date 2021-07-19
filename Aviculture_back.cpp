@@ -36,7 +36,7 @@ Aviculture_back::Aviculture_back(int _shenaseP)
 	fin.seekg(0, std::ios::end);
 	int size = fin.tellg();
 	fin.seekg(0, std::ios::beg);
-	while (size<fin.tellg()) {/////////////////////taghir dar hame
+	while (size>fin.tellg()) {/////////////////////taghir dar hame
 		fin.read((char*)&A, sizeof(temp));
 		if (A.shenaseP == _shenaseP) {
 			current = A.current;
