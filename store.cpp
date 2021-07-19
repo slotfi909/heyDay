@@ -6,10 +6,39 @@ store::store(QWidget *parent,Farm*_m)
     , ui(new Ui::store)
 {
     ui->setupUi(this);
- myfarm=_m;
+    myfarm=_m;
 
+    this->setStyleSheet("background-color: lightblue");
 
+    ui->pushButton->setIcon(QIcon("C:/HeydayLogo/Logo/wheatmenu.png"));
+    ui->pushButton->setIconSize(QSize(60, 60));
 
+    ui->pushButton_5->setIcon(QIcon("C:/HeydayLogo/Logo/cow.png"));
+    ui->pushButton_5->setIconSize(QSize(60, 60));
+
+    ui->pushButton_3->setIcon(QIcon("C:/HeydayLogo/Logo/Aviculture"));
+    ui->pushButton_3->setIconSize(QSize(60, 60));
+
+    ui->pushButton_4->setIcon(QIcon("C:/HeydayLogo/Logo/alfalfamenu.png"));
+    ui->pushButton_4->setIconSize(QSize(60, 60));
+
+    ui->pushButton_8->setIcon(QIcon("C:/HeydayLogo/Logo/milk.png"));
+    ui->pushButton_8->setIconSize(QSize(60, 60));
+
+    ui->pushButton_9->setIcon(QIcon("C:/HeydayLogo/Logo/shovel.png"));
+    ui->pushButton_9->setIconSize(QSize(60, 60));
+
+    ui->pushButton_6->setIcon(QIcon("C:/HeydayLogo/Logo/egg.png"));
+    ui->pushButton_6->setIconSize(QSize(60, 60));
+
+    ui->pushButton_2->setIcon(QIcon("C:/HeydayLogo/Logo/nail.png"));
+    ui->pushButton_2->setIconSize(QSize(60, 60));
+
+    ui->pushButton_10->setIcon(QIcon("C:/HeydayLogo/Logo/wool.png"));
+    ui->pushButton_10->setIconSize(QSize(60, 60));
+
+    ui->pushButton_7->setIcon(QIcon("C:/HeydayLogo/Logo/sheep.png"));
+    ui->pushButton_7->setIconSize(QSize(60, 60));
 }
 
 store::~store()
