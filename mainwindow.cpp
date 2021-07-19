@@ -254,37 +254,25 @@ void MainWindow::on_WheatLand_clicked()
 //Aviculture button (Ahmad)
 void MainWindow::on_Aviculture_clicked()
 {
-    if(myfarm.owner.getLevel() > 1){
         Avi=new Aviculture(this,&myfarm);
         Avi->show();
-    }
-    else{
-        QMessageBox::critical(this,"Error","At least level 2 is required!");
-    }
 }
 
 //Dairyfarm (Ahmad)
 void MainWindow::on_Dairyfarm_clicked()
 {
-    if(myfarm.owner.getLevel() > 3){
+   
         Da = new Dairyfarm(this,&myfarm);
         Da->show();
-    }
-    else{
-        QMessageBox::critical(this,"Error","At least level 4 is required!");
-    }
 }
 
 //Sheepcote (Ahmad)
 void MainWindow::on_Sheepcote_clicked()
 {
-    if(myfarm.owner.getLevel() > 5){
+  
         Sh = new Sheepcote(this,&myfarm);
         Sh->show();
-    }
-    else{
-        QMessageBox::critical(this,"Error","At least level 6 is required!");
-    }
+    
 }
 
 void MainWindow::on_shoewMessage_signal()
