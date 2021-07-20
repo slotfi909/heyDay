@@ -162,6 +162,7 @@ void wheatland2::on_bardasht_clicked()
 
 void wheatland2::on_upGrade_clicked()
 {
+    if(myfarm->myWhe.getIsUpgrading() == false)
     if(myfarm->owner.getCoin() >= 5 && myfarm->owner.getLevel() > 1 && myfarm->mySto.getShovel() >= 1)
     {
         myfarm->owner.changeCoin(-5);
@@ -182,6 +183,9 @@ void wheatland2::on_upGrade_clicked()
         else{
             QMessageBox::critical(this,"ERROR","You need at least one shovel!");
         }
+    }
+    else{
+            QMessageBox::critical(this,"ERROR","Upgrade already in progress!!!");
     }
 }
 

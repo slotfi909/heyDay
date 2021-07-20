@@ -19,9 +19,9 @@ DialogSilo::DialogSilo(QWidget *parent,Farm *_myfarm) :
 
     //for getting day of player
     myfarm = _myfarm;
-    if(checkForUpgrade()){
-        QMessageBox::information(this,"good News !","silo upgraded suucessfully");
-    }
+    checkForUpgrade();
+        
+    
     this->setWindowTitle("silo");
 
     //"C:\HeydayLogo\Logo\silo.jpg"
@@ -55,7 +55,7 @@ if(myfarm->mySil.isBeingUpgraded==false)
          myfarm->mySil.isBeingUpgraded=true;
          QMessageBox::information(this,"OK","silo is upgrading!\nit will take 4 days to complete");
           myfarm->mySil.upgradeStartTime= myfarm->owner.getDay();
-          myfarm->mySto.addShovel(-1*myfarm->mySil.getLevel()-2);
+          myfarm->mySto.addShovel(-1*(myfarm->mySil.getLevel()-2));
           myfarm->mySto.addNail(-1*myfarm->mySil.getLevel()*2);
      myfarm->owner.changeCoin(-1*pow(myfarm->mySil.getLevel()*2,2)*100);
 

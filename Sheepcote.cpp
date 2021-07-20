@@ -61,6 +61,7 @@ Sheepcote::Sheepcote(QWidget* parent, Farm* _Myfarm)
     }
 
     wdg->setLayout(Layout);
+
     wdg->show();
     //setLayout(Layout);
 
@@ -114,7 +115,7 @@ void Sheepcote::removal() {
         str = "sheeps have been fed but their fleece have not grown already";
     else if (!myFarm->myShe.gethavecrop())
         str = "there is no fleece for croping";
-    else if (myFarm->mySto.getCapacity() < myFarm->myShe.getcurrent())
+    else if (myFarm->mySto.getCapacity()-myFarm->mySto.allMerchandises() < myFarm->myShe.getcurrent())
         str = "garner has no place";
     else if (myFarm->owner.getCoin() < myFarm->myShe.getcurrent())
         str = QString("At least %1 coin is required!").arg(myFarm->myShe.getcurrent());

@@ -21,9 +21,9 @@ DialogStorage::DialogStorage(QWidget *parent,Farm *_myfarm) :
       myfarm = _myfarm;
       this->setWindowTitle("storage");
 
-      if(checkForUpgrade()){
-          QMessageBox::information(this,"good News !","storage upgraded suucessfully");
-      }
+      checkForUpgrade();
+          
+      
 
       QPixmap bkgndSto("C:/HeydayLogo/Logo/storage.jpg");
       bkgndSto = bkgndSto.scaled(this->size(), Qt::IgnoreAspectRatio);
@@ -104,6 +104,7 @@ int DialogStorage::checkForUpgrade(){
                     myfarm->mySto.setCapacity(ceil(1.5*myfarm->mySto.getCapacity()));
            myfarm->mySto.setLevel(myfarm->mySto.getLevel()+1);
          myfarm->mySto.isBeingUpgraded=false;
+         QMessageBox::information(this,"ERROR","storage fully upgraded!");
          return 1;
    }
     }

@@ -63,7 +63,10 @@ Aviculture::Aviculture(QWidget* parent, Farm* _Myfarm)
   //  setLayout(Layout);
 
     wdg->setLayout(Layout);
+
     wdg->show();
+
+
 
     connect(btn1, SIGNAL(clicked()), this, SLOT(status()));
     connect(btn2, SIGNAL(clicked()), this, SLOT(feeding()));
@@ -111,7 +114,7 @@ void Aviculture::removal() {
         str = "hens have been fed but they have not laid already";
     else if (!myFarm->myAvi.gethavecrop())
         str = "there is no egg for removal";
-    else if (myFarm->mySto.getCapacity() < myFarm->myAvi.getcurrent())
+    else if (myFarm->mySto.getCapacity()-myFarm->mySto.allMerchandises() < myFarm->myAvi.getcurrent())
         str = "garner has no place";
     else {
         myFarm->mySto.addEgg(myFarm->myAvi.getcurrent());

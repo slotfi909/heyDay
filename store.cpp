@@ -384,6 +384,7 @@ void store::on_pushButton_10_clicked()
 
 void store::on_pushButton_11_clicked()
 {
+
     this->close();
 }
 

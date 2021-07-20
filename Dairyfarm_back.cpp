@@ -147,30 +147,36 @@ int Dairyfarm_back::removecow(int num) {
 	return 1;
 }
 
-void Dairyfarm_back::checkcrop(int _day) {
+int Dairyfarm_back::checkcrop(int _day) {
 	if (isfed && (_day - start_day_of_produce >= 3)) {
 		havecrop = true;
 		isfed = false;
 		start_day_of_produce = -1;
+        return 1;
 	}
+    return 0;
 }
 
-void Dairyfarm_back::checkupdate(int _day) {
+int Dairyfarm_back::checkupdate(int _day) {
 
 	if (upgrading && (_day - start_day_of_upgrading >= 5)) {
 		capacity *= 2;
 		start_day_of_upgrading = -1;
 		level++;
 		upgrading = false;
+        return 1;
 	}
+    return 0;
 }
 
-void Dairyfarm_back::checkbuilding(int _day) {
+int Dairyfarm_back::checkbuilding(int _day) {
 	if (isbuildingmaking && (_day - start_day_of_building >= 5)) {
 		isbuildingmade = true;
 		start_day_of_building = -1;
 		isbuildingmaking = false;
+        return 1;
 	}
+    return 0;
 }
 /*
 int Dairyfarm_back::starting_upgrade() {

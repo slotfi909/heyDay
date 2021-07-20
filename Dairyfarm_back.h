@@ -51,9 +51,10 @@ public:
 	int isfull();
 	int addcow(int);
 	int removecow(int);
-	void checkcrop(int);
-	void checkupdate(int);
-	void checkbuilding(int);
+
+    int checkcrop(int);
+    int checkupdate(int);
+    int checkbuilding(int);
 	//int starting_upgrade();
 	//void upgrading();
 	//int feeding();

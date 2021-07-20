@@ -26,6 +26,7 @@ getAmount::~getAmount()
 
 void getAmount::on_SELL_clicked()
 {
+    if(!(ui->lineEdit->text().isEmpty())){
     if(tedad-(ui->lineEdit->text().toInt())>=0){
 
         emit mysell(kodom,ui->lineEdit->text().toInt());
@@ -33,13 +34,17 @@ void getAmount::on_SELL_clicked()
     }else {
      QMessageBox::information(this,"ERROR","you dont have enough ");
 }
+    }else{
+       QMessageBox::information(this,"ERROR","lineEdit cant be empty !");
+    }
     this->close();
+
 }
 
 
 void getAmount::on_BUY_clicked()
 {
-
+     if(!(ui->lineEdit->text().isEmpty())){
     if(coin-(ui->lineEdit->text().toInt()*buy)>=0){
         if(capacity-(ui->lineEdit->text().toInt())>=0)
         {
@@ -52,6 +57,9 @@ void getAmount::on_BUY_clicked()
     }else {
      QMessageBox::information(this,"ERROR","you dont have enough coin");
 }
+     }else{
+         QMessageBox::information(this,"ERROR","lineEdit cant be empty !");
+     }
     this->close();
 
 }

@@ -61,6 +61,7 @@ Dairyfarm::Dairyfarm(QWidget* parent, Farm* _Myfarm)
     }
 
     wdg->setLayout(Layout);
+
     wdg->show();
 
    // setLayout(Layout);
@@ -110,7 +111,7 @@ void Dairyfarm::removal() {
         str = "cows have been fed but they have not made milk already";
     else if (!myFarm->myDai.gethavecrop())
         str = "there is no milk for milching";
-    else if (myFarm->mySto.getCapacity() < myFarm->myDai.getcurrent())
+    else if (myFarm->mySto.getCapacity()-myFarm->mySto.allMerchandises() < myFarm->myDai.getcurrent())
         str = "garner has no place";
     else {
         myFarm->mySto.addMilk(myFarm->myDai.getcurrent());

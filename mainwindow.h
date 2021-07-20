@@ -61,7 +61,7 @@ private slots:
     void on_Dairyfarm_clicked();
 
     void on_Sheepcote_clicked();
-    void on_shoewMessage_signal();
+    void on_shoewMessage_signal(int);
 friend void runthread();
 private:
     Ui::MainWindow *ui;
@@ -78,7 +78,7 @@ private:
     DialogStorage * sto;
     store * stor;
 signals:
-    void showmessage();
+    void showmessage(int);
 
 };
 #endif // MAINWINDOW_H

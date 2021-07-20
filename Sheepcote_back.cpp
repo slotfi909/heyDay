@@ -34,7 +34,7 @@ Sheepcote_back::Sheepcote_back(int _shenaseP) {
 	fin.seekg(0, std::ios::end);
 	int size = fin.tellg();
 	fin.seekg(0, std::ios::beg);
-	while (size > fin.tellg()) {
+    while (size > fin.tellg()) {
 		fin.read((char*)&A, sizeof(temp));
 		if (A.shenaseP == _shenaseP) {
 			current = A.current;
@@ -145,30 +145,36 @@ int Sheepcote_back::removesheep(int num) {
 	return 1;
 }
 
-void Sheepcote_back::checkcrop(int _day) {
+int Sheepcote_back::checkcrop(int _day) {
 	if (isfed && (_day - start_day_of_produce >= 10)) {
 		havecrop = true;
 		isfed = false;
-		start_day_of_produce = -1;
+        start_day_of_produce = -1;
+        return 1;
 	}
+    return 0;
 }
 
-void Sheepcote_back::checkupdate(int _day) {
+int Sheepcote_back::checkupdate(int _day) {
 
 	if (upgrading && (_day - start_day_of_upgrading >= 9)) {
 		capacity *= 2;
 		start_day_of_upgrading = -1;
 		level++;
 		upgrading = false;
+        return 1;
 	}
+    return 0;
 } 
 
-void Sheepcote_back::checkbuilding(int _day) {
+int Sheepcote_back::checkbuilding(int _day) {
 	if (isbuildingmaking && (_day - start_day_of_building >= 10)) {
 		isbuildingmade = true;
 		start_day_of_building = -1;
 		isbuildingmaking = false;
+        return 1;
 	}
+    return 0;
 }
 /*
 int Sheepcote_back::starting_upgrade() {

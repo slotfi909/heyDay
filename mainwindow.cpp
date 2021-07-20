@@ -17,6 +17,43 @@ void runthread(QLabel*L1,Farm *myfarm,MainWindow*t){
             L1->setText("day : "+QString::number(myfarm->owner.getDay()));
 
         myfarm->mySto.addMilk(myfarm->read_milk(myfarm->owner.getShenaseP(),myfarm->owner.getDay()));
+        if( myfarm->myAvi.checkbuilding(myfarm->owner.getDay())){
+            emit t->showmessage(2);
+        }
+                    if(myfarm->myAvi.checkcrop(myfarm->owner.getDay())){
+                        emit t->showmessage(3);
+                    }
+
+                    if(myfarm->myAvi.checkupdate(myfarm->owner.getDay())){
+                        emit t->showmessage(4);
+                    }
+
+                    if(myfarm->myShe.checkbuilding(myfarm->owner.getDay())){
+                        emit t->showmessage(5);
+                    }
+
+                   if( myfarm->myShe.checkcrop(myfarm->owner.getDay())){
+                       emit t->showmessage(6);
+                   }
+
+                   if( myfarm->myShe.checkupdate(myfarm->owner.getDay())){
+                       emit t->showmessage(7);
+                   }
+
+                    if(myfarm->myDai.checkbuilding(myfarm->owner.getDay())){
+                        emit t->showmessage(8);
+                    }
+                    if(myfarm->myDai.checkcrop(myfarm->owner.getDay())){
+                        emit t->showmessage(9);
+                    }
+
+                    if(myfarm->myDai.checkupdate(myfarm->owner.getDay())){
+                        emit t->showmessage(10);
+                    }
+                    if(myfarm->owner.changeLevel()){
+                        emit t->showmessage(1);
+
+                    }
             t->showCoin();
            t->showLevel();
             t->showXp();
@@ -37,26 +74,12 @@ void runthread2(Farm *myfarm,MainWindow*t){
 
             myfarm->owner.setDay(myfarm->owner.getDay()+1);
 
-            myfarm->owner.setCoin(1000);
-            myfarm->owner.setLevel(10);
+           /* myfarm->owner.setCoin(900000);
+            myfarm->owner.setLevel(10);*/
 
-            myfarm->myAvi.checkbuilding(myfarm->owner.getDay());
-                       myfarm->myAvi.checkcrop(myfarm->owner.getDay());
-                       myfarm->myAvi.checkupdate(myfarm->owner.getDay());
-
-                       myfarm->myShe.checkbuilding(myfarm->owner.getDay());
-                       myfarm->myShe.checkcrop(myfarm->owner.getDay());
-                       myfarm->myShe.checkupdate(myfarm->owner.getDay());
-
-                       myfarm->myDai.checkbuilding(myfarm->owner.getDay());
-                       myfarm->myDai.checkcrop(myfarm->owner.getDay());
-                       myfarm->myDai.checkupdate(myfarm->owner.getDay());
 
             myfarm->owner.changeExp(1);
-            if(myfarm->owner.changeLevel()){
-                emit t->showmessage();
 
-            }
              //
             myfarm->mymutex.unlock();
             _sleep(10000);
@@ -140,7 +163,7 @@ MainWindow::MainWindow(QWidget *parent, int shenaseP)
     Qt2=QThread::create(runthread2,&myfarm,this);
     Qt2->start();
 
-    connect(this,SIGNAL(showmessage()),this,SLOT(on_shoewMessage_signal()));
+    connect(this,SIGNAL(showmessage(int)),this,SLOT(on_shoewMessage_signal(int)));
 
 }
 
@@ -228,6 +251,7 @@ void MainWindow::on_pushButton_2_clicked()
         QMessageBox::information(this,"congratulation","You reach level "+QString::number(myfarm.owner.getLevel()));
     }
 myfarm.mySto.addMilk(myfarm.read_milk(myfarm.owner.getShenaseP(),myfarm.owner.getDay()));
+
     showCoin();
    showLevel();
     showXp();
@@ -294,9 +318,29 @@ void MainWindow::on_Sheepcote_clicked()
     
 }
 
-void MainWindow::on_shoewMessage_signal()
+void MainWindow::on_shoewMessage_signal(int t)
 {
-    QMessageBox::information(this,"congratulation","You reach level "+QString::number(myfarm.owner.getLevel()));
+    if(t==1)
+    QMessageBox::information(this,"congratulation","You reach level "+QString::number(myfarm.owner.getLevel())+"!");
+    else if(t==2)
+         QMessageBox::information(this,"congratulation","You build Aviculture !");
+    else if(t==5)
+         QMessageBox::information(this,"congratulation","You build sheepcote !");
+    else if(t==8)
+         QMessageBox::information(this,"congratulation","You build Dairyfarm !");
+    else if(t==3)
+         QMessageBox::information(this,"congratulation","Eggs are ready to crop !");
+    else if(t==6)
+         QMessageBox::information(this,"congratulation","wools are ready to crop !");
+    else if(t==9)
+         QMessageBox::information(this,"congratulation","milk is ready to crop !");
+    else if(t==4)
+         QMessageBox::information(this,"congratulation","Aviculture updateded !");
+    else if(t==7)
+         QMessageBox::information(this,"congratulation","sheepcote updateded !");
+    else if(t==10)
+         QMessageBox::information(this,"congratulation","Dairyfarm updateded !");
+
 
 }
 

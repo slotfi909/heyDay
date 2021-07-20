@@ -153,30 +153,36 @@ int Aviculture_back::removechicken(int num) {
 
 }
 
-void Aviculture_back::checkcrop(int _day) {
+int Aviculture_back::checkcrop(int _day) {
 	if (isfed && (_day - start_day_of_produce >= 2)) {
 		havecrop = true;
 		isfed=false;
 		start_day_of_produce = -1;
+        return 1;
 	}
+    return 0;
 }
 
-void Aviculture_back::checkupdate(int _day) {
+int Aviculture_back::checkupdate(int _day) {
 
 	if (upgrading && (_day - start_day_of_upgrading >= 3)) {
 		capacity *= 2;
 		start_day_of_upgrading = -1;
 		level++;
 		upgrading = false;
+        return 1;
 	}
+    return 0;
 }
 
-void Aviculture_back::checkbuilding(int _day) {
+int Aviculture_back::checkbuilding(int _day) {
 	if (isbuildingmaking && (_day - start_day_of_building >= 3)) {
 		isbuildingmade = true;
 		start_day_of_building = -1;
 		isbuildingmaking = false;
+        return 1;
 	}
+    return 0;
 }
 
 /*dakhel slot ha.......................................
